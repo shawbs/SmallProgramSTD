@@ -1,0 +1,22 @@
+<!--pages/user/setting/setting.wxml-->
+<view class='container setting-page'>
+  <view class="list">
+      <navigator url='/pages/other/issue/issue' class="list-item">
+        <text>常见问题</text>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <!-- <view class="list-item">
+        用户反馈
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </view> -->
+      <view class="list-item" bindtap='celarStorage'>
+        清除缓存
+        <text class='gray'>{{storageSize}}M</text>
+      </view>
+      <navigator url='/pages/other/about/about' class="list-item">
+        关于我们
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+  </view>
+  <button bindtap='signOut' class='btn-orange1'>退出登录</button>
+</view>

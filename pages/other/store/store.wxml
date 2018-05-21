@@ -1,0 +1,34 @@
+<!--pages/store/store.wxml-->
+<view class='store-page container'>
+  <!-- <view class='select-btn' bind:tap="openSide">筛选</view> -->
+
+  <!-- <navigator url='../../other/order/order?id=123' class='order-btn'>我的订单</navigator> -->
+  <topnav bind:navitemtap="navtab" navlist="{{navlist}}"/>
+
+  <view>
+    
+        <view class='good-list row'>
+
+          <view class='good-item col' wx:for="{{listData}}"  wx:for-index="i"  wx:for-item="item" wx:key="{{i}}">
+            <navigator url='../../other/detail-store/detail?id={{item.treasureId}}'>
+              <view class='good-item-title'>{{item.name}}</view>
+              <image class='good-item-img' lazy-load src='{{item.imgUrl[0]}}' mode='widthFix'></image>
+              <view class='good-item-fd'>
+                <text class='good-item-price'>{{item.integralNum}}积分</text>
+              </view>
+            </navigator>
+          </view>
+
+          
+
+        </view>
+
+        <view class='text-center load-text'>
+          {{msg}}
+        </view>
+      
+
+  </view>
+
+  
+</view>

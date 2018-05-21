@@ -1,0 +1,38 @@
+/* pages/user/identification/identification.wxss */
+.card{
+  background: #fff;
+}
+.list{
+  margin-bottom: 10px;
+}
+.list .list-item{
+  margin-left: 0;
+  padding-left: 15px;
+}
+.card ._title{
+  padding: 10px;
+  color:#666;
+}
+.card .card-bd{
+  padding: 10px;
+  border-bottom: 1px solid #ddd
+}
+.card .card-bd:last-of-type{
+  border-bottom: none;
+}
+.preview-img{
+  width: 50%;
+  height: 130px;
+}
+.btn-upload{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ccc;
+}
+.btn-upload image{
+  width: 50px;
+  height: 50px;
+}

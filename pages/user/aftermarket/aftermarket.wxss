@@ -1,0 +1,7 @@
+/* pages/user/aftermarket/aftermarket.wxss */
+page{
+  padding-top: 10px;
+}
+.order-item{
+  margin-bottom: 10px;
+}

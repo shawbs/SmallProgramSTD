@@ -1,0 +1,53 @@
+<!--pages/user/login.wxml-->
+<view class='container login-page'>
+  <view class="top-pic">
+
+      <image src="/assets/image/yaobao_bg@3x.png" class='top-pic-bg'></image>
+      <image src="/assets/image/zhuce_bg_logo@3x.png" class='top-pic-logo'></image>
+      <view class="login-tip"><label class="top-text">登录</label></view>
+  </view>
+  <view class="content-tel {{step == 1 ? '':'hide'}}">
+      <view class="login-content">
+          <view class="input-phone-tip">请输入手机号码</view>
+          <view class="input-control">
+              <input type="number" maxlength="11" placeholder="请输入手机号码" bindblur='getPhone' id="phone" confirm-type="next" focus value='{{form.phone}}'/>
+          </view>
+          <view class="login-btn-wp">
+              <button type="button" class="login-btn" bindtap='sendPhone'>下一步</button>
+          </view>
+          <view class="login-noc">
+              <!-- <checkbox  id="checkbox-1-1" class="checkbox {{agreeChecked ? 'checked' : ''}}" checked="{{agreeChecked}}" bindtap='toggleAgreeCheck'/>
+              <label for="checkbox-1-1"></label> -->
+              <a href="/shuntd/agreement.html">点击下一步表示为同意“厦门顺天达用户协议”</a>
+          </view>
+      </view>
+  </view>
+  <view class="content-val animated  {{step >= 2 ? 'fadeInUp':'hide'}}">
+      <view class="desc-text">
+          <label class="phone-text">{{phone}}</label>
+          <label class="count-down" wx:if="{{timer>0}}">{{timer}}s</label>
+          <label class="count-down" bindtap='sendPhone' wx:if="{{timer==0}}">重新发送</label>
+      </view>
+      <view class="input-wp">
+          <view class="flex">
+            <view class="flex-item">
+              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==3}}" data-code="1" data-step="3" bindinput='putCode'></input>
+            </view>
+            <view class="flex-item">
+              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==4}}" data-code="2" data-step="4" bindinput='putCode'></input>
+            </view>
+            <view class="flex-item">
+              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==5}}" data-code="3" data-step="5" bindinput='putCode'></input>
+            </view>
+            <view class="flex-item">
+              <input type='number' maxlength="1"  confirm-type="send" focus="{{step==6}}" data-code="4" data-step="6" bindinput='putCode' bindblur='submitLogin'></input>
+            </view>
+
+          </view>
+      </view>
+  </view>
+  <view class="login-bottom">
+      <view class="black">— 顺天达拍卖 —</view>
+      <view class="gray">互联网拍卖平台领导者</view>
+  </view>
+</view>

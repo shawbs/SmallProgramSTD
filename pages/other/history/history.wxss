@@ -1,0 +1,66 @@
+/* pages/other/history/history.wxss */
+/* pages/list/list.wxss */
+.history-page{
+  padding-top: 40px;
+}
+.bar{
+  position: absolute;
+  top: 50px;
+  width: 40%;
+  border-bottom: 3.5px solid #e5b577;
+}
+.first-preview{
+  background-color: #fff;
+  margin-bottom: 2%; 
+}
+.first-preview .img-wp{
+  position: relative;
+}
+.first-preview .img-wp image{
+  width: 100%;
+}
+.first-preview .view-text{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  color: #fff;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.first-preview .view-text .title{
+  line-height: 40px;
+  font-size: 18px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.30);
+}
+.first-preview .view-text .time{
+  line-height: 40px;
+  font-size: 14px;
+}
+.first-preview .desc{
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #333;
+}
+.first-preview .tip{
+  color: gray;
+  font-size: 12px;
+}
+.good-item .good-item-fd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: gray;
+}
+.good-item .good-price{
+  flex: 1;
+  border-right: 1px solid #F4F4F4;
+}
+
+.good-item .good-item-fd .status-pic{
+  width: 50px;
+  height: 25px;
+}

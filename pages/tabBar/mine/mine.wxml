@@ -1,0 +1,100 @@
+<!--pages/mine/mine.wxml-->
+<view class='mine-page' wx:if="userInfo">
+  <view class='top-bg'>
+    <image class='icon-setting' src='/assets/image/wd_icon_sz@2x.png' bindtap='linkSetting'></image>
+    <image class='avatar' src='{{userInfo.headImgUrl || "/assets/image/default_avatar.png"}}'  bindtap='linkPersonal'></image>
+
+  </view>
+  <view class='top-nav'>
+    <navigator url='/pages/user/share/share' class='cell'>
+      <image class='icon' src='/assets/image/wd_icon_share@2x.png' mode='aspectFit'></image>
+      <view>我要推荐</view>
+    </navigator>
+    <view class='cell info'>
+      <view class='orange2'>{{userInfo.name}} <image wx-if="userInfo.level" class='icon-level' src='/assets/image/dj_{{userInfo.level}}.png' mode='aspectFit'></image></view>
+      <view>{{userInfo.nickName}}
+        <text wx:if="{{idCardNo}}" class='green'>已实名</text>
+        <text wx:if="{{!idCardNo}}" class='orange'>未实名</text>
+      </view>
+      <view class='orange2'>{{userInfo.typeName}}</view>
+    </view>
+    <navigator url='/pages/user/upgrade/upgrade' class='cell'>
+      <image class='icon' src='/assets/image/wd_icon_huiyuan@3x.png' mode='aspectFit'></image>
+      <view>我要升级</view>
+    </navigator>
+  </view>
+  <view class='orader-card'>
+    <navigator url='../../user/order/order' class='card-hd'>
+      <image class='fl icon-user' src='/assets/image/wd_icon_wddd@2x.png' mode='aspectFit'></image>
+      我的订单
+      <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </navigator>
+    <view class='card-bd'>
+      <navigator class='cell' url='../../user/order/order?tabIndex=1&id=1'>
+        <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
+        <view>待付款</view>
+      </navigator>
+      <navigator class='cell' url='../../user/order/order?tabIndex=2&id=2'>
+        <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
+        <view>待发货</view>
+      </navigator>
+      <navigator class='cell' url='../../user/order/order?tabIndex=3&id=3'>
+        <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
+        <view>待收货</view>
+      </navigator>
+      <!-- <navigator class='cell' url='../../user/order/order?tabIndex=2'>
+        <image class="img" src='/assets/image/wd_icon_dqh@2x.png'></image>
+        <view>待取货</view>
+      </navigator> -->
+      <navigator class='cell' url='../../user/order/order?tabIndex=4&id=4'>
+        <image class="img" src='/assets/image/wd_icon_ddwc@2x.png'></image>
+        <view>订单完成</view>
+      </navigator>
+    </view>
+  </view>
+  <view class='orader-card'>
+    <view bindtap='linkMerchant' class='card-hd'>
+      <image class='fl icon-user' src='/assets/image/sh_icon_07.png' mode='aspectFit'></image>
+      商户中心
+      <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </view>
+  
+  </view>
+  <view class='mine-card'>
+    <view class='card-bd'>
+      <navigator url='/pages/user/wallet/wallet' class='cell'>
+        <image class='icon-account' src='/assets/image/wd_icon_zhye@2x.png'></image>
+        <view>我的帐户</view>
+      </navigator>
+      <navigator url='/pages/user/wallet/wallet?tab=1' class='cell'>
+        <image class='icon-score' src='/assets/image/wd_icon_xfjf@2x.png'></image>
+        <view>我的积分</view>
+      </navigator>
+    </view>
+    <navigator url='/pages/user/card-list/card-list' class='card-fd'>
+      <image class='icon-card' src='/assets/image/wd_icon_wdyhk@2x.png'></image>
+      <text>我的银行卡</text>
+    </navigator>
+  </view>
+  <view class='other'>
+    <view class='_title'>拍品服务</view>
+    <view class='serve'>
+      <navigator url='/pages/other/identify/identify' class='cell'>
+        <image class='img' src='/assets/image/wd_icon_wdjd@2x.png' mode='aspectFit'></image>
+        <view>我的鉴定</view>
+      </navigator>
+      <navigator url='/pages/user/collect/collect' class='cell'>
+        <image class='img' src='/assets/image/wd_icon_wdtx@2x.png' mode='aspectFit'></image>
+        <view>我的关注</view>
+      </navigator>
+      <navigator url='/pages/user/consignment/consignment' class='cell'>
+        <image class='img' src='/assets/image/wd_icon_wdjc@2x.png' mode='aspectFit'></image>
+        <view>我的寄存</view>
+      </navigator>
+      <navigator url='/pages/user/aftermarket/aftermarket' class='cell'>
+        <image class='img' src='/assets/image/wd_icon_wdwt@2x.png' mode='aspectFit'></image>
+        <view>我的售后</view>
+      </navigator>
+    </view>
+  </view>
+</view>

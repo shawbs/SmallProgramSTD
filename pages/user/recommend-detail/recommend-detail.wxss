@@ -1,0 +1,26 @@
+/* pages/user/recommend-detail/recommend-detail.wxss */
+
+.recommend-detail-page ._line{
+  border-bottom: 1px solid #ccc;
+  line-height: 30px;
+  padding: 10px;
+  background: #fff;
+  color: #666;
+}
+.table{
+  background: #fff;
+}
+.table .th,.table .td{
+  display: flex;
+  margin-left: 10px;
+  border-bottom: 1px solid #ccc; 
+}
+.table .td:last-of-type{
+  border-bottom: none;
+}
+.table .th>view,.table .td>view{
+  flex: 1;
+  text-align: center;
+  line-height: 50px;
+  color: #666;
+}

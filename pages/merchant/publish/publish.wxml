@@ -1,0 +1,117 @@
+<!--pages/merchant/publish/publish.wxml-->
+<view class='form' wx:if="{{step==1}}">
+  <form bindsubmit='submitForm'>
+    <view class='publish-form'>
+      <view class='list'>
+        <view class='list-title'>选择拍品属性</view>
+        <checkbox-group class="checkbox-group" >
+          <label class="checkbox" wx:for="{{types}}" wx:key="{{index}}" data-index="{{index}}" bindtap="checkboxChange">
+            <checkbox value="{{item.value}}" checked="{{item.check}}" />
+            <image hidden="{{!item.check}}" class='checkbox-icon' src='/assets/image/icon_gou3@2x.png'></image>
+            <image hidden='{{item.check}}' class='checkbox-icon' src='/assets/image/icon_gou4@2x.png'></image>
+            {{item.value}}
+            <text class='orange2' wx:if="{{item.required}}">(必选)</text>
+          </label> 
+        </checkbox-group>
+        <view class='tip'>所勾选的属性，发布后会在拍品详情中显示</view>
+      </view>
+      <view class="list">
+          <view class="list-title">拍品信息</view>
+          <view class="list-item" wx:if="{{types[0].check}}">
+            <text class='fullflex'>拍品名称</text>
+            <input placeholder='请输入拍品名称' name="name" value=''></input>
+          </view>
+          <view class="list-item" wx:if="{{types[1].check}}">
+            <text class='fullflex'>年代</text>
+            <input placeholder='请输入拍品年代' name="years"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[2].check}}">
+            <text class='fullflex'>款识</text>
+            <input placeholder='请输入拍品款识' name="inscriptions"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[3].check}}">
+            <text class='fullflex'>规格</text>
+            <input placeholder='请输入拍品规格' name="specification"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[4].check}}">
+            <text class='fullflex'>重量</text>
+            <input placeholder='请输入拍品重量' name="weight"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[5].check}}">
+            <text class='fullflex'>品相</text>
+            <input placeholder='请输入拍品品相' name="condition"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[6].check}}">
+            <text class='fullflex'>职称</text>
+            <input placeholder='请输入拍品职称' name="jobname"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[7].check}}">
+            <text class='fullflex'>材质</text>
+            <input placeholder='请输入拍品材质' name="texture"></input>
+          </view>
+          <view class="list-item" wx:if="{{types[8].check}}">
+            <text class='fullflex'>退货</text>
+            <picker bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}" name="refund">
+              <view class="picker gray">
+                {{array[index]}}
+              </view>
+            </picker>
+          </view>
+          <view class='list-item'>
+            <textarea placeholder='请输入拍品介绍' name="desc"></textarea>
+          </view>
+      </view>
+      <view class='list'>
+        <view class='list-title'>拍品图片</view>
+        <view class='preview-img'>
+        <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+        <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+        </view>
+        <view class='tip'>备注: 上传图片+视频共计不超过9张</view>
+      </view>
+    </view>
+
+    <button form-type='submit' class='btn-orange'>下一步</button>
+  </form>
+</view>
+
+<view class='setting' wx:if="{{step==2}}">
+  <form bindsubmit='settingForm'>
+    <view class='list'>
+      <view class='list-title'>必选设置</view>
+      <view class='list-item'>
+        <text class='fullflex'>截拍时间</text>
+        <picker mode="date" value="{{endTime}}" start="{{endTime}}" end="2030-09-01" bindchange="bindDateChange1" name="endTime">
+          <view class="picker">
+            {{endTime}}
+          </view>
+        </picker>
+      </view>
+      <view class='list-item'>
+        <text class='fullflex'>起拍价</text>
+        <input type='number' value='0' name="startPrice"></input>
+      </view>
+      <view class='list-item'>
+        <text class='fullflex'>加价幅度</text>
+        <input type='number' value='0' name="price"></input>
+      </view>
+    </view>
+
+    <view class='list'>
+      <view class='list-title'>高级设置</view>
+      <view class='list-item'>
+        <text class='fullflex'>立即开拍</text>
+        <picker mode="date" value="{{startTime}}" start="{{startTime}}" end="2030-09-01" bindchange="bindDateChange2" name="startTime">
+          <view class="picker">
+            {{startTime}}
+          </view>
+        </picker>
+      </view>
+      <view class='list-item'>
+        <text class='fullflex'>保留价</text>
+        <input type='number' value='10' name="basePrice"></input>
+      </view>
+    </view>
+    <button form-type='submit' class='btn-orange'>发布</button>
+  </form>
+</view>

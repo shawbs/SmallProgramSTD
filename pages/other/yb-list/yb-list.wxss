@@ -1,0 +1,25 @@
+/* yb-list.wxss */
+.yb-list-page{
+    padding-top: 50px;
+}
+
+.yb-item{
+  font-size: 14px;
+  color: #444;
+}
+.yb-item .show-text .residue{
+  color: #444;
+  font-size: 14px;
+  bottom: 10px;
+}
+.yb-item .order-item-bd{
+  border-bottom: 1px solid #ddd;
+}
+.yb-item .yb-item-fd{
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd; 
+  justify-content: space-between;
+  align-items: center;
+}

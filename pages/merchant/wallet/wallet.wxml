@@ -1,0 +1,66 @@
+<!--pages/merchant/wallet/wallet.wxml-->
+<view class='container wallet-page'>
+
+  <view  class='qb'>
+    <view class='top'>
+      <view class='content'>
+        <view class='_title'>帐户余额</view>
+        <view class='money'>￥{{money.balance}}</view>
+      </view>
+    </view>
+
+    <view class='list'>
+      <view class='orader-card mb-2'>
+        <navigator url='/pages/user/order/order' class='card-hd'>
+          <image class='fl icon-user' src='/assets/image/dingdan_icon.png' mode='aspectFit'></image>
+          买家订单余款
+          <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+        </navigator>
+        <view class='card-bd'>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=1&id=1'>
+            <!-- <text class='bage'></text>   -->
+            <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
+            <view class='mb-1'>待付款</view>
+            <view class='orange2'>￥0.00</view>
+          </navigator>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=2&id=2'>
+            <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
+            <view class='mb-1'>待发货</view>
+            <view class='orange2'>￥0.00</view>
+          </navigator>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=3&id=3'>
+            <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
+            <view class='mb-1'>待收货</view>
+            <view class='orange2'>￥0.00</view>
+          </navigator>
+
+        </view>
+      </view>
+
+      <navigator url='/pages/user/level/level' class="list-item">
+        <image class='label-icon' src='/assets/image/yue_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>余额明细</label>
+
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/card-list/card-list' class="list-item noborder mb-2">
+        <image class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
+        <label class='fullflex'>管理银行卡</label>
+
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/pay-safe/pay-safe' class="list-item mb-2">
+        <image class='label-icon' src='/assets/image/mibao_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>支付安全</label>
+
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+
+    </view>
+
+
+
+    <navigator url='/pages/user/withdraw/withdraw' class='btn btn-orange'>提现</navigator>
+  </view>
+
+</view>

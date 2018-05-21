@@ -1,0 +1,33 @@
+<!--pages/user/level/level.wxml-->
+<view class="mine-level-page">
+    <view class="top-bar">
+        <navigator class="btn-link" url="/pages/other/store/store" >前往积分商城</navigator>
+    </view>
+    <view class="title">等级制度</view>
+    <view class="list">
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_0.png' mode='aspectFit'></image>
+            <view class="cell">成效0-9件拍品</view>
+        </view>
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_1.png' mode='aspectFit'></image>
+            <view class="cell">成效10件拍品</view>
+        </view>
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_2.png' mode='aspectFit'></image>
+            <view class="cell">成效20件拍品</view>
+        </view>
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_3.png' mode='aspectFit'></image>
+            <view class="cell">成效30件拍品</view>
+        </view>
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_4.png' mode='aspectFit'></image>
+            <view class="cell">成效40件拍品</view>
+        </view>
+        <view class="list-item">
+            <image class='icon-level' src='/assets/image/dj_5.png' mode='aspectFit'></image>
+            <view class="cell">成效50件拍品</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,27 @@
+<!--pages/user/share/share.wxml-->
+<view class="mine-share-page">
+    <button class="share-btn" open-type="share" >一键分享</button>
+
+    <view class="top">
+        <image class='bg' src='/assets/image/ma_bg@3x.png'></image>
+        <view class='top-titile'>分享二维码</view> 
+        <view class="canvas-box">
+          <canvas hidden='{{canvasHidden}}' style="width: {{qrcode.w}}px; height: {{qrcode.h}}px;"  canvas-id="mycanvas" bindtap='createPrevoewImg'/>
+          <image class='qrcode' wx:if="previewImg" src='{{previewImg}}'></image>
+        </view>
+    </view>
+    <view class="middle-content">
+        <view class="tip">扫一扫获得顺天达拍卖积分摇宝</view>
+        <view class="card">
+            <view class="card-title">注册会员推荐奖励</view>
+            分享推荐一名注册会员奖励100积分,积分可在商城兑换艺术品，也可参加平台艺术品摇宝奖励。
+        </view>   
+    </view>
+
+
+
+    <view class="rem-opt">
+        <navigator class="rem-btn" url="/pages/user/recommend/recommend">我推荐的会员</navigator>
+    </view>
+
+</view>

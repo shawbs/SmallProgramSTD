@@ -1,0 +1,21 @@
+<!--component/menu/menu.wxml-->
+<view class='menu-component'>
+  <view class='menu-row'>
+    <navigator url='/pages/other/yb/yb' class='menu-col'>
+      <image src='/assets/image/icon_yb@2x.png'></image>
+      <text>摇宝</text>
+    </navigator>
+    <navigator url="/pages/other/store/store" class='menu-col'>
+      <image src='/assets/image/icon_10.png'></image>
+      <text>换宝</text>
+    </navigator>
+    <navigator url="/pages/other/identify/identify" class='menu-col'>
+      <image src='/assets/image/jianbao.png'></image>
+      <text>鉴宝</text>
+    </navigator>
+    <navigator url='/pages/other/history/history' class='menu-col'>
+      <image src='/assets/image/icon_yz@2x.png'></image>
+      <text>历史</text>
+    </navigator>
+  </view>
+</view>

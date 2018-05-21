@@ -1,0 +1,51 @@
+<!--pages/user/account-record/account-record.wxml-->
+<view class='account-record' wx:if="{{!id}}">
+    <view class="list">
+      <view class="list-item" wx:if="{{type=='qb'}}" wx:for="{{moneyList}}" wx:key="{{index}}">
+        <view class='left'>
+          <view class='_title'>{{item.msg}}</view>
+          <text class='green'>+{{item.amount}}</text>
+        </view>
+        <view class='right'>
+          <view>
+            <view class='gray'>{{item.data}}</view>
+            <view>余额： <text class='gray'>{{item.balance}}</text></view>
+          </view>
+          
+        </view>
+      </view>
+      <view class="list-item" wx:if="{{type=='jf'}}" wx:for="{{integralList}}" wx:key="{{index}}">
+          <view class='left'>
+            <view class='_title'>{{item.msg}}</view>
+            <text class='green'>+{{item.amount}}</text>
+          </view>
+          <view class='right'>
+            <view>
+              <view class='gray'>{{item.data}}</view>
+              <view>余额： <text class='gray'>{{item.balance}}</text></view>
+            </view>
+            
+          </view>
+        
+      </view>
+    </view>
+</view>
+
+<view class='account-record' wx:if="{{id}}">
+    <view class="list">
+      <view class="list-item">
+        <view class='left'>
+          <view class='_title'>常见问题常见问题常见问题常见问题123456789</view>
+          <text class='green'>+0.00</text>
+        </view>
+        <view class='right'>
+          <view>
+            <view class='gray'>2017-12-04 22:30</view>
+            <view>余额： <text class='gray'>21.20</text></view>
+          </view>
+          <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+        </view>
+        
+      </view>
+    </view>
+</view>

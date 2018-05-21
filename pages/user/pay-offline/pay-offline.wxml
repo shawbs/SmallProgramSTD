@@ -1,0 +1,85 @@
+<!--pages/user/pay-offline/pay-offline.wxml-->
+<topnav bind:navitemtap="navtab" navlist="{{navlist}}" currentIndex="{{tabIndex}}"/>
+<view class='container pay-offline-page'>
+
+  <view class='box' wx:if="{{payType==0}}">
+    <form bindsubmit="submitForm">
+      <view class='card-item'>
+        <view class='form-title'>需要转账金额：￥{{payNo}}</view>
+        <view class='preview-img'>
+          <view class='preview-img-bd'>
+            <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
+              <image  class='img' src='{{item.imgUrl}}' data-img="{{item.imgUrl}}" mode='aspectFill' bindtap='previewImg'></image>
+              <!-- <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon> -->
+              <progress stroke-width="3" wx:if='{{progress.index == index && progress.value<101}}'  percent="{{progress.value}}" activeColor="#E86433"/>
+            </view>
+            <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+          </view>
+          <view class='preview-img-fd'>
+            请上传付款证明1张图片（如银行转账单，汇款证明图片）
+          </view>
+        </view>
+      </view>
+      <view class='card-item info'>
+        <view class='flex'>
+          <label>开户行：</label>
+          <view>{{publicAccount.openingBank}}</view>
+        </view>
+        <view class='flex'>
+          <label>帐户名称：</label>
+          <view>{{publicAccount.accountName}}</view>
+        </view>
+        <view class='flex'>
+          <label>帐户：</label>
+          <view>{{publicAccount.account}}</view>
+        </view>
+      </view>
+      <view class='card-item tip'>
+        （请在银行转账时，务必在备注上填写订单号，如“170821561651”，否则可能会影响您的订单支付。）
+      </view>
+      <button form-type="submit" class="btn-orange">确认支付</button>
+    </form>
+  </view>
+
+  <view class='box' wx:if="{{payType==1}}">
+    <form bindsubmit="submitForm">
+      <view class='card-item'>
+        <view class='form-title'>需要转账金额：￥{{payNo}}</view>
+        <view class='preview-img'>
+          <view class='preview-img-bd'>
+            <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
+              <image  class='img' src='{{item.imgUrl}}' data-img="{{item.imgUrl}}" mode='aspectFill' bindtap='previewImg'></image>
+              <!-- <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon> -->
+            </view>
+            <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+          </view>
+          <view class='preview-img-fd'>
+            请上传付款证明1张图片（如银行转账单，汇款证明图片）
+          </view>
+        </view>
+      </view>
+      <view class='card-item info'>
+        <view class='flex'>
+          <label>开户行：</label>
+          <view>{{privateAccount.openingBank}}</view>
+        </view>
+        <view class='flex'>
+          <label>帐户名称：</label>
+          <view>{{privateAccount.accountName}}</view>
+        </view>
+        <view class='flex'>
+          <label>帐户：</label>
+          <view>{{privateAccount.account}}</view>
+        </view>
+      </view>
+      <view class='card-item tip'>
+        （请在银行转账时，务必在备注上填写订单号，如“170821561651”，否则可能会影响您的订单支付。）
+      </view>
+      <button form-type="submit" class="btn-orange">确认支付</button>
+    </form>
+  </view>
+
+  
+  
+
+</view>

@@ -1,0 +1,74 @@
+<!--pages/order-detail/order-detail.wxml-->
+<view class="order-detail-page animated fadeInUp" wx:if="order">
+    <view class="message shipments">
+      <image wx:if="{{order.orderStatus==21 || order.orderStatus<20}}" class='status-icon' title="待收货/待付款" src='/assets/image/yonghuqueren@2x.png'></image>
+      <image wx:if="{{order.orderStatus==20}}" class='status-icon' title="待发货" src='/assets/image/ddxq_icon_dsh@3x.png'></image>
+      <image wx:if="{{order.orderStatus==23}}" class='status-icon' title="售后" src='/assets/image/ddxq_icon_shcl@2x.png'></image>
+      <image wx:if="{{order.orderStatus==31 || order.orderStatus==22}}" class='status-icon' title="超期或失败" src='/assets/image/no_03.png'></image>
+      <image wx:if="{{order.orderStatus==30}}" class='status-icon' title="成功" src='/assets/image/yes_03.png'></image>
+      {{order.statusText}}
+    </view>
+    
+    <view class="address-item">
+      <view class='address-box'>
+          <view class="address-item-bd">
+              <view class="address-row">收货人: xsa dsa <span class="fr">1231646546546464</span></view>
+              <view class="address">
+                <image src='/assets/image/ddxq_icon_dizhicopy2@3x.png' width="30" mode='widthFix'></image>
+                <!-- {{item.province}}
+                {{item.city}}
+                {{item.area}}
+                {{item.street}} -->
+                asxasjxalksdlnalsdnlansdlanlkdsn
+              </view>
+          </view>
+
+      </view>
+
+    </view>
+
+    <view class="order-item" data-orderid="3">
+        <view class="order-item-bd">
+            <image class='img' src="{{order.imgUrl[0]}}"></image>
+            <view class="show-text">
+            <view class="title ellipsis2">{{order.itemName}}</view>
+            <view class="residue">￥{{order.bidPrice/100}}</view>
+                <view class="create-date">订单时间: {{item.paymentCreateTime}}</view>
+            </view>
+        </view>
+
+    </view>
+
+
+    <view class="order-info mb-2">
+        <view class="linelg">
+          <text>金额总计</text>
+          <text class="orange">￥{{order.bidPrice/100}}</text>
+        </view>
+        <view class="line">
+          <text class='gray mr-1'>订单编号:</text>
+          <text>{{order.orderNo}}</text>
+        </view>
+    </view>
+
+    <view class="order-info">
+        <view class="linelg">
+          <text>订单配送</text>
+        </view>
+        <view class="line">
+          <text class='gray mr-1'>快递方式:</text>
+          <text class='blue'>顺丰快递</text>
+        </view>
+        <view class="line">
+          <text class='gray mr-1'>快递单号:</text>
+          <text class='blue'>{{order.orderNo}}</text>
+        </view>
+    </view>
+
+
+    <bottom-bar class="bottom-bar">
+      <view wx:if="{{type==2}}" class='btn2 ml-2 btn-orange2'>同意退货</view>
+      <view wx:if="{{type==2}}" class='btn2 ml-2 btn-orange2'>不予退货</view>
+      <view class='btn2 ml-2 btn-orange2'>联系买家</view>
+    </bottom-bar> 
+</view>

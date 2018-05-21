@@ -1,0 +1,11 @@
+<!--pages/user/pay-safe/pay-safe.wxml-->
+<view class='list'>
+  <navigator url='/pages/user/getpwd/getpwd?type=1' class="list-item">
+    <label>修改钱包密码</label>
+    <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
+  </navigator>
+  <navigator url='/pages/user/getpwd/getpwd?type=2' class="list-item">
+    <label>忘记钱包密码</label>
+    <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
+  </navigator>
+</view>

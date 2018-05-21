@@ -1,0 +1,65 @@
+/* pages/user/pay-offline/pay-offline.wxss */
+page{
+  padding-top: 50px;
+  box-sizing: border-box;
+}
+.container{
+  position: absolute;
+  height: auto;
+  top: 50px;
+  bottom: 0;
+}
+.box{
+  padding-bottom: 50px;
+  overflow: auto;
+}
+.btn-orange{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  margin: 0;
+}
+.card-item{
+  margin-bottom: 10px;
+  background: #fff;
+}
+.form-title{
+  border-bottom: 1px solid #ddd;
+  color: #E86433;
+  padding: 10px;
+}
+.preview-img .preview-img-bd{
+  padding: 10px;
+  display: flex;
+}
+.img-item{
+  margin-bottom: 5px;
+  margin-right: 5px; 
+}
+.preview-img .preview-img-bd .img{
+  width: 77px;
+  height: 77px;
+  border-radius: 4px;
+  background: #000;
+}
+.upload-icon{
+  width: 77px;
+  height: 77px;
+}
+.preview-img .preview-img-fd{
+  padding: 0 10px 10px;
+  color: #666;
+}
+.card-item.info{
+  padding: 10px 0;
+}
+.card-item.info .flex{
+  padding: 5px 10px;
+}
+.card-item.tip{
+  padding: 5px 10px;
+  color: #666;
+  height: 100px;
+}

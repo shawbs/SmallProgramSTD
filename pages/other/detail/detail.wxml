@@ -1,0 +1,87 @@
+<!--pages/detail/detail.wxml-->
+
+<view class='container detail-page'>
+  <view class='d-status status-0' wx:if="{{detail.status==0}}">拍卖已结束</view> 
+  <view class='d-status status-1' wx:if="{{detail.status==1}}">
+    正在拍卖
+    <image class='arrow-icon' src='/assets/image/arrow_gif.gif' mode='aspectFit'></image>
+    结束时间: {{countTime}}
+  </view> 
+  <swiper class='swiper-container' indicator-dots="true"
+      autoplay="true" interval="3000" style='height:{{swiper.height}}'>
+
+      <swiper-item wx:for="{{detail.imgUrl}}" wx:key="index">
+        <image src="{{item}}" mode='aspectFill' class="slide-image" width="355" height="150" bindtap='previewImage' data-img="{{item}}"/>
+      </swiper-item>
+
+  </swiper>
+  
+  <view class='top-info'>
+    <view class='text'>拍品编号【{{detail.auctionItemNo}}】</view>
+    <view class='title'>{{detail.name}}</view>
+    <!-- <view class='price'>{{detail.startPrice/100}}元</view> -->
+  </view>
+  <view class='flex top-price'>
+    <view class='flex-item'>
+      <view class='price'>¥ {{detail.startPrice/100}}</view>
+      <text>起拍价格</text>
+    </view>
+    <view class='flex-item'>
+      <view class="orange price">¥ 0</view>
+      <text>当前价格</text>
+    </view>
+  </view>
+  <view class="other-info">
+    <text class="next-price">下次竞猜价格：¥ {{detail.startPrice/100}}</text> 
+    <text>围观人数：{{detail.itemViews.length}}人</text>
+  </view>
+
+    
+  <view class="user-img">
+      <view class="aj-views">
+        <view wx:for="{{detail.itemViews}}" wx:key="{{index}}"><image src="{{item.headImgUrl}}" /></view>
+      </view>
+  </view>
+
+  
+
+  <view class='tip'>上拉， 查看拍品详情</view>
+
+  <view class='info'>
+      <view class='tabbar flex'>
+        <view class="{{tabIndex==0?'active':''}}" data-index='0' bind:tap="tab">拍品详情</view>
+        <view class="{{tabIndex==1?'active':''}}" data-index='1' bind:tap="tab">拍卖规则</view>
+        <view class="{{tabIndex==2?'active':''}}" data-index='2' bind:tap="tab">增值费用</view>
+      </view>
+      <view class='tabs'>
+        <view class="tab-item {{tabIndex==0?'active':''}}" data-index='0'>
+          <view class='flex' wx:for="{{detail.propertieslist}}" wx:key="{{index}}">
+            <text class='left'>{{item.name}}</text>
+            <text class='right'>{{item.value}}</text>
+          </view>
+          <view class='desc'>
+          {{detail.introduction}}
+          </view>
+        </view>
+        <view class="tab-item {{tabIndex==1?'active':''}}" data-index='1'>
+          {{pmgz}}
+        </view>
+        <view class="tab-item extrafee {{tabIndex==2?'active':''}}" data-index='2'>
+          <view class='flex' wx:for="{{detail.extraFeelist}}" wx:key="{{index}}">
+            <text class='left'>{{item.name}}</text>
+            <text class='right'>{{item.price/100}}</text>
+          </view>
+        </view>
+      </view>
+  </view>
+
+  <bottom-bar wx:if="{{exType!=1}}">
+      <view class='help' bindtap='toggleGuanzhu'>
+        <image wx:if="{{!detail.remind}}" src='/assets/image/guanzhu.png'></image>
+        <image wx:if="{{detail.remind}}" src='/assets/image/guanzhu_.png'></image> 
+        <view>关注</view>
+      </view>
+      <button bindtap="addPrice">加一手</button>
+      <button class='dark ml-2' bindtap="customAddPrice">自由出价</button>
+  </bottom-bar>
+</view>

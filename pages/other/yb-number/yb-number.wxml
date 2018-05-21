@@ -1,0 +1,6 @@
+<!--pages/yb-number/yb-number.wxml-->
+<view class='yb-number-page'>
+
+  <text class='yb-number {{item == luckNum ? "active": ""}}' wx:for="{{nums}}" wx:key="{{index}}">{{item}}</text>
+ 
+</view>

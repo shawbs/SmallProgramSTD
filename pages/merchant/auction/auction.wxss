@@ -1,0 +1,7 @@
+/* pages/merchant/auction/auction.wxss */
+page{
+  padding-top: 50px;
+}
+.order-item .order-item-fd {
+  height: 33px;
+}

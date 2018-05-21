@@ -1,0 +1,249 @@
+/* pages/live/live.wxss */
+.live-page{
+  /* display: none; */
+}
+.auction-content{
+  position: relative;
+  background: #1F1C1A;
+  display: flex;
+  padding: 5px 10px;
+  color: #fff;
+}
+.slide-btn{
+  position: absolute;
+  bottom: -33px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+  /* background: rgba(0,0,0,.6); */
+  z-index: 1;
+}
+.slide-btn image{
+  width: 103px;
+  height: 30px;
+}
+.auction-pic{
+  position: relative;
+  width: 100px;
+  border: 3px solid #E5B577;
+}
+.auction-pic image{
+  width: 100%;
+  height: 80px;
+}
+.auction-pic .aucton-pic-t{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 1.5em;
+  background: rgba(0,0,0,.6);
+  text-align: center;
+}
+.auction-info{
+  flex: 1;
+  padding-left: 10px;
+  font-size: 12px;
+}
+.auction-info .auction-title{
+  font-size: 14px;
+}
+.auction-info .tip{
+  font-size: 14px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+.auction-record{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  background: #fff;
+  line-height: 2em;
+}
+
+/**聊天器**/
+.chat-wrapper{
+  flex: 1;
+  height: 150px;
+  padding-top: 10px;
+}
+.chat-item{
+  margin-bottom: 10px;
+}
+.chat-item.left{
+  text-align: left;
+}
+.chat-item.right{
+  text-align: right;
+}
+.chat-item .chat{
+  display: inline-block;
+  padding: 0 10px;
+}
+.chat-item .nickname{
+  color: #666;
+  line-height: 2em;
+}
+.chat-item .chat-text{
+  position: relative;
+  margin: 0 10px; 
+  display: inline-block;
+  padding: 10px 12px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #ccc;
+}
+.chat-item .chat-text::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+}
+.chat-item.left .chat-text::after{
+  left: -5px;
+  border: 5px solid #fff;
+  border-left-color: transparent;
+  border-bottom-color: transparent; 
+}
+.chat-item.right .chat-text::after{
+  right: -5px;
+  border: 5px solid #fff;
+  border-right-color: transparent;
+  border-bottom-color: transparent; 
+}
+
+
+.chat-item .chat-price{
+  position: relative;
+  margin: 0 10px; 
+  display: inline-block;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e76434;
+  color: #e76434;
+  font-weight: 800;
+}
+.chat-item.left .chat-price{
+  border-radius: 0 0 0 4px;
+}
+.chat-item.right .chat-price{
+  border-radius: 0 0 4px 0;
+}
+.chat-item .chat-price::after,.chat-item .chat-price::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1px;
+}
+.chat-item.left .chat-price::before{
+  left: -8px;
+  border: 4px solid #e76434;
+  border-left-color: transparent;
+  border-bottom-color: transparent; 
+}
+.chat-item.left .chat-price::after{
+  top: 0px;
+  left: -5px;
+  border: 5px solid #fff;
+  border-left-color: transparent;
+  border-bottom-color: transparent; 
+}
+.chat-item.right .chat-price::before{
+  right: -8px;
+  border: 4px solid #e76434;
+  border-right-color: transparent;
+  border-bottom-color: transparent; 
+}
+.chat-item.right .chat-price::after{
+  top: 0px;
+  right: -5px;
+  border: 5px solid #fff;
+  border-right-color: transparent;
+  border-bottom-color: transparent; 
+}
+
+.chat-item .badge{
+  position: absolute;
+  top: -1px;
+  background: #e76434;
+  border: 1px solid #e76434;
+  color: #fff;
+  height: 100%;
+  width: 20px;
+  text-align: center;
+}
+.chat-item.left .badge{
+  right: -20px;
+  border-radius: 0 4px 4px 0;
+}
+.chat-item.right .badge{
+  left: -20px;
+  border-radius: 4px 0 0 4px;
+}
+/* 聊天器 end */
+
+/* 拍品详情模板 */
+.auction-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+  z-index: 9;
+}
+.mask-wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: #1F1C1A;
+  font-size: 14px;
+  color: #9B9B9B;
+  z-index: 10;
+}
+.mask-wrapper text{
+  font-size: 12px;
+}
+
+.mask-wrapper .mask-hd{
+  padding: 10px;
+}
+
+.mask-wrapper .mask-bd{
+  text-align: center;
+}
+.mask-wrapper .mask-bd .desc{
+  text-align: left;
+  padding: 5px 10px 45px;
+  line-height: 1.5em;
+}
+.desc ._title{
+  margin-bottom: 5px;
+}
+.desc .content{
+  font-size: 12px;
+}
+.mask-wrapper .mask-fd{
+  font-size: 14px;
+  position: fixed;
+  bottom: 20%;
+  margin-top: 40px; 
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background: #E5B577;
+  color: rgba(58,56,56,0.90);
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+

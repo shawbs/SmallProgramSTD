@@ -1,0 +1,73 @@
+<!--pages/other/identify/identify.wxml-->
+<view class='container identify-page'>
+  <!-- <view class='mask'>
+    <view class='box'>
+      <progress  percent="{{progress}}" activeColor="#E86433"/>
+    </view>
+  </view> -->
+  <swiper class="chunk-item" indicator-dots>
+    <swiper-item>
+      <view class='chunk'>
+        <view class='chunk-hd'>
+          <view class='_title'>普通鉴定 <navigator url='/pages/other/identify-list/identify-list' class='link-history'>鉴宝历史</navigator></view>
+          <view>普通鉴定由顺天达拍卖平台资深古玩鉴定师给予专业的眼鉴</view>
+        </view>
+        
+        <view class='chunk-bd'>
+            <view class='form'>
+              <form bindsubmit="submitForm">
+                <view class='input-group'>
+                  <input placeholder='请输入艺术品名称' placeholder-style="color: #ccc;" name="name" value='{{infoData.name}}'></input>
+                </view>
+                <view class='input-group'>
+                  <input placeholder='请输入艺术品年代' placeholder-style="color: #ccc;" name="year" value='{{infoData.years}}'></input>
+                </view>
+                <view class='input-group'>
+                  <input placeholder='请输入艺术品尺寸大小' placeholder-style="color: #ccc;" name="size" value='{{infoData.size}}'></input>
+                </view>
+                <view class='label'>请上传藏品6张各个方向照片:</view>
+                <view class='preview-img'>
+                  <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
+                    <image  class='img' src='{{item.imgUrl}}' data-img="{{item.imgUrl}}" mode='aspectFill' bindtap='previewImg'></image>
+                    <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon>
+                    <!-- <progress stroke-width="3" wx:if='{{progress.index == index && progress.value<101}}'  percent="{{progress.value}}" activeColor="#E86433"/> -->
+                  </view>
+                  <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+                </view>
+              </form>
+            </view>
+            <button formType="submit" class='btn-orange'>鉴定</button>
+        </view>
+        
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class='chunk sifa'>
+        <view class='chunk-hd'>
+          <view class='_title'>司法鉴定</view>
+          <view>司法鉴定是运用科学技术或者专门知识对专门性问题进行鉴别和判断并提供鉴定意见的活动</view>
+        </view>
+
+        <view class='chunk-bd'>
+            <view class='content'>
+
+              <view class='b'>福建历思司法鉴定所</view>
+              <view class='p'>福建历思司法鉴定所（以下简称历思）是一家拥有十年司法鉴定品牌、九大类司法鉴定执业资质的前沿型跨区域物证鉴定服务机构。目前在文书检验、文书形成时间、痕迹鉴定、微量物质鉴定、声像资料鉴定、环境物证鉴定等方面，其软硬件条件和检验技术已达国内先进水平，服务质量得到公、检、法、司等部门和行业、个人客户的充分认可。
+              </view>
+              <view class='p'>正是基于历思在痕迹、文书、声像资料鉴定等多领域的长期、全面的技术积累与业务实践，加上前瞻性的研发投入，历思发展了将刑侦技术与互联网、物联网、智能化等IT技术融合形成的智慧物证技术，并开创了【文物全相鉴证】这一新一代文物鉴定与认证技术体系，走在了领域前沿。2017年2月28日，经中国人寿财产保险股份有限公司厦门市分公司调研考察后，正式认可历思出具的司法鉴定意见，对历思鉴定的艺术品给予承保，为文物艺术品规范地进入金融资本流通领域创造了条件。
+              </view>
+              <view class='p'>历思还是中国首个汉字笔迹学学术团体--厦门市笔迹学学会的支撑单位。创会会长金一贵老师是国内笔迹心理学研究第一人、历思首席鉴定人。现任会长及学会多名骨干均为鉴定所专家。历思长期以来为笔迹学学会发展提供了人才支撑、学术研究、公益活动等各种条件，从而推动了文物物证鉴定实践与汉字笔迹学学术研究的相互促进。
+              </view>
+              <view class='p'>在【文物全相鉴证】技术体系支撑下，历思聚合多领域资深专家与鉴定人，并与国内多个考古研究所（院）、院校、博物馆合作，在北京朝阳区国粹苑设立了北京堃钧艺术品评估鉴定有限公司与北京垣钧文物鉴定技术研究院，并在厦门建设了配套的文物物证研发基地与大型实验室，可为文物艺术品鉴定与评估提供证据化、专业化、体系化的服务。
+              </view>
+              <view class='p'>北京堃钧艺术品评估鉴定有限公司已开展的业务包括陶瓷器类、字画类、金银器类、铜器、锡器类、宝玉石类、杂项等。北京垣钧文物鉴定技术研究院将努力建设成为适应市场经济规律与国际化惯例的新型组织，成为推动科学权威、促进民间收藏的重要渠道，同时为健全行业技术标准体系发挥积极作用。历思文物物证研发基地与实验室将发挥其基础支撑作用，通过融合多领域司法鉴定技术与传统文物鉴定技术，构筑可信证据链，引领文物艺术品鉴定评估进入【全相鉴证】新阶段。通过三者的相互依托和补足，可为文物艺术品国家馆藏、企事业及民间收藏、保险、典当、债券、拍卖、流通等领域提供全面领先的物证服务。
+              </view>
+              
+            </view>
+            <button class='btn-green' bindtap='connectTel'>联系鉴定</button>
+        </view>
+
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

@@ -1,0 +1,20 @@
+/* pages/order-confirm/order-confirm.wxss */
+.order-item{
+  border-bottom: 3px solid #e5b577;
+}
+.form{
+  background: #FFFFFF;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+.form .form-control{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 26px;
+}
+.form .form-control input{
+  float: right;
+  text-align: right;
+}
+.black{color: #222;}

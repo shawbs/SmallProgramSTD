@@ -1,0 +1,13 @@
+<!--component/topnav.wxml-->
+  <swiper class="scroll-nav" skip-hidden-item-layout="true">
+    <swiper-item wx:if="{{!isSimpleArr}}" wx:for="{{navlist}}" wx:for-index="i"  wx:for-item="cellnav" wx:key="{{i}}">
+      <view class='flex'>
+        <label wx:for="{{cellnav}}" wx:for-index="j" wx:for-item="navitem" wx:key="{{j}}" class="nav-item {{tabIndex==j?'active':''}}" data-index="{{j}}" data-id="{{navitem.cateId}}" bindtap='tab'>{{navitem.cateName}}</label>
+      </view>
+    </swiper-item>
+    <swiper-item wx:if="{{isSimpleArr}}">
+      <view class='flex'>
+        <label wx:for="{{navlist}}" wx:for-index="i" wx:for-item="item" wx:key="{{i}}" class="nav-item {{tabIndex==i?'active':''}}" data-index="{{i}}"  data-id="{{item.cateId}}" bindtap='tab'>{{item.cateName}}</label>
+      </view>
+    </swiper-item>
+  </swiper>

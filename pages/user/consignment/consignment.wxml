@@ -1,0 +1,4 @@
+<!--pages/user/consignment/consignment.wxml-->
+<view class='text-center load-text'>
+  暂无数据
+</view>

@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "拍品列表",
+    "usingComponents": {
+      "topnav": "../../../component/topnav/topnav"
+    },
+    "enablePullDownRefresh": true
+}

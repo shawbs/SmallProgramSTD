@@ -1,0 +1,28 @@
+/* pages/user/level/level.wxss */
+.mine-level-page .top-bar{
+    padding: 20px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+.mine-level-page .btn-link{
+    display: inline-block;
+    border: 1px solid #d89f56;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #d89f56;
+}
+.mine-level-page .title{
+    font-size: 14px;
+    line-height: 30px;
+    color: #333333;
+    padding: 0 10px;
+}
+.list{
+    background: #FFFFFF;
+    color: #666;
+}
+.icon-level{
+  width: 22px;
+  height: 22px;
+}

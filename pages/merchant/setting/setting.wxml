@@ -1,0 +1,64 @@
+<!--pages/merchant/setting/setting.wxml-->
+<view class="address-item2">
+  <view class='address-box'>
+      <view class="address-item-title">
+          退货地址
+      </view>
+      <view class="address-item-bd">
+          <image class='address-icon' src='/assets/image/ddxq_icon_dizhicopy2@3x.png' width="30" mode='widthFix'></image>
+          <view class="address2">
+            <view class="address-row">xsadsa <test class="ml-3">1231646546546464</test></view>
+            <view class='gray'>asxasjxalksdlnalsdnlansdlanlkdsn</view>
+          </view>
+          <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </view>
+  </view>
+
+</view>
+
+<view class="list">
+    <view class="list-title">店铺基本信息</view>
+    <view class="list-item">
+      <text>店铺LOGO</text>
+      <image class='store-logo' src='/assets/image/default_avatar.png' mode='aspectFit'></image>
+    </view>
+    <view class="list-item">
+      <text class='fullflex'>店铺名称</text>
+      <text class='gray' bindtap='toedit' data-type="storename">asdasd</text>
+      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </view>
+    <view class="list-item">
+      <text class='fullflex'>联系方式</text>
+      <text class='gray' bindtap='toedit' data-type="phone">157123123131</text>
+      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </view>
+    <view class="list-item">
+      <text class='fullflex'>店铺介绍</text>
+      <text class='gray' bindtap='toedit' data-type="desc">asdasd.....</text>
+      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </view>
+</view>
+
+<view class="list">
+    <view class="list-title">资质认证</view>
+    <navigator url='/pages/other/issue/issue' class="list-item">
+      <text class='fullflex'>实名认证</text>
+      <text class='green'>已认证</text>
+      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </navigator>
+</view>
+
+
+<view class='mask {{edit ? "":"hide"}}'>
+  <view class='box'>
+    <form bindsubmit="formSubmit">
+      <input wx:if="{{activeType=='storename'}}"  class='input-control' name="storename" placeholder='请输入店铺名称'></input>
+      <input wx:if="{{activeType=='phone'}}" type='number'  class='input-control' name="phone" placeholder='请输入联系方式'></input>
+      <textarea wx:if="{{activeType=='desc'}}" name="desc" placeholder='请输入店铺介绍'></textarea>
+      <view class='flex'>
+        <button form-type='submit' class='btn-orange'>确定</button>
+        <view class='btn btn-gray' bindtap='cannelEdit'>取消</view>
+      </view>
+    </form>
+  </view>
+</view>

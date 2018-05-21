@@ -1,0 +1,17 @@
+<!--pages/user/aftermarket-detail.wxml-->
+<view class='container'>
+  <view class='panel'>
+    <view class='status-title'>{{detail.statusText}}</view>
+    <view class='desc gray'>{{detail.remark}}</view>
+    <view class='preview-img'>
+      <image src='{{item}}' wx:for="{{detail.acc}}" wx:key="{{index}}" mode='aspectFill'  data-img="{{item}}" bindtap='previewImg'></image>
+    </view>
+    <view class='uploadTime gray'>上传时间{{detail.uploadTime}}</view>
+    <view class='address'>
+      <view>收货人： {{detail.seller}}</view>
+      <view>地址: {{detail.address}}</view>
+      <view>电话: {{detail.telephone}}</view>
+    </view>
+    <view class='checkTime orange'>审核时间:{{detail.checkTime}}</view>
+  </view>
+</view>

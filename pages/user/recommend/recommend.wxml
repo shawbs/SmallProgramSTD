@@ -1,0 +1,47 @@
+<!--pages/user/recommend/recommend.wxml-->
+<view class='mine-recommend-page' style='padding-top:{{scrollH}}px'>
+  <view class='top-nav' id='topNav'>
+    <swiper class="scroll-nav" skip-hidden-item-layout="true">
+      <swiper-item>
+        <view class='flex _nav'>
+          <image src='/assets/image/one%402x.png' wx:if="{{tabIndex==1}}" class='icon-star on flex-item' mode="aspectFit" data-id="1" bindtap='navtab'></image>
+          <image src='/assets/image/no-one%402x.png' wx:if="{{tabIndex!=1}}" class='icon-star  flex-item' mode="aspectFit" data-id="1" bindtap='navtab'></image>
+          <image src='/assets/image/no-two%402x.png' wx:if="{{tabIndex!=2}}" class='icon-star flex-item' mode="aspectFit" data-id="2" bindtap='navtab'></image>
+          <image src='/assets/image/two%402x.png' wx:if="{{tabIndex==2}}" class='icon-star on flex-item' mode="aspectFit" data-id="2" bindtap='navtab'></image>
+        </view>
+      </swiper-item>
+    </swiper>
+    
+    <view class='top-card'>
+      <view class='flex'>
+        <view class='flex-item'>白金会员(人)</view>
+        <view class='flex-item'>消费金额(元)</view>
+      </view>
+      <view class='flex'>
+        <view class='text-num flex-item'>{{platinum}}</view>
+        <view class='text-num flex-item'>{{orderPrice}}</view>
+      </view>
+    </view>
+    <view class='top-title'>
+      <text>会员昵称</text>
+      <text>加入时间</text>
+    </view>
+  </view>
+
+  <scroll-view class='_list' scroll-y style='height:{{windowH-scrollH}}px'>
+    <navigator url='/pages/user/recommend-detail/recommend-detail?userId={{item.userId}}&partnerToken={{partnerToken}}' wx:for="{{list}}" wx:key="{{index}}"  class="inviter">
+      <view class='list-item'>
+        <view class='item'>
+          <view>[{{index+1}}] {{item.nickName}}</view>
+          {{item.phone}}
+        </view>
+        <view class='item'>
+          {{item.inviterTime}}
+          <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+        </view>
+      
+      </view>
+      
+    </navigator>
+  </scroll-view>
+</view>

@@ -1,0 +1,66 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.93",
+	"appid": "wxb337f929cfc27df0",
+	"projectname": "SmallProgramSTD",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": 0,
+					"name": "tabBar",
+					"pathName": "pages/tabBar/mine/mine",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "live",
+					"pathName": "pages/live/live/live",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 2,
+					"name": "other",
+					"pathName": "pages/other/list/list",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 3,
+					"name": "t",
+					"pathName": "pages/merchant/publish/publish",
+					"query": "",
+					"scene": "1001"
+				}
+			]
+		}
+	}
+}

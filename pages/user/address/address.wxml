@@ -1,0 +1,33 @@
+<!--pages/address/address.wxml-->
+<view class="container">
+
+    <view class="address-list">
+
+
+      <view class="address-item" wx:for="{{addressList}}" wx:key="index" data-index="{{index}}"  bindtouchstart='slideS' bindtouchmove='slideM' bindtouchend='slideE' bindtap='linkAddressEdit' data-url='/pages/user/address-edit/address-edit?type=update&addressId={{item.addressId}}&adt={{item.addressToken}}' data-status="{{item.left}}">
+          <view class='address-box' style='transform: translateX({{item.left || 0}}px)' >
+            <view class="address-item-title">
+                收货地址{{index+1}}<span wx:if="{{item.state}}" class="orange1">默认地址</span>
+            </view>
+            <view class="address-item-bd">
+                <view class="address-row">收货人: {{item.consignee}} <span class="fr">{{item.telephone}}</span></view>
+                <view class="address">
+                  <image src='/assets/image/ddxq_icon_dizhicopy2@3x.png' width="30" mode='widthFix'></image>
+                  {{item.province}}
+                  {{item.city}}
+                  {{item.area}}
+                  {{item.street}}
+                </view>
+            </view>
+          </view>
+          <view class='delete-btn' style='width:{{deleteWidth}}px' data-id="{{item.addressId}}" bindtap='deleteAddress'>删除</view>
+      </view>
+
+
+    </view>
+
+    <view class="max-bottom-bar">
+        <navigator class='link'  url="/pages/user/address-edit/address-edit?type=add">添加新地址</navigator>
+    </view>
+
+</view>

@@ -1,0 +1,25 @@
+<!--pages/user/recommend-detail/recommend-detail.wxml-->
+<view class='recommend-detail-page' wx:if="{{detail}}">
+  <view class='_line'>
+    会员级别：{{detail.type == 1 ? '大众会员' : ''}}{{detail.type == 2 ? '白金会员' : ''}}{{detail.type == 3 ? '钻石会员' : ''}}
+  </view>
+  <view class='_line'>
+    <view>会员邀请总人数：{{detail.inviterNum}}人</view>
+    <view>会员邀请钻石会员：{{detail.inviterDiamondNum}}人</view>
+    <view>订单消费总计：￥{{detail.orderPrice/100}}元</view>
+  </view>
+  <view class='table'>
+    <view class='th'>
+      <view>奖励类型</view>
+      <view>时间</view>
+      <view>奖励</view>
+    </view>
+    <view class='td' wx:for="{{logs}}" wx:key="{{index}}">
+      <view>{{item.type}}</view>
+      <view>{{item.createTime}}</view>
+      <view>{{item.describe}}</view>
+    </view>
+
+
+  </view>
+</view>

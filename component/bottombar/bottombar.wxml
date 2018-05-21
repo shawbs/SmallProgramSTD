@@ -1,0 +1,3 @@
+<!--component/bottombar/bottombar.wxml-->
+  <slot></slot>
+

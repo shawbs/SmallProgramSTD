@@ -1,0 +1,31 @@
+/* pages/merchant/index/index.wxss */
+.avatar{
+  border-radius: 4px;
+  border: none;
+}
+.setting-usr-hd{
+  padding: 15px;
+  background: #333333;
+  border-bottom: 3px solid #E5B577;
+}
+.usr-pic{
+  margin-right: 10px;
+}
+.setting-usr-hd .info{
+  color: #CCCCCC;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.setting-usr-hd .info .info-title{
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.list{
+  background: transparent;
+  margin-bottom: 0;
+}
+.list .list-item{
+  background: #fff;
+  margin-left: 0;
+  padding-left: 10px;
+}

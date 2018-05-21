@@ -1,0 +1,36 @@
+/* pages/store/store.wxss */
+.store-page{
+  padding-top: 50px;
+}
+.select-btn{
+  position: fixed;
+  top: 26%;
+  right: 0;
+  background: #E86433;
+  color: #fff;
+  z-index: 3;
+  font-size: 14px;
+  width: 24px;
+  line-height: 20px;
+  padding: 5px 0;
+  text-align: center;
+  border: 1px solid #e76434;
+  border-radius: 4px 0 0 4px;
+}
+.order-btn{
+  position: fixed;
+  top: 40%;
+  right: 0;
+  background: #E86433;
+  color: #fff;
+  z-index: 3;
+  font-size: 14px;
+  width: 24px;
+  line-height: 20px;
+  padding: 5px 0;
+  text-align: center;
+  border: 1px solid #e76434;
+  border-radius: 4px 0 0 4px;
+}
+
+

@@ -1,0 +1,57 @@
+<!--pages/user/getpwd/getpwd.wxml-->
+
+<!-- 修改密码 -->
+<view class='container' wx:if="{{type==1}}">
+  <view class='savepwd' >
+    <view class='flex input-group'>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==1}}' maxlength="1" data-index="1"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==2}}' maxlength="1" data-index="2"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==3}}' maxlength="1" data-index="3"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==4}}' maxlength="1" data-index="4"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==5}}' maxlength="1" data-index="5"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==6}}' maxlength="1" data-index="6"/>
+    </view>
+    <view class='tip'>初始密码是六个零，请及时修改</view>
+  </view>
+  <button class='btn-orange mt-2 ml-2 mr-2' disabled="{{disabled}}">确定</button>
+</view>
+
+<!-- 忘记，重置密码 -->
+<view class='resetpwd' wx:if="{{type==2}}">
+  <view class='list'>
+    <view class='list-item input-group'>
+      <label>+86</label>
+      <view class='fullflex'>18012341234</view>
+      <view class='orange btn-sendcode'>发送验证码</view>
+    </view>
+    <view class='list-item'>
+      <input type='number' placeholder='请输入验证码'></input>
+    </view>
+  </view>
+  <button class='btn-orange mt-2 ml-2 mr-2' disabled="{{disabled}}">下一步</button>
+</view>
+
+<!-- 设置密码 -->
+<view class='container' wx:if="{{type==3}}">
+  <view class='savepwd gray' >
+    <view class='small'>设置新密码</view>
+    <view class='flex input-group'>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==1}}' maxlength="1" data-index="1"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==2}}' maxlength="1" data-index="2"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==3}}' maxlength="1" data-index="3"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==4}}' maxlength="1" data-index="4"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==5}}' maxlength="1" data-index="5"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==6}}' maxlength="1" data-index="6"/>
+    </view>
+    <view class='small gray'>确定新密码</view>
+    <view class='flex input-group'>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==7}}' maxlength="1" data-index="7"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==8}}' maxlength="1" data-index="8"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==9}}' maxlength="1" data-index="9"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==10}}' maxlength="1" data-index="10"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==11}}' maxlength="1" data-index="11"/>
+      <input type='number' class='flex-item input-col' bindinput="putCode" focus='{{inputIndex==12}}' maxlength="1" data-index="12"/>
+    </view>
+  </view>
+  <button class='btn-orange mt-2 ml-2 mr-2' disabled="{{disabled}}">确定</button>
+</view>

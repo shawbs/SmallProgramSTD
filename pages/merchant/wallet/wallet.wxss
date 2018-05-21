@@ -1,0 +1,47 @@
+/* pages/merchant/wallet/wallet.wxss */
+.list{
+  background: transparent;
+}
+.list .list-item{
+  background: #fff;
+  margin-left: 0;
+  padding-left: 10px;
+}
+.top{
+  padding: 20px;
+  padding-bottom: 0;
+  background: #333;
+  border-bottom: 4px solid #E5B577;
+}
+.top .content{
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+  background: #4F3723;
+}
+
+.top .content ._title{
+  color: #d89f55;
+  margin-bottom: 10px;
+}
+
+.top .content .money{
+  color: #fff;
+  font-size: 20px;
+}
+.button-card{
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 15px;
+}
+
+.account-record {
+  background: #fff;
+}
+.account-record .account-record-title{
+  padding: 12px 10px;
+  color: #666;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}

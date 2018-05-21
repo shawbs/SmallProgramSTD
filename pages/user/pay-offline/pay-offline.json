@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "线下支付",
+  "usingComponents": {
+    "topnav": "../../../component/topnav/topnav"
+  }
+}

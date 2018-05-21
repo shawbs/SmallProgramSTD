@@ -1,0 +1,84 @@
+/* pages/order-detail/order-detail.wxss */
+.order-detail-page{
+    height: 100%;
+}
+.message{
+    height: 50px;
+    line-height: 50px;
+    background: #FFF8EC;
+    font-size: 15px;
+    color: #E86433;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.status-icon{
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+}
+.order-item{
+  margin-bottom: 0;
+}
+.order-info{
+  padding: 0 10px;
+  background: #FFFFFF;
+  font-size: 14px;
+  color: #333333;
+}
+.order-info .line{
+  display: flex;
+  padding: 8px;
+  /* border-bottom: 1px solid #f3f3f3; */
+}
+.order-info .linelg{
+  display: flex;
+  padding: 10px 5px;
+  justify-content: space-between;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+ .contact-tip{
+    font-size: 12px;
+    color: #9B9B9B;
+    padding: 17px 7px;
+    padding-bottom: 3px;
+}
+ .contact-tel{
+    padding-left: 7px;
+}
+ .contact-tel a{
+    font-size: 18px;
+    color: #4990E2;
+    font-weight: bold;
+}
+ .order-bottom-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background: #4c4c4c;
+    text-align: right;
+    padding: 5px 10px;
+    z-index: 1;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+ .order-bottom-bar button{
+    display: inline-block;
+    height: 100%;
+    font-size: 14px;
+    color: #FFFFFF;
+    background: #f3a423;
+    margin: 0;
+}
+.bottom-bar{
+  justify-content: flex-end;
+}
+.address-item .address-item-bd{
+  padding-left: 10px;
+  border-bottom: 3px solid #d89f55;
+}

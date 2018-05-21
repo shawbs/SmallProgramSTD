@@ -1,0 +1,46 @@
+<!--pages/order-detail/order-detail.wxml-->
+<view class="order-detail-page animated fadeInUp" wx:if="order">
+    <view class="message shipments">{{order.statusText}}</view>
+    <view class="order-item" data-orderid="3">
+        <view class="order-item-bd">
+            <image class='img' src="{{order.imgUrl[0]}}"></image>
+            <view class="show-text">
+            <view class="title ellipsis2">{{order.itemName}}</view>
+            <view class="residue">￥{{order.bidPrice/100}}</view>
+                <view class="create-date">订单时间: {{item.paymentCreateTime}}</view>
+            </view>
+        </view>
+
+    </view>
+
+
+    <view class="order-info">
+        <view class="linelg">
+          <text>金额总计</text>
+          <text class="orange">￥{{order.bidPrice/100}}</text>
+        </view>
+        <view class="line">
+          <text class='gray'>订单编号:</text>
+          <text>{{order.orderNo}}</text>
+        </view>
+        <view class="line">
+          <text class='gray'>确认时间:</text>
+          <text></text>
+        </view>
+        <view class="line">
+          <text class='gray'>支付时间:</text>
+          <text>{{order.paymentCompleteTime || ''}}</text>
+        </view>
+        <view class="line">
+          <text class='gray'>关闭时间:</text>
+          <text>{{order.orderCompleteTime || ''}}</text>
+        </view>
+    </view>
+
+    <view class="contact-tip">联系我们：</view>
+    <view class="contact-tel"><a href="tel:0592-5220601">0592-5220601</a></view>
+
+     <bottom-bar wx:if="{{order.orderStatus==10 || order.orderStatus==11 || order.orderStatus==12 }}">
+      <navigator url="../../other/order-confirm/order-confirm" class='btn2 btn-orange2'>去支付</navigator>
+    </bottom-bar> 
+</view>

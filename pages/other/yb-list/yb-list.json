@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "摇宝记录",
+  "usingComponents": {
+    "topnav": "../../../component/topnav/topnav"
+  }
+}

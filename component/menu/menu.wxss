@@ -1,0 +1,27 @@
+/* component/menu/menu.wxss */
+menu{
+  width: 100%;
+  background: #ffffff;
+  border-top: 4px solid #E5B577;
+  margin-bottom: 10px;
+}
+.menu-component{
+  position: relative;
+}
+.menu-component .menu-row{
+  display: flex;
+  align-items: center;
+}
+.menu-component .menu-row .menu-col{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2em;
+  font-size: 14px;
+  padding: 5px 0;
+}
+.menu-component .menu-row image{
+  width: 30px;
+  height:30px;
+}

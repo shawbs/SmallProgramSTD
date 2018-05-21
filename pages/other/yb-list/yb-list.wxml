@@ -1,0 +1,37 @@
+<!--yb-list.wxml-->
+<view class='yb-list-page'>
+  <topnav bind:navitemtap="navtab" navlist="{{navlist}}"/>
+
+ <view class="yb-item order-item" data-id="{{item.lottoId}}" wx:for="{{lottoList}}" wx:key="{{index}}">
+      <view class="order-item-bd">
+          <image class='img' src="{{item.imgUrl[0]}}"></image>
+          <view class="show-text">
+            <view>第{{item.lottoId}}期</view>
+            <view class="title ellipsis2">{{item.name}}</view>
+            <view class="residue" wx:if="{{confirmType!=2}}">参与人数: {{item.lottoUsers}}</view>
+          </view>
+      </view>
+      <view class="yb-progress">
+          <view class='_title'>
+            <text class='orange'>{{item.price}}积分/摇奖号   </text>
+            <text class="fr gray">剩余{{item.surplusNum}}份</text>
+          </view>
+          <view class="plan">
+            <view class="bg-wp" style='width:{{(item.surplusNum/item.num)*100+"%"}}'></view>
+          </view>
+      </view>
+
+      <view class="yb-item-fd">
+        <view>
+          <view>总份额{{item.num}}份</view>
+          <text class='orange'>我拥有{{item.userNum}}票</text>
+        </view>
+        <text bindtap='linkYbNumber' data-nums="{{item.userCodes}}" data-luck-num="{{item.luckNum}}" class='orange2'>
+          查看我的号码
+        </text>
+      </view>
+        
+
+ </view>
+</view>
+

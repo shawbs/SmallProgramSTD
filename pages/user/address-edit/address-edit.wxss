@@ -1,0 +1,47 @@
+/* pages/add-edit/address-edit.wxss */
+.address-form{
+    color: #333333;
+    font-size: 15px;
+}
+.address-form .weui-input{
+    color: #666;
+}
+.address-form .weui-input.invalid{
+    color: #d9534f;
+}
+.address-form .mine_cell{
+    padding: 12px 15px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
+}
+.address-form .mine_cell.weui-cell_switch{
+    padding: 8px 15px;
+}
+.address-form .mine_cells{
+    background: #FFFFFF;
+    margin-bottom: 20px;
+}
+.weui-textarea{
+  height: 100px;
+}
+.picker{
+  color: #666;
+}
+.address-form .weui-input{
+    text-align: right;
+}
+
+.max-bottom-bar{
+    background: #D89F55;
+    text-align: center;
+}
+.max-bottom-bar button{
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+    background: transparent;
+    position: static;
+}

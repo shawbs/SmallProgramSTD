@@ -1,0 +1,57 @@
+<!--pages/user/personal/personal.wxml-->
+<view class='container personal-page' wx:if="{{userInfo}}">
+  <view class="setting-usr-hd">
+      <view class='row'>
+        <view class="usr-pic">
+            <image src="{{userInfo.headImgUrl || '/assets/image/default_avatar.png'}}"  alt="" class="avatar" bindtap='updataAvatar'></image>
+        </view>
+
+        <view class="info">
+            <view class="info-title">
+              {{userInfo.nickName}}
+              <text class='small orange' wx:if="{{!userInfo.realName}}" >未实名认证</text>
+              <text class='small green' wx:if="{{userInfo.realName}}" >已实名认证</text>
+            </view>
+            <view class="info-line orange">{{userInfo.typeName}}</view>
+            <view class="info-line">{{userInfo.name}}
+              <image class='icon-level' src='/assets/image/dj_{{userInfo.level}}.png' mode='aspectFit'></image>
+            </view>
+        </view>
+      </view>
+  </view>
+  <view class='list'>
+      <view class="list-item">
+        <text>ID</text>
+        <text>{{userInfo.userName}}</text>
+      </view>
+      <view class="list-item">
+        <text>昵称</text>
+        <input class='text-right' value='{{userInfo.nickName}}'  bindconfirm="updateName" confirm-type="done"/>
+      </view>
+       <!-- <navigator class="list-item">  -->
+       <navigator class="list-item" url='/pages/user/authentication/authentication'>  
+        <text style='flex: 1'>实名认证</text>
+        <text wx:if="{{!userInfo.realName}}" class='orange'>未实名认证</text>
+        <text wx:if="{{userInfo.realName}}"class='green'>已实名认证</text>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
+      </navigator>
+      <view class="list-item">
+        <text>手机号</text>
+        <text>{{userInfo.name}}</text>
+      </view>
+      <view class="list-item" bindtap='setGender'>
+        <text style='flex: 1'>性别</text>
+        <text>{{userInfo.gender==0 ? '男':'女'}}</text>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </view>
+      <navigator url='/pages/user/address/address' class="list-item">
+        我的地址
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/level/level' class="list-item">
+        我的等级
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+  </view>
+  
+</view>

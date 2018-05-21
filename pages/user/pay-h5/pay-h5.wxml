@@ -1,0 +1,2 @@
+<!--pages/user/pay-h5/pay-h5.wxml-->
+<web-view src="{{url}}"></web-view>

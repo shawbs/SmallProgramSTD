@@ -1,0 +1,23 @@
+/* pages/user/collect/collect.wxss */
+page{
+  padding-top: 10px;
+}
+.order-item{
+  margin-bottom: 10px;
+}
+.order-item-hd{
+  display: flex;
+  padding: 0 20px;
+  line-height: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-item-hd label{
+  border-top: 5px solid  #E5B577;
+}
+.order-item-hd text{
+  font-size: 12px;
+}
+.create-date{
+  line-height: 20px;
+}

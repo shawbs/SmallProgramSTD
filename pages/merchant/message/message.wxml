@@ -1,0 +1,35 @@
+<!--pages/merchant/message/message.wxml-->
+<view class='msg-list'>
+<view class='box' wx:for="{{list}}" wx:key="index" data-index="{{index}}" bindtouchstart='slideS' bindtouchmove='slideM' bindtouchend='slideE' bindtap='linkAddressEdit'>
+  <view class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
+    <text class='bage'>1</text>   
+    <image class='avatar-icon' src='/assets/image/default_avatar.png'></image>
+    <view class='msg-title'>
+      <label>萧三省</label>
+      <text class='gray small'>下午 2:06</text>
+    </view>
+    <view class='msg-content'>y表阿斯达棋</view>
+  </view>
+  <view class='delete-btn' style='width:{{deleteWidth}}px' data-id="{{item.addressId}}" bindtap='deleteAddress'>删除</view>
+</view>
+
+<view class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
+  <text class='bage'>1</text>   
+  <image class='avatar-icon' src='/assets/image/default_avatar.png'></image>
+  <view class='msg-title'>
+    <label>萧三省</label>
+    <text class='gray small'>下午 2:06</text>
+  </view>
+  <view class='msg-content'>y表阿斯达棋</view>
+</view>
+<view class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
+  <text class='bage'>1</text>   
+  <image class='avatar-icon' src='/assets/image/logo.png'></image>
+  <view class='msg-title'>
+    <label>系统消息</label>
+    <text class='gray small'>下午 2:06</text>
+  </view>
+  <view class='msg-content'>y表阿斯达棋</view>
+</view>
+
+</view>

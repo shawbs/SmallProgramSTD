@@ -1,0 +1,46 @@
+<!--pages/merchant/chat/chat.wxml-->
+<view  class='chat-wrapper'>
+    <view class='chat-item left'>
+      <image class='chat-avatar' src='/assets/image/default_avatar.png'></image>
+      <view class='chat'>
+        <!-- <view class='nickname'>sgdy</view> -->
+        <view class='chat-text'>我来了我来了我来了我来了我来了我来了我来了我来了我来了我来了
+          <image src='/assets/image/17_11_3_19_12_10.jpg' mode='widthFix'></image>
+          <navigator url=''>跳转到</navigator>
+        </view>
+      </view>
+    </view>
+    <view class='chat-item left'>
+      <image class='chat-avatar' src='/assets/image/default_avatar.png'></image>
+      <view class='chat'>
+        <!-- <view class='nickname'>sgdy</view> -->
+        <view class='chat-price'>￥2000 <text class='badge'>有效</text></view>
+      </view>
+    </view>
+    <view class='chat-item right'>
+      <image class='chat-avatar' src='/assets/image/default_avatar.png'></image>
+      <view class='chat'>
+        <!-- <view class='nickname'>sgdy</view> -->
+        <view class='chat-text'>我来了</view>
+      </view>
+    </view>
+    <view class='chat-item right'>
+      <image class='chat-avatar' src='/assets/image/default_avatar.png'></image>
+      <view class='chat'>
+        <!-- <view class='nickname'>sgdy</view> -->
+        <view class='chat-price'>2000 <text class='badge'>有效</text></view>
+      </view>
+    </view>
+
+  </view>
+
+
+<view class="opt-wp">
+    <image bindtap='toggleMsg' class='icon-msg' src='/assets/image/yuyin_05.png'></image>
+    <view wx:if='{{!hideInput}}' class="control">
+        <input class='input-control' placeholder="你想说什么" bindconfirm="sendMsg"></input>
+    </view>
+    <image bindtap='toggleMsg' class='icon-msg ml-2' src='/assets/image/icon_21.png'></image>
+    <view class='btn btn-orange3'>发送</view>
+
+</view>

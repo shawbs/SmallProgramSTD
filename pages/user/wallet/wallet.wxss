@@ -1,0 +1,84 @@
+/* pages/user/wallet/wallet.wxss */
+page{
+  padding-top: 40px;
+}
+.top{
+  padding: 20px;
+  padding-bottom: 0;
+  background: #333;
+  border-bottom: 4px solid #E5B577;
+}
+.top .content{
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+  background:  #4F3723;
+}
+.jf .top .content{
+  background: #352A3B;
+}
+.top .content ._title{
+  color: #d89f55;
+  margin-bottom: 10px;
+}
+.jf .top .content ._title{
+  color: #8666A2;
+}
+.top .content .money{
+  color: #fff;
+  font-size: 20px;
+}
+.button-card{
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 15px;
+}
+.button-card .btn{
+  margin: 0;
+}
+.account-record {
+  background: #fff;
+}
+.account-record .account-record-title{
+  padding: 12px 10px;
+  color: #666;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}
+.list{
+  margin-bottom: 0;
+  color: #333;
+}
+.list .list-item{
+  padding: 10px 15px 10px 0px;
+  line-height: 23px;
+}
+.list .list-item:last-of-type{
+  border-bottom: none;
+}
+
+.list .list-item ._title{
+  font-size: 16px;
+  width: 100%;
+  white-space: nowrap;
+  animation: slide 5s 3s infinite;
+}
+.list .list-item .left{
+  width: 50%;
+  overflow: hidden;
+}
+.list .list-item .right{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+@keyframes slide{
+  form{
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-100%);
+  }
+}

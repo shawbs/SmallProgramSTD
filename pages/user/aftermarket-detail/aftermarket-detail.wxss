@@ -1,0 +1,36 @@
+/* pages/user/aftermarket-detail.wxss */
+.panel{
+  background: #fff;
+  padding: 0 20px;
+}
+.status-title{
+  padding: 15px 0;
+  border-bottom: 3px solid #E5B577;
+}
+.desc{
+  padding: 15px 0;
+}
+.preview-img{
+  padding: 15px 0;
+}
+.preview-img image{
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+.uploadTime{
+  border-top: 1px solid #ddd;
+  text-align: right;
+  padding: 15px 0;
+  font-size: 12px;
+}
+.address{
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.checkTime{
+  border-top: 1px solid #ddd;
+  text-align: right;
+  padding: 15px 0;
+}

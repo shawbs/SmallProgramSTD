@@ -1,0 +1,120 @@
+{
+  "pages": [
+    "pages/tabBar/index/index",
+    "pages/tabBar/mine/mine",
+    "pages/tabBar/new/new"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/other/",
+      "pages": [
+        "detail-store/detail",
+        "detail/detail",
+        "list/list",
+        "yb/yb",
+        "yb-pay/yb-pay",
+        "yb-list/yb-list",
+        "yb-number/yb-number",
+        "history/history",
+        "store/store",
+        "identify/identify",
+        "identify-list/identify-list",
+        "new-detail/new-detail",
+        "about/about",
+        "issue/issue"
+      ]
+    },
+    {
+      "root": "pages/live/",
+      "pages": [
+        "live/live"
+      ]
+    },
+    {
+      "root": "pages/user/",
+      "pages": [
+        "order/order",
+        "order-detail/order-detail",
+        "order-confirm/order-confirm",
+        "orader-pay/orader-pay",
+        "address/address",
+        "address-edit/address-edit",
+        "login/login",
+        "setting/setting",
+        "personal/personal",
+        "level/level",
+        "share/share",
+        "recommend/recommend",
+        "recommend-detail/recommend-detail",
+        "upgrade/upgrade",
+        "pay/pay",
+        "pay-h5/pay-h5",
+        "pay-offline/pay-offline",
+        "wallet/wallet",
+        "account-record/account-record",
+        "withdraw/withdraw",
+        "card-list/card-list",
+        "card-edit/card-edit",
+        "consignment/consignment",
+        "aftermarket/aftermarket",
+        "collect/collect",
+        "aftermarket-detail/aftermarket-detail",
+        "identification/identification",
+        "authentication/authentication",
+        "pay-safe/pay-safe",
+        "getpwd/getpwd"
+      ]
+    },
+    {
+      "root": "pages/merchant/",
+      "pages": [
+        "index/index",
+        "apply/apply",
+        "identification/identification",
+        "wallet/wallet",
+        "order/order",
+        "order-detail/order-detail",
+        "message/message",
+        "chat/chat",
+        "auction/auction",
+        "setting/setting",
+        "publish/publish"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#333",
+    "navigationBarTitleText": "顺天达网拍",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "selectedColor": "#E5B577",
+    "backgroundColor": "#1F1C1A",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/index/index",
+        "text": "首页",
+        "iconPath": "assets/image/icon_sy@3x.png",
+        "selectedIconPath": "assets/image/icon_sy2@3x.png"
+      },
+      {
+        "pagePath": "pages/tabBar/new/new",
+        "text": "资讯",
+        "iconPath": "assets/image/zixun_07.png",
+        "selectedIconPath": "assets/image/zixun2_07.png"
+      },
+      {
+        "pagePath": "pages/tabBar/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/image/icon_wd@3x.png",
+        "selectedIconPath": "assets/image/icon_wd@3x.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 30000,
+    "downloadFile": 30000
+  },
+  "debug": true
+}

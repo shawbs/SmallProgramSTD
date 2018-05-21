@@ -1,0 +1,65 @@
+/* component/modelPrompt.wxss */
+.weui-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.3);
+  z-index: 999
+}
+.weui-dialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1000;
+}
+.weui-dialog>view{
+  background: #fff;
+  border-radius: 4px;
+  width: 80%;
+  margin-top: -16%;
+}
+.weui-dialog__hd{
+  padding: 1.3em 1.6em .5em;
+}
+.weui-dialog__title{
+  font-weight: 400;
+  font-size: 18px;
+}
+.weui-dialog__bd {
+  padding: 0 1.6em .8em;
+  min-height: 40px;
+  font-size: 15px;
+  line-height: 1.3;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: #999;
+}
+.weui-dialog__ft {
+  position: relative;
+  line-height: 48px;
+  font-size: 18px;
+  display: flex;
+  border-top: 1px solid #d5d5d6;
+}
+.weui-dialog__btn{
+  flex: 1;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  border-right: 1px solid #d5d5d6;
+}
+.weui-dialog__btn.primary{
+  color: #3cc51f;
+  border-right: none;
+}
+.weui-prompt-input{
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  margin: 10px;
+}

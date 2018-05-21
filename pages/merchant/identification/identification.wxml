@@ -1,0 +1,69 @@
+<!--pages/user/identification/identification.wxml-->
+<view class='container'>
+<form bindsubmit="submitForm">
+  <view class='list card '>
+    <view class='list-item'>
+      <label>企业名称</label>
+      <input class='text-right' placeholder='请输入真实姓名' value='{{detail.name}}' name="enterpriseName"></input>
+    </view>
+    <view class='list-item'>
+      <label>法人姓名</label>
+      <input class='text-right' placeholder='请输入真实姓名' value='{{detail.name}}' name="name"></input>
+    </view>
+    <view class='list-item'>
+      <label>身份证号</label>
+      <input class='text-right' placeholder='请输入身份证号' type="idcard"  value='{{detail.idCard}}' name="idCardNo"></input>
+    </view>
+    <view class='list-item'>
+      <label>手机号码</label>
+      <input class='text-right' placeholder='请输入手机号码' type='number' value='{{detail.name}}' name="telephone"></input>
+    </view>
+  </view>
+
+  <view class='card '>
+    <view class='_title'>请拍摄并上传营业执照副本照片</view>
+    <view class='card-bd flex'>
+      <image class='preview-img business-img' src='{{positiveImgUrl || "/assets/image/yyzz_img_03.png"}}' mode='aspectFit'></image>
+      <view class='btn-upload'>
+        <view class='box' bindtap='uploadImg' data-type='2'>
+          <image src='/assets/image/sfz_paizhao.png' mode='aspectFit'></image>
+          <view>
+            <view>点击上传</view>
+            营业执照照片
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='card mb-4'>
+    <view class='_title'>请拍摄并上传有效身份证照片</view>
+    <view class='card-bd flex'>
+      <image class='preview-img' src='{{positiveImgUrl || "/assets/image/sfz_zm.png"}}' mode='aspectFit'></image>
+      <view class='btn-upload'>
+        <view class='box' bindtap='uploadImg' data-type='0'>
+          <image src='/assets/image/sfz_paizhao.png' mode='aspectFit'></image>
+          <view>
+            <view>点击上传</view>
+            身份证正面图
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='card-bd noborder flex'>
+      <image class='preview-img' src='{{reverseImgUrl || "/assets/image/sfz_bm.png"}}' mode='aspectFit'></image>
+      <view class='btn-upload'>
+        <view class='box' bindtap='uploadImg' data-type="1">
+          <image src='/assets/image/sfz_paizhao.png' mode='aspectFit'></image>
+          <view>
+            <view>点击上传</view>
+            身份证反面图
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <button form-type="submit" class='btn-orange ml-2 mr-2 mb-2'>提交认证</button>
+</form>
+
+</view>

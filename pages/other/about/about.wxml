@@ -1,0 +1,2 @@
+<!--pages/other/about/about.wxml-->
+<web-view src="http://app.shuntd.cn/shuntd/about.html"></web-view>

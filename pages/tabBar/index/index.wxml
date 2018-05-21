@@ -1,0 +1,89 @@
+<!--index.wxml-->
+<view class="container index-page">
+
+  <swiper class='swiper-container top-banner' indicator-dots="true"
+    autoplay="true" interval="3000">
+      <swiper-item wx:for="{{banner}}" wx:key="index">
+        <navigator url="{{item.url}}" class='link'>
+          <image src="{{item.accessory}}" class="slide-image" mode='widthFix'/>
+        </navigator>
+      </swiper-item>
+  </swiper>
+
+  <menu></menu>
+
+  <view class='auction-list'>
+
+    <view class='auction'  wx:if="{{jxLive.length}}">
+      <!-- 直播拍场 -->
+      <view class='title-logo'>
+        <image src="/assets/image/ma_icon_biaoti@2x.png"></image>
+      </view>
+
+      <view class='auction-item' data-type="{{item.status==2?2:1}}" data-id="{{item.id}}" wx:for="{{jxLive}}" wx:key="{{index}}" bindtap='toLive'>
+        <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
+        <view class='auction-title preview' wx:if="{{item.status==1}}">直播预展中...</view>
+        <view class='auction-title' wx:if="{{item.status==2}}">正在直播...</view>
+        <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
+
+        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <view class='auction-info'>
+          <text class='text'>开拍时间</text>
+          <text class='start-time'>{{item.startTime}}</text>
+          <text class='auction-number'>第{{item.auctionNo}}场</text>
+        </view>
+      </view>
+
+    </view>
+
+    <view class='auction' wx:if="{{zpLive.length}}">
+      <!-- 展拍拍场 -->
+      <view class='title-logo'>
+        <image src='/assets/image/home_cjpc_icon.png'></image>
+      </view>
+      
+      <navigator url='/pages/other/list/list?auctionId={{item.id}}' class='auction-item' wx:for="{{zpLive}}" wx:key="{{index}}">
+        
+        <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
+        <view class='auction-title preview' wx:if="{{item.status==1}}">预展中...</view>
+        <view class='auction-title' wx:if="{{item.status==2}}">正在拍卖...</view>
+        <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
+        
+        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <view class='auction-info'>
+          <text class='text'>开拍时间</text>
+          <text class='start-time'>{{item.startTime}}</text>
+          <text class='auction-number'>第{{item.auctionNo}}场</text>
+        </view>
+      </navigator>
+      
+    </view>
+
+
+    <view class='auction' wx:if="{{jsLive.length}}">
+      <!-- 即时拍场 -->
+      <view class='title-logo'>
+        <image src='/assets/image/home_cjpc_icon.png'></image>
+      </view>
+      
+      <navigator url='/pages/other/list/list?auctionId={{item.id}}' class='auction-item' wx:for="{{jsLive}}" wx:key="{{index}}">
+        
+        <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
+        <view class='auction-title preview' wx:if="{{item.status==1}}">预展中...</view>
+        <view class='auction-title' wx:if="{{item.status==2}}">正在拍卖...</view>
+        <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
+
+        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <view class='auction-info'>
+          <text class='text'>开拍时间</text>
+          <text class='start-time'>{{item.startTime}}</text>
+          <text class='auction-number'>第{{item.auctionNo}}场</text>
+        </view>
+      </navigator>
+      
+    </view>
+
+
+  </view>  
+
+</view>

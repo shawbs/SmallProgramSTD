@@ -1,0 +1,72 @@
+<!--pages/user/upgrade-post/upgrade-post.wxml-->
+<view class="upgrade-post-page container" >
+  <form class='form' bindsubmit="postPay">
+    <view>
+      <view class='top'>
+        <view class="tip" wx:if="{{!origin}}">
+            <view class="text">支付金额</view>
+            <view class="point">￥{{typePay.upgradeFee/100}}</view>
+        </view>
+        <view class="tip" wx:if="{{origin=='tx'}}">
+            <view class="text">提现金额</view>
+            <view class="point">￥{{originNum}}</view>
+        </view>
+      </view>
+      <view class='play-list'>
+        
+          <radio-group bindchange="togglePay" name="payType">
+            <view class='list-title'>请选择支付方式</view>
+            <view class='list-item'>
+              <image class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
+              <view class='label'>
+                现金帐户
+                <!-- <text>余额￥0.00</text> -->
+              </view>
+              <view class='radio'>
+                <radio value='xj' checked='{{xj.checked}}' data-name='xj' bindtap='toggle'></radio>
+                <image hidden='{{xj.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!xj.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+            </view>
+            <view class='list-item' wx:if='{{origin!="tx"}}'>
+              <image class='label-icon' src='/assets/image/pay_icon1@2x.png' mode='aspectFit'></image>
+              <view class='label'>
+                银联支付
+              </view>
+              <view class='radio'>
+                <radio value='yl' checked='{{yl.checked}}' data-name='yl' bindtap='toggle'></radio>
+                <image hidden='{{yl.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!yl.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+            </view>
+            <view class='list-item' wx:if='{{origin!="tx"}}'>
+              <image class='label-icon' src='/assets/image/pay_icon3@2x.png' mode='aspectFit'></image>
+              <view class='label'>
+                微信支付
+              </view>
+              <view class='radio'>
+                <radio value='wx' checked='{{wx.checked}}' data-name='wx' bindtap='toggle'></radio>
+                <image hidden='{{wx.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!wx.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+            </view>
+            <view class='list-item' wx:if='{{origin!="tx"}}'>
+              <image class='label-icon' src='/assets/image/pay_icon5@2x.png' mode='aspectFit'></image>
+              <view class='label'>
+                线下支付
+              </view>
+              <view class='radio'>
+                <radio value='xx' checked='{{xx.checked}}' data-name='xx' bindtap='toggle'></radio>
+                <image hidden='{{xx.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!xx.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+            </view>
+          </radio-group>
+        
+      </view>
+    </view>
+    
+    <button form-type="submit" class="btn-orange">确认支付</button>
+  </form>
+</view>
+

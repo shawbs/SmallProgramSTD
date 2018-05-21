@@ -1,0 +1,16 @@
+<!--pages/user/aftermarket/aftermarket.wxml-->
+<view class="order-item" data-orderid="3" wx:for="{{list}}" wx:key="{{index}}">
+  <navigator url='/pages/user/aftermarket-detail/aftermarket-detail?orderNo={{item.orderNo}}' style='width:100%'>
+    <view class="order-item-bd">
+        <image class='img' src="{{item.imgUrl[0]}}"></image>
+        <view class="show-text">
+          <text class="create-date">{{item.auctionItemNo}}</text>
+          <view class="title ellipsis2">{{item.auctionItemName}}</view> 
+          <text class="create-date">落锤时间: {{item.countTime}}</text>  
+        </view>
+    </view>
+    <view class="order-item-fd">
+        <text class="btn-orange-link">{{item.statusText}}</text>                        
+    </view>
+  </navigator>  
+</view>

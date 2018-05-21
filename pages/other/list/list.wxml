@@ -1,0 +1,53 @@
+<!--pages/list/list.wxml-->
+<view class='store-page container'>
+  <!-- <view class='select-btn' bind:tap="openSide">筛选</view> -->
+
+  <!-- <topnav bind:navitemtap="navtab" navlist="{{navlist}}"/> -->
+
+  <view>
+
+        <view class="first-preview" wx:if="{{previewInfo}}">
+          <view class="img-wp">
+            <image src="{{previewInfo.imgUrls[0]}}" mode='widthFix'/>
+            <view class="view-text">
+              <view class="title">第0420z场</view>
+              <view class="time">开拍时间 {{previewInfo.startTime}}</view>
+            </view>
+          </view>
+          <view class="desc">
+            <view class="tip">专场介绍：</view>
+            <view class="text">4月20日晚上8点整，臻品视频直播，荷兰式降价拍场，开心摇宝，快乐收藏，玩赚艺术品，尽在顺天达。    
+            </view>
+          </view>
+        </view>
+
+    
+        <view class='good-list row' wx:if="{{listData.length}}">
+
+          <view class='good-item col' wx:for="{{listData}}"  wx:for-index="i"  wx:for-item="item" wx:key="{{i}}">
+            <navigator url='../../other/detail/detail?id={{item.auctionItemId}}{{exType==1 ? "&exType=1": ""}}'>
+              <view class='good-item-title'>{{item.name}}</view>
+              <image class='good-item-img' src='{{item.imgUrls[0]}}' mode='aspectFill'></image>
+              <view class='good-item-fd'>
+                <view class='good-price'>
+                  <view>当前价: <text class='orange'>￥{{item.finalPrice/100}}</text></view>
+                  <view>起拍价: <text>￥{{item.startPrice/100}}</text></view>
+                </view>
+                <image class='status-pic' src='/assets/image/paic_icon_time1@2x.png' mode="aspectFit"></image>
+              </view>
+            </navigator>
+          </view>
+
+          
+
+        </view>
+
+        <view class='text-center load-text'>
+          {{msg}}
+        </view>
+      
+
+  </view>
+
+  
+</view>

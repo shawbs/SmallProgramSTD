@@ -1,0 +1,20 @@
+<!--pages/user/collect/collect.wxml-->
+<view class="order-item" wx:for="{{list}}" wx:key="{{index}}">
+  <navigator url='/pages/other/detail/detail?id={{item.auctionItemId}}' style='width:100%'>
+    <view class='order-item-hd'>
+      <label>{{item.auctionType}}</label>
+      <text class='gray'>第{{item.auctionNo}}场</text>
+    </view>
+    <view class="order-item-bd">
+        <image class='img' src="{{item.imgUrls}}"></image>
+        <view class="show-text">
+          <text class="create-date">开拍时间: {{item.startTime}}</text>
+          <view class="title ellipsis2">{{item.name}}</view>
+          <view class="create-date">
+            起拍价格 <text class='orange2'>￥{{item.startPrice/100}}</text>
+          </view>
+            
+        </view>
+    </view>
+  </navigator>  
+</view>

@@ -1,0 +1,63 @@
+<!--pages/yb/yb.wxml-->
+
+<view class="yb-page container" wx:if="{{lottoList}}">
+    <view class="fixed-btn prev" wx:if="{{index>0}}" bindtap="prevLotto">点击查看上一件</view>
+    <view class="fixed-btn next" wx:if="{{index<(lottoList.length-1)}}" bindtap="nextLotto">点击查看下一件</view>
+    <image class='top-bg' src='/assets/image/yaobao_bg@3x.png'></image>
+    <view class="current-yb common-shadow" wx:if="{{lotto}}">
+        <image class='top-logo' mode='aspectFit' src='/assets/image/yaobao_jxpc_head_icon@2x.png'></image>
+        <view class="yb-slider">
+              <swiper class='swiper-container' indicator-dots="true"
+                  autoplay="true" interval="3000" style='height:{{swiper.height}}'>
+
+                  <swiper-item wx:for="{{lotto.imgUrl}}" wx:key="{{index}}">
+                    <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='previewImage' data-img="{{item}}"/>
+                  </swiper-item>
+
+              </swiper>
+               <view class='yb-title'>{{lotto.name}}</view>
+        </view>
+       
+        <view class="desc">
+            <view class="cz-wp">
+                <view class='row' wx:for="{{lotto.properties}}" wx:key="{{index}}">
+                  <label>{{item.name}}：</label>
+                  <span>{{item.value}}</span>
+                </view>
+            </view>
+            <view class="mt10 fl">简介：</view>
+            <view class="content introduction mt2">{{lotto.introduction}}</view>
+        </view>
+
+      <view class="yb-progress">
+          <view class='_title'>
+            <text class='orange'>总份额{{lotto.num}}份，{{lotto.price}}积分/摇奖号</text>
+            <text class="fr gray">剩余{{lotto.surplusNum}}份</text>
+          </view>
+          <view class="plan">
+            <view class="bg-wp" style='width:{{(lotto.surplusNum/lotto.num)*100+"%"}}'></view>
+          </view>
+      </view>
+    </view>
+
+    <view class="ruler">
+        <view class="title">活动规则：</view>
+        <view class="content">
+            <view>1、每位会员都有机会参与本活动。用少量积分可兑换一张摇奖号码，参加平台艺术品摇宝活动；</view>
+            <view>2、每张摇奖号码对应一个幸运编号，在份额售空后，根据开奖时间，平台随机抽取中奖编号；</view>
+            <view>3、中奖的幸运会员如是厦门本地，请到顺天达网络科技有限公司领取中奖奖品，外地会员则安排快递包邮送达；</view>
+            <view>4、参与摇奖的艺术品，不支持退货（质量问题除外）。</view>  
+        </view>
+    </view>
+
+    <view class="opt-wp">
+        <view class="text">
+            <view class="point-tip">您现有积分:</view>
+            <view class="point self-point">{{recreationBalance}}</view>
+        </view>
+        <view class="control">
+            <button class='re-btn' bind:tap="toYbHistory">摇宝记录</button>
+            <button class='re-btn primary' bind:tap="toConfirm" data-id="{{lotto.lottoId}}">确认参与</button>
+        </view>
+    </view>
+</view>

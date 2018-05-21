@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "拍品管理",
+  "usingComponents": {
+    "topnav": "../../../component/topnav/topnav"
+  }
+}

@@ -1,0 +1,17 @@
+<!--component/modelPrompt.wxml-->
+<view class='weui-mask' hidden='{{hideModel}}'></view>
+<view class="weui-dialog" hidden='{{hideModel}}'>
+  <view>
+    <view class="weui-dialog__hd">
+      <text class="weui-dialog__title">{{title}}</text>
+    </view>
+    <view class="weui-dialog__bd">
+      <view>{{content}}</view>
+      <input type='{{inputType}}' class="weui-prompt-input" id="weui-prompt-input" placeholder='{{placeholder}}'/>
+    </view>
+    <view class="weui-dialog__ft">
+      <text  class="weui-dialog__btn default" bindtap='cancel'>取消</text>
+      <text  class="weui-dialog__btn primary" bindtap='tap'>确定</text>
+    </view>
+  </view>
+</view>

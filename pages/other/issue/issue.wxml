@@ -1,0 +1,2 @@
+<!--pages/other/issue/issue.wxml-->
+<web-view src="http://app.shuntd.cn/shuntd/question.html"></web-view>

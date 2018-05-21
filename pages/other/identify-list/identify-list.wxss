@@ -1,0 +1,41 @@
+/* pages/other/identify-list/identify-list.wxss */
+
+.order-item{
+  margin-bottom: 10px;
+}
+.order-item .show-text .title {
+  margin-bottom: 20px;
+}
+.order-item .img{
+  height: 150px;
+}
+.show-text .time{
+  position: absolute;
+  bottom: 10px;
+  right: 10px
+}
+.order-item .order-item-fd{
+  width: 100%;
+  padding-right: 0;
+  font-size: 16px;
+  line-height: 30px;
+  color: #666;
+}
+.order-item-fd .title{
+  border-bottom: 2px solid #e5b577;
+  padding: 10px 0;
+  color: #333;
+}
+.order-item-fd .info{
+  padding: 8px 0;
+}
+.order-item-fd .content{
+  padding: 8px 0;
+  color: #000;
+}
+.order-item-fd .other{
+  border-top: 1px solid #ddd;
+  text-align: right;
+  padding: 6px 10px;
+  color: #e5b577;
+}

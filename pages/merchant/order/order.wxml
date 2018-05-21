@@ -1,0 +1,29 @@
+<!--pages/merchant/order/order.wxml-->
+
+<!-- 卖家订单 -->
+<view class="order-page container" wx:if="{{orderlist}}" >
+    <topnav bind:navitemtap="navtab" navlist="{{navlist}}" currentIndex="{{tabIndex}}"/>
+
+    <view class="order-item" data-orderid="3" wx:for="{{orderlist}}" wx:key="{{index}}">
+      <navigator url='/pages/merchant/order-detail/order-detail?id={{item.orderNo}}' style='width:100%'>
+        <view class="order-item-bd">
+            <image class='img' src="{{item.imgUrl[0]}}"></image>
+            <view class="show-text">
+            <view class="title ellipsis2">{{item.productDescribe}}</view>
+            <view class="residue">{{item.bidPrice/100}}元</view>
+                <text class="create-date">订单时间: {{item.countdownTime}}</text>
+            </view>
+        </view>
+        <view class="order-item-fd">
+            <text class="btn-orange-link">{{item.statusText}}</text>                        
+        </view>
+      </navigator>  
+    </view>
+  
+    <view class='text-center load-text'>
+      {{msg}}
+    </view>
+
+</view>
+
+

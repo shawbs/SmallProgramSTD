@@ -1,0 +1,37 @@
+/* pages/user/getpwd/getpwd.wxss */
+.savepwd{
+  background: #333;
+  border-bottom: 4px solid #E5B577;
+  padding: 20px 10px 10px;
+}
+.input-group{
+  justify-content: center;
+}
+.savepwd .input-col{
+  background: #fff;
+  margin: 2%;
+  border-radius: 6px;
+  width: 45px;
+  height: 45px;
+}
+.tip{
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+}
+.resetpwd{
+  padding-top: 10px;
+  color: #666;
+}
+.list .input-group{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 30px;
+}
+.list-item label{
+  margin-right: 5px;
+}
+.btn-sendcode{
+  padding-left: 10px;
+  border-left: 1px solid #ddd;
+}

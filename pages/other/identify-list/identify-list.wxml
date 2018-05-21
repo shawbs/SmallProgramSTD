@@ -1,0 +1,21 @@
+<!--pages/other/identify-list/identify-list.wxml-->
+<view class='container'>
+  <view class='order-item' wx:for="{{entries}}" wx:key="{{index}}">
+    <view class="order-item-bd">
+        <image class='img' src="{{item.imgUrl}}"></image>
+        <view class="show-text">
+          <view class="title ellipsis2">艺术口名称: {{item.name}}</view>
+          <view class="create-date">年代: {{item.years}}</view>
+          <view class="create-date">尺寸: {{item.size}}</view>
+          <view class="time">{{item.createTime}}</view>
+        </view>
+    </view>
+    <view class='order-item-fd'>
+      <view class='title'>鉴定结果</view>
+      <view class='info'>{{item.appraisalTitle}}</view>
+      <view class='content'>{{item.appraisalContent}}</view>
+      <view class='other'>鉴定时间 {{item.appraisalTime}}</view>
+    </view>
+  </view>
+  <view class='load-text text-center' wx:if="{{!entries.length}}">无数据</view>
+</view>

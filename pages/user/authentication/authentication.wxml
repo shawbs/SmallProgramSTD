@@ -1,0 +1,32 @@
+<!--pages/user/authentication/authentication.wxml-->
+<view class='card' wx:if="{{!checked}}">
+  <view class='_title'>申请认证</view>
+  <view class='flex'>
+    <view class='flex-item'>
+      <image class='icon' src='/assets/image/geren_icon.png'></image>
+      <view class='mb-2'>个人实名认证</view>
+      <navigator url='/pages/user/identification/identification' class='btn min btn-orange2'>申请</navigator>
+      <!-- <view class='green'>已认证</view> -->
+    </view>
+    <view class='flex-item'>
+      <image class='icon' src='/assets/image/qiye_icon.png'></image>
+      <view class='mb-2'>企业实名认证</view>
+      <navigator url='/pages/merchant/identification/identification' class='btn min btn-orange2'>申请</navigator>
+      <!-- <view class='green'>已认证</view> -->
+    </view>
+  </view>
+</view>
+<view class='card result' wx:if="{{checked}}">
+  <view class='flex'>
+    <view class='flex-item'>
+      <image class='icon' src='/assets/image/clock_03.png'></image>
+      <!-- <image class='icon' src='/assets/image/no_03.png'></image> -->
+      <!-- <image class='icon' src='/assets/image/yes_03.png'></image> -->
+      <view class='mb-4'>待审核...</view>
+      <!-- <view class='mb-4'>审核未通过</view> -->
+      <!-- <view class='mb-4'>审核通过</view> -->
+      <view class='small'>平台正在审核你的 " <text class='orange'>个人实名认证</text> ", 审核结果为 1-2个工作日 </view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,79 @@
+<!--pages/merchant/index/index.wxml-->
+<view class='container personal-page' wx:if="{{userInfo}}">
+  <view class="setting-usr-hd mb-2">
+      <view class='row'>
+        <view class="usr-pic">
+            <image src="{{userInfo.headImgUrl || '/assets/image/default_avatar.png'}}"  alt="" class="avatar" bindtap='updataAvatar'></image>
+        </view>
+
+        <view class="info">
+            <view class="info-title">
+              {{userInfo.nickName}}
+              <text class='small orange' wx:if="{{!userInfo.realName}}" >未实名认证</text>
+              <text class='small green' wx:if="{{userInfo.realName}}" >已实名认证</text>
+            </view>
+            <view class="info-line gray">{{userInfo.name}}</view>
+            <view class="info-line orange2">粉丝 128</view>
+        </view>
+      </view>
+  </view>
+  <view class='list'>
+      <view class='orader-card mb-2'>
+        <navigator url='/pages/user/order/order' class='card-hd'>
+          <image class='fl icon-user' src='/assets/image/dingdan_icon.png' mode='aspectFit'></image>
+          我的订单
+          <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+        </navigator>
+        <view class='card-bd'>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=1&id=1'>
+            <!-- <text class='bage'></text>   -->
+            <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
+            <view>待付款</view>
+          </navigator>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=2&id=2'>
+            <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
+            <view>待发货</view>
+          </navigator>
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=3&id=3'>
+            <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
+            <view>待收货</view>
+          </navigator>
+          <!-- <navigator class='cell' url='../../user/order/order?tabIndex=2'>
+            <image class="img" src='/assets/image/wd_icon_dqh@2x.png'></image>
+            <view>待取货</view>
+          </navigator> -->
+          <navigator class='cell' url='/pages/user/order/order?tabIndex=4&id=4'>
+            <image class="img" src='/assets/image/wd_icon_ddwc@2x.png'></image>
+            <view>订单完成</view>
+          </navigator>
+        </view>
+      </view>
+      <navigator url='/pages/user/level/level' class="list-item">
+        <image class='label-icon' src='/assets/image/money_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>帐户余额</label>
+        <text class='orange2'>0.00元</text>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+        <image class='label-icon' src='/assets/image/xiaoxi_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>消息中心</label>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+        <image class='label-icon' src='/assets/image/paipin_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>拍品管理</label>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+        <image class='label-icon' src='/assets/image/sz_icon.png' mode='aspectFit'></image>
+        <label class='fullflex'>设置</label>
+         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
+      </navigator>
+      <navigator url='/pages/tabBar/mine/mine' open-type='switchTab' class="list-item mb-2">
+        <image class='label-icon' src='/assets/image/wd_icon_wddd@2x.png' mode='aspectFit'></image>
+        <label class='fullflex'>买家中心</label>
+        <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+      </navigator>
+  </view>
+  
+</view>

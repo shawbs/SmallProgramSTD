@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "卖家订单列表",
+    "usingComponents": {
+      "topnav": "../../../component/topnav/topnav"
+    }
+}

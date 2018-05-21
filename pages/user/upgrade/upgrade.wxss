@@ -1,0 +1,80 @@
+/* pages/user/upgrade/upgrade.wxss */
+.upgrade-page{
+  justify-content: space-between;
+  height: 100vh;
+  overflow: hidden;
+}
+.upgrade-page .top{
+  height: 188px;
+}
+.upgrade-page .bd{
+  flex: 1;
+}
+.avatar{
+  border-radius: 4px;
+  border: none;
+}
+.setting-usr-hd{
+  padding: 15px;
+  background: #333333;
+  border-bottom: 3px solid #d89f55;
+  position: relative;
+}
+.usr-pic{
+  margin-right: 10px;
+}
+.setting-usr-hd .info{
+  color: #CCCCCC;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.setting-usr-hd .info .info-title{
+  font-size: 16px;
+  padding: 10px 0;
+  color: #fff;
+}
+.member-icon{
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 60px;
+}
+.member{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  text-align: center;
+  color: #d89f55;
+  font-size: 16px;
+}
+.upgrade-page .upgrade-title{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+  background: #fff;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.upgrade-page .upgrade-title .right{
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bd{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bd .content{
+  overflow: auto;
+  flex: 1;
+  padding: 10px;
+  line-height: 30px;
+}
+.bd .btn-orange{
+  margin: 0;
+  border-radius: 0; 
+}
