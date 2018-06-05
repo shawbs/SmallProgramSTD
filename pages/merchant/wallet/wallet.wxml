@@ -5,62 +5,80 @@
     <view class='top'>
       <view class='content'>
         <view class='_title'>帐户余额</view>
-        <view class='money'>￥{{money.balance}}</view>
+        <view class='money'>￥{{money/100}}</view>
       </view>
     </view>
 
     <view class='list'>
       <view class='orader-card mb-2'>
-        <navigator url='/pages/user/order/order' class='card-hd'>
+        <view class='card-hd'>
           <image class='fl icon-user' src='/assets/image/dingdan_icon.png' mode='aspectFit'></image>
           买家订单余款
-          <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
-        </navigator>
+          <!-- <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> -->
+        </view>
         <view class='card-bd'>
           <navigator class='cell' url='/pages/user/order/order?tabIndex=1&id=1'>
             <!-- <text class='bage'></text>   -->
             <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
             <view class='mb-1'>待付款</view>
-            <view class='orange2'>￥0.00</view>
+            <view class='orange'>￥{{orderMoney.noPay}}</view>
           </navigator>
           <navigator class='cell' url='/pages/user/order/order?tabIndex=2&id=2'>
             <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
             <view class='mb-1'>待发货</view>
-            <view class='orange2'>￥0.00</view>
+            <view class='orange'>￥{{orderMoney.noConsignment}}</view>
           </navigator>
           <navigator class='cell' url='/pages/user/order/order?tabIndex=3&id=3'>
             <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
             <view class='mb-1'>待收货</view>
-            <view class='orange2'>￥0.00</view>
+            <view class='orange'>￥{{orderMoney.noReceiving}}</view>
           </navigator>
 
         </view>
       </view>
 
-      <navigator url='/pages/user/level/level' class="list-item">
+      <navigator url='/pages/merchant/wallet-log/wallet-log' class="list-item">
         <image class='label-icon' src='/assets/image/yue_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>余额明细</label>
 
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
-      <navigator url='/pages/user/card-list/card-list' class="list-item noborder mb-2">
+      <navigator url='/pages/merchant/card-list/card-list' class="list-item noborder mb-2">
         <image class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
         <label class='fullflex'>管理银行卡</label>
 
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
-      <navigator url='/pages/user/pay-safe/pay-safe' class="list-item mb-2">
+      <!-- <navigator url='/pages/user/pay-safe/pay-safe' class="list-item mb-2">
         <image class='label-icon' src='/assets/image/mibao_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>支付安全</label>
 
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
-      </navigator>
+      </navigator>  -->
 
     </view>
 
 
-
-    <navigator url='/pages/user/withdraw/withdraw' class='btn btn-orange'>提现</navigator>
+    <view class='btn-group'>
+      <view class='btn btn-gray' bindtap='showModel'>转入买家帐户</view>
+      <view bindtap='linkWithdraw' class='btn btn-orange'>提现</view>
+    </view>
   </view>
 
+</view>
+
+
+<view class='model' hidden='{{!modelshow}}'>
+  <form bindsubmit='transferWallet'>
+    <view class='box'>
+      <view class='model-hd text-center'>转入买家帐户</view>
+      <view class='model-bd'>
+        <input type='number' placeholder='请输入转入金额' name="cashNum"></input>
+      </view>
+      <view class='model-fd'>
+        <button class='btn-cell cancel' bindtap='hideModel'>取消</button>
+        <button class='btn-cell comfirm' form-type='submit'>确定</button>
+      </view>
+    </view>
+  </form>
 </view>

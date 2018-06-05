@@ -95,13 +95,14 @@ Page({
     }
 
     action.addCard(parameter).then(res=>{
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/user/card-list/card-list',
       })
     })
 
   },
 
+  //删除银行卡
   deleteCard(){
     let id = this.data.bankCard.cardId;
     action.deleteCard(id).then(res=>{
@@ -109,7 +110,7 @@ Page({
         title: '删除成功',
       })
       setTimeout(function(){
-        wx.navigateTo({
+        wx.redirectTo({
           url: '/pages/user/card-list/card-list',
         })
       },1000)

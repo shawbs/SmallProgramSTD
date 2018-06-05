@@ -86,6 +86,7 @@ Page({
     this.initPage(e.detail.id)
   },
 
+  //初始化页面
   initPage(type = 0){
     action.getLottoHistory({
       page: 1,
@@ -98,6 +99,7 @@ Page({
     })
   },
 
+  //前往我的号码页
   linkYbNumber(e){
     console.log(e.target.dataset)
     let luckNum = e.target.dataset.luckNum;

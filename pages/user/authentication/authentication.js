@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.initPage();
   },
 
   /**
@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
+    
   },
 
   /**
@@ -69,11 +69,39 @@ Page({
   },
 
   initPage() {
-    //获取认证状态信息
-    action.getIdentificationStatus().then(res => {
-      this.setData({
-        checkInfo: res.data
-      })
+    //如果正在申请商户,设checkInfo为1,反之则设为实名认证状态
+    this.getMerchantApplyStatus((data)=>{
+      if (data.isexist){
+        console.log(data)
+        this.setData({
+          checked: true,
+          checkInfo: {
+            checkStatus: data.checkStatus
+          }
+        })
+      }else{
+        //获取实名认证状态信息
+        action.getIdentificationStatus().then(res => {
+          if (res.data.isexist) {
+            this.setData({
+              checked: true,
+              checkInfo: res.data.certifyEntity
+            })
+          }else{
+            this.setData({
+              checked: false,
+              checkInfo: null
+            })
+          }
+        })
+      }
     })
   },
+
+  //获取商户申请状态
+  getMerchantApplyStatus(cb) {
+    action.getMerchantApplyStatus().then(res => {
+      cb && cb(res.data)
+    })
+  }
 })

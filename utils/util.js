@@ -1,5 +1,7 @@
 //格式化为 年-月-日 时：分：秒
 const formatTime = datetime => {
+  if (!datetime)return ''
+
   let date = new Date(datetime)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -11,8 +13,9 @@ const formatTime = datetime => {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-//格式化为 年-月-日 时：分
+//格式化为 月-日 时：分
 const formatTimeSimple = datetime => {
+  if (!datetime) return ''
   let date = new Date(datetime)
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -23,11 +26,19 @@ const formatTimeSimple = datetime => {
 
 //格式化为 年-月-日
 const formatYear = datetime => {
-  let date = datetime? new Date(datetime) : new Date;
+  let date = datetime? new Date(datetime) : new Date();
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   return [year, month, day].map(formatNumber).join('-')
+}
+
+//格式化为 年-月-日
+const getTimer = datetime => {
+  let date = datetime ? new Date(datetime) : new Date();
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  return formatNumber(hour) + ':' + formatNumber(minute)
 }
 
 //相对时间，如2017/1/1相对今天是什么日期
@@ -107,24 +118,21 @@ const getAfterStatusText = (status)=>{
   return o[status]
 }
 
+//传递一个时间搓(毫秒),进行倒计计
 const getCountDown = function (timestamp){
+  
   if (timestamp != null) {
 
       var nowTime = new Date().getTime();
       var endTime = timestamp;
-      var t = endTime - nowTime;
-      if (t < 0) {
-        $("#countdown").html('等待落锤');
-        clearInterval(timer);
-        return;
-      }
-      // console.log(t)
+      var t = endTime > nowTime ? endTime - nowTime : nowTime - endTime;
+
+
       var d = Math.floor(t / 1000 / 60 / 60 / 24);
       var hour = Math.floor(t / 1000 / 60 / 60 % 24);
       var min = Math.floor(t / 1000 / 60 % 60);
       var sec = Math.floor(t / 1000 % 60);
       // console.log(d,hour,min,sec)
-
       if (hour < 10) {
         hour = "0" + hour;
       }
@@ -164,6 +172,7 @@ const autoCelarStorage = function(){
 }
 
 module.exports = {
+  getTimer,
   formatTime,
   formatTimeSimple,
   relativeDate,

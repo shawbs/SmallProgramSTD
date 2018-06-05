@@ -1,0 +1,21 @@
+<!--pages/other/bidlist/bidlist.wxml-->
+  <view class='bid-list' wx:if="{{bidlist}}">
+      <view class='bid-list-title'>
+        <text>出价记录({{bidlist.length}})</text>
+      </view>
+      <view class='bid-item' wx:for="{{bidlist}}" wx:key="{{index}}">
+        <image class='avatar-icon' src='{{item.imgUrl || "/assets/image/default_avatar.png"}}'></image>
+        <view class='flex'>
+          <view>
+            <text class='mr-1'>{{item.bidderName}}</text>
+            <image class='icon-level' src='/assets/image/dj_{{item.level}}.png' mode='aspectFit'></image>
+          </view>
+          <image wx:if="{{index==0}}" class='state-icon' src='/assets/image/leader.png' mode='aspectFit'></image>
+          <image wx:if="{{index>0}}" class='state-icon' src='/assets/image/out.png' mode='aspectFit'></image>
+        </view>
+        <view class='flex'>
+          <text class='orange'>￥{{item.bidPrice/100}}</text>
+          <text class='gray'>{{item.datetime}}</text>
+        </view>
+      </view>
+  </view>

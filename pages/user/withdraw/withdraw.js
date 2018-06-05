@@ -13,18 +13,26 @@ Page({
     cardChecked: false,
 
     //选中卡号后
-    bankCard: null
+    bankCard: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData.payType)
     let bankCard = app.globalData.bankCard_default;
     if (bankCard){
       this.setData({
         bankCard: bankCard,
-        cardChecked: true
+        cardChecked: true,
+      })
+    }
+    this.initPage();
+    let drawNum = app.globalData.drawNum;
+    if (drawNum) {
+      this.setData({
+        drawNum: drawNum
       })
     }
   },
@@ -40,13 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
-    let drawNum = app.globalData.drawNum;
-    if (drawNum){
-      this.setData({
-        drawNum: drawNum
-      })
-    }
+    
   },
 
   /**
@@ -85,11 +87,16 @@ Page({
   },
 
   initPage(){
-    this.getAccountMoney();
+    if (app.globalData.payType == 1){
+      this.getAccountMoney();
+    }
+    if (app.globalData.payType == 2) {
+      this.getMerchantBalance();
+    }
   },
 
+  //获取用户帐户余额
   getAccountMoney(){
-    //获取帐户余额
     action.getAccountMoney().then(res => {
       this.setData({
         money: res.data.balance || 0
@@ -97,10 +104,19 @@ Page({
     })
   },
 
+  //获取商户帐户余额
+  getMerchantBalance() {
+    action.getMerchantBalance().then(res => {
+      this.setData({
+        money: res.data.amount || 0
+      })
+    })
+  },
+
   //写入全部余额
   selectMoney(){
     this.setData({
-      drawNum: this.data.money
+      drawNum: this.data.money/100
     })
   },
 
@@ -127,20 +143,45 @@ Page({
     let drawNum = this.data.drawNum;
     let bankCardToken = this.data.bankCard.cardToken;
     if (Number(drawNum) && drawNum > 0){
-      action.postDrawPay({
-        cashNum: drawNum,
-        bankCardTokenString: bankCardToken
-      }).then(res => {
-        wx.navigateTo({
-          url: `/pages/user/pay/pay?origin=tx&originNum=${drawNum}&paymentNo=${res.data.paymentNo}`,
-        })
-      })
+      if (app.globalData.payType == 2){
+        this.merchantWithdraw(drawNum, bankCardToken);
+      }
+      if (app.globalData.payType == 1) {
+        this.postDrawPay(drawNum, bankCardToken);
+      }
+      
     }else{
       wx.showToast({
         title: '请输入正确金额',
         icon: 'none'
       })
     }    
+  },
+
+  //用户提现
+  postDrawPay(drawNum, bankCardToken){
+    action.postDrawPay({
+      cashNum: drawNum * 100,
+      bankCardTokenString: bankCardToken
+    }).then(res => {
+      wx.navigateTo({
+        url: `/pages/user/pay/pay?paymentNo=${res.data.paymentNo}`,
+      })
+
+    })
+  },
+
+  //商户用户提现
+  merchantWithdraw(drawNum, bankCardToken) {
+    action.merchantWithdraw({
+      cashNum: drawNum * 100,
+      bankCardTokenString: bankCardToken
+    }).then(res => {
+      wx.navigateTo({
+        url: `/pages/user/pay/pay?paymentNo=${res.data.paymentNo}`,
+      })
+
+    })
   }
 
 

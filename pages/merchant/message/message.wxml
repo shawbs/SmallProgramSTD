@@ -13,7 +13,7 @@
   <view class='delete-btn' style='width:{{deleteWidth}}px' data-id="{{item.addressId}}" bindtap='deleteAddress'>删除</view>
 </view>
 
-<view class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
+<navigator url="/pages/merchant/chat/chat" class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
   <text class='bage'>1</text>   
   <image class='avatar-icon' src='/assets/image/default_avatar.png'></image>
   <view class='msg-title'>
@@ -21,8 +21,8 @@
     <text class='gray small'>下午 2:06</text>
   </view>
   <view class='msg-content'>y表阿斯达棋</view>
-</view>
-<view class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
+</navigator>
+<navigator url="/pages/merchant/chat/chat" class='msg-item' style='transform: translateX({{item.left || 0}}px)'>
   <text class='bage'>1</text>   
   <image class='avatar-icon' src='/assets/image/logo.png'></image>
   <view class='msg-title'>
@@ -30,6 +30,6 @@
     <text class='gray small'>下午 2:06</text>
   </view>
   <view class='msg-content'>y表阿斯达棋</view>
-</view>
+</navigator>
 
 </view>

@@ -13,12 +13,12 @@
           </view>
         </view>
         <image class='member-icon' src='/assets/image/zhucehuiyuan_icon@2x.png' mode='widthFix'></image>
-        <text class='member'>大众会员</text>
+        <text class='member'>{{userInfo.typeName}}</text>
     </view>
     <view class='upgrade-title'>
       <text>当前身份:</text>
       <view class='right'>
-        <text class='gray'>大众会员</text>
+        <text class='gray'>{{userInfo.typeName}}</text>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </view>
     </view>
@@ -109,7 +109,8 @@
 九、免责声明
 9.1顺天达拍卖有义务在技术上确保平台的正常运行，尽力避免服务中断或将中断时间限制在最短时间内，保证会员网上交易活动的顺利进行。但如因不可抗力或其他顺天达拍卖APP无法控制的原因使顺天达拍卖APP崩溃或无法正常使用导致网上交易无法完成或丢失有关的信息、记录等，顺天达拍卖不承担责任；任何会员向顺天达拍卖提供错误、不完整、不实信息等造成不能正常使用顺天达拍卖APP服务或遭受任何其他损失，概与顺天达拍卖APP无关。
 </view>
-    <button class='btn-orange' bindtap='linkUpgradePost'>我要升级</button>
+    <button class='btn-orange' wx:if="{{userInfo.typeId == 1}}" bindtap='linkUpgradePost'>我要升级</button>
+    <button  disabled wx:if="{{userInfo.typeId == 2}}">已是会员</button>
   </view>
 
 

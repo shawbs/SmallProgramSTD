@@ -16,16 +16,35 @@
     </view>
   </view>
 </view>
+
 <view class='card result' wx:if="{{checked}}">
   <view class='flex'>
     <view class='flex-item'>
-      <image class='icon' src='/assets/image/clock_03.png'></image>
-      <!-- <image class='icon' src='/assets/image/no_03.png'></image> -->
-      <!-- <image class='icon' src='/assets/image/yes_03.png'></image> -->
-      <view class='mb-4'>待审核...</view>
-      <!-- <view class='mb-4'>审核未通过</view> -->
-      <!-- <view class='mb-4'>审核通过</view> -->
-      <view class='small'>平台正在审核你的 " <text class='orange'>个人实名认证</text> ", 审核结果为 1-2个工作日 </view>
+      <image wx:if="{{checkInfo.checkStatus == 1}}" class='icon' src='/assets/image/clock_03.png'></image>
+       <image wx:if="{{checkInfo.checkStatus == 3}}" class='icon' src='/assets/image/no_03.png'></image> 
+       <image wx:if="{{checkInfo.checkStatus == 2}}" class='icon' src='/assets/image/yes_03.png'></image> 
+      <view  wx:if="{{checkInfo.checkStatus == 1}}" class='mb-4'>待审核...</view>
+       <view wx:if="{{checkInfo.checkStatus == 3}}" class='mb-4'>审核未通过</view>
+      <view wx:if="{{checkInfo.checkStatus == 2}}" class='mb-4'>审核通过</view>  
+      <view wx:if="{{checkInfo.checkStatus == 1}}" class='small'>平台正在审核你的 " <text class='orange'>商户入驻</text> ", 审核结果为 1-2个工作日 </view>
+
+    </view>
+
+  </view>
+</view>  
+
+<view class='card result' wx:if="{{checked}}" wx:for="{{checkInfo}}" wx:key="{{index}}" wx:if="{{index==0}}">
+  <view class='flex'>
+    <view class='flex-item'>
+      <image wx:if="{{item.checkStatus == 1}}" class='icon' src='/assets/image/clock_03.png'></image>
+       <image wx:if="{{item.checkStatus == 3}}" class='icon' src='/assets/image/no_03.png'></image> 
+       <image wx:if="{{item.checkStatus == 2}}" class='icon' src='/assets/image/yes_03.png'></image> 
+      <view  wx:if="{{item.checkStatus == 1}}" class='mb-4'>待审核...</view>
+       <view wx:if="{{item.checkStatus == 3}}" class='mb-4'>审核未通过</view>
+      <view wx:if="{{item.checkStatus == 2}}" class='mb-4'>审核通过</view>  
+      <view wx:if="{{item.certifyType==0}}" class='small'>平台正在审核你的 " <text class='orange'>个人实名认证</text> ", 审核结果为 1-2个工作日 </view>
+      <view wx:if="{{item.certifyType==1}}" class='small'>平台正在审核你的 " <text class='orange'>企业认证申请</text> ", 审核结果为 1-2个工作日 </view>
+      <view wx:if="{{item.checkStatus==3}}" class='small'>{{item.reason}}</view>
     </view>
 
   </view>

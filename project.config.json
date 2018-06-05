@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.93",
-	"appid": "wxb337f929cfc27df0",
+	"appid": "wx6d731b36a21d753e",
 	"projectname": "SmallProgramSTD",
 	"isGameTourist": false,
 	"condition": {
@@ -30,12 +30,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "tabBar",
-					"pathName": "pages/tabBar/mine/mine",
+					"pathName": "pages/tabBar/index/index",
 					"query": "",
 					"scene": "1001"
 				},
@@ -56,8 +56,8 @@
 				{
 					"id": 3,
 					"name": "t",
-					"pathName": "pages/merchant/publish/publish",
-					"query": "",
+					"pathName": "pages/merchant/detail/detail",
+					"query": "id=1",
 					"scene": "1001"
 				}
 			]

@@ -1,0 +1,77 @@
+<!--pages/merchant/publish/publish.wxml-->
+<view class='form' wx:if="{{isMerchant==2}}">
+  <form bindsubmit='saveAuction'>
+    <view class='publish-form'>
+      <view class='list'>
+        <view class='list-title'>选择拍品属性
+          <navigator class='fr orange' url='/pages/merchant/auction/auction?tabIndex=3&status=3'>草稿箱</navigator>
+        </view>
+        <checkbox-group class="checkbox-group" >
+          <label class="checkbox" wx:for="{{types}}" wx:key="{{index}}" data-index="{{index}}" bindtap="checkboxChange">
+            <checkbox value="{{item.label}}" checked="{{item.check}}" />
+            <image hidden="{{!item.check}}" class='checkbox-icon' src='/assets/image/icon_gou3@2x.png'></image>
+            <image hidden='{{item.check}}' class='checkbox-icon' src='/assets/image/icon_gou4@2x.png'></image>
+            {{item.label}}
+            <text class='orange2' wx:if="{{item.required}}">(必选)</text>
+          </label> 
+        </checkbox-group>
+        <view class='tip'>所勾选的属性，发布后会在拍品详情中显示</view>
+      </view>
+      <view class="list">
+          <view class="list-title">拍品信息</view>
+         
+
+          <block  wx:for="{{types}}" wx:key="{{index}}">
+            <view class="list-item"  wx:if="{{item.check && item.name != 'introduction' && item.name != 'returnType'}}">
+              <text class='fullflex'>{{item.label}}</text>
+              <input placeholder='请输入{{item.label}}' name="{{item.name}}" value='{{auctionData[item.name]}}'></input>
+            </view>
+
+            <view class="list-item" wx:if="{{item.check && item.name == 'returnType'}}">
+              <text class='fullflex'>退货</text>
+              <picker bindchange="bindPickerChange" value="{{i}}" range="{{array}}" name="returnType">
+                <view class="picker gray">
+                  {{array[i]}}
+                </view>
+              </picker>
+            </view>
+
+            <view class='list-item' wx:if="{{item.check && item.name == 'introduction'}}">
+            <textarea placeholder='请输入拍品介绍' name="introduction" value="{{auctionData.introduction || ''}}"></textarea>
+          </view>
+          </block>
+
+      </view>
+      <view class='list'>
+        <view class='list-title'>拍品图片/视频</view>
+        <view class='preview-img'>
+          <view class='img-item' wx:for="{{previewList}}" wx:key="{{index}}">
+            <image class='img' src='{{item.url}}' ></image>
+            <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon>
+          </view>
+        
+        <image hidden='{{previewList.length>=8}}' class='upload-icon mr-2' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='uploadImg'></image>
+        <image hidden='{{previewList.length>=8}}'class='upload-icon' src='/assets/image/shipin_icon@2x.png' mode='widthFix' bindtap='uploadVideo'></image>
+        </view>
+        <view class='tip'>备注: 上传图片+视频共计不超过9张</view>
+      </view>
+    </view>
+
+    <button form-type='submit' class='btn-orange'>下一步</button>
+  </form>
+</view>
+<view class="order-page container" wx:if="{{isMerchant==1}}">
+  <view class='text-center hint'>
+    你还不是商户
+    <navigator url='/pages/user/authentication/authentication' class='text-center orange inline'>前往申请</navigator>
+  </view>
+  
+</view>
+
+<view class="order-page container" wx:if="{{isMerchant==100}}">
+  <view class='text-center hint'>
+    你还没有登录
+    <navigator url='/pages/user/login/login' class='text-center orange inline'>前往登录</navigator>
+  </view>
+  
+</view>

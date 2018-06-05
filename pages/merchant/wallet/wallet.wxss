@@ -45,3 +45,48 @@
   display: flex;
   justify-content: space-between;
 }
+
+.model{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.model .box{
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.model .model-hd{
+  line-height: 40px;
+  font-size: 16px;
+  /* border-bottom: 1px solid #ddd; */
+}
+.model .model-bd{
+  padding: 20px;
+}
+.model .model-bd input{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 5px;
+}
+.model .model-fd{
+  display: flex;
+}
+.model .model-fd .btn-cell{
+  flex: 1;
+  border-radius: 0;
+  background: transparent;
+  border-top: 1px solid #ddd;
+}
+.model .model-fd .btn-cell:first-child{
+  border-right: 1px solid #ddd;
+}
+.model .model-fd .btn-cell.comfirm{
+  color: #3385ff; 
+}

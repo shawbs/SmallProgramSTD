@@ -182,6 +182,7 @@ Page({
    
   },
 
+  //登录动作
   loginAction(parameter){
     action.login(parameter).then(res => {
       let data = res.data;
@@ -205,6 +206,21 @@ Page({
         wx.setStorageSync('__accessToken', data.accessToken)
         wx.setStorageSync('__User', user)
         wx.setStorageSync('tel', user.name)
+
+        //检测用户不否商户,2是 1不是
+        action.getMerchantApplyStatus().then(res => {
+          if (res.data.checkStatus == 2) {
+            app.globalData.isMerchant = 2;
+            action.merchantToken().then((res) => {
+              wx.setStorageSync('__refreshMerchantToken', res.data.refreshMerchantToken)
+              wx.setStorageSync('__merchantToken', res.data.merchantToken)
+              console.log('已更新merchant_token和refresh_merchant_token')
+            })
+          } else {
+            app.globalData.isMerchant = 1
+          }
+        })
+
         wx.showToast({
           title: '登录成功',
           icon: 'success',

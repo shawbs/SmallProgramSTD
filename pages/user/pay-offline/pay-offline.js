@@ -3,7 +3,6 @@ const app = getApp();
 
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-let uploading = false;
 Page({
 
   /**
@@ -27,7 +26,7 @@ Page({
     privateAccount: null,
     publicAccount: null,
     file: null,
-    payNo: 0
+    payNum: 0
   },
 
   /**
@@ -36,8 +35,9 @@ Page({
   onLoad: function (options) {
     this.setData({
       paymentToken: options.paymentToken,
-      payNo: options.payNo || 0
+      payNum: options.payNum || 0
     })
+    this.initPage();
   },
 
   /**
@@ -51,7 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
+    
   },
 
   /**
@@ -108,14 +108,6 @@ Page({
   selectImg() {
     let that = this;
     let previewList = that.data.previewList;
-    if (uploading) {
-      wx.showToast({
-        title: '等待上传完成',
-        icon: 'none'
-      })
-      return
-    }
-    uploading = true;
     wx.chooseImage({
       count: 1,
       success: function (res) {
@@ -131,7 +123,6 @@ Page({
         }) 
       },
       fail(e) {
-        uploading = false;
       }
     })
   },

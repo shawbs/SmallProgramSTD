@@ -1,5 +1,6 @@
 const { conf } = require('../config.js')
 const base = require('../utils/base.js')
+const API = require('./api.js')
 
 const getNetwork = ()=>{
   wx.getNetworkType({
@@ -10,8 +11,6 @@ const getNetwork = ()=>{
       console.log(networkType)
     }
   })
-
-
 }
 
 
@@ -25,7 +24,7 @@ const refreshToken = (showLoader=false) => {
       mask: true,
     })
     wx.request({
-      url: conf[conf.env].host + '/business-app-user/std/app/api/v1/app/user/login/refreshToken',
+      url: conf[conf.env].host + API.refreshToken,
       data: {
         refreshSign: wx.getStorageSync('__refreshToken'),
         location: 2,
@@ -60,6 +59,8 @@ const refreshToken = (showLoader=false) => {
   })
   
 }
+
+
 
 /**
  * 封装get请求,
@@ -332,11 +333,266 @@ const uploadFile = function (url, paramrter, cb) {
     })
 }
 
+/**
+ * 刷新商户TOKEN
+ */
+const refreshMerchantToken = (showLoader = false) => {
+  return new Promise((resolve, reject) => {
+    showLoader && wx.showLoading({
+      title: 'loading..',
+      mask: true,
+    })
+    wx.request({
+      url: conf[conf.env].host + API.refreshMerchantToken,
+      data: {
+        refreshMerchantToken: wx.getStorageSync('__refreshMerchantToken'),
+        location: 2,
+        sb: 'xzz'
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'accessToken': wx.getStorageSync('__accessToken')
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let data = res.data
+          if (data.code == 200) {
+            wx.setStorageSync('__refreshMerchantToken', data.data.refreshMerchantToken)
+            wx.setStorageSync('__merchantToken', data.data.merchantToken)
+            resolve();
+          } 
+          //token过期，刷新token后重新请求
+          else if (data.code == 401) {
+            refreshToken(showLoader).then(accessToken => {
+              refreshMerchantToken(showLoader)
+            }).catch(msg => {
+              console.error(msg)
+            })
+          }
+          else {
+            base.loginHandle();
+            reject(data.msg)
+          }
+        } else {
+          console.log(`${res.statusCode}, request fail.`);
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      },
+      complete: function () {
+        showLoader && wx.hideLoading()
+      }
+    })
+  })
+
+}
+
+/**
+ *商户中心请求方法post
+ */
+const merchantPost = function (url, paramrter, showLoader = false) {
+
+  return new Promise((resolve, reject) => {
+    showLoader && wx.showLoading({
+      title: 'loading..',
+      mask: true,
+    })
+    setTimeout(function(){
+      console.log('开始merchant post请求')
+      wx.request({
+        url: url,
+        data: paramrter,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'merchantToken': wx.getStorageSync('__merchantToken')
+        },
+        success: function (res) {
+          // console.log(res)
+          //请求成功
+          if (res.statusCode == 200) {
+            //接口返回正确码
+            if (res.data.code == 200) {
+              resolve(res.data);
+            }
+            //token过期，刷新token后重新请求
+            else if (res.data.code == 401) {
+              refreshMerchantToken(showLoader).then(() => {
+                merchantPost(url, paramrter, showLoader)
+              }).catch(msg => {
+                console.error(msg)
+              })
+            }
+            //token错误，未登录或其它原因
+            else if (res.data.msg == '无效token') {
+              base.loginHandle();
+            }
+            //接口返回错误码 
+            else {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              reject(res.data.msg)
+            }
+          }
+          //请求失败
+          else {
+            console.log(`${res.statusCode}, request fail.`);
+          }
+        },
+        fail: function (err) {
+          console.log(err)
+        },
+        complete: function () {
+          showLoader && wx.hideLoading()
+        }
+      })
+    }, 1000)
+  })
+
+}
+
+/**
+ *商户中心请求方法get
+ */
+const merchantGet = function (url, paramrter, showLoader = false) {
+
+  return new Promise((resolve, reject) => {
+    showLoader && wx.showLoading({
+      title: 'loading..',
+      mask: true,
+    })
+    setTimeout(function(){
+      console.log('开始merchant get请求')
+      wx.request({
+        url: url,
+        data: paramrter,
+        method: 'GET',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'merchantToken': wx.getStorageSync('__merchantToken')
+        },
+        success: function (res) {
+          // console.log(res)
+          //请求成功
+          if (res.statusCode == 200) {
+            //接口返回正确码
+            if (res.data.code == 200) {
+              resolve(res.data);
+            }
+            //token过期，刷新token后重新请求
+            else if (res.data.code == 401) {
+              refreshMerchantToken(showLoader).then(token => {
+                merchantGet(url, paramrter, showLoader)
+              }).catch(msg => {
+                console.error(msg)
+              })
+            }
+            //token错误，未登录或其它原因
+            else if (res.data.msg == '无效token') {
+              base.loginHandle();
+            }
+            //接口返回错误码 
+            else {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              reject(res.data.msg)
+            }
+          }
+          //请求失败
+          else {
+            console.log(`${res.statusCode}, request fail.`);
+          }
+        },
+        fail: function (err) {
+          console.log(err)
+        },
+        complete: function () {
+          showLoader && wx.hideLoading()
+        }
+      })
+    },1000)
+    
+  })
+
+}
+
+//商户中心上传方法
+const merchantUpload = function (url, paramrter, showLoader = false) {
+
+  return new Promise((resolve, reject) => {
+    showLoader && wx.showLoading({
+      title: '上传中..',
+      mask: true,
+    })
+    wx.uploadFile({
+      url: url,
+      filePath: paramrter.files,
+      name: paramrter.filename,
+      formData: paramrter.formData || {},
+      header: {
+        'merchantToken': wx.getStorageSync('__merchantToken')
+      },
+      success: function (res) {
+        res.data = JSON.parse(res.data);
+        //请求成功
+        if (res.statusCode == 200) {
+          //接口返回正确码
+          if (res.data.code == 200) {
+            resolve(res.data);
+          }
+          //token过期，刷新token后重新请求
+          else if (res.data.code == 401) {
+            refreshMerchantToken(showLoader).then(accessToken => {
+              merchantUpload(url, paramrter, showLoader)
+            }).catch(msg => {
+              console.error(msg)
+            })
+          }
+          //token错误，未登录或其它原因
+          else if (res.data.msg == '无效token') {
+            base.loginHandle();
+          }
+          //接口返回错误码 
+          else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            reject(res.data.msg)
+          }
+        }
+        //请求失败
+        else {
+          console.log(`${res.statusCode}, request fail.`);
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      },
+      complete: function () {
+        showLoader && wx.hideLoading()
+      }
+    })
+  })
+
+}
+
 module.exports = {
   get,
   post,
   getAsset,
   getNetwork,
   upload,
-  uploadFile
+  uploadFile,
+  merchantPost,
+  merchantGet,
+  merchantUpload,
+  refreshToken,
+  refreshMerchantToken
 }

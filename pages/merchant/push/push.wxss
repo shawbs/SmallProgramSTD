@@ -1,0 +1,20 @@
+/* pages/merchant/push/push.wxss */
+.list-item input{
+  text-align: right;
+  color: gray;
+}
+.list{
+  margin-bottom: 10px;
+}
+.setting{
+  border-top: 3px solid #d89f55;
+}
+.setting button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+button{
+  border-radius: 0; 
+}

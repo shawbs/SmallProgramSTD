@@ -1,6 +1,7 @@
 {
-  "navigationBarTitleText": "我的钱包",
+  "navigationBarTitleText": "用户钱包",
   "usingComponents": {
     "topnav": "/component/topnav/topnav"
-  }
+  },
+  "enablePullDownRefresh": true
 }

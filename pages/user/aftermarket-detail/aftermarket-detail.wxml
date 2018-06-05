@@ -7,10 +7,10 @@
       <image src='{{item}}' wx:for="{{detail.acc}}" wx:key="{{index}}" mode='aspectFill'  data-img="{{item}}" bindtap='previewImg'></image>
     </view>
     <view class='uploadTime gray'>上传时间{{detail.uploadTime}}</view>
-    <view class='address'>
+    <view class='address-chunk'>
       <view>收货人： {{detail.seller}}</view>
       <view>地址: {{detail.address}}</view>
-      <view>电话: {{detail.telephone}}</view>
+      <view class='mb-2'>电话: {{detail.telephone}}</view>
     </view>
     <view class='checkTime orange'>审核时间:{{detail.checkTime}}</view>
   </view>

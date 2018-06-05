@@ -32,7 +32,10 @@ const request = {
   },
   //加入围观人数
   addLooker: (paramrter) => $.post(baseurl + API.addLooker, paramrter),
-
+  //出价记录
+  bidList: (paramrter) => $.post(baseurl + API.bidList + `/${paramrter.auctionItemId}/bidinfo`, paramrter),
+  //出价
+  postbid: (paramrter) => $.post(baseurl + API.bid, paramrter),
   //获取积分商场详情
   getStoreDetail: (paramrter) => $.post(baseurl + API.storeDetail, paramrter, true),
   //预展
@@ -153,20 +156,96 @@ const request = {
   getAftermarketList: (parameter) => $.get(baseurl + API.getAftermarketList + `/${parameter.status}/${parameter.page}/${parameter.limit}`, {}, true),
   //设置关注
   postGuanzhu: (parameter) => $.post(baseurl + API.postGuanzhu, parameter, true),
-
   //获取售后详情'/business-return-product/std/app/api/v1/return/product/details/{orderNo}'
   getAftermarketInfo: (orderNo) => $.get(baseurl + API.getAftermarketInfo + `/${orderNo}`, {}, true),
-
+  //获取退货token
+  getRefundToken: (parameter) => $.post(baseurl + API.getRefundToken, parameter, true),
+  //申请退货
+  postRefund: (parameter) => $.post(baseurl + API.postRefund, parameter, true),
+  //取消退货
+  cancleRefund: (parameter) => $.post(baseurl + API.cancleRefund, parameter, true),
+  //售后图片上传
+  uploadRefundImg: (parameter) => $.upload(baseurl + API.uploadRefundImg, parameter, true),
+  //售后图片删除
+  deleteRefundImg: (parameter) => $.post(baseurl + API.deleteRefundImg, parameter, true),
   //用户信息修改(密码，昵称，性别)
   updataUserInfo: (parameter) => $.post(baseurl + API.updataUserInfo, parameter, false),
   //用户头像修改
-  updataUserAvatar: (parameter, cb) => $.upload(baseurl + API.updataUserAvatar, parameter, true),
+  updataUserAvatar: (parameter) => $.upload(baseurl + API.updataUserAvatar, parameter, true),
   //个人实名认证
-  identificationPersonal: (parameter) => $.post(baseurl + API.identificationPersonal, parameter, true),
+  identificationPersonal: (parameter) => $.post(baseurl + API.identificationPersonal, parameter, true), 
+  //获取个人实名认证token
+  personalToken: () => $.post(baseurl + API.personalToken, {}, true),
+  //企业实名认证
+  identificationEnterprise: (parameter) => $.post(baseurl + API.identificationEnterprise, parameter, true), 
+  //获取企业实名认证token
+  enterpriseToken: () => $.post(baseurl + API.enterpriseToken, {}, true),
   //身份证,营业照 图片上传
   uploadIdentificationImg: (parameter) => $.upload(baseurl + API.uploadIdentificationImg, parameter, true),
-  //查看认证状态
+  //查看实名认证状态
   getIdentificationStatus: () => $.post(baseurl + API.getIdentificationStatus, {}, true),
+  //查看商户申请状态
+  getMerchantApplyStatus: () => $.post(baseurl + API.getMerchantApplyStatus, {}, true),
+  //申请商户接口
+  merchantApply: (parameter) => $.post(baseurl + API.merchantApply, parameter, true),
+  //获取商户token接口
+  merchantToken: () => $.post(baseurl + API.merchantToken, {}, true),
+  //更新商户基本信息接口
+  updateMerchantInfo: (parameter) => $.merchantPost(baseurl + API.updateMerchantInfo, parameter, true),
+  //获取商户基本信息接口
+  merchantInfo: () => $.merchantPost(baseurl + API.merchantInfo, {}, true),
+  //取商户首页(商户中心)接口
+  merchantMainInfo: () => $.merchantPost(baseurl + API.merchantMainInfo, {}, true),
+  //商户中心上传商户LOGO
+  uploadMerchantLogo: (parameter) => $.merchantUpload(baseurl + API.uploadMerchantLogo, parameter, true),
+  //获取商户订单列表接口
+  getMerchantOrderList: (parameter) => $.merchantGet(baseurl + API.getMerchantOrder + `${parameter.status}/${parameter.page}/10`, {}, true),
+  //获取商户订单详情接口
+  getMerchantOrderInfo: (parameter) => $.merchantGet(baseurl + API.getMerchantOrderInfo + `${parameter.orderToken}`, {}, true),
+  //初始化拍品项和token
+  initMerchantAuction: (parameter) => $.merchantPost(baseurl + API.initMerchantAuction, parameter, true),
+  //生成拍品
+  saveMerchantAuction: (parameter) => $.merchantPost(baseurl + API.saveMerchantAuction, parameter, true),
+  //发布拍品
+  pushMerchantAuction: (parameter) => $.merchantPost(baseurl + API.pushMerchantAuction, parameter, true),
+  //上传拍品图片或视频
+  uploadAuctionImg: (parameter) => $.merchantUpload(baseurl + API.uploadAuctionImg, parameter, true),
+  //删除拍品图片或视频
+  deleteAuctionImg: (parameter) => $.merchantPost(baseurl + API.deleteAuctionImg, parameter, true),
+  //下架拍品
+  merchantAuctionOut: (parameter) => $.merchantPost(baseurl + API.merchantAuctionOut, parameter, true),
+  //获取拍品列表
+  merchantAuctionList: (parameter) => $.merchantPost(baseurl + API.merchantAuctionList, parameter, true),
+  //获取草稿箱
+  merchantAuction: (parameter) => $.merchantPost(baseurl + API.merchantAuction, parameter, true),
+  //获取草稿箱详情
+  merchantAuctionInfo: (parameter) => $.merchantPost(baseurl + API.merchantAuctionInfo, parameter, true),
+  //删除草稿箱
+  merchantAuctionDelete: (parameter) => $.merchantPost(baseurl + API.merchantAuctionDelete, parameter, true),
+  //获取商户余额
+  getMerchantBalance: (parameter) => $.merchantPost(baseurl + API.getMerchantBalance, parameter, true),
+  //获取商户余额明细
+  getMerchantBalanceLog: (parameter) => $.merchantPost(baseurl + API.getMerchantBalanceLog, parameter, true),
+  //商户转账
+  merchantTransfer: (parameter) => $.merchantPost(baseurl + API.merchantTransfer, parameter, true),
+  //商户提现
+  merchantWithdraw: (parameter) => $.merchantPost(baseurl + API.merchantWithdraw, parameter, true),
+  //商户现金付款
+  merchantPay: (parameter) => $.merchantPost(baseurl + API.merchantPay, parameter, true),
+  //商户银行卡列表
+  merchantBankCardList: (parameter) => $.merchantPost(baseurl + API.merchantBankCardList, parameter, true),
+  //商户删除商户银行卡
+  merchantBankCardDelete: (parameter) => $.merchantPost(baseurl + API.merchantBankCardDelete, parameter, true),
+  //增加商户银行卡
+  merchantBankCardAdd: (parameter) => $.merchantPost(baseurl + API.merchantBankCardAdd, parameter, true),
+  //获取订单余款
+  merchantOrderMoney: (parameter) => $.merchantPost(baseurl + API.merchantOrderMoney, parameter, true),
+  //首页获取商户发布的拍品
+  getMerchantAuctionList: (parameter) => $.post(baseurl + API.getMerchantAuctionList, parameter, true),
+  //商户拍品详情
+  getMerchantAuctionInfo: (parameter) => $.get(baseurl + API.getMerchantAuctionInfo + `${parameter.auctionItemId}/detail`, {}, true),
+  //商户拍品加入围观数
+  merchantAddLooker: (parameter) => $.post(baseurl + API.merchantAddLooker, parameter, false),
 }
 
 module.exports = request

@@ -5,3 +5,8 @@ page{
 .order-item .order-item-fd {
   height: 33px;
 }
+.in-bottom{
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}

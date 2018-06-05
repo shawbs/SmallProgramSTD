@@ -8,14 +8,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    userInfo: {},
+    amount: 0.00
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.initPage();
+    this.getMerchantBalance();
   },
 
   /**
@@ -29,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
+    
   },
 
   /**
@@ -69,16 +71,21 @@ Page({
 
   //初始用户信息
   initPage() {
-    //获取用户信息并更新到缓存和全局变量中
-    action.getUserInfo().then(data => {
-      let _data = { ...data.data };
-      let user = wx.getStorageSync('__User');
-      user = Object.assign(user, _data);
-      wx.setStorageSync('__User', user);
-      app.globalData.user = user;
-      // _data.nickName = util.format(_data.nickName);
+
+    //获取商户信息
+    action.merchantMainInfo().then(res=>{
       this.setData({
-        userInfo: _data
+        userInfo: res.data
+      })
+    })
+
+  },
+
+  //获取商户余额
+  getMerchantBalance(){
+    action.getMerchantBalance({}).then(res=>{
+      this.setData({
+        amount: res.data.amount/100
       })
     })
   }

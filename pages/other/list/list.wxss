@@ -48,18 +48,3 @@
   color: gray;
   font-size: 12px;
 }
-.good-item .good-item-fd {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: gray;
-}
-.good-item .good-price{
-  flex: 1;
-  border-right: 1px solid #F4F4F4;
-}
-
-.good-item .good-item-fd .status-pic{
-  width: 50px;
-  height: 25px;
-}

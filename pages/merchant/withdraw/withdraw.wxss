@@ -1,0 +1,72 @@
+/* pages/user/withdraw/withdraw.wxss */
+.top{
+  padding: 30px 20px;
+  padding-bottom: 0;
+  background: #333;
+  border-bottom: 4px solid #E5B577;
+}
+.input-control{
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+.tip{
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  padding: 20px 100px;
+  color: #9B9B9B;
+}
+.tip .blue{
+  font-size: 14px;
+}
+.btn-gray{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.btn-selectCard{
+  box-shadow: 0 3px 7px rgba(221,180,107,0.17);
+}
+.card-item{
+  background: #fff;
+  font-size: 16px;
+}
+.card-item .card-item-title{
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px 15px 20px;
+}
+.card-item .card-item-bd{
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+.card-item .card-item-bd .name{
+  flex: 1;
+}
+.card-item .card-icon{
+  width: 30px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+.input-control{
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 10px 5px;
+  font-size: 14px;
+}
+.input-control .icon-label{
+  color: #E86433;
+  width: 30px;
+  text-align: center;
+}
+.input-control .input{
+  flex: 1;
+}
+.input-control .btn-orange-outline{
+  color: #E5B577;
+  font-size: 18px;
+}

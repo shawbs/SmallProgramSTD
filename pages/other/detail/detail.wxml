@@ -1,7 +1,11 @@
 <!--pages/detail/detail.wxml-->
 
 <view class='container detail-page'>
-  <view class='d-status status-0' wx:if="{{detail.status==0}}">拍卖已结束</view> 
+  <view class='d-status status-0' wx:if="{{detail.status==0}}">
+    <text class='mr-4'>拍卖未开拍</text>
+    距离开拍时间: {{countTime}}
+  </view>
+  <view class='d-status status-0' wx:if="{{detail.status==2 || detail.status==3}}">拍卖已结束</view>  
   <view class='d-status status-1' wx:if="{{detail.status==1}}">
     正在拍卖
     <image class='arrow-icon' src='/assets/image/arrow_gif.gif' mode='aspectFit'></image>
@@ -27,7 +31,7 @@
       <text>起拍价格</text>
     </view>
     <view class='flex-item'>
-      <view class="orange price">¥ 0</view>
+      <view class="orange price">¥ {{currentPrice/100}}</view>
       <text>当前价格</text>
     </view>
   </view>
@@ -37,14 +41,41 @@
   </view>
 
     
-  <view class="user-img">
+  <view class="user-img mb-2">
       <view class="aj-views">
         <view wx:for="{{detail.itemViews}}" wx:key="{{index}}"><image src="{{item.headImgUrl}}" /></view>
       </view>
   </view>
 
-  
+  <view class='bid-list' wx:if="{{bidlist.length>0}}">
+      <view class='bid-list-title'>
+        <text>出价记录({{bidlist.length}})</text>
+        <navigator url='/pages/other/bidlist/bidlist?id={{auctionItemId}}'>
+          <text class='orange '>出价高者得</text>
+          <image class='arrow-icon fr' src='/assets/image/arrow_gif2.gif' mode='aspectFit'></image>
+        </navigator>
+      </view>
+      <view class='bid-item' wx:if="{{index<5}}" wx:for="{{bidlist}}" wx:key="{{index}}">
+        <image class='avatar-icon' src='{{item.imgUrl || "/assets/image/default_avatar.png"}}'></image>
+        <view class='flex'>
+          <view>
+            <text class='mr-1'>{{item.bidderName}}</text>
+            <image class='icon-level' src='/assets/image/dj_{{item.level}}.png' mode='aspectFit'></image>
+          </view>
+          <image wx:if="{{index==0}}" class='state-icon' src='/assets/image/leader.png' mode='aspectFit'></image>
+          <image wx:if="{{index>0}}" class='state-icon' src='/assets/image/out.png' mode='aspectFit'></image>
+        </view>
+        <view class='flex'>
+          <text class='orange'>￥{{item.bidPrice/100}}</text>
+          <text class='gray'>{{item.datetime}}</text>
+        </view>
+      </view>
+  </view>
 
+  
+  <navigator url='/pages/other/bidlist/bidlist?id={{auctionItemId}}' class='tip' wx:if="{{bidlist.length>5}}">
+    <text class='orange'>查看更多</text>
+  </navigator>
   <view class='tip'>上拉， 查看拍品详情</view>
 
   <view class='info'>
@@ -64,7 +95,7 @@
           </view>
         </view>
         <view class="tab-item {{tabIndex==1?'active':''}}" data-index='1'>
-          {{pmgz}}
+          <rich-text nodes="{{pmgz}}"></rich-text>
         </view>
         <view class="tab-item extrafee {{tabIndex==2?'active':''}}" data-index='2'>
           <view class='flex' wx:for="{{detail.extraFeelist}}" wx:key="{{index}}">
@@ -75,13 +106,20 @@
       </view>
   </view>
 
-  <bottom-bar wx:if="{{exType!=1}}">
+  <bottom-bar wx:if="{{detail.status==1}}">
       <view class='help' bindtap='toggleGuanzhu'>
         <image wx:if="{{!detail.remind}}" src='/assets/image/guanzhu.png'></image>
         <image wx:if="{{detail.remind}}" src='/assets/image/guanzhu_.png'></image> 
         <view>关注</view>
       </view>
-      <button bindtap="addPrice">加一手</button>
+      <button bindtap="addPrice" bindtap='addPrice'>加一手</button>
       <button class='dark ml-2' bindtap="customAddPrice">自由出价</button>
   </bottom-bar>
+
+  <model-prompt 
+    title = "输入出价"
+    hideModel="{{hideModel}}" 
+    inputType="number" 
+    placeholder="请输入加价金额" 
+    bind:confirmprice="submitPrice"  />
 </view>

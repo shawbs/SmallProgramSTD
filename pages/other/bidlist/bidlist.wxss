@@ -1,0 +1,43 @@
+/* pages/other/bidlist/bidlist.wxss */
+.bid-list{
+  background: #fff;
+  color: #666;
+}
+.bid-list .bid-list-title{
+  padding: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+.bid-list .avatar-icon{
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  z-index: 1;
+}
+.bid-list .bid-item{
+  position: relative;
+  margin-left: 10px;
+  padding-left: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+  font-size: 12px;
+  border-bottom: 1px solid #f3f3f3;
+  line-height: 25px;
+}
+.bid-list .bid-item .flex{
+  justify-content: space-between;
+  align-items: center;
+}
+.state-icon{
+  width: 45px;
+  height: 25px;
+}
+.arrow-icon{
+  width: 40px;
+  height: 22px;
+}

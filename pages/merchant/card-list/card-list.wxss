@@ -1,0 +1,47 @@
+/* pages/user/card-list/card-list.wxss */
+.container{
+  justify-content: space-between;
+  height: 100vh;
+}
+.btn{
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+}
+.card-list{
+  box-sizing: border-box;
+  padding-top: 10px;
+  flex: 1;
+  overflow: auto;
+}
+
+.card-item{
+  background: #fff;
+  font-size: 16px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.card-item.active{
+  border: 3px solid #E5B577;
+}
+.card-item .card-item-bd{
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.card-item .card-item-bd .name{
+  flex: 1;
+}
+.card-item .card-icon{
+  width: 33px;
+  height: 40px;
+  margin-right: 10px;
+}
+.card-item .card-item-fd{
+  text-align: right;
+  padding: 20px;
+}

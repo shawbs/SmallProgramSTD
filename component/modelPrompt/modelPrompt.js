@@ -23,20 +23,27 @@ Component({
     content: {
       type: String,
       value: ''
-    }
+    },
+    
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    inputvalue: ''
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+
+    saveinputvalue(e){
+      this.setData({
+        inputvalue: e.detail.value
+      })
+    },
     cancel: function(){
       this.setData({
         hideModel: true
@@ -46,7 +53,7 @@ Component({
       this.setData({
         hideModel: true
       })
-      this.triggerEvent('confirmprice', {})
+      this.triggerEvent('confirmprice', { value: this.data.inputvalue})
     }
   }
 })

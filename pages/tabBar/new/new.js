@@ -24,7 +24,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    if (this.data.type == 1) {
+      this.initPage();
+    }
+
+    if (this.data.type == 2) {
+      this.initPage2();
+    }
     
   },
 
@@ -39,13 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (this.data.type == 1) {
-      this.initPage();
-    }
-
-    if (this.data.type == 2) {
-      this.initPage2();
-    }
+    
   },
 
   /**
@@ -227,6 +227,7 @@ Page({
     })    
   },
 
+  //前往资讯详情
   linkInfo(e){  
     let url = encodeURIComponent(e.currentTarget.dataset.url);
     console.log(url)

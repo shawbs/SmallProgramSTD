@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    confirmType: 1,  //1默认订单提交,2摇宝提交订单
+    confirmType: 1,  //1默认订单提交,2摇宝提交订单 
     lotto: null,
     defaultVal: 1,
     total: 0,
@@ -29,7 +29,6 @@ Page({
       this.initPage(id)
     }else{
       this.initPage2(id)
-      this.getDefaultAddress();
     }
   },
 
@@ -44,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getDefaultAddress();
   },
 
   /**
@@ -131,11 +130,18 @@ Page({
 
   //获取默认地址
   getDefaultAddress(){
-    action.getDefaultAddress().then(res=>{
-      this.setData({
-        address: res.data
+    let address = wx.getStorageSync('selected_address');
+    if (!address){
+      action.getDefaultAddress().then(res=>{
+        this.setData({
+          address: res.data
+        })
       })
-    })
+    }else{
+      this.setData({
+        address: address
+      })
+    }
   },
 
   //输入数据绑定

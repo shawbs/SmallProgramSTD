@@ -1,0 +1,15 @@
+/* pages/user/card-edit/card-edit.wxss */
+.list{
+  border-bottom: 1px solid #ddd;
+}
+.list-item:last-of-type{
+  border-bottom: none;
+}
+.btn-orange,button{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.list-item input{
+  flex: 1;
+  text-align: right;
+}

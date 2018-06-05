@@ -57,9 +57,9 @@
                     <view class="logistics-info-content clearfix">
                         <view class="address">
                             <label>收货地址</label>
-                            {{address.province}}{{address.city}}{{address.area}}{{address.street}}
+                            {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
                         </view>
-                        <navigator url='/pages/user/address/address' class="btn1 btn-orange1 setAddressLink fr">设置地址</navigator>
+                        <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink fr">设置地址</navigator>
                     </view>
                 </view>
             </view>

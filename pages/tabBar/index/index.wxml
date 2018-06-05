@@ -5,14 +5,14 @@
     autoplay="true" interval="3000">
       <swiper-item wx:for="{{banner}}" wx:key="index">
         <navigator url="{{item.url}}" class='link'>
-          <image src="{{item.accessory}}" class="slide-image" mode='widthFix'/>
+          <image src="{{item.accessory}}" class="slide-image" mode='aspectFill'/>
         </navigator>
       </swiper-item>
   </swiper>
 
   <menu></menu>
 
-  <view class='auction-list'>
+  <view class='auction-list mb-1'>
 
     <view class='auction'  wx:if="{{jxLive.length}}">
       <!-- 直播拍场 -->
@@ -20,15 +20,16 @@
         <image src="/assets/image/ma_icon_biaoti@2x.png"></image>
       </view>
 
-      <view class='auction-item' data-type="{{item.status==2?2:1}}" data-id="{{item.id}}" wx:for="{{jxLive}}" wx:key="{{index}}" bindtap='toLive'>
+      <view class='auction-item' data-type="{{item.status==2?2:1}}" data-id="{{item.id}}" data-auctionNo="{{item.auctionNo}}" wx:for="{{jxLive}}" wx:key="{{index}}" bindtap='toLive'>
         <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
         <view class='auction-title preview' wx:if="{{item.status==1}}">直播预展中...</view>
         <view class='auction-title' wx:if="{{item.status==2}}">正在直播...</view>
         <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
 
-        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <image class='auction-cover' src='{{item.imgList[0]}}' mode="aspectFill"></image>
         <view class='auction-info'>
-          <text class='text'>开拍时间</text>
+          <text class='text' wx:if="{{item.status==1}}">开拍时间</text>
+          <text class='text' wx:if="{{item.status==2}}">截拍时间</text>
           <text class='start-time'>{{item.startTime}}</text>
           <text class='auction-number'>第{{item.auctionNo}}场</text>
         </view>
@@ -37,7 +38,7 @@
     </view>
 
     <view class='auction' wx:if="{{zpLive.length}}">
-      <!-- 展拍拍场 -->
+      <!-- 藏家拍场 -->
       <view class='title-logo'>
         <image src='/assets/image/home_cjpc_icon.png'></image>
       </view>
@@ -46,14 +47,14 @@
         
         <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
         <view class='auction-title preview' wx:if="{{item.status==1}}">预展中...</view>
-        <view class='auction-title' wx:if="{{item.status==2}}">正在拍卖...</view>
+        <view class='auction-title' wx:if="{{item.status==2}}">限时拍卖中...</view>
         <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
         
-        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <image class='auction-cover' src='{{item.imgList[0]}}'  mode="aspectFill"></image>
         <view class='auction-info'>
-          <text class='text'>开拍时间</text>
+          <text class='text'>截拍时间</text>
           <text class='start-time'>{{item.startTime}}</text>
-          <text class='auction-number'>第{{item.auctionNo}}场</text>
+          <!-- <text class='auction-number'>第{{item.auctionNo}}场</text> -->
         </view>
       </navigator>
       
@@ -70,12 +71,12 @@
         
         <view class='auction-title preview' wx:if="{{item.status==0}}">待上架...</view>
         <view class='auction-title preview' wx:if="{{item.status==1}}">预展中...</view>
-        <view class='auction-title' wx:if="{{item.status==2}}">正在拍卖...</view>
+        <view class='auction-title' wx:if="{{item.status==2}}">限时拍卖中...</view>
         <view class='auction-title preview' wx:if="{{item.status==4}}">结束</view>
 
-        <image class='auction-cover' src='{{item.imgList[0]}}'></image>
+        <image class='auction-cover' src='{{item.imgList[0]}}'  mode="aspectFill"></image>
         <view class='auction-info'>
-          <text class='text'>开拍时间</text>
+          <text class='text'>截拍时间</text>
           <text class='start-time'>{{item.startTime}}</text>
           <text class='auction-number'>第{{item.auctionNo}}场</text>
         </view>
@@ -85,5 +86,24 @@
 
 
   </view>  
+
+  <!-- <view class='good-list row' wx:if="{{merchantList.length>0}}">
+
+    <view class='good-item col' wx:for="{{merchantList}}" wx:key="{{index}}">
+      <navigator url='/pages/merchant/detail/detail?id={{item.liveId}}'>
+        <view class='good-item-title'>{{item.name}}</view>
+        <image class='good-item-img' src='{{item.accessories[0]}}' mode='aspectFill'></image>
+        <view class='good-item-fd'>
+          <view class='good-price'>
+            <view>当前价: <text class='orange'>￥{{item.currentPrice/100}}</text></view>
+            <view>起拍价: <text>￥{{item.startPrice/100}}</text></view>
+          </view>
+          <image class='status-pic' src='/assets/image/paic_icon_time1@2x.png' mode="aspectFit"></image>
+        </view>
+      </navigator>
+    </view>
+
+
+  </view> -->
 
 </view>

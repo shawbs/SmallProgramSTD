@@ -21,13 +21,15 @@
         "identify-list/identify-list",
         "new-detail/new-detail",
         "about/about",
-        "issue/issue"
+        "issue/issue",
+        "bidlist/bidlist"
       ]
     },
     {
       "root": "pages/live/",
       "pages": [
-        "live/live"
+        "live/live",
+        "live-h5/live-h5"
       ]
     },
     {
@@ -62,7 +64,8 @@
         "identification/identification",
         "authentication/authentication",
         "pay-safe/pay-safe",
-        "getpwd/getpwd"
+        "getpwd/getpwd",
+        "refund/refund"
       ]
     },
     {
@@ -76,9 +79,14 @@
         "order-detail/order-detail",
         "message/message",
         "chat/chat",
-        "auction/auction",
         "setting/setting",
-        "publish/publish"
+        "auction/auction",
+        "push/push",
+        "wallet-log/wallet-log",
+        "withdraw/withdraw",
+        "card-list/card-list",
+        "card-edit/card-edit",
+        "detail/detail"
       ]
     }
   ],
@@ -95,8 +103,8 @@
       {
         "pagePath": "pages/tabBar/index/index",
         "text": "首页",
-        "iconPath": "assets/image/icon_sy@3x.png",
-        "selectedIconPath": "assets/image/icon_sy2@3x.png"
+        "iconPath": "assets/image/icon_sy@2x.png",
+        "selectedIconPath": "assets/image/icon_sy2@2x.png"
       },
       {
         "pagePath": "pages/tabBar/new/new",
@@ -107,8 +115,8 @@
       {
         "pagePath": "pages/tabBar/mine/mine",
         "text": "我的",
-        "iconPath": "assets/image/icon_wd@3x.png",
-        "selectedIconPath": "assets/image/icon_wd@3x.png"
+        "iconPath": "assets/image/icon_wd@2x.png",
+        "selectedIconPath": "assets/image/icon_wd2@2x.png"
       }
     ]
   },

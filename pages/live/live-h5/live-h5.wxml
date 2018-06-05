@@ -1,0 +1,2 @@
+<!--pages/live/live-h5/live-h5.wxml-->
+<web-view src="{{liveurl}}"></web-view>

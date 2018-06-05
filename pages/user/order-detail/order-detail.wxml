@@ -40,7 +40,11 @@
     <view class="contact-tip">联系我们：</view>
     <view class="contact-tel"><a href="tel:0592-5220601">0592-5220601</a></view>
 
-     <bottom-bar wx:if="{{order.orderStatus==10 || order.orderStatus==11 || order.orderStatus==12 }}">
+    <bottom-bar wx:if="{{order.orderStatus==10 || order.orderStatus==11 || order.orderStatus==12 }}">
       <navigator url="../../other/order-confirm/order-confirm" class='btn2 btn-orange2'>去支付</navigator>
-    </bottom-bar> 
+    </bottom-bar>
+    <bottom-bar wx:if="{{order.orderStatus==30}}">
+      <text></text>
+      <navigator url="/pages/user/refund/refund?orderNo={{order.orderNo}}" class='btn2 btn-orange2'>申请售后</navigator>
+    </bottom-bar>  
 </view>

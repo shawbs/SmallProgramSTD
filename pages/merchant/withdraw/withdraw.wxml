@@ -1,0 +1,32 @@
+<!--pages/user/withdraw/withdraw.wxml-->
+<view class='container'>
+  <view class='top'>
+    <view class='input-control'>
+      <view class='icon-label'>￥</view>
+      <input class='input' type='number' placeholder='请输入提现值金额' value='{{drawNum}}' bindinput='setDrawNum' bindblur='saveDrawNum'></input>
+      <text class='btn-orange-outline' bindtap='selectMoney'>全部金额</text>
+    </view>
+  </view>
+   <navigator url='/pages/merchant/card-list/card-list?type=1' class='btn-selectCard'  hidden="{{cardChecked}}">
+    <image src='/assets/image/tixian_icon_ka@2x.png' mode="aspectFit"></image>
+    点击选择银行卡
+  </navigator> 
+  <navigator url='/pages/merchant/card-list/card-list?type=1' class='card-item' hidden="{{!cardChecked}}">
+    <view class='card-item-title'>
+      <text>银行卡</text>
+      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+    </view>
+    <view class='card-item-bd'>
+      <image class='card-icon' src='{{bankCard.imgurl}}' mode='aspectFit'></image>
+      <text class='name'>{{bankCard.cardName}}</text>
+      <text class='gray'>{{bankCard.cardNo}}</text>
+    </view>
+  </navigator>
+  <view class='tip'>
+    3个工作日之内提现到账,请届时查收
+    如需帮助，请拨打客服电话
+    <view class='blue'>0592-88367373</view>
+  </view>
+  <button class='btn-gray' bindtap='postWithDraw'>下一步</button>
+</view>
+

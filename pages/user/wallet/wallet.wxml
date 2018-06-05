@@ -5,11 +5,11 @@
     <view class='top'>
       <view class='content'>
         <view class='_title'>帐户余额</view>
-        <view class='money'>￥{{money.balance}}</view>
+        <view class='money'>￥{{money.balance/100}}</view>
       </view>
     </view>
     <view class='button-card'>
-      <navigator url='/pages/user/withdraw/withdraw' class='btn btn-orange2'>退还</navigator>
+      <view bindtap='linkWithdraw' class='btn btn-orange2'>退还</view>
     </view>
     <view class='account-record'>
       <navigator url='/pages/user/account-record/account-record?type=qb' class='account-record-title'>
@@ -23,12 +23,12 @@
         <view wx:for="{{moneyList}}" wx:key="{{index}}" url='/pages/user/account-record/account-record?id=123' class="list-item">
           <view class='left'>
             <view class='_title'>{{item.msg}}</view>
-            <text class='green'>+{{item.amount}}</text>
+            <text class='green'>+{{item.amount/100}}</text>
           </view>
           <view class='right'>
             <view>
               <view class='gray'>{{item.data}}</view>
-              <view>余额： <text class='gray'>{{item.balance}}</text></view>
+              <view>余额： <text class='gray'>{{item.balance/100}}</text></view>
             </view>
             <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
           </view>

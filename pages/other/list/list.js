@@ -177,7 +177,7 @@ Page({
       let auctionInfo = { ...res.data.auctionInfo}
       auctionInfo.imgUrls = JSON.parse(auctionInfo.imgUrls)
       auctionInfo.startTime = util.formatTime(auctionInfo.startTime)
-      console.log(auctionInfo, res.data.auctionInfo)
+      // console.log(auctionInfo, res.data.auctionInfo)
       _this.transformImgUrls(list)
       if(list.length>0){
         _this.setData({

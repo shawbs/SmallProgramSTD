@@ -78,11 +78,15 @@ Page({
   onShareAppMessage: function () {
   
   },
+
+  //前往摇宝历史页
   toYbHistory: function(){
     wx.navigateTo({
       url: '/pages/other/yb-list/yb-list',
     })
   },
+
+  //前往订单提交页
   toConfirm: function(e){
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
@@ -90,6 +94,7 @@ Page({
     })
   },
 
+  //页面初始化
   initPage(){
     action.getLottoList({
       page: 1,
@@ -103,7 +108,7 @@ Page({
     })
   },
 
-  //图片放大
+  //图片预览
   previewImage(e) {
     console.log(e)
     let target = e.target;
@@ -117,6 +122,7 @@ Page({
     })
   },
 
+  //显示上一件摇宝
   prevLotto(){
     let lottoList = this.data.lottoList;
     let index = this.data.index;
@@ -127,6 +133,7 @@ Page({
     })
   },
 
+  //显示下一件摇宝
   nextLotto(){
     let lottoList = this.data.lottoList;
     let index = this.data.index;

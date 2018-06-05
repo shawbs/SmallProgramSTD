@@ -1,0 +1,51 @@
+<!--pages/merchant/push/push.wxml-->
+<view class='setting'>
+  <form bindsubmit='pushAuction'>
+    <view class='list'>
+      <view class='list-title'>必选设置</view>
+      <view class='list-item'>
+        <text class='fullflex'>截拍时间</text>
+        <picker class='mr-1' mode="date" value="{{endTime}}" start="2000-01-01" end="2100-01-01" bindchange="bindDateChange1" name="endTime">
+          <view class="picker">
+            {{endTime}}
+          </view>
+        </picker>
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange1" name="time">
+          <view class="picker">
+            {{time}}
+          </view>
+        </picker>
+      </view>
+      <view class='list-item'>
+        <text class='fullflex'>起拍价</text>
+        <input type='number' value='0' name="startPrice"></input>
+      </view>
+      <view class='list-item'>
+        <text class='fullflex'>加价幅度</text>
+        <input type='number' value='0' name="addPrice"></input>
+      </view>
+    </view>
+
+    <view class='list'>
+      <view class='list-title'>高级设置</view>
+      <view class='list-item'>
+        <text class='fullflex'>立即开拍</text>
+        <picker class='mr-1' mode="date" value="{{startTime}}" start="2000-01-01" end="2100-01-01" bindchange="bindDateChange2" name="startTime">
+          <view class="picker">
+            {{startTime}}
+          </view>
+        </picker>
+        <picker mode="time" value="{{time2}}" start="00:00" end="23:59" bindchange="bindTimeChange2" name="time2">
+          <view class="picker">
+            {{time2}}
+          </view>
+        </picker>
+      </view>
+      <!-- <view class='list-item'>
+        <text class='fullflex'>保留价</text>
+        <input type='number' value='10' name="basePrice"></input>
+      </view> -->
+    </view>
+    <button form-type='submit' class='btn-orange'>发布</button>
+  </form>
+</view>

@@ -2,10 +2,10 @@
 module.exports = {
   //发送验证码
   getCode: '/service-sms/std/app/sms/vcode',
-  //刷新token
-  refreshToken: '/business-app-user/std/app/api/v1/app/web/user/login/refreshToken',
   //登录
   login: '/business-app-user/std/app/api/v1/app/login/mobile',
+  //刷新token
+  refreshToken: '/business-app-user/std/app/api/v1/app/user/login/refreshToken',
   //首页
   index: {
     banner: '/business-banner/get/banner/list',
@@ -22,8 +22,9 @@ module.exports = {
   storePaySure: '/business-treasure-shop/std/app/api/v1/treasure/order',
   //限时拍品列表
   list: '/web-app-facade/std/app/api/v1/show/auction/info',
-
-  //围观人数
+  //出价记录
+  bidList: '/web-app-facade/std/app/api/v1/auction/item',
+  //添加围观人数
   addLooker: '/business-app-view/set/app/auction/item/view/info',
 
   //预展  
@@ -126,7 +127,7 @@ module.exports = {
   getAccountIntegral:'/business-recreation/std/app/api/v1/app/user/recreation/balance',
   //获取娱乐积分变更记录接口
   getAccountIntegralList: '/business-recreation/std/app/api/v1/app/user/recreation/log',
-  //提现支付
+  //申请提现支付单号
   postDrawPay: '/business-withdraw/std/app/api/v1/do/withdraw',
   //获取银行卡列表
   getCardList: '/business-bank-card/std/app/api/v1/bank/card/list',
@@ -144,14 +145,96 @@ module.exports = {
   getAftermarketList: '/business-return-product/std/app/api/v1/return/productlist',
   //获取售后详情
   getAftermarketInfo:'/business-return-product/std/app/api/v1/return/product/details',
+  //获取退货token
+  getRefundToken: '/business-return-product/std/app/api/v1/return/product/token',
+  //申请退货
+  postRefund:　'/business-return-product/std/app/api/v1/return/product',
+  //取消退货
+  cancleRefund: '/business-return-product/std/app/api/v1/cancle/return/product',
+  //售后图片上传
+  uploadRefundImg: '/business-return-product/std/app/api/v1/return/product/upload/img',
+  //售后图片删除
+  deleteRefundImg: '/business-return-product/std/app/api/v1/delete/return/img',
   //用户信息修改(密码，昵称，性别)
   updataUserInfo: '/business-app-user/std/app/api/v1/app/user/info/update',
   //用户头像修改
   updataUserAvatar: '/business-app-user/std/app/api/v1/app/user/image',
   //个人实名认证
   identificationPersonal: "/business-certification-center/std/app/api/v1/apply/personal",
+  //获取个人实名认证token
+  personalToken: '/business-certification-center/std/app/api/v1/personal/token',
+  //企业实名认证
+  identificationEnterprise: "/business-certification-center/std/app/api/v1/apply/enterprise",
+  //获取企业p实名认证token
+  enterpriseToken: '/business-certification-center/std/app/api/v1/enterprise/token',
   //身份证,营业照 图片上传
   uploadIdentificationImg: "/business-certification-center/std/app/api/v1/upload/img",
-  //查看认证状态
+  //查看实名认证状态
   getIdentificationStatus: "/business-certification-center/std/app/api/v1/apply/certificate/status",
+  //查看商户申请状态
+  getMerchantApplyStatus: "/business-merchant/std/app/api/v1/search/merchant/status",
+  //申请商户接口
+  merchantApply: '/business-merchant/std/app/api/v1/apply/merchant',
+  //重新申请商户接口
+  merchantApply: '/business-merchant/std/app/api/v1/apply/merchant',
+  //获取商户token接口
+  merchantToken: '/business-merchant/std/app/api/v1/merchant/token',
+  //刷新商户Token接口
+  refreshMerchantToken: '/business-merchant/std/app/api/v1/refresh/merchant/token',
+  //更新商户基本信息接口
+  updateMerchantInfo:　'/business-merchant/std/app/api/v1/update/merchant/info',
+  //获取商户基本信息接口
+  merchantInfo: '/web-app-facade/std/app/api/v1/merchant/info',
+  //取商户首页(商户中心)接口
+  merchantMainInfo: '/web-app-facade/std/app/api/v1/merchant/main/page',
+  //商户中心上传商户LOGO
+  uploadMerchantLogo: '/business-merchant/std/app/api/v1/upload/img',
+  //获取商户订单列表接口
+  getMerchantOrder: '/business-order/std/app/api/v1/user/merchant/orderlist/',
+  //获取商户订单详情接口
+  getMerchantOrderInfo: '/web-app-facade/std/app/api/v1/merchant/order/',
+  //初始化拍品项和token
+  initMerchantAuction: '/business-merchant-product/std/app/api/v1/app/merchant/createProduct',
+  //生成拍品
+  saveMerchantAuction: '/business-merchant-product/std/app/api/v1/app/merchant/addProduct',
+  //发布拍品
+  pushMerchantAuction: '/business-merchantauction-live/std/app/api/v1/live/public/auction/item',
+  //上传拍品图片或视频
+  uploadAuctionImg: '/business-merchant-product/std/app/api/v1/app/uploadFile',
+  //删除拍品图片或视频
+  deleteAuctionImg: '/business-merchant-product/std/app/api/v1/app/deleteFile',
+  //获取商户拍品列表
+  merchantAuctionList: '/business-merchantauction-live/std/app/api/v1/live/merchant/item/list',
+  //下架拍品
+  merchantAuctionOut: '/business-merchantauction-live/std/app/api/v1/live/merchant/item/remove',
+  //获取草稿箱
+  merchantAuction: '/business-merchant-product/std/app/api/v1/app/merchant/getProductList',
+  //获取草稿箱详情
+  merchantAuctionInfo: '/business-merchant-product/std/app/api/v1/app/merchant/getProduct',
+  //删除草稿箱
+  merchantAuctionDelete: '/business-merchant-product/std/app/api/v1/app/deleteDraft',
+  //获取商户余额
+  getMerchantBalance: '/business-merchant-account/std/app/api/v1/app/merchant/getBalance',
+  //获取商户余额明细
+  getMerchantBalanceLog: '/business-merchant-account/std/app/api/v1/app/merchant/account/log',
+  //商户转账
+  merchantTransfer: '/business-merchant-account/std/app/api/v1/app/merchant/transfer',
+  //商户提现
+  merchantWithdraw: '/business-withdraw/std/app/api/v1/do/merchant/withdraw',
+  //商户现金付款
+  merchantPay: '/business-merchant-account/std/app/api/v2/merchant/account/payment/apply',
+  //商户银行卡列表
+  merchantBankCardList: '/business-bank-card/std/app/api/v1/merchant/bank/card/list',
+  //商户删除商户银行卡
+  merchantBankCardDelete: '/business-bank-card/std/app/api/v1/bank/merchant/card/delete',
+  //增加商户银行卡
+  merchantBankCardAdd: '/business-bank-card/std/app/api/v1/merchant/bank/card/add',
+  //获取订单余款
+  merchantOrderMoney: '/web-app-facade/std/app/api/v1/merchant/order/amount',
+  //首页获取商户发布的拍品
+  getMerchantAuctionList: '/business-merchantauction-live/std/app/api/v1/live/public/auction/item/list',
+  //商户拍品详情
+  getMerchantAuctionInfo: '/web-app-facade/std/app/api/v1/merchant/auction/item/',
+  //商户拍品加入围观数
+  merchantAddLooker: '/business-app-view/set/app/merchant/auction/item/view/info'
 }

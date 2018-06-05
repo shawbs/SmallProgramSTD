@@ -4,14 +4,14 @@
       <view class="address-item-title">
           退货地址
       </view>
-      <view class="address-item-bd">
+      <navigator url='/pages/user/address/address' class="address-item-bd">
           <image class='address-icon' src='/assets/image/ddxq_icon_dizhicopy2@3x.png' width="30" mode='widthFix'></image>
           <view class="address2">
-            <view class="address-row">xsadsa <test class="ml-3">1231646546546464</test></view>
-            <view class='gray'>asxasjxalksdlnalsdnlansdlanlkdsn</view>
+            <view class="address-row">{{userInfo.consignee}} <test class="ml-3">{{userInfo.phone}}</test></view>
+            <view class='gray'>{{userInfo.address}}</view>
           </view>
           <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
-      </view>
+      </navigator>
   </view>
 
 </view>
@@ -20,41 +20,41 @@
     <view class="list-title">店铺基本信息</view>
     <view class="list-item">
       <text>店铺LOGO</text>
-      <image class='store-logo' src='/assets/image/default_avatar.png' mode='aspectFit'></image>
+      <image class='store-logo' src='{{userInfo.headImg || "/assets/image/default_avatar.png"}}' mode='aspectFit' bindtap='changeLogo'></image>
     </view>
-    <view class="list-item">
+    <view class="list-item" bindtap='toedit' data-type="storeName">
       <text class='fullflex'>店铺名称</text>
-      <text class='gray' bindtap='toedit' data-type="storename">asdasd</text>
+      <text class='gray' >{{userInfo.storeName || ''}}</text>
       <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </view>
-    <view class="list-item">
+    <view class="list-item" bindtap='toedit' data-type="telephone">
       <text class='fullflex'>联系方式</text>
-      <text class='gray' bindtap='toedit' data-type="phone">157123123131</text>
+      <text class='gray' >{{userInfo.telephone || ''}}</text>
       <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </view>
-    <view class="list-item">
+    <view class="list-item" bindtap='toedit' data-type="introduction">
       <text class='fullflex'>店铺介绍</text>
-      <text class='gray' bindtap='toedit' data-type="desc">asdasd.....</text>
+      <text class='gray' >{{userInfo.introduction || ''}}</text>
       <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </view>
 </view>
 
 <view class="list">
     <view class="list-title">资质认证</view>
-    <navigator url='/pages/other/issue/issue' class="list-item">
+    <view class="list-item">
       <text class='fullflex'>实名认证</text>
-      <text class='green'>已认证</text>
-      <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
-    </navigator>
+      <text class='green'>{{userInfo.certifyMsg}}</text>
+      <!-- <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> -->
+    </view>
 </view>
 
 
 <view class='mask {{edit ? "":"hide"}}'>
   <view class='box'>
-    <form bindsubmit="formSubmit">
-      <input wx:if="{{activeType=='storename'}}"  class='input-control' name="storename" placeholder='请输入店铺名称'></input>
-      <input wx:if="{{activeType=='phone'}}" type='number'  class='input-control' name="phone" placeholder='请输入联系方式'></input>
-      <textarea wx:if="{{activeType=='desc'}}" name="desc" placeholder='请输入店铺介绍'></textarea>
+    <form bindsubmit="updateMerchantInfo">
+      <input wx:if="{{activeType=='storeName'}}"  class='input-control' name="storeName" placeholder='请输入店铺名称' value='{{userInfo.storeName || ""}}'></input>
+      <input wx:if="{{activeType=='telephone'}}" type='number'  class='input-control' name="telephone" placeholder='请输入联系方式' value='{{userInfo.telephone || ""}}'></input>
+      <textarea wx:if="{{activeType=='introduction'}}" name="introduction" placeholder='请输入店铺介绍' value='{{userInfo.introduction || ""}}'></textarea>
       <view class='flex'>
         <button form-type='submit' class='btn-orange'>确定</button>
         <view class='btn btn-gray' bindtap='cannelEdit'>取消</view>

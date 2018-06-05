@@ -1,0 +1,37 @@
+<!--pages/user/card-edit/card-edit.wxml-->
+<view class='container'>
+  <form wx:if="{{type=='edit'}}">
+      <view class='list'>
+        <!-- <view class="list-item">
+          <text>持卡人</text>
+          <text class='gray'>{{bankCard.cardBy}}</text>
+        </view> -->
+        <view class="list-item">
+          <text>开户银行</text>
+          <text class='gray'>{{bankCard.cardName}}</text>
+        </view>
+        <view class="list-item">
+          <text>银行卡号</text>
+          <text class='gray'>{{bankCard.cardNo}}</text>
+        </view>
+      </view>
+      <view bindtap='deleteCard' class='btn btn-orange'>删除银行卡</view>
+  </form>
+  <form wx:if="{{type=='add'}}" bindsubmit="addCard">
+      <view class='list'>
+        <!-- <view class="list-item">
+          <text class='label'>持卡人</text>
+          <input placeholder='请输入持卡人姓名' name="bankCardName"></input>
+        </view> -->
+        <!-- <view class="list-item">
+          <text>开户银行</text>
+          <text class='gray'>建设银行.龙卡通</text>
+        </view> -->
+        <view class="list-item">
+          <text class='label'>银行卡号</text>
+          <input placeholder='请输入银行卡号' name="bankCardNo"></input>
+        </view>
+      </view>
+      <button form-type='submit' class='btn-orange'>立即绑定</button>
+  </form>
+</view>

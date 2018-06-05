@@ -90,7 +90,7 @@ Page({
         certifyType: 0
       }
     }).then(res => {
-      let imgurl = res.data.headImgUrl;
+      let imgurl = res.data.url;
       if(_type == 1){
         this.setData({
           reverseImgUrl:imgurl
@@ -108,7 +108,7 @@ Page({
     let parameter = e.detail.value;
     parameter.positiveImgUrl = this.data.positiveImgUrl;
     parameter.reverseImgUrl = this.data.reverseImgUrl;
-    parameter.purpose = 2;
+    parameter.purpose = 0;
     console.log(parameter)
     action.identificationPersonal(parameter).then(res=>{
       wx.showToast({

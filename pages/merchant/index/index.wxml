@@ -3,68 +3,67 @@
   <view class="setting-usr-hd mb-2">
       <view class='row'>
         <view class="usr-pic">
-            <image src="{{userInfo.headImgUrl || '/assets/image/default_avatar.png'}}"  alt="" class="avatar" bindtap='updataAvatar'></image>
+            <image src="{{userInfo.headImg || '/assets/image/default_avatar.png'}}"  alt="" class="avatar" bindtap='updataAvatar'></image>
         </view>
 
         <view class="info">
             <view class="info-title">
-              {{userInfo.nickName}}
-              <text class='small orange' wx:if="{{!userInfo.realName}}" >未实名认证</text>
-              <text class='small green' wx:if="{{userInfo.realName}}" >已实名认证</text>
+              {{userInfo.storeName || userInfo.userId}}
+              <text class='small green'>{{userInfo.certifyMsg}}</text>
             </view>
-            <view class="info-line gray">{{userInfo.name}}</view>
-            <view class="info-line orange2">粉丝 128</view>
+            <view class='info-line'>{{userInfo.telephone || ''}}</view>
+            <view class="info-line gray">{{userInfo.consignee}}</view>
+            <view class="info-line orange2">粉丝 {{userInfo.fans || 0}}</view>
         </view>
       </view>
   </view>
   <view class='list'>
       <view class='orader-card mb-2'>
-        <navigator url='/pages/user/order/order' class='card-hd'>
+        <navigator url='/pages/merchant/order/order' class='card-hd'>
           <image class='fl icon-user' src='/assets/image/dingdan_icon.png' mode='aspectFit'></image>
           我的订单
           <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
         </navigator>
         <view class='card-bd'>
-          <navigator class='cell' url='/pages/user/order/order?tabIndex=1&id=1'>
-            <!-- <text class='bage'></text>   -->
+          <navigator class='cell' url='/pages/merchant/order/order?tabIndex=1&id=1'>
+            <text class='bage' wx:if="{{userInfo.wait_pay}}"></text>   
             <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
             <view>待付款</view>
           </navigator>
-          <navigator class='cell' url='/pages/user/order/order?tabIndex=2&id=2'>
+          <navigator class='cell' url='/pages/merchant/order/order?tabIndex=2&id=2'>
+            <text class='bage' wx:if="{{userInfo.wait_send}}"></text> 
             <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
             <view>待发货</view>
           </navigator>
-          <navigator class='cell' url='/pages/user/order/order?tabIndex=3&id=3'>
+          <navigator class='cell' url='/pages/merchant/order/order?tabIndex=3&id=3'>
+            <text class='bage' wx:if="{{userInfo.wait_take}}"></text> 
             <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
             <view>待收货</view>
           </navigator>
-          <!-- <navigator class='cell' url='../../user/order/order?tabIndex=2'>
-            <image class="img" src='/assets/image/wd_icon_dqh@2x.png'></image>
-            <view>待取货</view>
-          </navigator> -->
-          <navigator class='cell' url='/pages/user/order/order?tabIndex=4&id=4'>
+          <navigator class='cell' url='/pages/merchant/order/order?tabIndex=4&id=4'>
+            <text class='bage' wx:if="{{userInfo.wait_service}}"></text> 
             <image class="img" src='/assets/image/wd_icon_ddwc@2x.png'></image>
-            <view>订单完成</view>
+            <view>退货/售后</view>
           </navigator>
         </view>
       </view>
-      <navigator url='/pages/user/level/level' class="list-item">
+      <navigator url='/pages/merchant/wallet/wallet' class="list-item">
         <image class='label-icon' src='/assets/image/money_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>帐户余额</label>
-        <text class='orange2'>0.00元</text>
+        <text class='orange2'>{{amount}}元</text>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
-      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+      <!-- <navigator url='/pages/merchant/message/message' class="list-item mb-2 noborder">
         <image class='label-icon' src='/assets/image/xiaoxi_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>消息中心</label>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
-      </navigator>
-      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+      </navigator> -->
+      <navigator url='/pages/merchant/auction/auction' class="list-item mb-2 noborder">
         <image class='label-icon' src='/assets/image/paipin_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>拍品管理</label>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
-      <navigator url='/pages/user/level/level' class="list-item mb-2 noborder">
+      <navigator url='/pages/merchant/setting/setting' class="list-item mb-2 noborder">
         <image class='label-icon' src='/assets/image/sz_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>设置</label>
          <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
@@ -75,5 +74,5 @@
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
   </view>
-  
+
 </view>

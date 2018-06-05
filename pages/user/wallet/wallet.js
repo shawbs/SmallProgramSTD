@@ -1,4 +1,5 @@
 // pages/user/wallet/wallet.js
+const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
 Page({
@@ -26,20 +27,21 @@ Page({
     this.setData({
       tabIndex: options.tab || 0
     })
+    this.initPage()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage()
+    
   },
 
   /**
@@ -60,7 +62,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.initPage();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 1000)
   },
 
   /**
@@ -108,6 +113,14 @@ Page({
       this.setData({
         integralList: res.data.list
       })
+    })
+  },
+  
+  linkWithdraw(){
+    //设置支付类型为 用户提现
+    app.globalData.payType = 1;
+    wx.navigateTo({
+      url: '/pages/user/withdraw/withdraw',
     })
   }
 })

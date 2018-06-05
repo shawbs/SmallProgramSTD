@@ -5,7 +5,7 @@
   <view class='box' wx:if="{{payType==0}}">
     <form bindsubmit="submitForm">
       <view class='card-item'>
-        <view class='form-title'>需要转账金额：￥{{payNo}}</view>
+        <view class='form-title'>需要转账金额：￥{{payNum}}</view>
         <view class='preview-img'>
           <view class='preview-img-bd'>
             <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
@@ -44,7 +44,7 @@
   <view class='box' wx:if="{{payType==1}}">
     <form bindsubmit="submitForm">
       <view class='card-item'>
-        <view class='form-title'>需要转账金额：￥{{payNo}}</view>
+        <view class='form-title'>需要转账金额：￥{{payNum}}</view>
         <view class='preview-img'>
           <view class='preview-img-bd'>
             <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">

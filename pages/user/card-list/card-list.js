@@ -23,7 +23,7 @@ Page({
         originType: options.type || 0
       })
     }
-    
+    this.initPage();
   },
 
   /**
@@ -37,7 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
+    
   },
 
   /**
@@ -75,6 +75,7 @@ Page({
   
   },
 
+  //初始
   initPage(){
     action.getCardList().then(res=>{
       this.setData({
@@ -83,6 +84,7 @@ Page({
     })
   },
 
+  //点击银行卡处理
   tapCard(e){
 
     let dataset = e.currentTarget.dataset;

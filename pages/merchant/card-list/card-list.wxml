@@ -1,0 +1,19 @@
+<!--pages/user/card-list/card-list.wxml-->
+<view class='container'>
+  <view class='card-list'>
+    <view class='card-item' bindtap='tapCard' wx:for="{{cardList}}" wx:key="{{index}}" data-id="{{item.merchantBankCardId}}" data-no="{{item.bankCardNo}}" data-token="{{item.bankCardToken}}" data-name="{{item.bank}}" data-imgurl='{{item.imgUrl}}'>
+      <view class='card-item-bd'>
+        <image class='card-icon' src='{{item.imgUrl}}' mode='aspectFit'></image>
+        <text class='name'>{{item.bank}}</text>
+        <!-- <text class='orange2'>已选择</text> -->
+      </view>
+      <view class='card-item-fd'>
+        {{item.bankCardNo}}
+      </view>
+    </view>
+    
+  </view>
+  <navigator class='btn btn-orange' url='/pages/merchant/card-edit/card-edit?type=add'>
+    +添加银行卡
+  </navigator>
+</view>

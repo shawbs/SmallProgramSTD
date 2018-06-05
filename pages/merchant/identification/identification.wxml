@@ -1,4 +1,4 @@
-<!--pages/user/identification/identification.wxml-->
+<!--pages/merchant/identification/identification.wxml-->
 <view class='container'>
 <form bindsubmit="submitForm">
   <view class='list card '>
@@ -23,7 +23,7 @@
   <view class='card '>
     <view class='_title'>请拍摄并上传营业执照副本照片</view>
     <view class='card-bd flex'>
-      <image class='preview-img business-img' src='{{positiveImgUrl || "/assets/image/yyzz_img_03.png"}}' mode='aspectFit'></image>
+      <image class='preview-img business-img' src='{{businessLicense || "/assets/image/yyzz_img_03.png"}}' mode='aspectFit'></image>
       <view class='btn-upload'>
         <view class='box' bindtap='uploadImg' data-type='2'>
           <image src='/assets/image/sfz_paizhao.png' mode='aspectFit'></image>

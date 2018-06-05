@@ -2,44 +2,65 @@
 const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
+
+/**
+ * 支付流程 生成订单号=>获取订单号支付项=>支付
+ */
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    xj: {//现金支付
-      checked: true
-    },
-    yl: {//银联支付
-      checked: false
-    },
-    wx: {//微信支付
-      checked: false
-    },
-    xx: {//线下支付
-      checked: false
-    },
+    payTypes: [
+      {
+        //现金支付
+        type: 'xj',
+        title: '现金支付',
+        checked: true
+      },
+      {
+        //银联支付
+        type:'yl',
+        title: '银联支付',
+        checked: false
+      },
+      {
+        //微信支付
+        type: 'wx',
+        title: '微信支付',
+        checked: false
+      },
+      {
+        //线下支付
+        type: 'xx',
+        title: '线下支付',
+        checked: false
+      },
+    ],
+    
     typePay: null,//支付类型
     gradeId: 0,
     paymentNo: '',//订单号
 
-    //提现-------------
-    origin: '',
-    originNum: 0
+    payInfo: null, //支付项
+    originType: 0, //来源类型
+    originNum: 0, //支付数值
+    paymentToken: '', //支付token
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.origin){
+
       this.setData({
-        origin: options.origin,
-        originNum: options.originNum || 0,
-        paymentNo: options.paymentNo || ''
+        paymentNo: options.paymentNo || '',
+        originType: app.globalData.payType
       })
-    }
+      //打印 支付来源类型如: 普通支付/提现
+      console.log(this.data.originType)
+      this.initPage();
   },
 
   /**
@@ -53,7 +74,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initPage();
+    
   },
 
   /**
@@ -93,141 +114,79 @@ Page({
 
   //初始页面
   initPage(){
-    action.getTypeList().then(res=>{
+    //获取帐户订单支付项
+    action.getPayInfo(this.data.paymentNo).then(res => {
+      //获取支持的支付类型
+      let acceptedChannel = res.data.entrys[0].acceptedChannel;
+      //获取支付token
+      let paymentToken = res.data.entrys[0].paymentToken;
+      //获取支付数值
+      let payNum = res.data.entrys[0].amountToPay;
+      let payTypes = [];
+
+      for (let i=0;i< acceptedChannel.length;i++){
+        //转换
+        let type = this.getPayType1(acceptedChannel[i]);
+        let checked = i==0?true:false;
+        payTypes.push({
+          type: type,
+          title: this.getPayType3(type),
+          checked: checked
+        })
+      }
+
+      console.log(payTypes)
+
       this.setData({
-        typePay: res.data.list[0],
-        gradeId: res.data.list[0].gradeId
+        payTypes: payTypes,
+        paymentToken: paymentToken,
+        originNum: payNum
       })
     })
-  },
-  togglePay(e){
 
   },
+
+
   //切换支付方式
   toggle(e){
-    let name = e.currentTarget.dataset.name;
-    if(name == 'xj'){
-      let check = { checked: true}
-      let check2 = { checked: false }
-      this.setData({
-        xj: check,
-        yl: check2,
-        wx: check2,
-        xx: check2
-      })
+
+    let dataset = e.currentTarget.dataset;
+    let name = dataset.name;
+    let index = dataset.index;
+
+    let payTypes = this.data.payTypes;
+    for (let i=0;i<payTypes.length; i++){
+      if(i == index){
+        payTypes[i].checked = true;
+      }else{
+        payTypes[i].checked = false;
+      }
     }
-    if (name == 'yl') {
-      let check = { checked: true }
-      let check2 = { checked: false }
-      this.setData({
-        xj: check2,
-        yl: check,
-        wx: check2,
-        xx: check2
-      })
-    }
-    if (name == 'wx') {
-      let check = { checked: true }
-      let check2 = { checked: false }
-      this.setData({
-        xj: check2,
-        yl: check2,
-        wx: check,
-        xx: check2
-      })
-    }
-    if (name == 'xx') {
-      let check = { checked: true }
-      let check2 = { checked: false }
-      this.setData({
-        xj: check2,
-        yl: check2,
-        wx: check2,
-        xx: check
-      })
-    }
+    
+    this.setData({
+      payTypes: payTypes
+    })
   },
 
   //支付处理
   postPay(e){
-    //提现支付
-    if(this.data.origin == 'tx'){
-      this.drawPay();
-      return
-    }
+    let type = e.detail.value.payType;
 
+    this.switchPay(type)
 
-    let that = this;
-    //获取支付类型
-    let payType = e.detail.value.payType;
-    let paymentNo = that.data.paymentNo;
-    //判断是否有订单号，避免重复生成订单
-    if (!!paymentNo){
-      that.getPayInfo(paymentNo, (data) => {
-        console.log(data, that);
-        that.switchPay(payType, data);
-      })
-    }else{
-      that.createPay((_paymentNo) => {
-        that.getPayInfo(_paymentNo, (data) => {
-          console.log(data, that)
-          that.switchPay(payType, data);
-        })
-      })
-    }
-    
   },
 
   //选择支付类型
-  switchPay(payType,parameter){
-    let paymentToken = '';
+  switchPay(payType){
+    let paymentToken = this.data.paymentToken;
     switch (payType){
-      case 'xj': 
-                paymentToken = this.getPaymentToken(parameter.entrys, "pay_by_cash"); this.xjPay(paymentToken); 
-                break;
-      case 'yl': 
-                this.ylPay(parameter); break;
-      case 'wx': 
-                paymentToken = this.getPaymentToken(parameter.entrys, "pay_by_cash"); this.wxPay({ paymentToken: paymentToken}); 
-                break;
-      case 'xx': 
-                paymentToken = this.getPaymentToken(parameter.entrys, "pay_by_cash");
-                this.xxPay(paymentToken); 
-                break;
+      case 'xj': this.xjPay(paymentToken); break;
+      case 'yl': this.ylPay(); break;
+      case 'wx': this.wxPay({ paymentToken: paymentToken}); break;
+      case 'xx': this.xxPay(paymentToken); break;
+      case 'merchant_account': this.merchantPay(paymentToken); break;
       default: console.log('payType参数有误')
     }
-  },
-
-  // 获取paymentToken entrys: array
-  getPaymentToken(entrys, key){
-    let paymentToken = '';
-    if(Array.isArray(entrys)){
-      for (let i of entrys){
-        if (i.paymentType == key){
-          paymentToken = i.paymentToken
-        } 
-      }
-    }
-
-    return paymentToken
-  },
-  //生成支付订单
-  createPay(cb){
-    action.createPay({
-      typeId: this.data.gradeId
-    }).then(res=>{
-      this.setData({
-        paymentNo: res.data.paymentNo
-      })
-      cb && cb(res.data.paymentNo)
-    })
-  },
-
-  //获取支付项
-  getPayInfo(paymentNo, cb){
-    action.getPayInfo(paymentNo).then(res=>{
-      cb && cb(res.data)
-    })
   },
 
   //现金支付
@@ -240,10 +199,10 @@ Page({
   },
 
   //银联支付
-  ylPay(parameter) {
-    parameter = {
-      amount: this.data.typePay.upgradeFee,
-      paymentNo: parameter.paymentNo
+  ylPay() {
+    let parameter = {
+      amount: this.data.originNum,
+      paymentNo: this.data.paymentNo
     }
     action.ylPay(parameter).then(res => {
       //银联支付链接
@@ -271,16 +230,52 @@ Page({
   //线下支付
   xxPay(paymentToken) {
     wx.navigateTo({
-      url: `/pages/user/pay-offline/pay-offline?paymentToken=${paymentToken}&payNo=${this.data.typePay.upgradeFee/100}`,
+      url: `/pages/user/pay-offline/pay-offline?paymentToken=${paymentToken}&payNum=${this.data.originNum/100}`,
     })
   },
 
-  //提现支付
-  drawPay(){
-    let that = this;
-    let paymentNo = this.data.paymentNo;
-    that.getPayInfo(paymentNo, (data) => {
-      that.switchPay('xj', data);
+  //商户余额支付
+  merchantPay(paymentToken){
+    action.merchantPay({
+      paymentToken: paymentToken
+    }).then(res => {
+      wx.showToast({
+        title: '支付成功',
+      })
     })
+  },
+
+  //获取支持的支付类型
+  getPayType1(key){
+    let o = {
+      'merchant_account': 'merchant_account',
+      "account": 'xj',
+      "fast_union_pay": 'yl',
+      "wechat": 'wx',
+      "offline_pay": 'xx',
+    }
+    return o[key]
+  },
+
+  //获取支付类型
+  getPayType2(key) {
+    let o = {
+      "pay_by_cash": 'cash',
+      "pay_by_recreation": 'recreation',
+      "pay_by_point": 'point',
+    }
+    return o[key]
+  },
+
+  //获取支付类型
+  getPayType3(key) {
+    let o = {
+      "xj": '现金支付',
+      "yl": '银联支付',
+      "wx": '微信支付',
+      "xx": '线下支付',
+      'merchant_account': '商户余额'
+    }
+    return o[key]
   }
 })

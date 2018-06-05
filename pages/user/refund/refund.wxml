@@ -1,0 +1,27 @@
+<!--pages/user/refund/refund.wxml-->
+<view class='container'>
+  <form bindsubmit='postRefund'>
+    <view class='top'>您好,您是否收到快递时地出现问题?</view>
+    <view class='form'>
+      <view class='_title'>
+      为了保证您的售后申请顺利进行，请把您的 <text class='orange'>图片和留言</text>以及问题情况说明，提交成功后， 我们将第一时间和您联系处理售后
+      </view>
+      <view class='form-card'>
+        <textarea placeholder='请说明问题情况' name="remark"></textarea>
+        <view class='gray pt-2 mb-2' style='border-top: 1px solid #ddd;'>请上传图片:</view>
+        <view class='preview-img'>
+            <view class='img-item' wx:for="{{previewList}}" wx:key="{{index}}">
+              <image class='img' src='{{item.imgUrl}}' ></image>
+              <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon>
+            </view>
+          
+            <image  class='upload-icon mr-2' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='uploadImg'></image>
+
+        </view>
+      </view>
+    </view>
+    <view class="max-bottom-bar">
+        <button  form-type='submit'>确认提交</button>
+    </view>
+  </form>
+</view>

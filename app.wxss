@@ -27,6 +27,9 @@ page{
 image{
   border: none;
 }
+.inline{
+  display: inline;
+}
 .fl{
   float: left;
 }
@@ -54,6 +57,12 @@ image{
 .mr-2{
   margin-right: 10px;
 }
+.mr-3{
+  margin-right: 15px;
+}
+.mr-4{
+  margin-right: 20px;
+}
 .mt-2{
   margin-top: 10px;
 }
@@ -68,6 +77,9 @@ image{
 }
 .mb-4{
   margin-bottom: 20px;
+}
+.pt-2{
+  padding-top: 10px;
 }
 .pr-1{
   padding-right: 5px;
@@ -326,6 +338,7 @@ button::after{
     padding: 8px;
     line-height: 20px;
     height: 35px;
+    border-bottom: 3px solid #d89f55;
 }
 .good-item .good-item-img{
    width: 100%; 
@@ -337,6 +350,21 @@ button::after{
 }
 .good-item .good-item-price{
   color: #e76434;
+}
+.good-item .good-item-fd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: gray;
+}
+.good-item .good-price{
+  flex: 1;
+  border-right: 1px solid #F4F4F4;
+}
+
+.good-item .good-item-fd .status-pic{
+  width: 50px;
+  height: 25px;
 }
 /**good-list end**/
 
@@ -808,4 +836,12 @@ topnav.dark{
 }
 .address image{
   width: 30px;
+}
+.btn-group{
+  display: flex;
+  padding: 0 5px;
+}
+.btn-group .btn{
+  flex: 1;
+  margin: 5px;
 }

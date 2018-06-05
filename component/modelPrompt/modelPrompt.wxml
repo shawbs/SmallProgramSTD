@@ -7,7 +7,7 @@
     </view>
     <view class="weui-dialog__bd">
       <view>{{content}}</view>
-      <input type='{{inputType}}' class="weui-prompt-input" id="weui-prompt-input" placeholder='{{placeholder}}'/>
+      <input type='{{inputType}}' class="weui-prompt-input" id="weui-prompt-input" value='' bindinput='saveinputvalue' placeholder='{{placeholder}}'/>
     </view>
     <view class="weui-dialog__ft">
       <text  class="weui-dialog__btn default" bindtap='cancel'>取消</text>

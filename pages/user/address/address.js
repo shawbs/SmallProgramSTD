@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    type: 1, //默认1，2来自地址选择
     addressList: [],
 
     //滑动删除
@@ -19,6 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      type: options.type || 1
+    })
     this.initPage();
   },
 
@@ -98,17 +102,27 @@ Page({
     })
   },
 
+  //点击地址项，如果this.data.type为1则跳转编辑，2跳转地址上一个页面
   linkAddressEdit(e){
     let target = e.currentTarget;
-    let status = target.dataset.status ? target.dataset.status : null;
-    let url = target.dataset.url;
-    if(!status){
-      wx.navigateTo({
-        url: url,
-      })
+    if(this.data.type == 1){
+      let status = target.dataset.status ? target.dataset.status : null;
+      let url = target.dataset.url;
+      if (!status) {
+        wx.navigateTo({
+          url: url,
+        })
+      }
+    }else{
+      let index = target.dataset.index;
+      // console.log(this.data.addressList[index]);
+      //把当前选中的地址缓存起来
+      wx.setStorageSync('selected_address', this.data.addressList[index]);
+      wx.navigateBack();
     }
   },
 
+  //滑动开始
   slideS(e){
     //判断是否只有一个触摸点
     if (e.touches.length == 1) {
@@ -119,6 +133,7 @@ Page({
     }
   },
 
+  //滑动中
   slideM(e){
     let sx = this.data.startX;
     let cx = e.touches[0].clientX;
@@ -149,6 +164,7 @@ Page({
 
   },
 
+  //滑动结束
   slideE(e){
     let sx = this.data.startX;
     let ex = e.changedTouches[0].clientX;

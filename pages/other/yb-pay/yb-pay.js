@@ -75,6 +75,7 @@ Page({
   
   },
 
+  //初始化页面
   initPage(payNo){
     action.getPayInfo(payNo).then(res=>{
       let entrys = res.data.entrys;
@@ -106,7 +107,7 @@ Page({
     })
   },
 
-
+  //提交支付动作
   postIntegralPay(){
     let payNo = this.data.payNo;
     action.postIntegralPay({
@@ -116,6 +117,12 @@ Page({
         wx.showToast({
           title: '支付成功'
         })
+
+        setTimeout(function(){
+          wx.navigateBack({
+            delta: 2
+          })
+        },1000)
 
     })
   }

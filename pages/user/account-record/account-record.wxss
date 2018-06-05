@@ -29,7 +29,7 @@
 }
 .list .list-item .left{
   width: 50%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .list .list-item .right{
   display: flex;

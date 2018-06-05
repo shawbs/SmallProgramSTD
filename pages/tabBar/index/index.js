@@ -10,7 +10,12 @@ Page({
     banner: null,
     jsLive: null,
     jxLive: null,
-    zpLive: null
+    zpLive: null,
+
+    page: 1,
+    loadover: false,
+    loading: false,
+    merchantList: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -19,7 +24,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initPage();
+    //获取商户入驻首页拍品
+    // this.getMerchantAuctionList();
   },
 
   /**
@@ -33,7 +40,7 @@ Page({
  * 生命周期函数--监听页面显示
  */
   onShow: function () {
-    this.initPage();
+
   },
 
   /**
@@ -41,19 +48,57 @@ Page({
    */
   onPullDownRefresh: function(){
     this.initPage();
+    // this.getMerchantAuctionList();
     setTimeout(function(){
       wx.stopPullDownRefresh()
     },1000)
   },
 
-  //判断直播是否开始
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    // if(!this.data.loadover){
+    //   if (!this.data.loading) {
+    //     this.setData({
+    //       loading: true,
+    //       page: ++this.data.page
+    //     })
+    //     action.getMerchantAuctionList({
+    //       page: this.data.page,
+    //       limit: 10
+    //     }).then(res => {
+    //       if (!res.data.list.length){
+    //         this.setData({
+    //           loadover: true
+    //         })
+    //       }else{
+    //         this.setData({
+    //           merchantList: res.data.list
+    //         })
+    //       }
+    //     })
+    //   }
+    // }
+
+  },
+
+  //判断直播是否开始进行跳转
   toLive: function(e){
-    let target = e.currentTarget
-    let id = target.dataset.id
+    let target = e.currentTarget;
+    let id = target.dataset.id;
+    let auctionNo = target.dataset.auctionno;
     if(target.dataset.type ==2){
-      wx.navigateTo({
-        url: '../../live/live/live'
+      wx.showToast({
+        title: '请下载APP观看或微信公众号进入观看!',
       })
+      // wx.navigateTo({
+      //   url: '../../live/live/live'
+      // })
+      // let url = encodeURIComponent('https://app.shuntd.cn/shuntd/preview-ing/' + auctionNo + '-'+ id +'.html');
+      // wx.navigateTo({
+      //   url: `/pages/live/live-h5/live-h5?url=${url}`
+      // })
     }else{
       wx.navigateTo({
         url: `../../other/list/list?auctionId=${id}&type=1`
@@ -62,6 +107,7 @@ Page({
     
   },
 
+  //转换返回的json字符串数据
   transformImgUrls(arr) {
     if(arr.length>0){
       for (let i = (arr.length - 1); i >= 0; i--) {
@@ -72,9 +118,10 @@ Page({
     return arr;
   },
 
+  //初始化页面
   initPage(){
     let _this = this;
-
+    //获取广告数据
     action.getBanner()
       .then(res => {
         _this.setData({
@@ -91,6 +138,7 @@ Page({
     //     })
     //   })
 
+    //获取即时拍场
     action.getJSLive()
       .then(res => {
         let items = [...res.data.items]
@@ -100,6 +148,7 @@ Page({
         })
       })
 
+    //获取直播拍场
     action.getJXLive()
       .then(res => {
         let items = [...res.data.items]
@@ -108,6 +157,24 @@ Page({
           jxLive: _this.transformImgUrls(items)
         })
       })
+  },
+
+  //初始获取商户拍品
+  getMerchantAuctionList(){
+    action.getMerchantAuctionList({
+      page: this.data.page,
+      limit: 10
+    }).then(res=>{
+      if (!res.data.list.length) {
+        this.setData({
+          loadover: true
+        })
+      } else {
+        this.setData({
+          merchantList: res.data.list
+        })
+      }
+    })
   }
 
 })

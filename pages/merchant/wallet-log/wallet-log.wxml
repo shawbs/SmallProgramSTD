@@ -1,0 +1,19 @@
+<!--pages/merchant/wallet-log/wallet-log.wxml-->
+<view class='account-record' >
+    <view class="list">
+      <view class="list-item"  wx:for="{{moneyList}}" wx:key="{{index}}">
+        <view class='left'>
+          <view class='_title'>{{item.msg}}</view>
+          <text class='green'>+{{item.amount}}</text>
+        </view>
+        <view class='right'>
+          <view>
+            <view class='gray'>{{item.createTime}}</view>
+            <view>余额： <text class='gray'>{{item.balance}}</text></view>
+          </view>
+          
+        </view>
+      </view>
+
+    </view>
+</view>

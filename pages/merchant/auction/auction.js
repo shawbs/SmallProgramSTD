@@ -4,6 +4,7 @@ const app = getApp();
 
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
+const ob = require('../../../utils/observer.js')
 Page({
 
   /**
@@ -14,7 +15,7 @@ Page({
     navlist: [
       {
         cateName: '竞拍中',
-        cateId: '5'
+        cateId: '0'
       },
       {
         cateName: '已截拍',
@@ -32,7 +33,7 @@ Page({
     orderlist: [],
     //分页
     page: 1,
-    status: 5,
+    status: 0,
     loadover: false,
     msg: ''
   },
@@ -41,11 +42,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    let index = options.tabIndex ;
     this.setData({
-      tabIndex: options.tabIndex || 0
+      tabIndex: index || 0,
+      status: options.status || 0
     })
-    this.getList(options.id || 5);
+    if (index == 3) {
+      this.merchantAuction();
+    } else {
+      this.getList(this.data.status);
+    }
   },
 
   /**
@@ -87,14 +93,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.loadover) return
-    let that = this;
-    that.scrollLoad(that.data.status, orderlist => {
-      orderlist = this.data.orderlist.concat(orderlist)
-      that.setData({
-        orderlist: orderlist
+    if(this.data.status == 3)return
+    if(!this.data.loadover){
+      action.merchantAuctionList({
+        status: this.data.status,
+        page: ++this.data.page,
+        limit: 10
+      }).then(res => {
+        let list = res.data.list;
+        if (list.length > 0) {
+          this.setData({
+            orderlist: this.data.orderlist.concat(list)
+          })
+        } else {
+          this.setData({
+            msg: '数据加载完成！',
+            loadover: true
+          })
+        }
       })
-    })
+    }
+  
   },
 
   /**
@@ -111,12 +130,19 @@ Page({
 
   //tab点击事件
   navtab: function (e) {
-
     let id = e.detail.id;
-    console.log(id)
-    this.getList(id);
+    this.setData({
+      status: id,
+      orderlist: []
+    })
+    if(id == 3){
+      this.merchantAuction();
+    }else{
+      this.getList(id);
+    }
   },
 
+  //获取拍品列表
   getList(status) {
     this.setData({
       status: status,
@@ -124,43 +150,77 @@ Page({
       loadover: false,
       msg: ''
     })
-    action.getOrderList({
+    action.merchantAuctionList({
       status: status,
-      page: 1
+      page: 1,
+      limit: 10
     }).then(res => {
-      let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
-      for (let i = orderlist.length - 1; i >= 0; i--) {
-        orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
-      }
       this.setData({
-        orderlist: orderlist
+        orderlist: res.data.list
       })
     })
   },
 
-  scrollLoad(status, cb) {
-    this.setData({
-      page: ++this.data.page
-    })
-    action.getOrderList({
-      status: status,
-      page: this.data.page
-    }).then(res => {
-      if (res.data.orderlist.length <= 0) {
+  //获取草稿箱
+  merchantAuction(){
+    action.merchantAuction({
+    }).then(res=>{
         this.setData({
-          loadover: true,
-          msg: '数据加载完成!'
+          orderlist: res.data.list
         })
-        return
-      }
-      let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
-      for (let i = orderlist.length - 1; i >= 0; i--) {
-        orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
-      }
+    })
+  },
 
-      cb && cb(orderlist)
+  //删除草稿箱
+  deleteAuction(e){
+    let token = e.target.dataset.token;
+    let index = e.target.dataset.index;
+    action.merchantAuctionDelete({
+      productToken: token
+    }).then(res=>{
+      let list = this.data.orderlist;
+      list.splice(index,1);
+      this.setData({
+        orderlist: list
+      })
+    })
+
+  },
+
+  //前往上架
+  linkPushAuction(e){
+    let token = e.target.dataset.token;
+    wx.navigateTo({
+      url: `/pages/merchant/push/push?token=${encodeURIComponent(token)}`,
+    })
+  },
+
+  //下架
+  soldout(e){
+    let id = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    action.merchantAuctionOut({
+      itemId: id
+    }).then(res=>{
+      wx.showToast({
+        title: '下架成功',
+      })
+      let list = this.data.orderlist;
+      list.splice(index,1);
+      this.setData({
+        orderlist: list
+      })
+    })
+  },
+
+  //前往编辑
+  linkAuctionEdit(e){
+    let token = e.target.dataset.token;
+    app.globalData.token = token;
+    ob.trigger('pushlish_refresh',token)
+    wx.switchTab({
+      url: '/pages/tabBar/publish/publish',
     })
   }
-
 
 })

@@ -13,7 +13,7 @@ Page({
     navlist: [
       {
         cateName: '全部',
-        cateId: '5'
+        cateId: '0'
       }, 
       {
         cateName: '待付款',
@@ -35,7 +35,7 @@ Page({
     orderlist:[],
     //分页
     page: 1,
-    status: 5,
+    status: 0,//订单状态
     loadover: false,
     msg: ''
   },
@@ -46,9 +46,10 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      tabIndex: options.tabIndex || 0
+      tabIndex: options.tabIndex || 0,
+      status: options.id ||0
     })
-    this.getList(options.id || 5);
+    this.getList();
   },
 
   /**
@@ -91,12 +92,27 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.loadover) return
-    let that = this;
-    that.scrollLoad(that.data.status, orderlist=>{
-      orderlist = this.data.orderlist.concat(orderlist)
-      that.setData({
-        orderlist: orderlist
-      })
+    this.setData({
+      page: ++this.data.page
+    })
+    action.getMerchantOrderList({
+      status: this.data.status,
+      page: this.data.page
+    }).then(res => {
+      if (res.data.orderlist.length > 0) {
+        let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
+        for (let i = orderlist.length - 1; i >= 0; i--) {
+          orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
+        }
+        this.setData({
+          orderlist: [...this.data.orderlist, ...orderlist]
+        })
+      } else {
+        this.setData({
+          msg: '无数据'
+        })
+      }
+
     })
   },
 
@@ -107,63 +123,40 @@ Page({
   
   },
 
-  //滚动加载更多
-  loadmore: function(){
-
-  },
-
   //tab点击事件
   navtab: function (e) {
-    
     let id = e.detail.id;
-    console.log(id)
-    this.getList(id);
-  },
-
-  getList(status){
     this.setData({
-      status: status,
+      status: id,
       page: 1,
       loadover: false,
       msg: ''
     })
-    action.getOrderList({
-      status: status,
+    this.getList();
+  },
+
+  //获取商户订单列表
+  getList(){
+    action.getMerchantOrderList({
+      status: this.data.status,
       page: 1
     }).then(res=>{
-      let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
-      for(let i=orderlist.length-1;i>=0;i--){
-        orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
-      } 
-      this.setData({
-        orderlist: orderlist
-      })
+      if (res.data.orderlist.length>0){
+        let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
+        for (let i = orderlist.length - 1; i >= 0; i--) {
+          orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
+        }
+        this.setData({
+          orderlist: orderlist
+        })
+      }else{
+        this.setData({
+          msg: '无数据'
+        })
+      }
     })
   },
 
-  scrollLoad(status,cb){
-    this.setData({
-      page: ++this.data.page
-    })
-    action.getOrderList({
-      status: status,
-      page: this.data.page
-    }).then(res => {
-      if (res.data.orderlist.length<=0){
-        this.setData({
-          loadover: true,
-          msg: '数据加载完成!'
-        })
-        return
-      }
-      let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
-      for (let i = orderlist.length - 1; i >= 0; i--) {
-        orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
-      }
-
-      cb && cb(orderlist)
-    })
-  }
 
   
 })
