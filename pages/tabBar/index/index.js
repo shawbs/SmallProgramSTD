@@ -26,7 +26,7 @@ Page({
   onLoad: function (options) {
     this.initPage();
     //获取商户入驻首页拍品
-    // this.getMerchantAuctionList();
+    this.getMerchantAuctionList();
   },
 
   /**
@@ -48,7 +48,7 @@ Page({
    */
   onPullDownRefresh: function(){
     this.initPage();
-    // this.getMerchantAuctionList();
+    this.getMerchantAuctionList();
     setTimeout(function(){
       wx.stopPullDownRefresh()
     },1000)
@@ -58,28 +58,28 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // if(!this.data.loadover){
-    //   if (!this.data.loading) {
-    //     this.setData({
-    //       loading: true,
-    //       page: ++this.data.page
-    //     })
-    //     action.getMerchantAuctionList({
-    //       page: this.data.page,
-    //       limit: 10
-    //     }).then(res => {
-    //       if (!res.data.list.length){
-    //         this.setData({
-    //           loadover: true
-    //         })
-    //       }else{
-    //         this.setData({
-    //           merchantList: res.data.list
-    //         })
-    //       }
-    //     })
-    //   }
-    // }
+    if(!this.data.loadover){
+      if (!this.data.loading) {
+        this.setData({
+          loading: true,
+          page: ++this.data.page
+        })
+        action.getMerchantAuctionList({
+          page: this.data.page,
+          limit: 10
+        }).then(res => {
+          if (!res.data.list.length){
+            this.setData({
+              loadover: true
+            })
+          }else{
+            this.setData({
+              merchantList: res.data.list
+            })
+          }
+        })
+      }
+    }
 
   },
 

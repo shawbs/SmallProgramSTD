@@ -28,13 +28,15 @@
         <text>昵称</text>
         <input class='text-right' value='{{userInfo.nickName}}'  bindconfirm="updateName" confirm-type="done"/>
       </view>
-       <!-- <navigator class="list-item">  -->
-       <navigator class="list-item" url='/pages/user/authentication/authentication'>  
+      <navigator wx:if="{{!userInfo.realName}}" class="list-item" url='/pages/user/authentication/authentication'>  
         <text style='flex: 1'>实名认证</text>
-        <text wx:if="{{!userInfo.realName}}" class='orange'>未实名认证</text>
-        <text wx:if="{{userInfo.realName}}"class='green'>已实名认证</text>
+        <text  class='orange'>未实名认证</text>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image> 
       </navigator>
+      <view class='list-item' wx:if="{{userInfo.realName}}">
+        <text style='flex: 1'>实名认证</text>
+        <text class='green'>已实名认证</text>
+      </view>
       <view class="list-item">
         <text>手机号</text>
         <text>{{userInfo.name}}</text>

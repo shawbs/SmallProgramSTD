@@ -87,7 +87,7 @@ Page({
     this.getBidList();
     this.getDetail();
     this.getPMGZ();
-    this.getCountTime();
+    
   },
 
   //tab点击
@@ -132,6 +132,7 @@ Page({
       this.setData({
         detail: detail
       })
+      this.getCountTime();
 
 
       if (base.checkLogin()) {
@@ -206,7 +207,7 @@ Page({
 
   //加价
   postPrice(price){
-    action.postbid({
+    action.merchantBid({
       biddableToken: this.data.detail.biddableToken,
       itemToken: this.data.detail.itemToken,
       bidPrice: price
@@ -234,7 +235,7 @@ Page({
 
   //出价记录
   getBidList(){
-    action.bidList({
+    action.merchantBidInfo({
       auctionItemId: this.data.auctionItemId
     }).then(res=>{
         let bidlist = res.data.items;

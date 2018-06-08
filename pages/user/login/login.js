@@ -15,10 +15,10 @@ Page({
     timer: 60,
     phone:'',
     smstoken: '',
-    code1:'',
-    code2: '',
-    code3: '',
-    code4: '',
+    // code1:'',
+    // code2: '',
+    // code3: '',
+    // code4: '',
     inviterToken: ''
   },
 
@@ -155,13 +155,17 @@ Page({
       default: 
     }
   },
+  postSend(e){
+    let value = e.detail.value;
+    if(Number(value) && value.length >= 4){
+      this.submitLogin(value)
+    }
+  },
 
-  submitLogin(e){
-    if (!e.detail.value) { return }
-    let code = this.data.code;
+  submitLogin(code){
     let parameter = {
       name: this.data.phone,
-      code: this.data.code1 + this.data.code2 + this.data.code3 + this.data.code4,
+      code: code,
       smsToken: this.data.smstoken
     }
     if (this.data.inviterToken){
@@ -205,6 +209,7 @@ Page({
         wx.setStorageSync('__refreshToken', data.refreshToken)
         wx.setStorageSync('__accessToken', data.accessToken)
         wx.setStorageSync('__User', user)
+        wx.setStorageSync('__inviterToken', data.inviterToken)
         wx.setStorageSync('tel', user.name)
 
         //检测用户不否商户,2是 1不是

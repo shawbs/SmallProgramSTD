@@ -17,7 +17,7 @@
   </view>
 </view>
 
-<view class='card result' wx:if="{{checked}}">
+<view class='card result' wx:if="{{checked == 2}}">
   <view class='flex'>
     <view class='flex-item'>
       <image wx:if="{{checkInfo.checkStatus == 1}}" class='icon' src='/assets/image/clock_03.png'></image>
@@ -33,7 +33,7 @@
   </view>
 </view>  
 
-<view class='card result' wx:if="{{checked}}" wx:for="{{checkInfo}}" wx:key="{{index}}" wx:if="{{index==0}}">
+<view class='card result' wx:if="{{checked == 1}}" wx:for="{{checkInfo}}" wx:key="{{index}}" wx:if="{{index==0}}">
   <view class='flex'>
     <view class='flex-item'>
       <image wx:if="{{item.checkStatus == 1}}" class='icon' src='/assets/image/clock_03.png'></image>

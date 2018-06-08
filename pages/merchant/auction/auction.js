@@ -190,8 +190,9 @@ Page({
   //前往上架
   linkPushAuction(e){
     let token = e.target.dataset.token;
+    let type = e.target.dataset.type || 1;
     wx.navigateTo({
-      url: `/pages/merchant/push/push?token=${encodeURIComponent(token)}`,
+      url: `/pages/merchant/push/push?type=${type}&token=${encodeURIComponent(token)}`,
     })
   },
 

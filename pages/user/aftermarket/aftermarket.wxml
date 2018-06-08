@@ -10,7 +10,7 @@
         </view>
     </view>
     <view class="order-item-fd">
-        <text class="btn-orange-link">{{item.statusText}}</text>                        
+        <text class="btn-orange-none">{{item.statusText}}</text>                        
     </view>
   </navigator>  
 </view>

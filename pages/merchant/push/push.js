@@ -14,6 +14,7 @@ Page({
     time2: util.getTimer(),
     startTime: util.formatYear(),
     productTokenString: '',
+    type: 1
   },
 
   /**
@@ -21,7 +22,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      productTokenString: decodeURIComponent(options.token) ||''
+      productTokenString: decodeURIComponent(options.token) ||'',
+      type: options.type || 1
     })
   },
 
@@ -74,7 +76,7 @@ Page({
   
   },
 
-  //发布拍品
+  //新拍品发布
   pushAuction(e) {
     let formdata = e.detail.value;
     formdata.startPrice = formdata.startPrice * 100; 
@@ -86,6 +88,27 @@ Page({
       merchantProductToken: this.data.productTokenString
     })
     action.pushMerchantAuction(parameter).then(res=>{
+      wx.showToast({
+        title: '发布成功！',
+      })
+      wx.redirectTo({
+        url: '/pages/merchant/auction/auction'
+      })
+    })
+  },
+
+  //上架过的拍品发布
+  RepublicAuction(e) {
+    let formdata = e.detail.value;
+    formdata.startPrice = formdata.startPrice * 100;
+    formdata.addPrice = formdata.addPrice * 100;
+
+    formdata.endTime = new Date(formdata.endTime + ' ' + formdata.time).getTime();
+    formdata.startTime = new Date(formdata.startTime + ' ' + formdata.time2).getTime();
+    let parameter = Object.assign(formdata, {
+      itemToken: this.data.productTokenString
+    })
+    action.merchantAuctionRepublic(parameter).then(res => {
       wx.showToast({
         title: '发布成功！',
       })

@@ -16,7 +16,8 @@ Page({
     id:0,
     list: [],
     auctionInfo: null,
-    msg: '数据加载完成'
+    msg: '数据加载完成',
+    exType: 1
   },
 
   /**
@@ -108,6 +109,16 @@ Page({
     this.setData({
       id: id
     })
+    if(id == 0){
+      this.setData({
+        exType: 1
+      })
+    }
+    if (id == 2) {
+      this.setData({
+        exType: 2
+      })
+    }
     this.initPage()
   }
 })

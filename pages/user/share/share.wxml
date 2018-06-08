@@ -7,7 +7,7 @@
         <view class='top-titile'>分享二维码</view> 
         <view class="canvas-box">
           <canvas hidden='{{canvasHidden}}' style="width: {{qrcode.w}}px; height: {{qrcode.h}}px;"  canvas-id="mycanvas" bindtap='createPrevoewImg'/>
-          <image class='qrcode' wx:if="previewImg" src='{{previewImg}}'></image>
+          <image hidden="{{!canvasHidden}}" class='qrcode {{ canvasHidden ? "bounceIn" : ""}}' src='{{previewImg}}'></image>
         </view>
     </view>
     <view class="middle-content">

@@ -33,7 +33,7 @@
     </view>
   </view>
   <view class="other-info">
-    <text class="next-price">下次竞猜价格：¥ {{detail.startPrice/100}}</text> 
+    <text class="next-price">下次竞猜价格：¥ {{nextBidPrice/100}}</text> 
     <text>围观人数：{{detail.itemViews.length}}人</text>
   </view>
 

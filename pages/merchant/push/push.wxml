@@ -1,6 +1,6 @@
 <!--pages/merchant/push/push.wxml-->
 <view class='setting'>
-  <form bindsubmit='pushAuction'>
+  <form bindsubmit='{{type == 2 ? "RepublicAuction": "pushAuction"}}'>
     <view class='list'>
       <view class='list-title'>必选设置</view>
       <view class='list-item'>
@@ -26,7 +26,7 @@
       </view>
     </view>
 
-    <view class='list'>
+    <!-- <view class='list'>
       <view class='list-title'>高级设置</view>
       <view class='list-item'>
         <text class='fullflex'>立即开拍</text>
@@ -40,12 +40,12 @@
             {{time2}}
           </view>
         </picker>
-      </view>
+      </view> -->
       <!-- <view class='list-item'>
         <text class='fullflex'>保留价</text>
         <input type='number' value='10' name="basePrice"></input>
       </view> -->
-    </view>
+    <!-- </view> -->
     <button form-type='submit' class='btn-orange'>发布</button>
   </form>
 </view>

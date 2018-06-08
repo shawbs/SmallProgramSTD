@@ -15,7 +15,9 @@
             </view>
         </view>
         <view class="order-item-fd">
-            <text class="btn-orange-link">{{item.statusText}}</text>                        
+            <text class="btn-orange-none" wx:if="{{item.orderStatus !=24}}">{{item.statusText}}</text>
+            <text class="btn-orange-none" wx:if="{{item.orderStatus ==24}}">已成交</text>  
+            <navigator wx:if="{{item.orderStatus ==24}}" url="/pages/user/refund/refund?orderNo={{item.orderNo}}" class='btn-orange-link ml-2'>申请售后</navigator>                          
         </view>
       </navigator>  
     </view>

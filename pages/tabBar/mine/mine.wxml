@@ -52,14 +52,14 @@
       </navigator>
     </view>
   </view>
-  <!-- <view class='orader-card'>
+   <view class='orader-card'>
     <view bindtap='linkMerchant' class='card-hd'>
       <image class='fl icon-user' src='/assets/image/sh_icon_07.png' mode='aspectFit'></image>
       商户中心
       <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </view>
   
-  </view> -->
+  </view> 
   <view class='mine-card'>
     <view class='card-bd'>
       <navigator url='/pages/user/wallet/wallet' class='cell'>

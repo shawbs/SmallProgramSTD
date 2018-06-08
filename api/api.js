@@ -236,5 +236,11 @@ module.exports = {
   //商户拍品详情
   getMerchantAuctionInfo: '/web-app-facade/std/app/api/v1/merchant/auction/item/',
   //商户拍品加入围观数
-  merchantAddLooker: '/business-app-view/set/app/merchant/auction/item/view/info'
+  merchantAddLooker: '/business-app-view/set/app/merchant/auction/item/view/info',
+  //商户拍品出价
+  merchantBid: '/business-bidding/std/app/api/v1/merchant/bidding/bid',
+  //商户拍品出价记录
+  merchantBidInfo: '/web-app-facade/std/app/api/v1/auction/merchant/item',
+  //商户拍品重新上架
+  merchantAuctionRepublic: '/business-merchantauction-live/std/app/api/v1/live/republic/auction/item'
 }

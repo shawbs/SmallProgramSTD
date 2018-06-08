@@ -57,10 +57,13 @@
     width: 84%;
     margin: 0 auto;
     border: none;
-    border-bottom: 1px solid #e76434;
+    border-bottom: 1px solid #666;
     padding: 10px 0;
     font-size: 15px;
     outline: none;
+}
+.login-content .input-control input:focus{
+    border-bottom: 1px solid #e76434;
 }
 .login-content .login-btn-wp{
     text-align: center;
@@ -132,12 +135,14 @@
 }
 .content-val .input-wp input{
     display: inline-block;
-    width: 60px;
+    width: 150px;
     height: 60px;
     text-align: center;
     font-size: 22px;
-    border: 1px solid #666;
-    border-radius: 4px;
+    border-bottom: 1px solid #666;
+}
+.content-val .input-wp input:focus{
+    border-bottom: 1px solid #e76434;
 }
 /* 特效 */
 .animated {

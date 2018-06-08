@@ -10,7 +10,7 @@
       <view class="login-content">
           <view class="input-phone-tip">请输入手机号码</view>
           <view class="input-control">
-              <input type="number" maxlength="11" placeholder="请输入手机号码" bindblur='getPhone' id="phone" confirm-type="next" focus value='{{form.phone}}'/>
+              <input type="text" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{form.phone}}' bindconfirm="sendPhone"/>
           </view>
           <view class="login-btn-wp">
               <button type="button" class="login-btn" bindtap='sendPhone'>下一步</button>
@@ -29,7 +29,7 @@
           <label class="count-down" bindtap='sendPhone' wx:if="{{timer==0}}">重新发送</label>
       </view>
       <view class="input-wp">
-          <view class="flex">
+          <!-- <view class="flex">
             <view class="flex-item">
               <input type='number' maxlength="1"  confirm-type="next" focus="{{step==3}}" data-code="1" data-step="3" bindinput='putCode'></input>
             </view>
@@ -43,6 +43,11 @@
               <input type='number' maxlength="1"  confirm-type="send" focus="{{step==6}}" data-code="4" data-step="6" bindinput='putCode' bindblur='submitLogin'></input>
             </view>
 
+          </view> -->
+          <view class="flex">
+            <view class="flex-item">
+              <input type='text' confirm-type="done" focus placeholder='请输入验证码' placeholder-style="font-size:14px;" bindconfirm='postSend'></input>
+            </view>
           </view>
       </view>
   </view>

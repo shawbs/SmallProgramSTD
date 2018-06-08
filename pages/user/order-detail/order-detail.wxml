@@ -1,13 +1,31 @@
 <!--pages/order-detail/order-detail.wxml-->
 <view class="order-detail-page animated fadeInUp" wx:if="order">
-    <view class="message shipments">{{order.statusText}}</view>
+    <view class="message shipments">
+      <!-- 订单关闭 -->
+      <image wx:if="{{order.orderStatus == 31}}" src='/assets/image/dingdanguanbi@2x.png' class="icon-status fl" mode='aspectFit'></image>
+       <!-- 待发货 -->
+      <image wx:if="{{order.orderStatus == 20}}" src='/assets/image/ddxq_icon_dfh@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 待收货 -->
+      <image wx:if="{{order.orderStatus == 21}}" src='/assets/image/ddxq_icon_dsh@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 人工处理中 -->
+      <image wx:if="{{order.orderStatus == 23}}" src='/assets/image/ddxq_icon_shcl@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 待付款 -->
+      <image wx:if="{{order.orderStatus >=10 && order.orderStatus <=12}}" src='/assets/image/ddxq_icon_dfk@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 已成交 -->
+      <image wx:if="{{order.orderStatus == 30}}" src='/assets/image/yes_03.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 待退货 -->
+      <image wx:if="{{order.orderStatus == 24}}" src='/assets/image/ddxq_icon_dsh@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 超期 -->
+      <image wx:if="{{order.orderStatus == 22}}" src='/assets/image/dingdanguanbi@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      {{order.statusText}}
+    </view>
     <view class="order-item" data-orderid="3">
         <view class="order-item-bd">
             <image class='img' src="{{order.imgUrl[0]}}"></image>
             <view class="show-text">
             <view class="title ellipsis2">{{order.itemName}}</view>
             <view class="residue">￥{{order.bidPrice/100}}</view>
-                <view class="create-date">订单时间: {{item.paymentCreateTime}}</view>
+                <view class="create-date">订单时间: {{order.paymentCreateTime || ''}}</view>
             </view>
         </view>
 
@@ -23,10 +41,10 @@
           <text class='gray'>订单编号:</text>
           <text>{{order.orderNo}}</text>
         </view>
-        <view class="line">
+        <!-- <view class="line">
           <text class='gray'>确认时间:</text>
           <text></text>
-        </view>
+        </view> -->
         <view class="line">
           <text class='gray'>支付时间:</text>
           <text>{{order.paymentCompleteTime || ''}}</text>
@@ -43,7 +61,7 @@
     <bottom-bar wx:if="{{order.orderStatus==10 || order.orderStatus==11 || order.orderStatus==12 }}">
       <navigator url="../../other/order-confirm/order-confirm" class='btn2 btn-orange2'>去支付</navigator>
     </bottom-bar>
-    <bottom-bar wx:if="{{order.orderStatus==30}}">
+    <bottom-bar wx:if="{{order.orderStatus==24}}">
       <text></text>
       <navigator url="/pages/user/refund/refund?orderNo={{order.orderNo}}" class='btn2 btn-orange2'>申请售后</navigator>
     </bottom-bar>  

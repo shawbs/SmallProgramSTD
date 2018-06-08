@@ -3,16 +3,15 @@
     height: 100%;
 }
 .message{
-    height: 50px;
-    line-height: 50px;
+    padding: 0 10px;
     background: #FFF8EC;
     font-size: 15px;
+    line-height: 50px;
     color: #E86433;
-    padding-left: 66px;
 }
 
 .order-item{
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 .order-info{
   padding: 0 10px;
@@ -68,4 +67,9 @@
     color: #FFFFFF;
     background: #f3a423;
     margin: 0;
+}
+.icon-status{
+  height: 50px;
+  width: 40px;
+  margin-right: 10px;
 }

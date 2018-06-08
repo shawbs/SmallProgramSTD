@@ -5,7 +5,7 @@
 
     <view class="order-item" wx:if="{{status != 3}}" data-orderid="3" wx:for="{{orderlist}}" wx:key="{{index}}">
       <view  style='width:100%'>
-        <navigator class="order-item-bd" url='/pages/other/detail/detail?id={{item.id}}'>
+        <navigator class="order-item-bd" url='/pages/merchant/detail/detail?id={{item.id}}'>
             <image class='img' src="{{item.accessories[0]}}"  mode='aspectFit'></image>
             <view class="show-text">
               <view class="create-date mb-1">[{{item.productNo}}]</view>
@@ -17,7 +17,7 @@
             </view>
         </navigator>
         <view class="order-item-fd">  
-            <text class="btn-orange-link mr-2 fr" wx:if="{{status!=0}}" bindtap='linkPushAuction' data-token="{{item.product.productToken}}">上架</text>
+            <text data-type="2" class="btn-orange-link mr-2 fr" wx:if="{{status!=0}}" bindtap='linkPushAuction' data-token="{{item.itemToken}}">上架</text>
             <text class="btn-orange-link mr-2 fr" wx:if="{{status==0}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='soldout'>下架</text>                                
         </view>
       </view>  

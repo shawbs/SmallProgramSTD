@@ -87,7 +87,7 @@
 
   </view>  
 
-  <!-- <view class='good-list row' wx:if="{{merchantList.length>0}}">
+   <view class='good-list row' wx:if="{{merchantList.length>0}}">
 
     <view class='good-item col' wx:for="{{merchantList}}" wx:key="{{index}}">
       <navigator url='/pages/merchant/detail/detail?id={{item.liveId}}'>
@@ -104,6 +104,6 @@
     </view>
 
 
-  </view> -->
+  </view> 
 
 </view>

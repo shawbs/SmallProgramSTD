@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked: true,
+    checked: 100,
     checkInfo: null
   },
 
@@ -72,9 +72,8 @@ Page({
     //如果正在申请商户,设checkInfo为1,反之则设为实名认证状态
     this.getMerchantApplyStatus((data)=>{
       if (data.isexist){
-        console.log(data)
         this.setData({
-          checked: true,
+          checked: 2,
           checkInfo: {
             checkStatus: data.checkStatus
           }
@@ -84,12 +83,12 @@ Page({
         action.getIdentificationStatus().then(res => {
           if (res.data.isexist) {
             this.setData({
-              checked: true,
+              checked: 1,
               checkInfo: res.data.certifyEntity
             })
           }else{
             this.setData({
-              checked: false,
+              checked: 0,
               checkInfo: null
             })
           }

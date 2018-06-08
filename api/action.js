@@ -246,6 +246,18 @@ const request = {
   getMerchantAuctionInfo: (parameter) => $.get(baseurl + API.getMerchantAuctionInfo + `${parameter.auctionItemId}/detail`, {}, true),
   //商户拍品加入围观数
   merchantAddLooker: (parameter) => $.post(baseurl + API.merchantAddLooker, parameter, false),
+  //商户出价
+  merchantBid: (parameter) => $.post(baseurl + API.merchantBid, parameter, false),
+  //商户拍品出价记录
+ 
+  //商户拍品加入围观数
+  merchantAddLooker: (parameter) => $.post(baseurl + API.merchantAddLooker, parameter, false),
+  //商户出价
+  merchantBid: (parameter) => $.post(baseurl + API.merchantBid, parameter, false),
+  //商户拍品出价记录
+  merchantBidInfo: (parameter) => $.post(baseurl + API.merchantBidInfo + `/${parameter.auctionItemId}/bidinfo`, {}, false),
+  //商户拍品重新上架
+  merchantAuctionRepublic: (parameter) => $.merchantPost(baseurl + API.merchantAuctionRepublic, parameter, false),
 }
 
 module.exports = request

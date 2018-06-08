@@ -1,0 +1,4 @@
+/* pages/user/merchant-entry/merchant-entry.wxss */
+.merchant-entry-page{
+  padding-top: 20px;
+}

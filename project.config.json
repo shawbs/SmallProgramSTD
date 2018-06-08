@@ -56,7 +56,7 @@
 				{
 					"id": 3,
 					"name": "t",
-					"pathName": "pages/merchant/detail/detail",
+					"pathName": "pages/user/merchant-entry/merchant-entry",
 					"query": "id=1",
 					"scene": "1001"
 				}

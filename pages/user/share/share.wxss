@@ -17,6 +17,9 @@ page{
   height: 100%;
   z-index: -1;
 }
+.canvas-box{
+  text-align: center;
+}
 .qrcode{
   width: 150px;
   height: 150px;
@@ -87,4 +90,36 @@ page{
 }
 .mine-share-page .rem-btn.orange{
     background: #d99f55;
+}
+.bounceIn {
+    animation-name: bounceIn;
+    animation-duration:1s;
+    animation-fill-mode:both;
+}
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -ms-transform: scale(.3);
+        transform: scale(.3);
+    }
+
+    /*50% {*/
+        /*opacity: 1;*/
+        /*-webkit-transform: scale(1.05);*/
+        /*-ms-transform: scale(1.05);*/
+        /*transform: scale(1.05);*/
+    /*}*/
+
+    /*70% {*/
+        /*-webkit-transform: scale(.9);*/
+        /*-ms-transform: scale(.9);*/
+        /*transform: scale(.9);*/
+    /*}*/
+
+    100% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
 }

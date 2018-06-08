@@ -22,7 +22,7 @@
       <view class='good-list row' wx:if="{{list}}">
 
         <view class='good-item col' wx:for="{{list}}" wx:key="{{index}}">
-          <navigator url='/pages/other/detail/detail?id={{item.auctionItemId}}&exType=1'>
+          <navigator url='/pages/other/detail/detail?id={{item.auctionItemId}}&exType={{exType}}'>
             <view class='good-item-title'>{{item.name}}</view>
             <image class='good-item-img' lazy-load src='{{item.imgUrls[0]}}' mode='aspectFill'></image>
             <image src='http://app.shuntd.cn/shuntd/pub/images/icon_done@3x.png'  mode='aspectFill' class='done-icon'></image>
