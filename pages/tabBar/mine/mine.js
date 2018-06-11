@@ -2,7 +2,7 @@
 const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-
+const ob = require('../../../utils/observer.js')
 Page({
 
   /**
@@ -21,6 +21,9 @@ Page({
    */
   onLoad: function (options) {
     this.initPage();
+	ob.listen('refresh_userinfo', ()=>{
+      this.initPage();
+    })
   },
 
   /**

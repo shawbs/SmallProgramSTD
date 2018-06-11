@@ -18,7 +18,7 @@
           <view class="login-noc">
               <!-- <checkbox  id="checkbox-1-1" class="checkbox {{agreeChecked ? 'checked' : ''}}" checked="{{agreeChecked}}" bindtap='toggleAgreeCheck'/>
               <label for="checkbox-1-1"></label> -->
-              <a href="/shuntd/agreement.html">点击下一步表示为同意“厦门顺天达用户协议”</a>
+              <navigator class='orange' url='/pages/user/agreement/agreement'>点击下一步表示为同意“厦门顺天达用户协议”</navigator>
           </view>
       </view>
   </view>
@@ -29,24 +29,10 @@
           <label class="count-down" bindtap='sendPhone' wx:if="{{timer==0}}">重新发送</label>
       </view>
       <view class="input-wp">
-          <!-- <view class="flex">
-            <view class="flex-item">
-              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==3}}" data-code="1" data-step="3" bindinput='putCode'></input>
-            </view>
-            <view class="flex-item">
-              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==4}}" data-code="2" data-step="4" bindinput='putCode'></input>
-            </view>
-            <view class="flex-item">
-              <input type='number' maxlength="1"  confirm-type="next" focus="{{step==5}}" data-code="3" data-step="5" bindinput='putCode'></input>
-            </view>
-            <view class="flex-item">
-              <input type='number' maxlength="1"  confirm-type="send" focus="{{step==6}}" data-code="4" data-step="6" bindinput='putCode' bindblur='submitLogin'></input>
-            </view>
 
-          </view> -->
           <view class="flex">
             <view class="flex-item">
-              <input type='text' confirm-type="done" focus placeholder='请输入验证码' placeholder-style="font-size:14px;" bindconfirm='postSend'></input>
+              <input type='text' confirm-type="done" focus="{{step == 2}}" placeholder='请输入验证码' placeholder-style="font-size:14px;" bindconfirm='postSend'></input>
             </view>
           </view>
       </view>

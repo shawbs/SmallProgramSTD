@@ -123,13 +123,38 @@
 .user-img .aj-views{
     display: flex;
     flex-wrap: wrap;
+    justify-item: space-around; 
 }
-.user-img .aj-views>view{
+.user-img .aj-views image{
+  width: 38px;
+  height: 38px;
   margin-right: 5px;
+  margin-bottom: 5px;
 }
-.user-img image{
-    width: 38px;
-    height: 38px;
+.user-img .aj-views.close{
+    height: 125px;
+    overflow: hidden;
+}
+.user-img .aj-views.open{
+    height: auto;
+    overflow: visible;
+}
+.load-more{
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -10px 20px 10px #fff;
+}
+.load-more .icon-arrow-r{
+  width: 30px;
+  height: 18px;
+}
+.load-more.open .icon-arrow-r{
+  transform: rotate(-90deg);
+}
+.load-more.close .icon-arrow-r{
+  transform: rotate(90deg);
 }
 button.dark{
   background: #6f645e;

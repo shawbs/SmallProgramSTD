@@ -21,7 +21,10 @@ Page({
     currentPrice: '',
     nextBidPrice: 0,
     bidlist: [],
-    hideModel: true
+    hideModel: true,
+
+    hideView: false, //是否隐藏多余的围观人数
+    hideViewBtn: true, //是否隐藏切换围观人数按钮
   },
 
   /**
@@ -126,6 +129,7 @@ Page({
         detail: res.data
       })
       this.getCountTime(res.data.status);
+      this.initViewUserHeight();
     })
     .catch(msg=>{
       console.log(msg)
@@ -260,6 +264,23 @@ Page({
     }).then(res => { })
   },
 
+  initViewUserHeight(){
+    let $ = wx.createSelectorQuery()
+    $.select('.aj-views').boundingClientRect(rect=>{
+      console.log(rect)
+      if (rect.height > 129){
+        this.setData({
+          hideView: true,
+          hideViewBtn: false
+        })
+      }
+    }).exec()
+  },
 
+  showViewUser(){
+    this.setData({
+      hideView: !this.data.hideView
+    })
+  }
 
 })

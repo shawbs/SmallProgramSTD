@@ -1,4 +1,5 @@
 <!--pages/user/authentication/authentication.wxml-->
+<!-- 申请入口 -->
 <view class='card' wx:if="{{!checked}}">
   <view class='_title'>申请认证</view>
   <view class='flex'>
@@ -17,22 +18,27 @@
   </view>
 </view>
 
+<!-- 商户入驻申请 -->
 <view class='card result' wx:if="{{checked == 2}}">
   <view class='flex'>
     <view class='flex-item'>
-      <image wx:if="{{checkInfo.checkStatus == 1}}" class='icon' src='/assets/image/clock_03.png'></image>
-       <image wx:if="{{checkInfo.checkStatus == 3}}" class='icon' src='/assets/image/no_03.png'></image> 
-       <image wx:if="{{checkInfo.checkStatus == 2}}" class='icon' src='/assets/image/yes_03.png'></image> 
+      
+      <image wx:if="{{checkInfo.checkStatus == 1 || checkInfo.checkStatus == 0}}" class='icon' src='/assets/image/clock_03.png'></image>
+      <image wx:if="{{checkInfo.checkStatus == 3}}" class='icon' src='/assets/image/no_03.png'></image> 
+      <image wx:if="{{checkInfo.checkStatus == 2}}" class='icon' src='/assets/image/yes_03.png'></image> 
       <view  wx:if="{{checkInfo.checkStatus == 1}}" class='mb-4'>待审核...</view>
-       <view wx:if="{{checkInfo.checkStatus == 3}}" class='mb-4'>审核未通过</view>
+      <view  wx:if="{{checkInfo.checkStatus == 0}}" class='mb-4'>待激活...</view>
+      <view wx:if="{{checkInfo.checkStatus == 3}}" class='mb-4'>审核未通过</view>
       <view wx:if="{{checkInfo.checkStatus == 2}}" class='mb-4'>审核通过</view>  
-      <view wx:if="{{checkInfo.checkStatus == 1}}" class='small'>平台正在审核你的 " <text class='orange'>商户入驻</text> ", 审核结果为 1-2个工作日 </view>
+      <view wx:if="{{checkInfo.checkStatus == 1 || checkInfo.checkStatus == 0}}" class='small'>平台正在审核你的 " <text class='orange'>商户入驻</text> ", 审核结果为 1-2个工作日 </view>
 
     </view>
 
   </view>
 </view>  
 
+
+<!-- 实名认证 -->
 <view class='card result' wx:if="{{checked == 1}}" wx:for="{{checkInfo}}" wx:key="{{index}}" wx:if="{{index==0}}">
   <view class='flex'>
     <view class='flex-item'>

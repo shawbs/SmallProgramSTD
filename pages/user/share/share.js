@@ -76,22 +76,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    if(res.from === 'button'){
-      let url = this.data.inviterToken ? `/pages/user/login/login?inviterToken=${this.data.inviterToken}` : '/page/user/login/login';
-      return {
-        title: '顺天达分享',
-        path: url,
-        success: function (res) {
-          // 转发成功
-          wx.showToast({
-            title: '分享成功'
-          })
-        },
-        fail: function (res) {
-          // 转发失败
-        }
+    let url = this.data.inviterToken ? `/pages/user/login/login?inviterToken=${this.data.inviterToken}` : '/page/user/login/login';
+    return {
+      title: '顺天达分享',
+      path: url,
+      success: function (res) {
+      },
+      fail: function (res) {
+        // 转发失败
       }
     }
+
   },
 
   createQrCode: function (url, canvasId, cavW, cavH) {

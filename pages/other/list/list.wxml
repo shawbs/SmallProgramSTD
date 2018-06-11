@@ -10,14 +10,13 @@
           <view class="img-wp">
             <image src="{{previewInfo.imgUrls[0]}}" mode='widthFix'/>
             <view class="view-text">
-              <view class="title">第0420z场</view>
+              <view class="title">第{{previewInfo.auctionNo}}场</view>
               <view class="time">开拍时间 {{previewInfo.startTime}}</view>
             </view>
           </view>
           <view class="desc">
             <view class="tip">专场介绍：</view>
-            <view class="text">4月20日晚上8点整，臻品视频直播，荷兰式降价拍场，开心摇宝，快乐收藏，玩赚艺术品，尽在顺天达。    
-            </view>
+            <view class="text">{{previewInfo.auctionDesc}}</view>
           </view>
         </view>
 

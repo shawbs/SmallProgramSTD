@@ -135,7 +135,6 @@
 }
 .content-val .input-wp input{
     display: inline-block;
-    width: 150px;
     height: 60px;
     text-align: center;
     font-size: 22px;

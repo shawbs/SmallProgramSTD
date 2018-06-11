@@ -1,6 +1,7 @@
 /* pages/tabBar/new/new.wxss */
 page{
-  padding-top: 50px;
+  /* padding-top: 50px; */
+  padding-top: 10px;
   padding-bottom: 50px;
 }
 .card{

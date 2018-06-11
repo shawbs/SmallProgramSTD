@@ -29,7 +29,7 @@
         </view> -->
         <view class="list-item">
           <text class='label'>银行卡号</text>
-          <input placeholder='请输入银行卡号' name="bankCardNo"></input>
+          <input type='number' placeholder='请输入银行卡号' name="bankCardNo"></input>
         </view>
       </view>
       <button form-type='submit' class='btn-default'>立即绑定</button>

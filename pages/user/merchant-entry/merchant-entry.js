@@ -10,7 +10,8 @@ Page({
    */
   data: {
     merchantApplyStatus: null,
-    identificationInfo: null
+    identificationInfo: null,
+    status: 0 // 1商户待审核 2商户待激活 3商户申请通过
   },
 
   /**
@@ -75,13 +76,36 @@ Page({
     this.setData({
       merchantApplyStatus: merchantApplyStatus
     })
-    //如果不是商户，则获取实名状态，如果实名通过，则显示申请成为商户的按钮，没有通过则跳转申请入口页面
+
+    //未实名认证或未通过实名认证
     if (!merchantApplyStatus.isexist) {
-      this.getIdentificationStatus(()=>{
-        let identificationInfo = this.data.identificationInfo;
-        console.log(identificationInfo)
-      })
+      this.getIdentificationStatus()
+    }else{
+
+      //商户待审核
+      if (merchantApplyStatus.checkStatus == 1) {
+        this.setData({
+          status: 1
+        })
+      }
+
+      //商户待激活
+      if (merchantApplyStatus.checkStatus == 0) {
+        this.setData({
+          status: 2
+        })
+        this.getIdentificationStatus()
+      }
+
+      //商户申请通过
+      if (merchantApplyStatus.checkStatus == 2) {
+        this.setData({
+          status: 3
+        })
+      }  
     }
+
+    
 
 
   },
@@ -90,24 +114,21 @@ Page({
   //获取实名认证申请状态信息，保存到缓存中
   getIdentificationStatus(cb) {
     let identificationInfo = {};
-    identificationInfo.status = 0;
+    let isChecked = false;
     action.getIdentificationStatus().then(res => {
       let isexist = res.data.isexist;
       if (isexist) {
         let arr = res.data.certifyEntity;
         for (let item of arr) {
-          if (item.certifyType == 1) {
+          if (item.certifyType == 0) {
             identificationInfo.personal = item
           }
-          if (item.certifyType == 0) {
+          if (item.certifyType == 1) {
             identificationInfo.enterprise = item
           }
           if (item.checkStatus == 2){
-            identificationInfo.status = 1
+            isChecked = true;
           }
-        }
-        if (Object.keys(identificationInfo).length > 1){
-          identificationInfo.status = 2
         }
         wx.setStorageSync('identificationInfo', identificationInfo);
         this.setData({
@@ -115,7 +136,7 @@ Page({
         })
       }
 
-      cb && cb();
+      cb && cb(isChecked);
     })
   },
 

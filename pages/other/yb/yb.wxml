@@ -4,7 +4,7 @@
     <view class="fixed-btn prev" wx:if="{{index>0}}" bindtap="prevLotto">点击查看上一件</view>
     <view class="fixed-btn next" wx:if="{{index<(lottoList.length-1)}}" bindtap="nextLotto">点击查看下一件</view>
     <image class='top-bg' src='/assets/image/yaobao_bg@3x.png'></image>
-    <view class="current-yb common-shadow" wx:if="{{lotto}}">
+    <view class="current-yb common-shadow" >
         <image class='top-logo' mode='aspectFit' src='/assets/image/yaobao_jxpc_head_icon@2x.png'></image>
         <view class="yb-slider">
               <swiper class='swiper-container' indicator-dots="true"
@@ -15,10 +15,10 @@
                   </swiper-item>
 
               </swiper>
-               <view class='yb-title'>{{lotto.name}}</view>
+              <view class='yb-title'>{{lotto.name}}</view>
         </view>
-       
-        <view class="desc">
+      
+        <view class="desc" wx:if="{{lotto}}">
             <view class="cz-wp">
                 <view class='row' wx:for="{{lotto.properties}}" wx:key="{{index}}">
                   <label>{{item.name}}：</label>
@@ -38,6 +38,7 @@
             <view class="bg-wp" style='width:{{(lotto.surplusNum/lotto.num)*100+"%"}}'></view>
           </view>
       </view>
+
     </view>
 
     <view class="ruler">

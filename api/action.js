@@ -5,8 +5,13 @@ const {conf} = require('../config.js')
 const baseurl = conf[conf.env].host
 
 const request = {
-
+  //注册协议
+  getzcxy: () => $.getAsset('http://text.shuntd.cn/zcxy.txt'),
+  //常见问题
+  getcjwt: () => $.getAsset('http://text.shuntd.cn/cjwt.txt'),
+  //拍卖规则
   getPMGZ: () => $.getAsset('http://text.shuntd.cn/pmgz.txt'),
+  //首页banner图
   getBanner: () => $.get(baseurl + API.index.banner, {}),
   //展拍拍场
   // getZPLive: () => $.get(baseurl + API.index.getZPLive, {}),
@@ -44,6 +49,8 @@ const request = {
   getCode: (phone) => $.post(baseurl + API.getCode, { phone: phone }),
   //登录
   login: (parameter) => $.post(baseurl + API.login, Object.assign({ deviceId: '', sb: 'xzz' }, parameter), true),
+  //签到
+  checkIn: () => $.post(baseurl + API.checkIn, {}),
   //获取用户信息
   getUserInfo: () => $.post(baseurl + API.getUserInfo, {}),
   //获取地址列表
@@ -155,7 +162,7 @@ const request = {
   //获取售后 /business-return-product/std/app/api/v1/return/productlist/{status}/{page}/{limit}
   getAftermarketList: (parameter) => $.get(baseurl + API.getAftermarketList + `/${parameter.status}/${parameter.page}/${parameter.limit}`, {}, true),
   //设置关注
-  postGuanzhu: (parameter) => $.post(baseurl + API.postGuanzhu, parameter, true),
+  postGuanzhu: (parameter) => $.post(baseurl + API.postGuanzhu, parameter, false),
   //获取售后详情'/business-return-product/std/app/api/v1/return/product/details/{orderNo}'
   getAftermarketInfo: (orderNo) => $.get(baseurl + API.getAftermarketInfo + `/${orderNo}`, {}, true),
   //获取退货token
@@ -188,19 +195,19 @@ const request = {
   getMerchantApplyStatus: () => $.post(baseurl + API.getMerchantApplyStatus, {}, true),
   //申请商户接口
   merchantApply: (parameter) => $.post(baseurl + API.merchantApply, parameter, true),
-  //获取商户token接口
+  //�?�取商户token�?�口
   merchantToken: () => $.post(baseurl + API.merchantToken, {}, true),
-  //更新商户基本信息接口
+  //更新商户基本信息�?�口
   updateMerchantInfo: (parameter) => $.merchantPost(baseurl + API.updateMerchantInfo, parameter, true),
-  //获取商户基本信息接口
+  //�?�取商户基本信息�?�口
   merchantInfo: () => $.merchantPost(baseurl + API.merchantInfo, {}, true),
-  //取商户首页(商户中心)接口
+  //取商户首页(商户中心)�?�口
   merchantMainInfo: () => $.merchantPost(baseurl + API.merchantMainInfo, {}, true),
   //商户中心上传商户LOGO
   uploadMerchantLogo: (parameter) => $.merchantUpload(baseurl + API.uploadMerchantLogo, parameter, true),
-  //获取商户订单列表接口
+  //�?�取商户订单列表�?�口
   getMerchantOrderList: (parameter) => $.merchantGet(baseurl + API.getMerchantOrder + `${parameter.status}/${parameter.page}/10`, {}, true),
-  //获取商户订单详情接口
+  //�?�取商户订单详情�?�口
   getMerchantOrderInfo: (parameter) => $.merchantGet(baseurl + API.getMerchantOrderInfo + `${parameter.orderToken}`, {}, true),
   //初始化拍品项和token
   initMerchantAuction: (parameter) => $.merchantPost(baseurl + API.initMerchantAuction, parameter, true),
@@ -212,35 +219,35 @@ const request = {
   uploadAuctionImg: (parameter) => $.merchantUpload(baseurl + API.uploadAuctionImg, parameter, true),
   //删除拍品图片或视频
   deleteAuctionImg: (parameter) => $.merchantPost(baseurl + API.deleteAuctionImg, parameter, true),
-  //下架拍品
+  //下�?�拍品
   merchantAuctionOut: (parameter) => $.merchantPost(baseurl + API.merchantAuctionOut, parameter, true),
-  //获取拍品列表
+  //�?�取拍品列表
   merchantAuctionList: (parameter) => $.merchantPost(baseurl + API.merchantAuctionList, parameter, true),
-  //获取草稿箱
+  //�?�取草稿箱
   merchantAuction: (parameter) => $.merchantPost(baseurl + API.merchantAuction, parameter, true),
-  //获取草稿箱详情
+  //�?�取草稿箱详情
   merchantAuctionInfo: (parameter) => $.merchantPost(baseurl + API.merchantAuctionInfo, parameter, true),
   //删除草稿箱
   merchantAuctionDelete: (parameter) => $.merchantPost(baseurl + API.merchantAuctionDelete, parameter, true),
-  //获取商户余额
+  //�?�取商户余额
   getMerchantBalance: (parameter) => $.merchantPost(baseurl + API.getMerchantBalance, parameter, true),
-  //获取商户余额明细
+  //�?�取商户余额�?细
   getMerchantBalanceLog: (parameter) => $.merchantPost(baseurl + API.getMerchantBalanceLog, parameter, true),
   //商户转账
   merchantTransfer: (parameter) => $.merchantPost(baseurl + API.merchantTransfer, parameter, true),
-  //商户提现
+  //商户提�?�
   merchantWithdraw: (parameter) => $.merchantPost(baseurl + API.merchantWithdraw, parameter, true),
-  //商户现金付款
+  //商户�?�金付款
   merchantPay: (parameter) => $.merchantPost(baseurl + API.merchantPay, parameter, true),
   //商户银行卡列表
   merchantBankCardList: (parameter) => $.merchantPost(baseurl + API.merchantBankCardList, parameter, true),
   //商户删除商户银行卡
   merchantBankCardDelete: (parameter) => $.merchantPost(baseurl + API.merchantBankCardDelete, parameter, true),
-  //增加商户银行卡
+  //�?加商户银行卡
   merchantBankCardAdd: (parameter) => $.merchantPost(baseurl + API.merchantBankCardAdd, parameter, true),
-  //获取订单余款
+  //�?�取订单余款
   merchantOrderMoney: (parameter) => $.merchantPost(baseurl + API.merchantOrderMoney, parameter, true),
-  //首页获取商户发布的拍品
+  //首页�?�取商户发布的拍品
   getMerchantAuctionList: (parameter) => $.post(baseurl + API.getMerchantAuctionList, parameter, true),
   //商户拍品详情
   getMerchantAuctionInfo: (parameter) => $.get(baseurl + API.getMerchantAuctionInfo + `${parameter.auctionItemId}/detail`, {}, true),
@@ -256,7 +263,7 @@ const request = {
   merchantBid: (parameter) => $.post(baseurl + API.merchantBid, parameter, false),
   //商户拍品出价记录
   merchantBidInfo: (parameter) => $.post(baseurl + API.merchantBidInfo + `/${parameter.auctionItemId}/bidinfo`, {}, false),
-  //商户拍品重新上架
+  //商户拍品重新上�?�
   merchantAuctionRepublic: (parameter) => $.merchantPost(baseurl + API.merchantAuctionRepublic, parameter, false),
 }
 

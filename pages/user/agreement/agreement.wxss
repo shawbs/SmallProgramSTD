@@ -1,0 +1,5 @@
+/* pages/user/agreement/agreement.wxss */
+.agreement-page{
+  padding: 20px 10px;
+  line-height: 22px;
+}

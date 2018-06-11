@@ -3,7 +3,7 @@ const app = getApp();
 
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-
+const ob = require('../../../utils/observer.js')
 Page({
 
   /**
@@ -122,6 +122,10 @@ Page({
     let phone = this.data.phone;
     if (/^\d{11}$/.test(phone)) {
       action.getCode(phone).then(res=>{
+        wx.showToast({
+          title: '发送成功',
+        });
+
         this.setData({
           timer: 60,
           step: 2,
@@ -236,6 +240,8 @@ Page({
             url: '../../tabBar/index/index'
           })
         }, 1000)
+
+        ob.trigger('refresh_userinfo');
       } catch (e) {
         console.error(e)
       }

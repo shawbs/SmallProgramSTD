@@ -1,27 +1,35 @@
 <!--pages/user/merchant-entry/merchant-entry.wxml-->
 <view class='merchant-entry-page container'>
 
-
-  <view class='p mb-4' wx:if="{{merchantApplyStatus.isexist}}">
-    您已经是商户，
-    <navigator url='/pages/merchant/index/index' class='inline orange'>前往商户中心</navigator>
-  </view>
-
-  <view  wx:if="{{!merchantApplyStatus.isexist}}">
-      <view class='p orange mb-4' wx:if="{{identificationInfo.status == 1}}">您当前已实名认证成功，可选择申请商户入驻!</view>
-      <view class='btn btn-orange mb-2' wx:if="{{identificationInfo.personal.checkStatus == 2}}" bindtap='applyMerchant' data-type="1">申请个人商户</view>
-      <view class='btn btn-orange mb-2' wx:if="{{identificationInfo.enterprise.checkStatus == 2}}" bindtap='applyMerchant' data-type="2">申请企业商户</view>
-
-
-      <view class='p mb-4' wx:if="{{!identificationInfo.status}}">
+      <view class='p mb-4' wx:if="{{!identificationInfo}}">
         您还不是商户，
         <navigator url='/pages/user/authentication/authentication' class='inline orange'>前往申请</navigator>
       </view>
-      <view class='p mb-4' wx:if="{{identificationInfo.status == 2}}">
+
+      <view class='p mb-4' wx:if="{{!status && identificationInfo}}">
         您提交了实名认证，
         <navigator url='/pages/user/authentication/authentication' class='inline orange'>前往查看</navigator>
       </view>
 
-  </view>
+      <view class='p mb-4' wx:if="{{status == 1}}">
+        您提交了商户入驻申请，
+        <navigator url='/pages/user/authentication/authentication' class='inline orange'>前往查看</navigator>
+      </view>
+
+
+      <view class='p orange mb-4' wx:if="{{status == 2}}">您当前已实名认证成功，可选择申请商户入驻!</view>
+      <view class='btn btn-orange mb-2' wx:if="{{identificationInfo.personal.checkStatus == 2}}" bindtap='applyMerchant' data-type="1">申请个人商户</view>
+      <view class='btn btn-orange mb-2' wx:if="{{identificationInfo.enterprise.checkStatus == 2}}" bindtap='applyMerchant' data-type="2">申请企业商户</view>
+
+
+      <view class='p mb-4' wx:if="{{status==3}}">
+        您已经是商户，
+        <navigator url='/pages/merchant/index/index' class='inline orange'>前往商户中心</navigator>
+      </view>
+
+
+      
+
+
 
 </view>

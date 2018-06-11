@@ -1,6 +1,6 @@
 <!--pages/tabBar/new/new.wxml-->
 <view class='container new-page'>
-  <topnav class="dark" bind:navitemtap="navtab"  navlist="{{navlist}}" />
+  <!-- <topnav class="dark" bind:navitemtap="navtab"  navlist="{{navlist}}" /> -->
   <view class='card-list' wx:if="{{type==1}}">
     <view class='card' wx:for="{{list}}" wx:key="{{index}}">
       <view class='card-hd' data-url='{{item.url}}' bindtap='linkInfo'>{{item.title}}</view>

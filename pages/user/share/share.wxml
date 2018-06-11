@@ -15,13 +15,21 @@
         <view class="card">
             <view class="card-title">注册会员推荐奖励</view>
             分享推荐一名注册会员奖励100积分,积分可在商城兑换艺术品，也可参加平台艺术品摇宝奖励。
+        </view>
+        <view class="card orange">
+            <view class="card-title">白金会员推广收益</view>
+            推广一名注册会员奖100积分;直接推广一名白金会员奖励120积分;间接推广一名白金会员奖励30积分;白金会员享有直推会员20积分的消费奖。
         </view>   
     </view>
+    
 
 
 
     <view class="rem-opt">
-        <navigator class="rem-btn" url="/pages/user/recommend/recommend">我推荐的会员</navigator>
+        <navigator class="rem-btn" url="/pages/user/recommend/recommend">
+          我推荐的会员
+           <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
+        </navigator>
     </view>
 
 </view>

@@ -67,6 +67,8 @@
         "pay-safe/pay-safe",
         "getpwd/getpwd",
         "refund/refund",
+        "webview/webview",
+        "agreement/agreement",
         "merchant-entry/merchant-entry"
       ]
     },
@@ -111,14 +113,14 @@
       {
         "pagePath": "pages/tabBar/publish/publish",
         "text": "发布",
-        "iconPath": "assets/image/fabu_icon2.png",
-        "selectedIconPath": "assets/image/fabu_icon.png"
+        "iconPath": "assets/image/fb_icon@2x.png",
+        "selectedIconPath": "assets/image/fb_icon2@2x.png"
       },
       {
         "pagePath": "pages/tabBar/new/new",
         "text": "资讯",
-        "iconPath": "assets/image/zixun_07.png",
-        "selectedIconPath": "assets/image/zixun2_07.png"
+        "iconPath": "assets/image/icon_zx@2x.png",
+        "selectedIconPath": "assets/image/icon_zx2@2x.png"
       },
       {
         "pagePath": "pages/tabBar/mine/mine",

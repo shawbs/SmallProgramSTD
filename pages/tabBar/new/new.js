@@ -16,7 +16,7 @@ Page({
     list: [],
     dopraise: false,
     navlist: [{ cateId: 1, cateName: '文章' }, { cateId: 2, cateName: '视频'}],
-    type: 1,
+    type: 2,
     scrollH: 0
   },
 

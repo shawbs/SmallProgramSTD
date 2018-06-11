@@ -9,15 +9,15 @@
     <view>订单消费总计：￥{{detail.orderPrice/100}}元</view>
   </view>
   <view class='table'>
-    <view class='th'>
-      <view>奖励类型</view>
-      <view>时间</view>
-      <view>奖励</view>
+    <view class='tr'>
+      <view class='th'>奖励类型</view>
+      <view class='th'>时间</view>
+      <view class='th'>奖励</view>
     </view>
-    <view class='td' wx:for="{{logs}}" wx:key="{{index}}">
-      <view>{{item.type}}</view>
-      <view>{{item.createTime}}</view>
-      <view>{{item.describe}}</view>
+    <view class='tr' wx:for="{{logs}}" wx:key="{{index}}">
+      <view class='td'>{{item.type}}</view>
+      <view class='td'>{{item.createTime}}</view>
+      <view class='td'>{{item.describe}}</view>
     </view>
 
 
