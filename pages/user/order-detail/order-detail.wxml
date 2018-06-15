@@ -11,6 +11,8 @@
       <image wx:if="{{order.orderStatus == 23}}" src='/assets/image/ddxq_icon_shcl@2x.png' class="icon-status fl" mode='aspectFit'></image>
       <!-- 待付款 -->
       <image wx:if="{{order.orderStatus >=10 && order.orderStatus <=12}}" src='/assets/image/ddxq_icon_dfk@2x.png' class="icon-status fl" mode='aspectFit'></image>
+      <!-- 待确认 -->
+      <image wx:if="{{order.orderStatus == 0}}" src='/assets/image/ddxq_icon_dfk@2x.png' class="icon-status fl" mode='aspectFit'></image>
       <!-- 已成交 -->
       <image wx:if="{{order.orderStatus == 30}}" src='/assets/image/yes_03.png' class="icon-status fl" mode='aspectFit'></image>
       <!-- 待退货 -->
@@ -58,11 +60,31 @@
     <view class="contact-tip">联系我们：</view>
     <view class="contact-tel"><a href="tel:0592-5220601">0592-5220601</a></view>
 
-    <bottom-bar wx:if="{{order.orderStatus==10 || order.orderStatus==11 || order.orderStatus==12 }}">
-      <navigator url="../../other/order-confirm/order-confirm" class='btn2 btn-orange2'>去支付</navigator>
+
+    <bottom-bar wx:if="{{order.orderStatus <=12}}">
+      <text></text><text></text>
+      <text></text><text></text>
+
+
+      <navigator wx:if="{{order.orderStatus == 0}}" url="/pages/user/order-confirm/order-confirm?token={{order.orderToken}}&orderNo={{order.orderNo}}" class='btn2 btn-orange2'>确认订单</navigator>
+
+      <view wx:if="{{order.orderStatus == 10 || order.orderStatus == 11 || order.orderStatus == 12}}" data-paymentNo="{{order.paymentNo}}" data-token="{{order.orderToken}}" data-isofflinepay="{{order.isOfflinePay}}" data-orderNo="{{order.orderNo}}" bindtap='linkPay' class='btn2 btn-orange2'>前往支付</view>   
+
     </bottom-bar>
+
+    <bottom-bar wx:if="{{order.orderStatus==21}}">
+        <text></text><text></text>
+        <text></text><text></text>
+
+        <view data-orderNo="{{order.orderNo}}" bindtap='postReceiving' class='btn2 btn-orange2'>确认收货</view>
+        <navigator url='/pages/user/logistics/logistics?orderNo={{order.orderNo}}'  class='btn2 btn-orange2'>查看物流</navigator>
+    </bottom-bar>
+
     <bottom-bar wx:if="{{order.orderStatus==24}}">
-      <text></text>
-      <navigator url="/pages/user/refund/refund?orderNo={{order.orderNo}}" class='btn2 btn-orange2'>申请售后</navigator>
-    </bottom-bar>  
+        <text></text><text></text>
+        <text></text><text></text>
+
+        <navigator url="/pages/user/refund/refund?orderNo={{order.orderNo}}" class='btn2 btn-orange2'>申请售后</navigator>
+        
+    </bottom-bar>
 </view>

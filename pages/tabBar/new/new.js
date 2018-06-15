@@ -151,9 +151,9 @@ Page({
       deviceId: wx.getSystemInfoSync().model
     }).then(res => {
       let dtolist = res.data.dtolist;
-      for (let item of dtolist){
-        item.introduction = util.format(item.introduction,12)
-      }
+      // for (let item of dtolist){
+      //   item.introduction = util.format(item.introduction,12)
+      // }
       this.setData({
         list: dtolist
       })
@@ -233,6 +233,15 @@ Page({
     console.log(url)
     wx.navigateTo({
       url: `/pages/other/new-detail/new-detail?url=${url}`,
+    })
+  },
+
+  //前往视频详情
+  linkVideoInfo(e){
+    let index = e.currentTarget.dataset.index;
+    app.globalData.videoInfo = this.data.list[index];
+    wx.navigateTo({
+      url: '/pages/other/new-detail/new-detail?type=2',
     })
   }
 })

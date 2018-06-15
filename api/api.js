@@ -3,9 +3,11 @@ module.exports = {
   //发送验证码
   getCode: '/service-sms/std/app/sms/vcode',
   //登录
-  login: '/business-app-user/std/app/api/v1/app/login/mobile',
+  login: '/business-app-user/std/app/api/v1/app/minapps/login/mobile',
   //刷新token
-  refreshToken: '/business-app-user/std/app/api/v1/app/user/login/refreshToken',
+  refreshToken: '/business-app-user/std/app/api/v1/app/minapps/user/login/refreshToken',
+  //签到
+  checkIn: '/business-check-in/std/app/api/v1/check',
   //首页
   index: {
     banner: '/business-banner/get/banner/list',
@@ -47,6 +49,34 @@ module.exports = {
   getOrderList: '/business-order/std/app/api/v1/user/orderlist/',
   //订单详情
   getOrderInfo: '/web-app-facade/std/app/api/v1/user/order/',
+  //获取订单配置项
+  getOrderPayway: '/web-app-facade/std/app/api/v1/user/order/config',
+  //订单付款配置
+  getPayway: '/business-order/std/app/api/v1/order/payway/info',
+  //创建订单发票
+  createInvoice: '/business-invoice/std/app/api/v1/invoice/create',
+  //获取订单各状态数量
+  getOrderNumByStatus: '/business-order/std/app/api/v1/order/all/status/num',
+  //确认订单付款方式
+  postOrderPayway: '/business-order/std/app/api/v1/order/payway',
+  //订单配置提交生成支付订单接口
+  postOrderConfig: '/business-order/std/app/api/v1/order/bill',
+  //重新配置订单
+  postOrderReconfig: '/business-order/std/app/api/v1/order/reconfig',
+  //订单确认收货接口
+  postOrderReceived: '/business-order/std/app/api/v1/user/order/received',
+  //申请人工服务
+  postOrderManual: '/business-order/std/app/api/v1/order/manual',
+  //获取订单配送token
+  getDeliveryToken: '/business-delivery/std/app/api/v1/delivery/token/',
+  //获取寄存token
+  getConsignmentToken: '/business-consignment/std/app/api/v1/consignment/token',
+  //获取自取token
+  getShippmentselfToken: '/business-shippment_self /std/app/api/v1/shippmentself/token',
+  //更新增值费用token
+  getExtraFeeToken: '/business-extra-fee/std/app/api/v1/extraFee/token',
+  //获取订单的配送记录
+  getLogistics: '/business-delivery/std/app/api/v1/delivery',
   //获取摇宝列表
   getLottoList: '/business-lotto/std/app/api/v1/user/lotto/list',
   //摇宝记录
@@ -79,6 +109,8 @@ module.exports = {
 
   //获取视频列表
   getVideoList: '/business-seminar/get/seminar/message',
+  //获取视频详情
+  getVideoInfo: '/business-seminar/get/seminar/message',
 
   //点赞
   dopraise: '/business-article/get/article/dopraise',

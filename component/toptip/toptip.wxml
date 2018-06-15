@@ -1,0 +1,4 @@
+<!--component/toptip/toptip.wxml-->
+<view wx:if="{{show && status == 'success'}}" class='success tip slideDown'>{{content}}</view>
+<view wx:if="{{show && status == 'error'}}" class='error tip slideDown'>{{content}}</view>
+<view wx:if="{{show && status == 'warn'}}" class='warn tip slideDown'>{{content}}</view>

@@ -17,7 +17,6 @@ Page({
    */
   onLoad: function (options) {
     this.initPage();
-    this.getMerchantBalance();
   },
 
   /**
@@ -72,13 +71,16 @@ Page({
   //初始用户信息
   initPage() {
 
-    //获取商户信息
-    action.merchantMainInfo().then(res=>{
-      this.setData({
-        userInfo: res.data
+    this.getMerchantToken(()=>{
+      //获取商户信息
+      action.merchantMainInfo().then(res => {
+        this.setData({
+          userInfo: res.data
+        })
       })
-    })
 
+      this.getMerchantBalance();
+    })
   },
 
   //获取商户余额
@@ -87,6 +89,17 @@ Page({
       this.setData({
         amount: res.data.amount/100
       })
+    })
+  },
+
+  //更新商户token
+  getMerchantToken(cb){
+    action.merchantToken().then((res) => {
+      wx.setStorageSync('__refreshMerchantToken', res.data.refreshMerchantToken)
+      wx.setStorageSync('__merchantToken', res.data.merchantToken)
+      console.log('已更新merchant_token和refresh_merchant_token')
+
+      cb && cb();
     })
   }
 })

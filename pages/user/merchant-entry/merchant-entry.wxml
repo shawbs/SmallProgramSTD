@@ -1,7 +1,7 @@
 <!--pages/user/merchant-entry/merchant-entry.wxml-->
 <view class='merchant-entry-page container'>
 
-      <view class='p mb-4' wx:if="{{!identificationInfo}}">
+      <view class='p mb-4' wx:if="{{!status && !identificationInfo}}">
         您还不是商户，
         <navigator url='/pages/user/authentication/authentication' class='inline orange'>前往申请</navigator>
       </view>

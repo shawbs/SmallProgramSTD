@@ -142,7 +142,7 @@ Page({
   linkStoreComfirm(e){
     let target = e.target;
     wx.navigateTo({
-      url: `/pages/user/order-confirm/order-confirm?id=${target.dataset.id}&type=1`,
+      url: `/pages/other/store-order-confirm/store-order-confirm?id=${target.dataset.id}`,
     })
   }
   

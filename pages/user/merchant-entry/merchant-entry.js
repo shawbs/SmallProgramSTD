@@ -2,7 +2,7 @@
 const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-
+const ob = require('../../../utils/observer.js')
 Page({
 
   /**
@@ -71,6 +71,7 @@ Page({
   },
 
   initPage(){
+    
     //获取商户状态
     let merchantApplyStatus = wx.getStorageSync('merchantApplyStatus');
     this.setData({
@@ -81,7 +82,7 @@ Page({
     if (!merchantApplyStatus.isexist) {
       this.getIdentificationStatus()
     }else{
-
+      console.log(merchantApplyStatus)
       //商户待审核
       if (merchantApplyStatus.checkStatus == 1) {
         this.setData({
@@ -154,6 +155,9 @@ Page({
           personalCertifyToken: token
         }).then(res => {
           console.log('已提交个人商户申请')
+          wx.showToast({
+            title: '提交成功',
+          })
         })
       })
     }
@@ -163,6 +167,9 @@ Page({
           enterpriseCertifyToken: token
         }).then(res => {
           console.log('已提交企业商户申请')
+          wx.showToast({
+            title: '提交成功',
+          })
         })
       })
     }

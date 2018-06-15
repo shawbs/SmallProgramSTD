@@ -18,7 +18,11 @@ Page({
     this.setData({
       auctionItemId: options.id || 106
     })
-    this.getBidList();
+    if(options.type == 1){
+      this.getMerchantBidInfo();
+    }else{
+      this.getBidList();
+    }
   },
 
   /**
@@ -70,9 +74,27 @@ Page({
   
   },
 
-  //出价记录
+  //出价记录 自营拍品
   getBidList() {
+
     action.bidList({
+      auctionItemId: this.data.auctionItemId
+    }).then(res => {
+      let bidlist = res.data.items;
+      for (let item of bidlist) {
+        item.datetime = util.formatTime(item.bidTime);
+      }
+      this.setData({
+        currentPrice: res.data.latestBidPrice,
+        nextBidPrice: res.data.nextBidPrice,
+        bidlist: bidlist
+      })
+    })
+  },
+
+  //出价记录 商户拍品
+  getMerchantBidInfo() {
+    action.merchantBidInfo({
       auctionItemId: this.data.auctionItemId
     }).then(res => {
       let bidlist = res.data.items;

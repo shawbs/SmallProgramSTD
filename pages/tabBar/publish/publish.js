@@ -30,7 +30,7 @@ Page({
 
     this.init();
     let _this = this;
-    ob.listen('pushlish_refresh', function (token){
+    ob.on('pushlish_refresh', function (token){
       _this.init();
     })
     

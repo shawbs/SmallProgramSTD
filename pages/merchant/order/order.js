@@ -44,12 +44,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       tabIndex: options.tabIndex || 0,
       status: options.id ||0
     })
-    this.getList();
+    this.initPage()
   },
 
   /**
@@ -84,7 +83,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.initPage();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 1000)
   },
 
   /**
@@ -128,6 +130,16 @@ Page({
     let id = e.detail.id;
     this.setData({
       status: id,
+      page: 1,
+      loadover: false,
+      msg: ''
+    })
+    this.getList();
+  },
+
+  //初始化
+  initPage(){
+    this.setData({
       page: 1,
       loadover: false,
       msg: ''

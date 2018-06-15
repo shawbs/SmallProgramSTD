@@ -5,21 +5,35 @@
     <topnav bind:navitemtap="navtab" navlist="{{navlist}}" currentIndex="{{tabIndex}}"/>
 
     <view class="order-item" data-orderid="3" wx:for="{{orderlist}}" wx:key="{{index}}">
-      <navigator url='/pages/user/order-detail/order-detail?id={{item.orderNo}}' style='width:100%'>
-        <view class="order-item-bd">
+      <view style='width:100%'>
+        <navigator url='/pages/user/order-detail/order-detail?id={{item.orderNo}}' class="order-item-bd">
             <image class='img' src="{{item.imgUrl[0]}}"></image>
             <view class="show-text">
             <view class="title ellipsis2">{{item.productDescribe}}</view>
             <view class="residue">{{item.bidPrice/100}}元</view>
                 <text class="create-date">订单时间: {{item.countdownTime}}</text>
             </view>
-        </view>
+        </navigator>
         <view class="order-item-fd">
             <text class="btn-orange-none" wx:if="{{item.orderStatus !=24}}">{{item.statusText}}</text>
             <text class="btn-orange-none" wx:if="{{item.orderStatus ==24}}">已成交</text>  
-            <navigator wx:if="{{item.orderStatus ==24}}" url="/pages/user/refund/refund?orderNo={{item.orderNo}}" class='btn-orange-link ml-2'>申请售后</navigator>                          
+
+            <view>
+              <navigator wx:if="{{item.orderStatus ==24}}" url="/pages/user/refund/refund?orderNo={{item.orderNo}}" class='btn-orange-link ml-2'>申请售后</navigator>
+
+            <navigator wx:if="{{item.orderStatus == 0}}" url="/pages/user/order-confirm/order-confirm?token={{item.orderToken}}&orderNo={{item.orderNo}}" class='btn-orange-link ml-2'>确认订单</navigator>
+
+            <view wx:if="{{item.orderStatus == 21}}" data-orderNo="{{item.orderNo}}" bindtap='postReceiving' class='btn-orange-link ml-2'>确认收货</view>
+            <navigator url='/pages/user/logistics/logistics?orderNo={{item.orderNo}}' wx:if="{{item.orderStatus == 21}}" data-orderNo="{{item.orderNo}}"  class='btn-orange-link ml-2'>查看物流</navigator>
+
+            <view wx:if="{{item.orderStatus == 11 || item.orderStatus == 12}}"  data-token="{{item.orderToken}}" data-orderNo="{{item.orderNo}}" class='btn-orange-link ml-2' bindtap='postOrderReconfig'>重新配置</view>
+
+           <view wx:if="{{item.orderStatus == 10 || item.orderStatus == 11 || item.orderStatus == 12}}" data-paymentNo="{{item.paymentNo}}" data-token="{{item.orderToken}}" data-orderNo="{{item.orderNo}}" bindtap='linkPay' data-isofflinepay="{{item.isOfflinePay}}" class='btn-orange-link ml-2'>前往支付</view>    
+           
+            </view>                  
         </view>
-      </navigator>  
+
+      </view>  
     </view>
   
     <view class='text-center load-text'>

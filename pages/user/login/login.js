@@ -241,7 +241,7 @@ Page({
           })
         }, 1000)
 
-        ob.trigger('refresh_userinfo');
+        ob.emit('refresh_userinfo');
       } catch (e) {
         console.error(e)
       }

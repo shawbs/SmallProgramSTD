@@ -90,7 +90,7 @@ Page({
   toConfirm: function(e){
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `/pages/user/order-confirm/order-confirm?id=${id}&type=2`,
+      url: `/pages/other/yb-confirm/yb-confirm?id=${id}`,
     })
   },
 

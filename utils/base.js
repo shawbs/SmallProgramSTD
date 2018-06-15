@@ -1,15 +1,14 @@
 
 //未登录处理
+let linkLoginTimer;
 const loginHandle = function () {
-  // wx.showToast({
-  //   title: '检测到未登录！前往登录',
-  //   icon: 'none'
-  // })
-  setTimeout(function(){
+  //如果该定时器已定义则刷新它
+  clearTimeout(linkLoginTimer)
+  linkLoginTimer = setTimeout(function () {
     wx.navigateTo({
       url: '/pages/user/login/login',
     })
-  },1500)
+  }, 1500)
 }
 
 //检测当前登录状态
@@ -23,6 +22,7 @@ const checkLogin = function(){
     return true
   }
 }
+
 
 module.exports = {
   loginHandle,

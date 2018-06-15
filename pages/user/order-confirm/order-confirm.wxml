@@ -1,84 +1,155 @@
 <!--pages/order-confirm/order-confirm.wxml-->
-<view class="store-confirm">
-    <view class='lotto-confirm' wx:if="{{confirmType==2 && lotto}}">
-        <view class="order-item">
-            <view class="order-item-bd">
-                <image class='img' src="{{lotto.imgUrl[0]}}"></image>
-                <view class="show-text">
-                  <view class="title ellipsis2">{{lotto.itemName}}</view>
-                  <view>本次摇宝 {{lotto.price}}积分/摇奖号</view>
-                  <view class="black">剩余{{lotto.surplusNum}}份</view>
-                </view>
-            </view>
-
-        </view>
-        <view class='form' >
-          <view class='form-control'>
-            <label>购买数量</label>
-            <view>
-              <text class="fr">份</text>  
-              <input value='{{defaultVal}}' type='number' bindinput="changNum"/>
-            </view>
-          </view>
-        </view>
-
-        <view class="max-bottom-bar">
-            <view class="fl">
-                <view class="point-tip">费用合计:</view>
-                <view class="point"><label class="zf-point">{{total||defaultVal*lotto.price}}</label>积分</view>
-            </view>
-            <view class="confirm-btn" bindtap='postLottoOrader' data-id="{{lotto.lottoId}}">提交订单</view>
-        </view>
-    </view>
-
-    <view class='confirm' wx:if="{{confirmType==1 && info && address}}">
+<view class="store-confirm" wx:if="{{info.orderStatus<=12}}">
+    
+    <view class='confirm' wx:if="{{info}}">
         <view class="order-item" data-orderid="3">
             <view class="order-item-bd">
                 <image class='img' src="{{info.imgUrl[0]}}"></image>
                 <view class="show-text">
-                  <view class="title ellipsis2">{{info.name}}</view>
-                  <view class="residue">{{info.integralNum}}积分</view>
+                  <view class='mb-1'>[{{info.auctionType}}]</view>
+                  <view class="title ellipsis2">{{info.itemName}}</view>
+                  <view class="residue">￥{{info.bidPrice/100}}</view>
                 </view>
             </view>
 
         </view>
-        <view class="logistics">
-            <view class="logistics-title">选择物流</view>
+        <form wx:if="{{step == 1}}" bindsubmit="nextPost">
+            <radio-group name="payType" class="play-list" bindchange="toggle">
+              <view class='list-item' wx:for="{{entrys}}" wx:key="{{index}}">
+                <view class='label' wx:if="{{item.type == 0}}">
+                  全款
+                  <text class='gray small'>全款金额: ￥{{payway.payAllCash/100}}</text>
+                </view>
+                <view class='label' wx:if="{{item.type == 1}}">
+                  定金
+                  <text class='gray small'>首款金额: ￥{{payway.payFirstCash/100}} 尾款金额: ￥{{payway.payRestCash/100}}</text>
+                </view>
+                <view class='radio' >
+                  <radio value='{{item.type}}'  checked='{{item.checked}}' ></radio>
+                  <image hidden='{{item.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                  <image hidden='{{!item.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                </view>
+              </view>
+            </radio-group>
+            <view class="max-bottom-bar ">
+              <button class='link' form-type="submit">下一步</button>
+            </view>
+        </form>
+
+        <form wx:if="{{step == 2}}" bindsubmit="postStoreOrader">
+
+
+          <view class='play-list mb-2' style='margin-top: -10px;'>
+             <view class='list-item'>
+                <view class='label' wx:if="{{info.orderStatus == 0 || info.orderStatus == 12 }}">
+                  全款
+                  <text class='orange2 small'>￥{{info.actualPrice/100}}</text>
+                </view>
+                <!-- <view class='label' wx:if="{{info.orderStatus == 10}}">
+                  首款
+                  <text class='orange2 small'>￥{{info.firstPrice/100}}</text>
+                </view> -->
+                 <view class='label' wx:if="{{info.orderStatus == 11}}">
+                  尾款
+                  <text class='orange2 small'>￥{{info.actualPrice/100}}</text>
+                </view> 
+                
+                <view class='radio' >
+                  <!-- <image  src='/assets/image/icon_gou@2x.png'></image> -->
+                   <image  src='/assets/image/icon_gou2@2x.png'></image>  
+                </view>
+              </view>
+          </view>
+
+          <view class="logistics mb-2">
+            <view class="logistics-title">增值费用</view>
+            <checkbox-group name="extraFee" bindchange="changeExtrafee">
+            <view class="logistics-bd extrafee" wx:for="{{extraFeeList}}" wx:key="{{index}}">
+                <image class='logistics-pic'  mode='widthFix' src='/assets/image/800176150231440334.png'></image>
+                <view class='label'>{{item.name}}
+                    <view class='gray small'>费用￥{{item.price/100}}</view>
+                </view>
+                <view class="checkbox mr-2">
+                   <checkbox value="{{item.id}}" checked="{{item.isConstraint}}" data-index="{{index}}" data-fee="{{item.price}}" bindtap='toggleExtrafee'/>
+                   <image hidden='{{!item.isConstraint}}' src='/assets/image/icon_gou3@2x.png'></image>
+                   <image hidden='{{item.isConstraint}}' src='/assets/image/icon_gou4@2x.png'></image>
+                </view>
+            </view>
+            </checkbox-group>
+          </view>
+          <radio-group name="express" bindchange="toggleExpress">
+            <view class="logistics mb-2">
+                <view class="logistics-title">选择物流</view>
+
+                <view class="logistics-bd extrafee">
+                    <image class='logistics-pic'  mode='widthFix' src='/assets/image/dingdan_icon_shunfeng@3x.png'></image>
+                    <view class='label'>快递</view>
+                    <view class='radio mr-2' >
+                      <radio value='1'  checked='{{expressTypes[1]}}' ></radio>
+                      <image hidden='{{expressTypes[1]}}' src='/assets/image/icon_gou@2x.png'></image>
+                      <image hidden='{{!expressTypes[1]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                    </view>
+                </view>
+                <view class="logistics-info-content">
+                    <view class="address">
+                        <label>收货地址</label>
+                        {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
+                    </view>
+                    <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink">设置地址</navigator>
+                </view>
+
+                <view class="logistics-bd extrafee">
+                    <image class='logistics-pic'  mode='widthFix' src='/assets/image/dingdan_icon_ziqu@2x.png'></image>
+                    <view class='label'>自取</view>
+                    <view class='radio mr-2'>
+                      <radio value='2'  checked='{{expressTypes[2]}}' ></radio>
+                      <image hidden='{{expressTypes[2]}}' src='/assets/image/icon_gou@2x.png'></image>
+                      <image hidden='{{!expressTypes[2]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                    </view>
+                </view>
+
+                <view class="logistics-bd extrafee" wx:if="{{info.consignAllow}}">
+                    <image class='logistics-pic'  mode='widthFix' src='/assets/image/dingdan_icon_jicun@2x.png'></image>
+                    <view class='label'>寄存
+                      <!-- <view class='gray small'>预计费用￥0.00</view> -->
+                      <view class='gray small'>寄存需缴纳成交价*0.3%元/天寄存费</view>
+                    </view>
+                    <view class='radio mr-2'>
+                      <radio value='3'  checked='{{expressTypes[3]}}' ></radio>
+                      <image hidden='{{expressTypes[3]}}' src='/assets/image/icon_gou@2x.png'></image>
+                      <image hidden='{{!expressTypes[3]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                    </view>
+                </view>
+              
+            </view>
+          </radio-group>
+
+          <view class='logistics'>
             <view class="logistics-bd">
-
-                <view class="logistics-pic">
-                  <image mode='widthFix' src='/assets/image/dingdan_icon_shunfeng@3x.png'></image>
+                <image bindtap='linkInvoice' class='logistics-pic'  mode='widthFix' src='/assets/image/dingdan_icon_fapiao@2x.png'></image>
+                <view class='label' bindtap='linkInvoice'>需要发票
+                  <view class='gray small'>买家需要自行承担成交价的3%的发票费用</view>
                 </view>
-                <view class="logistics-info">
-                    <view class="logistics-info-title">
-                        快递
-                        <i class="radio-icon on fr"></i>
-                    </view>
-                    <view class="logistics-info-content clearfix">
-                        <view class="address">
-                            <label>收货地址</label>
-                            {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
-                        </view>
-                        <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink fr">设置地址</navigator>
-                    </view>
+                <view class="checkbox mr-2" bindtap='changeInvoice'>
+
+                    <checkbox  value="{{invoice.checked}}" checked="{{invoice.checked}}"/>
+                    <image hidden='{{!invoice.checked}}' src='/assets/image/icon_gou3@2x.png'></image>
+                    <image hidden='{{invoice.checked}}' src='/assets/image/icon_gou4@2x.png'></image>
+                    <switch name="invoice" checked="{{invoice.checked}}"/>
                 </view>
             </view>
-        </view>
+          </view>
 
-        <view class="max-bottom-bar">
-            <view class="fl">
-                <view class="point-tip">费用合计:</view>
-                <view class="point"><label class="zf-point">{{info.integralNum}}</label>积分</view>
-            </view>
-            <view class="confirm-btn" bindtap='postStoreOrader' data-id="{{info.treasureId}}" data-token="{{info.treasureItemToken}}" data-atoken="{{address.addressToken}}">提交订单</view>
-        </view>
+          <view class="max-bottom-bar dark">
+              <view class="fl">
+                  <view class="point-tip">费用合计:</view>
+                  <view class="point"><label class="zf-point">￥{{total}}</label></view>
+              </view>
+              <button form-type="submit" class="confirm-btn" data-id="{{info.treasureId}}" data-token="{{info.treasureItemToken}}" data-atoken="{{address.addressToken}}">提交订单</button>
+          </view>
+        </form>
+
     </view>
     
-
-    
-    
-
-    
-
 </view>
 

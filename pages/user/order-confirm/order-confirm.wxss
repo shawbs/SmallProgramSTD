@@ -1,6 +1,9 @@
 /* pages/order-confirm/order-confirm.wxss */
 .order-item{
-  border-bottom: 3px solid #e5b577;
+  /* border-bottom: 3px solid #e5b577; */
+}
+.store-confirm{
+  padding-bottom: 80px;
 }
 .form{
   background: #FFFFFF;
@@ -18,3 +21,51 @@
   text-align: right;
 }
 .black{color: #222;}
+
+.max-bottom-bar{
+    background: #D89F55;
+    text-align: center;
+}
+.max-bottom-bar.dark{
+  background: #4C4A4A;
+  text-align: left;
+}
+.max-bottom-bar button{
+    border: none;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+    border-radius: 0;
+}
+.max-bottom-bar .link{
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.play-list{
+  background: #fff;
+  font-size: 16px;
+}
+.play-list .list-item{
+  position: relative;
+  margin-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+.play-list .list-item:last-of-type{
+  border-bottom: none;
+}
+.play-list .list-item .label-icon{
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  left: -40px;
+  top: 10px;
+}

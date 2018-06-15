@@ -23,7 +23,9 @@
         "new-detail/new-detail",
         "about/about",
         "issue/issue",
-        "bidlist/bidlist"
+        "bidlist/bidlist",
+        "yb-confirm/yb-confirm",
+        "store-order-confirm/store-order-confirm"
       ]
     },
     {
@@ -69,7 +71,9 @@
         "refund/refund",
         "webview/webview",
         "agreement/agreement",
-        "merchant-entry/merchant-entry"
+        "merchant-entry/merchant-entry",
+        "invoice/invoice",
+		"logistics/logistics"
       ]
     },
     {

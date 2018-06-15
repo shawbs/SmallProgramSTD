@@ -2,6 +2,7 @@
 const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
+const base = require('../../../utils/base.js')
 const ob = require('../../../utils/observer.js')
 Page({
 
@@ -9,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    orderStatusNums: {},
     userInfo: null,
     idCardNo: '',
     merchantApplyStatus: null,
@@ -21,7 +23,7 @@ Page({
    */
   onLoad: function (options) {
     this.initPage();
-	ob.listen('refresh_userinfo', ()=>{
+	  ob.on('refresh_userinfo', ()=>{
       this.initPage();
     })
   },
@@ -92,21 +94,15 @@ Page({
 
   //初始化
   initPage(){
+    this.getOrderNumByStatus();
     this.setData({
       idCardNo: app.globalData.user ? app.globalData.user.idCardNo : ''
     })
     //获取商户申请状态，如果通过则代表点击商户中心进入商户中心页，没有通过则跳转商户入驻入口页面
-    this.getMerchantApplyStatus(()=>{
-      let merchantApplyStatus = this.data.merchantApplyStatus;
-      if (merchantApplyStatus.checkStatus == 2){
-        this.setData({
-          pass: true
-        })
-      }else{
-        this.setData({
-          pass: false
-        })
-      }
+    app.globalData.getMerchantApplyStatus(merchantApplyStatus=>{
+      this.setData({
+        merchantApplyStatus: merchantApplyStatus
+      })
     })
 
     //获取用户信息并更新到缓存和全局变量中
@@ -125,7 +121,7 @@ Page({
 
   //点击商户中心跳转判断
   linkMerchant(e){
-    if(this.data.pass){
+    if (app.globalData.isMerchant == 2){
       wx.navigateTo({
         url: '/pages/merchant/index/index',
       })
@@ -135,16 +131,15 @@ Page({
       })
     }
   },
-
-  //获取商户申请状态
-  getMerchantApplyStatus(cb) {
-    action.getMerchantApplyStatus().then(res => {
+  //获取订单各个状态的订单数量
+  getOrderNumByStatus(){
+    action.getOrderNumByStatus().then(res=>{
       this.setData({
-        merchantApplyStatus: res.data
+        orderStatusNums: res.data
       })
-      wx.setStorageSync('merchantApplyStatus', res.data);
-      cb && cb();
     })
-  },
+  }
+
+
 
 })

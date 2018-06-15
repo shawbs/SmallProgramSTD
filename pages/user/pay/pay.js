@@ -58,8 +58,6 @@ Page({
         paymentNo: options.paymentNo || '',
         originType: app.globalData.payType
       })
-      //打印 支付来源类型如: 普通支付/提现
-      console.log(this.data.originType)
       this.initPage();
   },
 
@@ -196,6 +194,7 @@ Page({
         title: '支付成功',
       })
     })
+    this.goback();
   },
 
   //银联支付
@@ -243,6 +242,7 @@ Page({
         title: '支付成功',
       })
     })
+    this.goback();
   },
 
   //获取支持的支付类型
@@ -277,5 +277,26 @@ Page({
       'merchant_account': '商户余额'
     }
     return o[key]
+  },
+
+  //支付成功判断路由到相应页面
+  goback() {
+    setTimeout(function () {
+      let url;
+      switch (app.globalData.payType) {
+        case 0: url = '/pages/user/order/order'; break;
+        case 1: url = '/pages/user/wallet/wallet'; break;
+        case 2: url = '/pages/merchant/wallet/wallet'; break;
+        case 3: url = '/pages/user/upgrade/upgrade'; break;
+        default:
+          wx.switchTab({
+            url: '/pages/tabBar/index/index',
+          });
+      }
+      wx.redirectTo({
+        url: url,
+      })
+
+    }, 1000)
   }
 })

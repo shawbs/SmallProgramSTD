@@ -47,7 +47,7 @@
   <view class='bid-list' wx:if="{{bidlist.length>0}}">
       <view class='bid-list-title'>
         <text>出价记录({{bidlist.length}})</text>
-        <navigator url='/pages/other/bidlist/bidlist?id={{auctionItemId}}'>
+        <navigator url='/pages/other/bidlist/bidlist?id={{auctionItemId}}&type=1'>
           <text class='orange '>出价高者得</text>
           <image class='arrow-icon fr' src='/assets/image/arrow_gif2.gif' mode='aspectFit'></image>
         </navigator>
@@ -108,7 +108,7 @@
       <view class='help' bindtap='toggleGuanzhu'>
         <image wx:if="{{!detail.remind}}" src='/assets/image/guanzhu.png'></image>
         <image wx:if="{{detail.remind}}" src='/assets/image/guanzhu_.png'></image> 
-        <view>关注</view>
+        <view class="{{detail.remind?'orange':''}}">关注</view>
       </view>
       <button bindtap="addPrice" bindtap='addPrice'>加一手</button>
       <button class='dark ml-2' bindtap="customAddPrice">自由出价</button>

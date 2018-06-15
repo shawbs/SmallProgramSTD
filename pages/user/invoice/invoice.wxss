@@ -1,0 +1,27 @@
+/* pages/user/invoice/invoice.wxss */
+.top-input{
+  background: #d89f55;
+  padding: 10px;
+}
+.top-input input{
+  background: #fff;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.max-bottom-bar{
+    background: #D89F55;
+    text-align: center;
+}
+.max-bottom-bar button{
+    border: none;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+}
+.max-bottom-bar .link{
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+}

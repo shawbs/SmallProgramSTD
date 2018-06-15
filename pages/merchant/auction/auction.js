@@ -218,7 +218,7 @@ Page({
   linkAuctionEdit(e){
     let token = e.target.dataset.token;
     app.globalData.token = token;
-    ob.trigger('pushlish_refresh',token)
+    ob.emit('pushlish_refresh',token)
     wx.switchTab({
       url: '/pages/tabBar/publish/publish',
     })

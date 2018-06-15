@@ -1,0 +1,52 @@
+<!--pages/other/store-order-confirm/store-order-confirm.wxml-->
+<view class="store-confirm">
+    
+    <view class='confirm' >
+        <view class="order-item" data-orderid="3">
+            <view class="order-item-bd">
+                <image class='img' src="{{info.imgUrl[0]}}"></image>
+                <view class="show-text">
+                  <view class="title ellipsis2">{{info.name}}</view>
+                  <view class="residue">{{info.integralNum}}积分</view>
+                </view>
+            </view>
+
+        </view>
+        <radio-group name="express">
+            <view class="logistics mb-2" wx:if="{{address}}">
+                <view class="logistics-title">选择物流</view>
+
+                <view class="logistics-bd extrafee">
+                    <image class='logistics-pic'  mode='widthFix' src='/assets/image/dingdan_icon_shunfeng@3x.png'></image>
+                    <view class='label'>快递</view>
+                    <view class='radio mr-2' >
+                      <radio value='1'  checked ></radio>
+                      <image  src='/assets/image/icon_gou2@2x.png'></image> 
+                    </view>
+                </view>
+                <view class="logistics-info-content">
+                    <view class="address">
+                        <label>收货地址</label>
+                        {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
+                    </view>
+                    <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink">设置地址</navigator>
+                </view>
+            </view>
+        </radio-group>
+
+        <view class="max-bottom-bar">
+            <view class="fl">
+                <view class="point-tip">费用合计:</view>
+                <view class="point"><label class="zf-point">{{info.integralNum}}</label>积分</view>
+            </view>
+            <view class="confirm-btn" bindtap='postStoreOrader' data-id="{{info.treasureId}}" data-token="{{info.treasureItemToken}}" data-atoken="{{address.addressToken}}">提交订单</view>
+        </view>
+    </view>
+    
+
+    
+    
+
+    
+
+</view>

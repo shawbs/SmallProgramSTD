@@ -50,6 +50,8 @@ page{
   padding: 10px 0;
 }
 .video-fd .desc{
+  display: inline-block;
+  width: 70%;
   white-space: nowrap;
 }
 .video-fd .label{

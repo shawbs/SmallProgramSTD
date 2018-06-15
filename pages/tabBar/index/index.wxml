@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<toptip content="{{tip}}" status="{{tipstatus}}" show="{{tipshow}}"/>
 <view class="container index-page">
 
   <swiper class='swiper-container top-banner' indicator-dots="true"

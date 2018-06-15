@@ -46,8 +46,29 @@ App({
     assets: conf.path.assets,
     oldVersion: false,
     token: '', //临时token,
-    isMerchant: 1, //是否商户 1不是，2是
-    payType: 0 //支付类型 0默认(用户) 1用户提现 2商户提现
+
+     //是否商户 1不是，2是
+    isMerchant: 1,
+
+    //支付类型 0默认(用户) 1用户提现 2商户提现
+    payType: 0, 
+
+    //刷新商户申请状态
+    getMerchantApplyStatus(cb) { 
+      action.getMerchantApplyStatus().then(res => {
+        let merchantApplyStatus = {...res.data};
+        wx.setStorageSync('merchantApplyStatus', merchantApplyStatus);
+        if (merchantApplyStatus.checkStatus == 2) {
+          this.isMerchant = 2;
+        } else {
+          this.isMerchant = 1
+        }
+        cb && cb(merchantApplyStatus)
+      })
+    },
+
+    //资讯视频详情
+    videoInfo: null
   }
 })
 

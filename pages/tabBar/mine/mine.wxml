@@ -30,15 +30,23 @@
       <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </navigator>
     <view class='card-bd'>
-      <navigator class='cell' url='../../user/order/order?tabIndex=1&id=1'>
+      <navigator class='cell' url='../../user/order/order?tabIndex=1&id=0'>
+        <text class='bage' wx:if="{{orderStatusNums.wait_sure_pay_way}}">{{orderStatusNums.wait_sure_pay_way}}</text>   
+        <image class="img" src='/assets/image/582842036568052583.png'></image>
+        <view>待确认</view>
+      </navigator>
+      <navigator class='cell' url='../../user/order/order?tabIndex=2&id=1'>
+        <text class='bage' wx:if="{{orderStatusNums.wait_pay}}">{{orderStatusNums.wait_pay}}</text>   
         <image class="img" src='/assets/image/wd_icon_dfk@2x.png'></image>
         <view>待付款</view>
       </navigator>
-      <navigator class='cell' url='../../user/order/order?tabIndex=2&id=2'>
+      <navigator class='cell' url='../../user/order/order?tabIndex=3&id=2'>
+        <text class='bage' wx:if="{{orderStatusNums.wait_send}}">{{orderStatusNums.wait_send}}</text>   
         <image class="img" src='/assets/image/wd_icon_dfh@2x.png'></image>
         <view>待发货</view>
       </navigator>
-      <navigator class='cell' url='../../user/order/order?tabIndex=3&id=3'>
+      <navigator class='cell' url='../../user/order/order?tabIndex=4&id=3'>
+        <text class='bage' wx:if="{{orderStatusNums.wait_take}}">{{orderStatusNums.wait_take}}</text>   
         <image class="img" src='/assets/image/wd_icon_dsh@2x.png'></image>
         <view>待收货</view>
       </navigator>
@@ -46,7 +54,7 @@
         <image class="img" src='/assets/image/wd_icon_dqh@2x.png'></image>
         <view>待取货</view>
       </navigator> -->
-      <navigator class='cell' url='../../user/order/order?tabIndex=4&id=4'>
+      <navigator class='cell' url='../../user/order/order?tabIndex=5&id=4'>
         <image class="img" src='/assets/image/wd_icon_ddwc@2x.png'></image>
         <view>订单完成</view>
       </navigator>

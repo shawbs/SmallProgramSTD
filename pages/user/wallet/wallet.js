@@ -28,6 +28,7 @@ Page({
       tabIndex: options.tab || 0
     })
     this.initPage()
+    app.globalData.payType = 1;
   },
 
   /**

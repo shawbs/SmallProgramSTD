@@ -67,6 +67,34 @@ const request = {
   getOrderList: (parameter) => $.get(baseurl + API.getOrderList + `${parameter.status}/${parameter.page}/10`, {}, true),
   //获取订单详情
   getOrderInfo: (parameter) => $.get(baseurl + API.getOrderInfo + parameter.orderNo, {}, true),
+  //获取订单配置项
+  getOrderPayway: (parameter) => $.post(baseurl + API.getOrderPayway, parameter, true),
+  //订单付款配置
+  getPayway: (parameter) => $.post(baseurl + API.getPayway, parameter, true),
+  //创建订单发票
+  createInvoice: (parameter) => $.post(baseurl + API.createInvoice, parameter, true),
+  //获取订单各状态数量
+  getOrderNumByStatus: () => $.post(baseurl + API.getOrderNumByStatus, {}, true),
+  //确认订单付款方式
+  postOrderPayway: (parameter) => $.post(baseurl + API.postOrderPayway, parameter, true),
+  //订单配置提交生成支付订单接口
+  postOrderConfig: (parameter) => $.post(baseurl + API.postOrderConfig, parameter, true),
+  //重新配置订单
+  postOrderReconfig: (parameter) => $.post(baseurl + API.postOrderReconfig, parameter, true),
+  //订单确认收货接口
+  postOrderReceived: (parameter) => $.post(baseurl + API.postOrderReceived + `/${parameter.orderNo}`, {}, true),
+  //申请人工服务
+  postOrderManual: (parameter) => $.post(baseurl + API.postOrderManual, parameter, true),
+  //获取订单配送token
+  getDeliveryToken: (parameter) => $.post(baseurl + API.getDeliveryToken, parameter, true),
+  //获取寄存token
+  getConsignmentToken: (parameter) => $.post(baseurl + API.getConsignmentToken, parameter, true),
+  //获取自取token
+  getShippmentselfToken: (parameter) => $.post(baseurl + API.getShippmentselfToken, parameter, true),
+  //更新增值费用token
+  getExtraFeeToken: (parameter) => $.post(baseurl + API.getExtraFeeToken, parameter, true),
+  //获取订单的配送记录
+  getLogistics: (parameter) => $.post(baseurl + API.getLogistics + `/${parameter.orderNo}/info/`, {}, true),
   //获取摇宝列表
   getLottoList: (parameter) => $.post(baseurl + API.getLottoList, parameter, true),
   // 获取摇宝历史记录
@@ -100,6 +128,8 @@ const request = {
 
   //获取视频列表
   getVideoList: (parameter) => $.get(baseurl + API.getVideoList, parameter),
+  //获取视频详情
+  getVideoInfo: (parameter) => $.get(baseurl + API.getVideoInfo, parameter, true),
 
   //点赞
   dopraise: (parameter) => $.get(baseurl + API.dopraise, parameter),
@@ -195,19 +225,19 @@ const request = {
   getMerchantApplyStatus: () => $.post(baseurl + API.getMerchantApplyStatus, {}, true),
   //申请商户接口
   merchantApply: (parameter) => $.post(baseurl + API.merchantApply, parameter, true),
-  //�?�取商户token�?�口
+  //�?�取商户token�?�口
   merchantToken: () => $.post(baseurl + API.merchantToken, {}, true),
-  //更新商户基本信息�?�口
+  //更新商户基本信息�?�口
   updateMerchantInfo: (parameter) => $.merchantPost(baseurl + API.updateMerchantInfo, parameter, true),
-  //�?�取商户基本信息�?�口
+  //�?�取商户基本信息�?�口
   merchantInfo: () => $.merchantPost(baseurl + API.merchantInfo, {}, true),
-  //取商户首页(商户中心)�?�口
+  //取商户首页(商户中心)�?�口
   merchantMainInfo: () => $.merchantPost(baseurl + API.merchantMainInfo, {}, true),
   //商户中心上传商户LOGO
   uploadMerchantLogo: (parameter) => $.merchantUpload(baseurl + API.uploadMerchantLogo, parameter, true),
-  //�?�取商户订单列表�?�口
+  //�?�取商户订单列表�?�口
   getMerchantOrderList: (parameter) => $.merchantGet(baseurl + API.getMerchantOrder + `${parameter.status}/${parameter.page}/10`, {}, true),
-  //�?�取商户订单详情�?�口
+  //�?�取商户订单详情�?�口
   getMerchantOrderInfo: (parameter) => $.merchantGet(baseurl + API.getMerchantOrderInfo + `${parameter.orderToken}`, {}, true),
   //初始化拍品项和token
   initMerchantAuction: (parameter) => $.merchantPost(baseurl + API.initMerchantAuction, parameter, true),
@@ -219,35 +249,35 @@ const request = {
   uploadAuctionImg: (parameter) => $.merchantUpload(baseurl + API.uploadAuctionImg, parameter, true),
   //删除拍品图片或视频
   deleteAuctionImg: (parameter) => $.merchantPost(baseurl + API.deleteAuctionImg, parameter, true),
-  //下�?�拍品
+  //下�?�拍品
   merchantAuctionOut: (parameter) => $.merchantPost(baseurl + API.merchantAuctionOut, parameter, true),
-  //�?�取拍品列表
+  //�?�取拍品列表
   merchantAuctionList: (parameter) => $.merchantPost(baseurl + API.merchantAuctionList, parameter, true),
-  //�?�取草稿箱
+  //�?�取草稿箱
   merchantAuction: (parameter) => $.merchantPost(baseurl + API.merchantAuction, parameter, true),
-  //�?�取草稿箱详情
+  //�?�取草稿箱详情
   merchantAuctionInfo: (parameter) => $.merchantPost(baseurl + API.merchantAuctionInfo, parameter, true),
   //删除草稿箱
   merchantAuctionDelete: (parameter) => $.merchantPost(baseurl + API.merchantAuctionDelete, parameter, true),
-  //�?�取商户余额
+  //�?�取商户余额
   getMerchantBalance: (parameter) => $.merchantPost(baseurl + API.getMerchantBalance, parameter, true),
-  //�?�取商户余额�?细
+  //�?�取商户余额�?细
   getMerchantBalanceLog: (parameter) => $.merchantPost(baseurl + API.getMerchantBalanceLog, parameter, true),
   //商户转账
   merchantTransfer: (parameter) => $.merchantPost(baseurl + API.merchantTransfer, parameter, true),
-  //商户提�?�
+  //商户提�?�
   merchantWithdraw: (parameter) => $.merchantPost(baseurl + API.merchantWithdraw, parameter, true),
-  //商户�?�金付款
+  //商户�?�金付款
   merchantPay: (parameter) => $.merchantPost(baseurl + API.merchantPay, parameter, true),
   //商户银行卡列表
   merchantBankCardList: (parameter) => $.merchantPost(baseurl + API.merchantBankCardList, parameter, true),
   //商户删除商户银行卡
   merchantBankCardDelete: (parameter) => $.merchantPost(baseurl + API.merchantBankCardDelete, parameter, true),
-  //�?加商户银行卡
+  //�?加商户银行卡
   merchantBankCardAdd: (parameter) => $.merchantPost(baseurl + API.merchantBankCardAdd, parameter, true),
-  //�?�取订单余款
+  //�?�取订单余款
   merchantOrderMoney: (parameter) => $.merchantPost(baseurl + API.merchantOrderMoney, parameter, true),
-  //首页�?�取商户发布的拍品
+  //首页�?�取商户发布的拍品
   getMerchantAuctionList: (parameter) => $.post(baseurl + API.getMerchantAuctionList, parameter, true),
   //商户拍品详情
   getMerchantAuctionInfo: (parameter) => $.get(baseurl + API.getMerchantAuctionInfo + `${parameter.auctionItemId}/detail`, {}, true),
@@ -263,7 +293,7 @@ const request = {
   merchantBid: (parameter) => $.post(baseurl + API.merchantBid, parameter, false),
   //商户拍品出价记录
   merchantBidInfo: (parameter) => $.post(baseurl + API.merchantBidInfo + `/${parameter.auctionItemId}/bidinfo`, {}, false),
-  //商户拍品重新上�?�
+  //商户拍品重新上�?�
   merchantAuctionRepublic: (parameter) => $.merchantPost(baseurl + API.merchantAuctionRepublic, parameter, false),
 }
 

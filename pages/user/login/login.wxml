@@ -10,7 +10,7 @@
       <view class="login-content">
           <view class="input-phone-tip">请输入手机号码</view>
           <view class="input-control">
-              <input type="text" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{form.phone}}' bindconfirm="sendPhone"/>
+              <input type="text" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{phone}}' bindconfirm="sendPhone"/>
           </view>
           <view class="login-btn-wp">
               <button type="button" class="login-btn" bindtap='sendPhone'>下一步</button>

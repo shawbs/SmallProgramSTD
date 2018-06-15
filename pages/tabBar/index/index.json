@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "menu": "../../../component/menu/menu"
+    "menu": "../../../component/menu/menu",
+    "toptip": "../../../component/toptip/toptip"
   },
   "enablePullDownRefresh": true
 }

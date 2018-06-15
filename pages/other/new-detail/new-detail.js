@@ -1,11 +1,17 @@
 // pages/other/new-detail/new-detail.js
+const app = getApp()
+
+const action = require('../../../api/action.js')
+const util = require('../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    url: ''
+    url: '',
+    type: 2, //1资讯 ， 2视频
+    video: null
   },
 
   /**
@@ -13,8 +19,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      url: decodeURIComponent(options.url)
+      url: decodeURIComponent(options.url),
+      type: options.type || 2
     })
+    this.initPage();
   },
 
   /**
@@ -64,5 +72,17 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  initPage(){
+    if(this.data.type == 2){
+      let videoInfo = app.globalData.videoInfo;
+      this.setData({
+        video: videoInfo
+      })
+      console.log(this.data.video)
+    }
   }
+
+  
 })

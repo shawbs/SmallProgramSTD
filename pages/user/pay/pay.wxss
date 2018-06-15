@@ -91,14 +91,4 @@
   color: #666;
   font-size: 12px;
 }
-.radio{
-  position: relative;
-}
-.radio radio{
-   position: absolute;
-   opacity: 0; 
-}
-.radio image{
-  width: 30px;
-  height: 30px;
-}
+

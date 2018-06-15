@@ -1,0 +1,37 @@
+<!--pages/other/yb-confirm/yb-confirm.wxml-->
+<view class="store-confirm">
+    <view class='lotto-confirm' wx:if="{{lotto}}">
+        <view class="order-item">
+            <view class="order-item-bd">
+                <image class='img' src="{{lotto.imgUrl[0]}}"></image>
+                <view class="show-text">
+                  <view class="title ellipsis2">{{lotto.itemName}}</view>
+                  <view>本次摇宝 {{lotto.price}}积分/摇奖号</view>
+                  <view class="black">剩余{{lotto.surplusNum}}份</view>
+                </view>
+            </view>
+
+        </view>
+        <view class='form' >
+          <view class='form-control'>
+            <label>购买数量</label>
+            <view>
+              <text class="fr">份</text>  
+              <input value='{{defaultVal}}' type='number' bindinput="changNum"/>
+            </view>
+          </view>
+        </view>
+
+        <view class="max-bottom-bar">
+            <view class="fl">
+                <view class="point-tip">费用合计:</view>
+                <view class="point"><label class="zf-point">{{total||defaultVal*lotto.price}}</label>积分</view>
+            </view>
+            <view class="confirm-btn" bindtap='postLottoOrader' data-id="{{lotto.lottoId}}">提交订单</view>
+        </view>
+    </view>
+
+
+    
+</view>
+

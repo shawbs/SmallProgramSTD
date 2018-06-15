@@ -1,0 +1,57 @@
+/* component/toptip/toptip.wxss */
+.tip{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.success{
+  background: #0aba07;
+  color: #fff;
+}
+.warn{
+  background: #f60;
+  color: #fff;
+}
+.error{
+  background: #f6383a;
+  color: #fff;
+}
+.slideDown{
+    animation-name: slideDown;
+    animation-duration:1s;
+    animation-fill-mode:both;
+}
+@keyframes slideDown {
+    0% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.slideUp{
+    animation-delay: 2s;
+    animation-name: slideUp;
+    animation-duration:1s;
+    animation-fill-mode:both; 
+}
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+    }
+    99% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(-30px); 
+        display: none;
+    }
+}
+

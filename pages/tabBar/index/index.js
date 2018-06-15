@@ -4,7 +4,7 @@ const app = getApp()
 
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-
+const base = require('../../../utils/base.js')
 Page({
   data: {
     banner: null,
@@ -15,7 +15,11 @@ Page({
     page: 1,
     loadover: false,
     loading: false,
-    merchantList: []
+    merchantList: [],
+
+    tip: '',
+    tipstatus: '',
+    tipshow: false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -25,6 +29,7 @@ Page({
    */
   onLoad: function (options) {
     this.initPage();
+    this.checkIn();
     //获取商户入驻首页拍品
     this.getMerchantAuctionList();
   },
@@ -174,6 +179,26 @@ Page({
           merchantList: res.data.list
         })
       }
+    })
+  },
+
+  //签到
+  checkIn(){
+    if (!base.checkLogin()) return
+    let that = this;
+    action.checkIn().then(res=>{
+      if (!res.data.isChecked) return
+      that.setData({
+        tipshow: true,
+        tip: res.data.describ,
+        tipstatus: 'success'
+      })
+
+      setTimeout(function(){
+        that.setData({
+          tipshow: false,
+        })
+      },3000)
     })
   }
 

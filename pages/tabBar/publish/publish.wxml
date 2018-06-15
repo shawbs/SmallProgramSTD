@@ -51,7 +51,7 @@
           </view>
         
         <image hidden='{{previewList.length>=8}}' class='upload-icon mr-2' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='uploadImg'></image>
-        <image hidden='{{previewList.length>=8}}'class='upload-icon' src='/assets/image/shipin_icon@2x.png' mode='widthFix' bindtap='uploadVideo'></image>
+        <!-- <image hidden='{{previewList.length>=8}}'class='upload-icon' src='/assets/image/shipin_icon@2x.png' mode='widthFix' bindtap='uploadVideo'></image> -->
         </view>
         <view class='tip'>备注: 上传图片+视频共计不超过9张</view>
       </view>

@@ -24,6 +24,7 @@ Page({
       userInfo: userInfo
     })
     this.initPage();
+    app.globalData.payType = 3;
   },
 
   /**

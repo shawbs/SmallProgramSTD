@@ -13,7 +13,7 @@
         
           <radio-group name="payType">
             <view class='list-title'>请选择支付方式</view>
-            <view class='list-item' wx:for="{{payTypes}}" wx:key="{{index}}">
+            <view class='list-item' wx:for="{{payTypes}}" wx:key="{{index}}" wx:if="{{item.type!='yl' && item.type!='wx'}}">
               <image wx:if="{{item.type=='xj'}}" class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
               <image wx:if="{{item.type=='merchant_account'}}" class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
               <image wx:if="{{item.type=='yl'}}" class='label-icon' src='/assets/image/pay_icon1@2x.png' mode='aspectFit'></image>

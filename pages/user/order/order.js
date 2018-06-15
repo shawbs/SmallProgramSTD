@@ -14,6 +14,10 @@ Page({
       {
         cateName: '全部',
         cateId: '5'
+      },
+      {
+        cateName: '待确认',
+        cateId: '0'
       }, 
       {
         cateName: '待付款',
@@ -46,9 +50,11 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      tabIndex: options.tabIndex || 0
+      tabIndex: options.tabIndex || 0,
+      status: options.id || 5,
     })
-    this.getList(options.id || 5);
+    this.initPage();
+    app.globalData.payType = 0;
   },
 
   /**
@@ -83,7 +89,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.initPage();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 1000)
   },
 
   /**
@@ -92,10 +101,10 @@ Page({
   onReachBottom: function () {
     if (this.data.loadover) return
     let that = this;
-    that.scrollLoad(that.data.status, orderlist=>{
-      orderlist = this.data.orderlist.concat(orderlist)
+    that.scrollLoad(orderlist=>{
+      let arr = [...this.data.orderlist,...orderlist];
       that.setData({
-        orderlist: orderlist
+        orderlist: arr
       })
     })
   },
@@ -107,26 +116,24 @@ Page({
   
   },
 
-  //滚动加载更多
-  loadmore: function(){
-
-  },
-
   //tab点击事件
   navtab: function (e) {
     let id = e.detail.id;
-    this.getList(id);
+    this.setData({
+      status: id
+    })
+    this.initPage();
   },
 
-  getList(status){
+  // 获取订单列表
+  initPage(){
     this.setData({
-      status: status,
       page: 1,
       loadover: false,
       msg: ''
     })
     action.getOrderList({
-      status: status,
+      status: this.data.status,
       page: 1
     }).then(res=>{
       let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
@@ -139,12 +146,13 @@ Page({
     })
   },
 
-  scrollLoad(status,cb){
+  //滚动加载
+  scrollLoad(cb){
     this.setData({
       page: ++this.data.page
     })
     action.getOrderList({
-      status: status,
+      status: this.data.status,
       page: this.data.page
     }).then(res => {
       if (res.data.orderlist.length<=0){
@@ -160,6 +168,65 @@ Page({
       }
 
       cb && cb(orderlist)
+    })
+  },
+
+  //前往支付
+  linkPay(e){
+    let paymentno = e.currentTarget.dataset.paymentno;
+    let token = e.currentTarget.dataset.token;
+    let orderno = e.currentTarget.dataset.orderno;
+    // console.log(e, paymentno, token, orderno)
+    let isofflinepay = e.currentTarget.dataset.isofflinepay;//是否正在进行线下支付
+    if (isofflinepay == true){
+      wx.showModal({
+        title: '温馨提示',
+        content: '您已经申请了线下支付渠道，是否更换其它支付方式？',
+        success: function (res) {
+          if (res.confirm) {
+            let url = paymentno ? `/pages/user/pay/pay?paymentNo=${paymentno}` : `/pages/user/order-confirm/order-confirm?step=2&token=${token}&orderNo=${orderno} `;
+
+            wx.navigateTo({
+              url: url,
+            })
+          } else if (res.cancel) {
+            return
+          }
+        }
+      })
+    }else{
+      let url = paymentno ? `/pages/user/pay/pay?paymentNo=${paymentno}` : `/pages/user/order-confirm/order-confirm?step=2&token=${token}&orderNo=${orderno} `;
+
+      wx.navigateTo({
+        url: url,
+      })
+    }
+
+    
+  },
+
+  //收货
+  postReceiving(e){
+    let orderno = e.currentTarget.dataset.orderno;
+    action.postOrderReceived({
+      orderNo: orderno
+    }).then(res=>{
+      wx.showToast({
+        title: '收货完成',
+      })
+    })
+  },
+
+  //重新配置订单
+  postOrderReconfig(e){
+    let orderno = e.currentTarget.dataset.orderno;
+    let token = e.currentTarget.dataset.token;
+    action.postOrderReconfig({
+      orderNo: orderno
+    }).then(res=>{
+      wx.navigateTo({
+        url: `/pages/user/order-confirm/order-confirm?step=2&token=${token}&orderNo=${orderno}`,
+      })
     })
   }
 

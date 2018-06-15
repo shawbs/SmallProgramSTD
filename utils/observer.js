@@ -13,8 +13,8 @@ var event = (function () {
   };
 
   return {
-    listen: listen,
-    trigger: trigger,
+    on: listen,
+    emit: trigger,
     remove: remove
   }
 })()

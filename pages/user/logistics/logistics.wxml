@@ -1,0 +1,40 @@
+<!--pages/user/logistics/logistics.wxml-->
+<view class='container'>
+  <view class="order-item" data-orderid="3">
+      <view class="order-item-bd">
+          <image class='img' src="{{logistics.imgUrl[0]}}"></image>
+          <view class="show-text">
+            <view class='mb-1'>物流状态：
+              <text class='white'>{{entry.deliveryStatus}}</text>
+            </view>
+            <view class='mb-1'>乘运公司：
+              <text class='white'>{{entry.deliveryCompany}}</text>
+            </view>
+            <view class='mb-1'>运单单号：
+              <text class='white'>{{entry.deliveryCompany}}</text>
+            </view>
+            <view class='mb-1'>官方电话：
+              <text class='white'>{{entry.deliveryCompanyPhone}}</text>
+            </view>
+          </view>
+      </view>
+  </view>
+  <view class='logistics-info fullflex'>
+    <view class='item' wx:for="{{entry.deliveryHistory}}" wx:key="{{index}}">
+      <view class='icon-line'></view>
+      <image wx:if="{{index == 0}}" src='/assets/image/wuliu_dian02@2x.png' class='icon-circle mr-2'></image>
+      <image wx:if="{{index > 0}}" src='/assets/image/wuliu_dian01@2x.png' class='icon-circle mr-2'></image>
+      <view class='fullflex'>
+        <view>{{item.msg}}</view>
+        <text class='small'>{{item.time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='logistics-bottom'>
+    <view class='btn btn-green' bindtap='connectTel'>
+      <image src='/assets/image/phone.png' class='icon-phone mr-2'></image>
+      联系客服: 0592-5220601
+    </view>
+  </view>
+</view>

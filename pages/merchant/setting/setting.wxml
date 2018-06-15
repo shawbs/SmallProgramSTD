@@ -7,8 +7,8 @@
       <navigator url='/pages/user/address/address' class="address-item-bd">
           <image class='address-icon' src='/assets/image/ddxq_icon_dizhicopy2@3x.png' width="30" mode='widthFix'></image>
           <view class="address2">
-            <view class="address-row">{{userInfo.consignee}} <test class="ml-3">{{userInfo.phone}}</test></view>
-            <view class='gray'>{{userInfo.address}}</view>
+            <view class="address-row">{{userInfo.consignee || ''}} <test class="ml-3">{{userInfo.phone || ''}}</test></view>
+            <view class='gray'>{{userInfo.address || ''}}</view>
           </view>
           <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>

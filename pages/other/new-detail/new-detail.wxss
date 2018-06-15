@@ -1,1 +1,75 @@
-/* pages/other/new-detail/new-detail.wxss */
+/* pages/tabBar/new/new.wxss */
+page{
+
+}
+.card{
+  margin-bottom: 10px;
+  background: #fff;
+  position: relative;
+}
+.card .card-hd{
+  font-size: 14px;
+  line-height: 40px;
+  font-weight: 800;
+}
+.card .card-bd{
+  margin-left: -3px;
+  margin-right: -3px;
+}
+.card .card-bd image{
+  margin: 0 3px;
+  height: 71px;
+}
+.card .card-fd{
+  border-top: 1px solid #ddd;
+  color: #ccc;
+  font-size: 12px;
+  line-height: 30px;
+}
+.card .card-fd .line:first-of-type{
+  padding-top: 5px;
+}
+.card .card-fd .line{
+  display: flex;
+  justify-content: space-between;
+}
+.zan-icon{
+  width: 20px;
+  height: 30px;
+}
+.video-fd{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ccc;
+  font-size: 14px;
+  padding: 10px 10px;
+}
+
+.video-fd .label{
+  white-space: nowrap;
+}
+.video-fd .left{
+  width: 80%;
+  overflow: hidden;
+}
+.video-fd .right{
+  padding-left: 20px;
+  padding-right: 10px;
+  border-left: 1px solid #ddd; 
+  text-align: center;
+}
+.video-hd{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #fff;
+  z-index: 1;
+}
+.card .desc{
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  color: #666;
+  font-size: 12px;
+  line-height: 22px;
+}
