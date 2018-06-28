@@ -37,6 +37,7 @@ Page({
     page: 1,
     status: 0,//订单状态
     loadover: false,
+    loading: false,
     msg: ''
   },
 
@@ -93,9 +94,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.loadover) return
+    if (this.data.loadover || this.data.loading) return
     this.setData({
-      page: ++this.data.page
+      page: ++this.data.page,
+      msg: app.globalData.msgLoading,
+      loading: true
     })
     action.getMerchantOrderList({
       status: this.data.status,
@@ -111,18 +114,15 @@ Page({
         })
       } else {
         this.setData({
-          msg: '无数据'
+          msg: app.globalData.msgLoadOver,
+          loadover: true
         })
       }
+      this.setData({
+        loading: false
+      })
 
     })
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   },
 
   //tab点击事件
@@ -163,7 +163,7 @@ Page({
         })
       }else{
         this.setData({
-          msg: '无数据'
+          msg: app.globalData.msgLoadNone
         })
       }
     })

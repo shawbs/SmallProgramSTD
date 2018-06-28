@@ -4,8 +4,10 @@
     <view>
       <view class='top'>
         <view class="tip" >
-            <view class="text" wx:if="{{originType==0}}">支付金额</view>
-            <view class="text" wx:if="{{originType!=0}}">提现金额</view>
+            <view class="text">支付金额</view>
+            <!-- <view class="text" wx:if="{{payType==1 || 2}}">提现金额</view>
+            <view class="text" wx:if="{{payType==3}}">提现金额</view>
+            <view class="text" wx:if="{{payType==4}}">寄存费用</view> -->
             <view class="point">￥{{originNum/100}}</view>
         </view>
       </view>
@@ -13,7 +15,7 @@
         
           <radio-group name="payType">
             <view class='list-title'>请选择支付方式</view>
-            <view class='list-item' wx:for="{{payTypes}}" wx:key="{{index}}" wx:if="{{item.type!='yl' && item.type!='wx'}}">
+            <view class='list-item' wx:for="{{payTypes}}" wx:key="{{index}}" wx:if="{{item.type!='yl' }}">
               <image wx:if="{{item.type=='xj'}}" class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
               <image wx:if="{{item.type=='merchant_account'}}" class='label-icon' src='/assets/image/wd_icon_wdyhk@2x.png' mode='aspectFit'></image>
               <image wx:if="{{item.type=='yl'}}" class='label-icon' src='/assets/image/pay_icon1@2x.png' mode='aspectFit'></image>
@@ -21,7 +23,7 @@
               <image wx:if="{{item.type=='xx'}}" class='label-icon' src='/assets/image/pay_icon5@2x.png' mode='aspectFit'></image>
               <view class='label'>
                 {{item.title}}
-                <!-- <text>余额￥0.00</text> -->
+                 <text wx:if="{{item.type=='xj'}}">余额￥{{money.balance/100}}</text> 
               </view>
               <view class='radio'>
                 <radio value='{{item.type}}' data-index="{{index}}" checked='{{item.checked}}' data-name='{{item.type}}' bindtap='toggle'></radio>

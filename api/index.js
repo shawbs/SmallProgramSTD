@@ -2,17 +2,22 @@ const { conf } = require('../config.js')
 const base = require('../utils/base.js')
 const API = require('./api.js')
 
-const getNetwork = ()=>{
+
+const hintNetwork = function(){
   wx.getNetworkType({
     success: function (res) {
       // 返回网络类型, 有效值：
       // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
       var networkType = res.networkType
-      console.log(networkType)
+      if (networkType == 'none') {
+        wx.showToast({
+          title: '当前状态无网络,请尝试连接网络再重新刷新',
+          icon: 'none'
+        })
+      }
     }
   })
 }
-
 
 /**
  * 刷新TOKEN
@@ -87,11 +92,13 @@ const get = function(url,paramrter,showLoader=false){
         if (res.statusCode == 200) {
           //接口返回正确码
           if (res.data.code == 200) {
-            resolve(res.data);
+            setTimeout(function () {
+              resolve(res.data);
+            }, 300)
           }
           //token过期，刷新token后重新请求
           else if (res.data.code == 401) {
-            refreshToken(showLoader).then(accessToken => {
+            refreshToken().then(accessToken => {
               get(url, paramrter, showLoader)
             }).catch(msg => {
               console.error(msg)
@@ -103,11 +110,13 @@ const get = function(url,paramrter,showLoader=false){
           }
           //接口返回错误码 
           else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none'
-            })
-            reject(res.data.msg)
+            setTimeout(function () {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              reject(res.data.msg)
+            }, 300)
           }
         }
         //请求失败
@@ -117,6 +126,7 @@ const get = function(url,paramrter,showLoader=false){
       },
       fail: function (err) {
         console.log(err)
+        base.debounce(hintNetwork, 1000)()
       },
       complete: function () {
         showLoader && wx.hideLoading();
@@ -153,11 +163,13 @@ const post = function (url, paramrter, showLoader=false) {
           if (res.statusCode == 200) {
             //接口返回正确码
             if (res.data.code == 200) {
-              resolve(res.data);
+              setTimeout(function(){
+                resolve(res.data);
+              },300)
             }
             //token过期，刷新token后重新请求
             else if (res.data.code == 401) {
-              refreshToken(showLoader).then(accessToken => {
+              refreshToken().then(accessToken => {
                 post(url, paramrter, showLoader)
               }).catch(msg => {
                 console.error(msg)
@@ -169,11 +181,14 @@ const post = function (url, paramrter, showLoader=false) {
             }
             //接口返回错误码 
             else {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
-              reject(res.data.msg)
+              setTimeout(function () {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+                })
+                reject(res.data.msg)
+              }, 300)
+              
             }
           }
           //请求失败
@@ -183,6 +198,7 @@ const post = function (url, paramrter, showLoader=false) {
         },
         fail: function (err) {
           console.log(err)
+          base.debounce(hintNetwork,1000)()
         },
         complete: function () {
           showLoader && wx.hideLoading()
@@ -240,11 +256,13 @@ const upload = function (url, paramrter, showLoader = false) {
         if (res.statusCode == 200) {
           //接口返回正确码
           if (res.data.code == 200) {
-            resolve(res.data);
+            setTimeout(function () {
+              resolve(res.data);
+            }, 300)
           }
           //token过期，刷新token后重新请求
           else if (res.data.code == 401) {
-            refreshToken(showLoader).then(accessToken => {
+            refreshToken().then(accessToken => {
               upload(url, paramrter, showLoader)
             }).catch(msg => {
               console.error(msg)
@@ -256,11 +274,13 @@ const upload = function (url, paramrter, showLoader = false) {
           }
           //接口返回错误码 
           else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none'
-            })
-            reject(res.data.msg)
+            setTimeout(function () {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              reject(res.data.msg)
+            }, 300)
           }
         }
         //请求失败
@@ -314,10 +334,12 @@ const uploadFile = function (url, paramrter, cb) {
           }
           //接口返回错误码 
           else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none'
-            })
+            setTimeout(function () {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+            }, 300)
           }
         }
         //请求失败
@@ -364,7 +386,7 @@ const refreshMerchantToken = (showLoader = false) => {
           } 
           //token过期，刷新token后重新请求
           else if (data.code == 401) {
-            refreshToken(showLoader).then(accessToken => {
+            refreshToken().then(accessToken => {
               refreshMerchantToken(showLoader)
             }).catch(msg => {
               console.error(msg)
@@ -415,11 +437,13 @@ const merchantPost = function (url, paramrter, showLoader = false) {
           if (res.statusCode == 200) {
             //接口返回正确码
             if (res.data.code == 200) {
-              resolve(res.data);
+              setTimeout(function () {
+                resolve(res.data);
+              }, 300)
             }
             //token过期，刷新token后重新请求
             else if (res.data.code == 401) {
-              refreshMerchantToken(showLoader).then(() => {
+              refreshMerchantToken().then(() => {
                 merchantPost(url, paramrter, showLoader)
               }).catch(msg => {
                 console.error(msg)
@@ -431,11 +455,13 @@ const merchantPost = function (url, paramrter, showLoader = false) {
             }
             //接口返回错误码 
             else {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
-              reject(res.data.msg)
+              setTimeout(function () {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+                })
+                reject(res.data.msg)
+              }, 300)
             }
           }
           //请求失败
@@ -445,6 +471,7 @@ const merchantPost = function (url, paramrter, showLoader = false) {
         },
         fail: function (err) {
           console.log(err)
+          base.debounce(hintNetwork, 1000)()
         },
         complete: function () {
           showLoader && wx.hideLoading()
@@ -481,11 +508,13 @@ const merchantGet = function (url, paramrter, showLoader = false) {
           if (res.statusCode == 200) {
             //接口返回正确码
             if (res.data.code == 200) {
-              resolve(res.data);
+              setTimeout(function () {
+                resolve(res.data);
+              }, 300)
             }
             //token过期，刷新token后重新请求
             else if (res.data.code == 401) {
-              refreshMerchantToken(showLoader).then(token => {
+              refreshMerchantToken().then(token => {
                 merchantGet(url, paramrter, showLoader)
               }).catch(msg => {
                 console.error(msg)
@@ -497,11 +526,13 @@ const merchantGet = function (url, paramrter, showLoader = false) {
             }
             //接口返回错误码 
             else {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
-              reject(res.data.msg)
+              setTimeout(function () {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+                })
+                reject(res.data.msg)
+              }, 300)
             }
           }
           //请求失败
@@ -511,6 +542,7 @@ const merchantGet = function (url, paramrter, showLoader = false) {
         },
         fail: function (err) {
           console.log(err)
+          base.debounce(hintNetwork, 1000)()
         },
         complete: function () {
           showLoader && wx.hideLoading()
@@ -544,11 +576,13 @@ const merchantUpload = function (url, paramrter, showLoader = false) {
         if (res.statusCode == 200) {
           //接口返回正确码
           if (res.data.code == 200) {
-            resolve(res.data);
+            setTimeout(function () {
+              resolve(res.data);
+            }, 300)
           }
           //token过期，刷新token后重新请求
           else if (res.data.code == 401) {
-            refreshMerchantToken(showLoader).then(accessToken => {
+            refreshMerchantToken().then(accessToken => {
               merchantUpload(url, paramrter, showLoader)
             }).catch(msg => {
               console.error(msg)
@@ -560,11 +594,13 @@ const merchantUpload = function (url, paramrter, showLoader = false) {
           }
           //接口返回错误码 
           else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none'
-            })
-            reject(res.data.msg)
+            setTimeout(function () {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              reject(res.data.msg)
+            }, 300)
           }
         }
         //请求失败
@@ -587,7 +623,6 @@ module.exports = {
   get,
   post,
   getAsset,
-  getNetwork,
   upload,
   uploadFile,
   merchantPost,

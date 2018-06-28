@@ -62,22 +62,23 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   //初始用户信息
   initPage() {
 
-    //获取商户信息
-    action.merchantInfo().then(res => {
+    let userInfo = wx.getStorageSync('merchant_user_info');
+    if(!!userInfo){
       this.setData({
-        userInfo: res.data
+        userInfo: userInfo
       })
-    })
+    }else{
+      //获取商户信息
+      action.merchantInfo().then(res => {
+        wx.setStorageSync('merchant_user_info', res.data);
+        this.setData({
+          userInfo: res.data
+        })
+      })
+    }
 
   },
 

@@ -59,13 +59,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   initPage(){
     //获取帐户流水记录
     action.getMerchantBalanceLog().then(res => {

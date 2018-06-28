@@ -87,12 +87,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
   //tab点击
   tabclick:function(e){
     var o = {}

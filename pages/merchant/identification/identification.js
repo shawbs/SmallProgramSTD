@@ -61,15 +61,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-
-
   //上传
   uploadImg(e){
     let _type = e.currentTarget.dataset.type;

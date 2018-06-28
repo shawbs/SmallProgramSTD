@@ -68,12 +68,7 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
   tabclick:function(e){
     var o = {}
     o[e.currentTarget.dataset.id] = 'active'

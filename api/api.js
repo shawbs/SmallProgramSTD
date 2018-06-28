@@ -71,6 +71,12 @@ module.exports = {
   getDeliveryToken: '/business-delivery/std/app/api/v1/delivery/token/',
   //获取寄存token
   getConsignmentToken: '/business-consignment/std/app/api/v1/consignment/token',
+  //删除寄存
+  deleteConsignment: '/business-consignment/std/app/api/v1/consignment/delete/info/',
+  //自取寄存
+  feeConsignment: '/business-consignment/std/app/api/v1/consignment/fee/info/',
+  //获取寄存paymentNo
+  getConsignmentPay: '/business-consignment/std/app/api/v1/create/consignment/payment',
   //获取自取token
   getShippmentselfToken: '/business-shippment_self /std/app/api/v1/shippmentself/token',
   //更新增值费用token
@@ -114,6 +120,9 @@ module.exports = {
 
   //点赞
   dopraise: '/business-article/get/article/dopraise',
+
+  //点赞视频
+  dopraiseVideo: '/business-seminar/get/seminar/dopraise',
 
   //获取鉴宝
   getJB: '/business-appraisal/std/app/api/v1/appraisal/token',
@@ -274,5 +283,8 @@ module.exports = {
   //商户拍品出价记录
   merchantBidInfo: '/web-app-facade/std/app/api/v1/auction/merchant/item',
   //商户拍品重新上架
-  merchantAuctionRepublic: '/business-merchantauction-live/std/app/api/v1/live/republic/auction/item'
+  merchantAuctionRepublic: '/business-merchantauction-live/std/app/api/v1/live/republic/auction/item',
+  //获取微信支付参数
+  wxpayParms: '/business-wepay/std/wxpay/smallpro/params',
+
 }

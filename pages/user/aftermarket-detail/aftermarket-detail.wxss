@@ -20,17 +20,15 @@
 }
 .uploadTime{
   border-top: 1px solid #ddd;
-  text-align: right;
   padding: 15px 0;
   font-size: 12px;
 }
-.address{
+.address-chunk{
   border-top: 1px solid #ddd;
   padding: 10px 0;
   font-size: 14px;
 }
 .checkTime{
   border-top: 1px solid #ddd;
-  text-align: right;
   padding: 15px 0;
 }

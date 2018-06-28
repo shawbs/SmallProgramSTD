@@ -69,3 +69,6 @@
   left: -40px;
   top: 10px;
 }
+.address label{
+  color: #9B9B9B;
+}

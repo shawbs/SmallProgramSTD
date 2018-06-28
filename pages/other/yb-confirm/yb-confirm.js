@@ -68,12 +68,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  },
 
   //初始化摇宝订单
   initPage() {

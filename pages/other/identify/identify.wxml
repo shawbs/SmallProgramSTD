@@ -7,39 +7,41 @@
   </view> -->
   <swiper class="chunk-item" indicator-dots>
     <swiper-item>
-      <view class='chunk'>
-        <view class='chunk-hd'>
-          <view class='_title'>普通鉴定 <navigator url='/pages/other/identify-list/identify-list' class='link-history'>鉴宝历史</navigator></view>
-          <view>普通鉴定由顺天达拍卖平台资深古玩鉴定师给予专业的眼鉴</view>
-        </view>
-        
-        <view class='chunk-bd'>
-            <view class='form'>
-              <form bindsubmit="submitForm">
-                <view class='input-group'>
-                  <input placeholder='请输入艺术品名称' placeholder-style="color: #ccc;" name="name" value='{{infoData.name}}'></input>
-                </view>
-                <view class='input-group'>
-                  <input placeholder='请输入艺术品年代' placeholder-style="color: #ccc;" name="year" value='{{infoData.years}}'></input>
-                </view>
-                <view class='input-group'>
-                  <input placeholder='请输入艺术品尺寸大小' placeholder-style="color: #ccc;" name="size" value='{{infoData.size}}'></input>
-                </view>
-                <view class='label'>请上传藏品6张各个方向照片:</view>
-                <view class='preview-img'>
-                  <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
-                    <image  class='img' src='{{item.imgUrl}}' data-img="{{item.imgUrl}}" mode='aspectFill' bindtap='previewImg'></image>
-                    <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon>
-                    <!-- <progress stroke-width="3" wx:if='{{progress.index == index && progress.value<101}}'  percent="{{progress.value}}" activeColor="#E86433"/> -->
+      <form bindsubmit="submitForm">
+        <view class='chunk'>
+          <view class='chunk-hd'>
+            <view class='_title'>普通鉴定 <navigator url='/pages/other/identify-list/identify-list' class='link-history'>鉴宝历史</navigator></view>
+            <view>普通鉴定由顺天达拍卖平台资深古玩鉴定师给予专业的眼鉴</view>
+          </view>
+          
+          <view class='chunk-bd'>
+              <view class='form'>
+                
+                  <view class='input-group'>
+                    <input placeholder='请输入艺术品名称' placeholder-style="color: #ccc;" name="name" value='{{infoData.name}}'></input>
                   </view>
-                  <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
-                </view>
-              </form>
-            </view>
-            <button formType="submit" class='btn-orange'>鉴定</button>
+                  <view class='input-group'>
+                    <input placeholder='请输入艺术品年代' placeholder-style="color: #ccc;" name="years" value='{{infoData.years}}'></input>
+                  </view>
+                  <view class='input-group'>
+                    <input placeholder='请输入艺术品尺寸大小' placeholder-style="color: #ccc;" name="size" value='{{infoData.size}}'></input>
+                  </view>
+                  <view class='label'>请上传藏品6张各个方向照片:</view>
+                  <view class='preview-img'>
+                    <view class='img-item' wx:if="{{previewList}}" wx:for="{{previewList}}" wx:key="{{index}}">
+                      <image  class='img' src='{{item.imgUrl}}' data-img="{{item.imgUrl}}" mode='aspectFill' bindtap='previewImg'></image>
+                      <icon class='delete-icon' type='clear' color='#333' data-index="{{index}}" data-id='{{item.id}}' bindtap='deleteImg'></icon>
+                      <!-- <progress stroke-width="3" wx:if='{{progress.index == index && progress.value<101}}'  percent="{{progress.value}}" activeColor="#E86433"/> -->
+                    </view>
+                    <image class='upload-icon' src='/assets/image/jianding_icon_tupian@2x.png' mode='widthFix' bindtap='selectImg'></image>
+                  </view>
+                  <view class='orange'>图片最少6张,最多10张</view>
+              </view>
+              <button form-type="submit" class='btn-orange'>鉴定</button>
+          </view>
+          
         </view>
-        
-      </view>
+      </form>
     </swiper-item>
     <swiper-item>
       <view class='chunk sifa'>

@@ -69,13 +69,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   //新拍品发布
   pushAuction(e) {
     let formdata = e.detail.value;

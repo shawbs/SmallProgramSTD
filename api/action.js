@@ -29,8 +29,10 @@ const request = {
   getDetail: (paramrter) => {
     let url;
     if (paramrter.exType == 1) {
+      //直播详情
       url = '/web-app-facade/std/app/api/v1/auction/item/' + paramrter.auctionItemId + '/detail';
     } else {
+      //限时详情
       url = '/web-app-facade/std/app/api/v1/show/auction/item/' + paramrter.auctionItemId + '/detail';
     }
     return $.post(baseurl + url, {}, true);
@@ -133,6 +135,7 @@ const request = {
 
   //点赞
   dopraise: (parameter) => $.get(baseurl + API.dopraise, parameter),
+  dopraiseVideo: (parameter) => $.get(baseurl + API.dopraiseVideo, parameter),
 
   //获取鉴宝
   getJB: () => $.post(baseurl + API.getJB, {}, true),
@@ -187,6 +190,12 @@ const request = {
   deleteCard: (bankCardId) => $.post(baseurl + API.deleteCard, { bankCardId: bankCardId}, true),
   //获取寄存
   getConsignmentList: (parameter) => $.post(baseurl + API.getConsignmentList, parameter, true),
+  //删除寄存
+  deleteConsignment: (parameter) => $.post(baseurl + API.deleteConsignment, parameter, true),
+  //自取寄存
+  feeConsignment: (parameter) => $.post(baseurl + API.feeConsignment, parameter, true),
+  //获取寄存paymentNo
+  getConsignmentPay: (parameter) => $.post(baseurl + API.getConsignmentPay, parameter, true),
   //获取关注
   getCollectList: () => $.post(baseurl + API.getCollectList, {}, true),
   //获取售后 /business-return-product/std/app/api/v1/return/productlist/{status}/{page}/{limit}
@@ -260,7 +269,7 @@ const request = {
   //删除草稿箱
   merchantAuctionDelete: (parameter) => $.merchantPost(baseurl + API.merchantAuctionDelete, parameter, true),
   //�?�取商户余额
-  getMerchantBalance: (parameter) => $.merchantPost(baseurl + API.getMerchantBalance, parameter, true),
+  getMerchantBalance: (parameter) => $.merchantPost(baseurl + API.getMerchantBalance, parameter, false),
   //�?�取商户余额�?细
   getMerchantBalanceLog: (parameter) => $.merchantPost(baseurl + API.getMerchantBalanceLog, parameter, true),
   //商户转账
@@ -295,6 +304,8 @@ const request = {
   merchantBidInfo: (parameter) => $.post(baseurl + API.merchantBidInfo + `/${parameter.auctionItemId}/bidinfo`, {}, false),
   //商户拍品重新上�?�
   merchantAuctionRepublic: (parameter) => $.merchantPost(baseurl + API.merchantAuctionRepublic, parameter, false),
+  //获取微信支付参数
+  wxpayParms: (parameter) => $.post(baseurl + API.wxpayParms, parameter, false),
 }
 
 module.exports = request

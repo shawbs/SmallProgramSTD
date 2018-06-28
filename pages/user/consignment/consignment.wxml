@@ -1,4 +1,31 @@
 <!--pages/user/consignment/consignment.wxml-->
-<view class='text-center load-text'>
-  暂无数据
+<view class="order-item" wx:for="{{list}}" wx:key="{{index}}">
+  <view class="order-item-bd">
+      <image class='img' src="{{item.imgUrl[0]}}"></image>
+      <view class="show-text">
+        <view class="title ellipsis2">{{item.name}}</view>
+        <view class="create-date mb-1">产品其他属性</view>
+        <view class='title orange2'>￥{{item.price/100}}</view>
+        <view class="create-date text-right">寄存时间: {{item.startTime}}</view>
+      </view>
+  </view>
+  <view class="order-item-fd line">
+      <view class="orange" wx:if="{{item.status <= 1}}">{{item.overTimeString}}</view>
+      <view class="orange" wx:if="{{item.status == 2 || item.status == 4}}">用户自取时间:{{item.getSelfTime || ''}}</view> 
+      <view class='gray'>
+        寄存金额:
+        <text class='orange2'>￥{{item.consignmentPrice/100}}</text>
+      </view>
+  </view>
+  <view class="order-item-fd">
+    <view class='flex-item text-left'>
+        <text class="btn-default-link ml-2" wx:if="{{item.status >= 2}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="deleteConsignment">删除订单</text> 
+    </view>
+    <view class='flex-item text-right'>
+        <text class="btn-orange-link ml-2" wx:if="{{item.status == 1}}" data-id="{{item.id}}" data-index="{{index}}"  bindtap='feeConsignment'>自取</text> 
+    </view>
+  </view>
+</view>  
+<view class='load-text'>
+  {{msg}}
 </view>

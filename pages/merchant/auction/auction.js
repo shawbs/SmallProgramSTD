@@ -35,6 +35,7 @@ Page({
     page: 1,
     status: 0,
     loadover: false,
+    loading: false,
     msg: ''
   },
 
@@ -94,38 +95,33 @@ Page({
    */
   onReachBottom: function () {
     if(this.data.status == 3)return
-    if(!this.data.loadover){
-      action.merchantAuctionList({
-        status: this.data.status,
-        page: ++this.data.page,
-        limit: 10
-      }).then(res => {
-        let list = res.data.list;
-        if (list.length > 0) {
-          this.setData({
-            orderlist: this.data.orderlist.concat(list)
-          })
-        } else {
-          this.setData({
-            msg: '数据加载完成！',
-            loadover: true
-          })
-        }
+    if (this.data.loadover || this.data.loading) return
+
+    this.setData({
+      loading: true,
+      msg: app.globalData.msgLoading
+    })
+    action.merchantAuctionList({
+      status: this.data.status,
+      page: ++this.data.page,
+      limit: 10
+    }).then(res => {
+      let list = res.data.list;
+      if (list.length > 0) {
+        this.setData({
+          orderlist: this.data.orderlist.concat(list)
+        })
+      } else {
+        this.setData({
+          msg: app.globalData.msgLoadOver,
+          loadover: true
+        })
+      }
+      this.setData({
+        loading: false
       })
-    }
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  //滚动加载更多
-  loadmore: function () {
-
+    })
+    
   },
 
   //tab点击事件

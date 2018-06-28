@@ -35,3 +35,4 @@
     </view>
   </navigator>  
 </view>
+<view class='load-text' wx:if="{{!list.length}}">暂无数据</view>

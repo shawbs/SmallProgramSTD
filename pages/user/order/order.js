@@ -41,6 +41,7 @@ Page({
     page: 1,
     status: 5,
     loadover: false,
+    loading: false,
     msg: ''
   },
 
@@ -99,22 +100,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.loadover) return
-    let that = this;
-    that.scrollLoad(orderlist=>{
-      let arr = [...this.data.orderlist,...orderlist];
-      that.setData({
-        orderlist: arr
-      })
-    })
+    this.scrollLoad()
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   //tab点击事件
   navtab: function (e) {
@@ -130,12 +119,19 @@ Page({
     this.setData({
       page: 1,
       loadover: false,
-      msg: ''
+      msg: '',
+      orderlist: []
     })
     action.getOrderList({
       status: this.data.status,
       page: 1
     }).then(res=>{
+      if (res.data.orderlist.length == 0){
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+        return
+      }
       let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
       for(let i=orderlist.length-1;i>=0;i--){
         orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
@@ -147,27 +143,37 @@ Page({
   },
 
   //滚动加载
-  scrollLoad(cb){
+  scrollLoad(){
+    if (this.data.loadover || this.data.loading) return
+
     this.setData({
-      page: ++this.data.page
+      page: ++this.data.page,
+      msg: app.globalData.msgLoading,
+      loading: true
     })
     action.getOrderList({
       status: this.data.status,
       page: this.data.page
     }).then(res => {
-      if (res.data.orderlist.length<=0){
+      if (res.data.orderlist.length>0){
+        let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
+        for (let i = orderlist.length - 1; i >= 0; i--) {
+          orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
+        }
+        let arr = [...this.data.orderlist, ...orderlist];
+        this.setData({
+          orderlist: arr
+        })
+      }else{
         this.setData({
           loadover: true,
-          msg: '数据加载完成!'
+          msg: app.globalData.msgLoadOver
         })
-        return
       }
-      let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
-      for (let i = orderlist.length - 1; i >= 0; i--) {
-        orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
-      }
+      this.setData({
+        loading: false
+      }) 
 
-      cb && cb(orderlist)
     })
   },
 
@@ -197,6 +203,7 @@ Page({
     }else{
       let url = paymentno ? `/pages/user/pay/pay?paymentNo=${paymentno}` : `/pages/user/order-confirm/order-confirm?step=2&token=${token}&orderNo=${orderno} `;
 
+      
       wx.navigateTo({
         url: url,
       })
@@ -214,6 +221,7 @@ Page({
       wx.showToast({
         title: '收货完成',
       })
+      this.initPage()
     })
   },
 

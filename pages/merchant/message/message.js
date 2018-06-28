@@ -61,12 +61,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   slideS(e) {
     //判断是否只有一个触摸点

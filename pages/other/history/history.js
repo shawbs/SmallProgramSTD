@@ -1,5 +1,5 @@
 // pages/other/history/history.js
-
+const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
 Page({
@@ -9,14 +9,14 @@ Page({
    */
   data: {
     navlist: [
-      { cateId: '0', cateName: '直播拍场' },
+      { cateId: '0', cateName: '精品拍场' },
       { cateId: '2', cateName: '藏家拍场' },
       // { cateId: '2', cateName: '艺术拍场' }
     ],
     id:0,
     list: [],
     auctionInfo: null,
-    msg: '数据加载完成',
+    msg: '',
     exType: 1
   },
 
@@ -86,9 +86,10 @@ Page({
     }).then(res=>{
 
       if(res.data){
-        let auctionInfo = res.data.auctionInfo;
+        let auctionInfo = { ...res.data.auctionInfo};
         let list = res.data.items;
         auctionInfo.imgUrl = JSON.parse(auctionInfo.imgUrl);
+        auctionInfo.startTimeText = util.formatTimeSimple(auctionInfo.startTime)
         util.transformImgUrls(list, 'imgUrls');
         this.setData({
           list: list,
@@ -97,7 +98,8 @@ Page({
       }else{
         this.setData({
           list: [],
-          auctionInfo: null
+          auctionInfo: null,
+          msg: app.globalData.msgLoadNone
         })
       }
       
@@ -107,7 +109,8 @@ Page({
   navtab(e){
     let id = e.detail.id;
     this.setData({
-      id: id
+      id: id,
+      msg: ''
     })
     if(id == 0){
       this.setData({

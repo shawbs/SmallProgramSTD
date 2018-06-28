@@ -15,10 +15,6 @@ Page({
     timer: 60,
     phone:'',
     smstoken: '',
-    // code1:'',
-    // code2: '',
-    // code3: '',
-    // code4: '',
     inviterToken: ''
   },
 

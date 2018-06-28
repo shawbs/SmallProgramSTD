@@ -20,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.payType)
+    app.globalData.payType = 1;
     let bankCard = app.globalData.bankCard_default;
     if (bankCard){
       this.setData({
@@ -79,12 +79,7 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   initPage(){
     if (app.globalData.payType == 1){
@@ -143,13 +138,7 @@ Page({
     let drawNum = this.data.drawNum;
     let bankCardToken = this.data.bankCard.cardToken;
     if (Number(drawNum) && drawNum > 0){
-      if (app.globalData.payType == 2){
-        this.merchantWithdraw(drawNum, bankCardToken);
-      }
-      if (app.globalData.payType == 1) {
-        this.postDrawPay(drawNum, bankCardToken);
-      }
-      
+        this.postDrawPay(drawNum, bankCardToken);  
     }else{
       wx.showToast({
         title: '请输入正确金额',
@@ -169,20 +158,9 @@ Page({
       })
 
     })
-  },
-
-  //商户用户提现
-  merchantWithdraw(drawNum, bankCardToken) {
-    action.merchantWithdraw({
-      cashNum: drawNum * 100,
-      bankCardTokenString: bankCardToken
-    }).then(res => {
-      wx.navigateTo({
-        url: `/pages/user/pay/pay?paymentNo=${res.data.paymentNo}`,
-      })
-
-    })
   }
+
+
 
 
 })

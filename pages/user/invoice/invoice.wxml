@@ -5,42 +5,46 @@
     <input placeholder='请输入发票抬头名称' name="title"></input>
   </view>
   
-  <radio-group name="content" bindchange="toggleExpress">
+  
     <view class="logistics mb-2">
         <view class="logistics-title">选择发票内容</view>
-        <view class="logistics-bd extrafee">
-            <image class='logistics-pic'  mode='widthFix' src='/assets/image/698677074711150887.png'></image>
-            <view class='label'>艺术品</view>
-            <view class='radio mr-2'>
-              <radio value='1'  checked='{{content[1]}}' ></radio>
-              <image hidden='{{content[1]}}' src='/assets/image/icon_gou@2x.png'></image>
-              <image hidden='{{!content[1]}}' src='/assets/image/icon_gou2@2x.png'></image> 
-            </view>
-        </view>
-        <view class="logistics-bd extrafee">
-            <image class='logistics-pic'  mode='widthFix' src='/assets/image/26430149242697688.png'></image>
-            <view class='label'>珠宝
-            </view>
-            <view class='radio mr-2'>
-              <radio value='2'  checked='{{content[2]}}' ></radio>
-              <image hidden='{{content[2]}}' src='/assets/image/icon_gou@2x.png'></image>
-              <image hidden='{{!content[2]}}' src='/assets/image/icon_gou2@2x.png'></image> 
-            </view>
-        </view>
-
-        <view class="logistics-bd extrafee">
+        <radio-group name="content" bindchange="toggleExpress">
+          <view class="logistics-bd extrafee">
+              <image class='logistics-pic'  mode='widthFix' src='/assets/image/698677074711150887.png'></image>
+              <view class='label'>艺术品</view>
+              <view class='radio mr-2'>
+                <radio value='1'  checked='{{content[1]}}' ></radio>
+                <image hidden='{{content[1]}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!content[1]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+          </view>
+          <view class="logistics-bd extrafee">
+              <image class='logistics-pic'  mode='widthFix' src='/assets/image/26430149242697688.png'></image>
+              <view class='label'>珠宝
+              </view>
+              <view class='radio mr-2'>
+                <radio value='2'  checked='{{content[2]}}' ></radio>
+                <image hidden='{{content[2]}}' src='/assets/image/icon_gou@2x.png'></image>
+                <image hidden='{{!content[2]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              </view>
+          </view>
+        </radio-group>
+        <view class="logistics-bd extrafee" bindtap='callphone'>
             <image class='logistics-pic'  mode='widthFix' src='/assets/image/541115882817992348.png'></image>
-            <view class='label'>有疑问请联系客服400-000-0000
+            <view class='label'>有疑问请联系客服
+              <text class='blue'>0592-5220601</text>
             </view>
             <view class='radio mr-2'>
-              <radio value='3'  checked='{{content[3]}}' ></radio>
-              <image hidden='{{content[3]}}' src='/assets/image/icon_gou@2x.png'></image>
-              <image hidden='{{!content[3]}}' src='/assets/image/icon_gou2@2x.png'></image> 
+              <!-- <radio value='3'  checked='{{content[3]}}' ></radio> -->
+              <!-- <image hidden='{{content[3]}}' src='/assets/image/icon_gou@2x.png'></image> -->
+              <!-- <image hidden='{{!content[3]}}' src='/assets/image/icon_gou2@2x.png'></image>  -->
+              <radio value='3'></radio>
+              <image  src='/assets/image/icon_gou@2x.png'></image> 
             </view>
         </view>
       
     </view>
-  </radio-group>
+  
 
   <view class="max-bottom-bar ">
     <button class='link' form-type="submit">确定</button>

@@ -6,6 +6,7 @@ page{
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
+    min-height: 30px;
 }
 
 

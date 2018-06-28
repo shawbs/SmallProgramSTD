@@ -32,7 +32,9 @@
                   <view>当前价: <text class='orange'>￥{{item.finalPrice/100}}</text></view>
                   <view>起拍价: <text>￥{{item.startPrice/100}}</text></view>
                 </view>
-                <image class='status-pic' src='/assets/image/paic_icon_time1@2x.png' mode="aspectFit"></image>
+                <image wx:if="{{exType == 2}}" class='status-pic' src='/assets/image/paic_icon_time1@2x.png' mode="aspectFit"></image>
+                <image wx:if="{{exType == 1}}" class='status-pic' src='/assets/image/paic_icon_time3@2x.png' mode="aspectFit"></image>
+                
               </view>
             </navigator>
           </view>
@@ -41,7 +43,7 @@
 
         </view>
 
-        <view class='text-center load-text'>
+        <view class='load-text'>
           {{msg}}
         </view>
       

@@ -8,7 +8,7 @@
           <image src="{{auctionInfo.imgUrl[0]}}" mode='widthFix'/>
           <view class="view-text">
             <view class="title">第{{auctionInfo.auctionNo}}场</view>
-            <view class="time">开拍时间 {{auctionInfo.startTime}}</view>
+            <view class="time">开拍时间 {{auctionInfo.startTimeText}}</view>
           </view>
         </view>
         <view class="desc">
@@ -25,13 +25,13 @@
           <navigator url='/pages/other/detail/detail?id={{item.auctionItemId}}&exType={{exType}}'>
             <view class='good-item-title'>{{item.name}}</view>
             <image class='good-item-img' lazy-load src='{{item.imgUrls[0]}}' mode='aspectFill'></image>
-            <image src='http://app.shuntd.cn/shuntd/pub/images/icon_done@3x.png'  mode='aspectFill' class='done-icon'></image>
+            <image src='http://app.shuntd.cn/shuntd/pub/images/paic2_icon_chuizi@2x.png'  mode='aspectFill' class='done-icon'></image>
             <view class='good-item-fd'>
               <view class='good-price'>
                 <view>当前价: <text class='orange'>￥{{item.finalPrice/100}}</text></view>
                 <view>起拍价: <text>￥{{item.startPrice/100}}</text></view>
               </view>
-              <image class='status-pic' src='/assets/image/paic_icon_time1@2x.png' mode="aspectFit"></image>
+              <image class='status-pic' src='/assets/image/paic2_icon_chuizi@2x.png' mode="aspectFit"></image>
             </view>
           </navigator>
         </view>
@@ -39,7 +39,7 @@
         
 
       </view>
-      <view class='text-center load-text'>
+      <view class='load-text'>
         {{msg}}
       </view>
     </view>

@@ -23,8 +23,24 @@ const checkLogin = function(){
   }
 }
 
+//返回一个函数,传递函数会至少大于delay时间才能再次调用
+const debounce = function (action, delay) {
+  var timer = null;
+  return function () {
+    var self = this,
+      args = arguments;
+
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      action.apply(self, args)
+    }, delay);
+  }
+}
+
+
 
 module.exports = {
   loginHandle,
-  checkLogin
+  checkLogin,
+  debounce
 }

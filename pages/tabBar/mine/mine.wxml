@@ -2,7 +2,7 @@
 <view class='mine-page' wx:if="userInfo">
   <view class='top-bg'>
     <image class='icon-setting' src='/assets/image/wd_icon_sz@2x.png' bindtap='linkSetting'></image>
-    <image class='avatar' src='{{userInfo.headImgUrl || "/assets/image/default_avatar.png"}}'  bindtap='linkPersonal'></image>
+    <image class='avatar' src='{{userInfo.headImgUrl || "/assets/image/default_avatar.png"}}'  bindtap='linkPersonal' bindload=''></image>
 
   </view>
   <view class='top-nav'>
@@ -60,14 +60,17 @@
       </navigator>
     </view>
   </view>
-   <view class='orader-card'>
+
+   <!-- 商户入驻入口 -->
+  <!-- <view class='orader-card'>
     <view bindtap='linkMerchant' class='card-hd'>
       <image class='fl icon-user' src='/assets/image/sh_icon_07.png' mode='aspectFit'></image>
       商户中心
       <image class='fr icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
     </view>
-  
-  </view> 
+  </view>    -->
+
+
   <view class='mine-card'>
     <view class='card-bd'>
       <navigator url='/pages/user/wallet/wallet' class='cell'>

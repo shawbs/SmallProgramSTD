@@ -10,7 +10,7 @@
       <view class="login-content">
           <view class="input-phone-tip">请输入手机号码</view>
           <view class="input-control">
-              <input type="text" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{phone}}' bindconfirm="sendPhone"/>
+              <input type="number" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{phone}}'/>
           </view>
           <view class="login-btn-wp">
               <button type="button" class="login-btn" bindtap='sendPhone'>下一步</button>
@@ -32,7 +32,7 @@
 
           <view class="flex">
             <view class="flex-item">
-              <input type='text' confirm-type="done" focus="{{step == 2}}" placeholder='请输入验证码' placeholder-style="font-size:14px;" bindconfirm='postSend'></input>
+              <input type='number' maxlength='4' confirm-type="done" focus="{{step == 2}}" value="" placeholder='请输入验证码' placeholder-style="font-size:14px;" bindinput='postSend'></input>
             </view>
           </view>
       </view>

@@ -69,13 +69,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   //初始化
   initPage(){
     //获取商户帐户余额

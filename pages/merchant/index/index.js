@@ -61,33 +61,35 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   //初始用户信息
   initPage() {
-
+    
     this.getMerchantToken(()=>{
-      //获取商户信息
-      action.merchantMainInfo().then(res => {
+      let userInfo = wx.getStorageSync('merchant_info');
+      if (!!userInfo) {
         this.setData({
-          userInfo: res.data
+          userInfo: userInfo
         })
-      })
-
+      } else {
+        //获取商户信息
+        action.merchantMainInfo().then(res => {
+          wx.setStorageSync('merchant_info', res.data)
+          this.setData({
+            userInfo: res.data
+          })
+        })
+      }
       this.getMerchantBalance();
+      
     })
   },
 
   //获取商户余额
   getMerchantBalance(){
     action.getMerchantBalance({}).then(res=>{
+      wx.setStorageSync('merchant_balance', res.data)
       this.setData({
-        amount: res.data.amount/100
+        amount: res.data.amount
       })
     })
   },

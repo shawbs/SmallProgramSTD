@@ -6,7 +6,7 @@ const app = getApp();
 let PAGE = 1
 let CATEID = 0
 let LOADOVER = false
-
+let LOADING = false
 Page({
 
   /**
@@ -72,7 +72,7 @@ Page({
    */
   onPullDownRefresh: function () {
 
-    this.initListInfo(CATEID)
+    this.initListInfo()
     .then(function () {
       wx.stopPullDownRefresh()
     })
@@ -85,35 +85,36 @@ Page({
   onReachBottom: function () {
 
     //预展无分页，加载完不触发
-    if (LOADOVER || this.data.exType ==1) {
+    if (LOADOVER || LOADING || this.data.exType ==1) {
       return
     }
-    let _this = this;
-    let _page = PAGE;
+    LOADING = true;
+    this.setData({
+      msg: app.globalData.msgLoading
+    })
     action.getListInfo({
       cateId: -1,
       pageSize: 10,
-      pageNumber: ++_page,
-      auctionId: _this.data.auctionId
+      pageNumber: ++PAGE,
+      auctionId: this.data.auctionId
     })
       .then(res => {
         let treasurelist = [...res.data.items];
         if (treasurelist.length > 0) {
           this.transformImgUrls(treasurelist)
-          _this.setData({
-            listData: _this.data.listData.concat(treasurelist)
+          this.setData({
+            listData: this.data.listData.concat(treasurelist)
           })
-          PAGE = _page
         } else {
-          _this.setData({
-            msg: '数据加载完成!'
+          this.setData({
+            msg: app.globalData.msgLoadOver
           })
           LOADOVER = true
         }
-
+        LOADING = false
       })
       .catch(msg => {
-        console.log(msg)
+        LOADING = false
       })
 
 
@@ -127,24 +128,23 @@ Page({
   },
 
   //初始化列表
-  initListInfo(cateId = 0) {
-    let _this = this;
+  initListInfo() {
     return action.getListInfo({
-      cateId: -1,
+      cateId: CATEID,
       pageSize: 10,
       pageNumber: 1,
-      auctionId: _this.data.auctionId
+      auctionId: this.data.auctionId
     })
     .then(res => {
       let treasurelist = [...res.data.items]
       if (treasurelist.length > 0) {
         this.transformImgUrls(treasurelist)
-        _this.setData({
+        this.setData({
           listData: treasurelist
         })
       } else {
-        _this.setData({
-          msg: '无数据!'
+        this.setData({
+          msg: app.globalData.msgLoadNone
         })
       }
 
@@ -156,11 +156,10 @@ Page({
 
   //初始商品类型
   initCateType() {
-    let _this = this;
     action.getStoreCateType({})
     .then(res => {
-      _this.setData({
-        navlist: _this.data.navlist.concat(res.data.cateList)
+      this.setData({
+        navlist: this.data.navlist.concat(res.data.cateList)
       })
     })
     .catch(msg => {
@@ -170,26 +169,24 @@ Page({
 
   //初始化预展
   initPreviewInfo(){
-    let _this = this;
-    return action.getPreviewInfo(_this.data.auctionId)
+
+    return action.getPreviewInfo(this.data.auctionId)
     .then(res=>{
       let list = res.data.items
       let auctionInfo = { ...res.data.auctionInfo}
       auctionInfo.imgUrls = JSON.parse(auctionInfo.imgUrls)
       auctionInfo.startTime = util.formatTime(auctionInfo.startTime)
-      // console.log(auctionInfo, res.data.auctionInfo)
-      _this.transformImgUrls(list)
+      this.transformImgUrls(list)
       if(list.length>0){
-        _this.setData({
+        this.setData({
           listData: list,
           previewInfo: auctionInfo
         })
       }else{
-        _this.setData({
-          msg: '无数据!'
+        this.setData({
+          msg: app.globalData.msgLoadNone
         })
-      }
-      
+      } 
     })
     .catch(msg => {
       console.log(msg)
@@ -197,6 +194,7 @@ Page({
 
   },
 
+  //切换类别
   navtab(e) {
     let cateId = e.detail.id
     CATEID = cateId
@@ -205,15 +203,14 @@ Page({
     this.setData({
       msg: ''
     })
-
-    this.initListInfo(cateId)
+    this.initListInfo()
   },
 
+  //转换json字符串数组为js数组
   transformImgUrls(arr){
     for (let i = (arr.length - 1); i >= 0; i--){
       arr[i].imgUrls = JSON.parse(arr[i].imgUrls)
     }
-    // console.log(arr)
   }
 
 

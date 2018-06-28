@@ -9,7 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    entries: []
+    entries: [],
+    
+    page: 1,
+    loadover: false,
+    loading: false,
+    msg: ''
   },
 
   /**
@@ -58,14 +63,35 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
+    if (this.data.loading || this.data.loadover) return
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    this.setData({
+      loading: true,
+      page: ++this.data.page
+    })
+    action.getJBlist({
+      page: this.data.page,
+      limit: 10
+    }).then(res => {
+      let entries = [...res.data.entries]
+      if (entries.length > 0) {
+        for (let item of entries) {
+          item.appraisalTime = util.formatTimeSimple(item.appraisalTime)
+          item.createTime = util.formatTimeSimple(item.createTime)
+        }
+        this.setData({
+          entries: [...this.data.entries, ...entries]
+        })
+      } else {
+        this.setData({
+          loadover: true,
+          msg: app.globalData.msgLoadOver
+        })
+      }
+      this.setData({
+        loading: false
+      })
+    })
   },
 
   initPage(){
@@ -73,9 +99,20 @@ Page({
       page:1,
       limit: 10
     }).then(res=>{
-      this.setData({
-        entries: res.data.entries
-      })
+      let entries = [ ...res.data.entries]
+      if (entries.length > 0){
+        for (let item of entries){
+          item.appraisalTime = util.formatTimeSimple(item.appraisalTime)
+          item.createTime = util.formatTimeSimple(item.createTime)
+        }
+        this.setData({
+          entries: entries
+        })
+      }else{
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+      }
     })
   }
 })

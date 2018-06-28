@@ -2,7 +2,7 @@
 const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
-
+const { wx_conf} = require('../../../config.js')
 /**
  * 支付流程 生成订单号=>获取订单号支付项=>支付
  */
@@ -44,7 +44,7 @@ Page({
     paymentNo: '',//订单号
 
     payInfo: null, //支付项
-    originType: 0, //来源类型
+    payType: 0, //支付类型 0用户订单支付，1用户提现，2商户提现，3用户升级,4寄存
     originNum: 0, //支付数值
     paymentToken: '', //支付token
   },
@@ -56,7 +56,7 @@ Page({
 
       this.setData({
         paymentNo: options.paymentNo || '',
-        originType: app.globalData.payType
+        payType: app.globalData.payType
       })
       this.initPage();
   },
@@ -103,15 +103,17 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   //初始页面
   initPage(){
+    //获取帐户余额
+    action.getAccountMoney().then(res => {
+      this.setData({
+        money: res.data
+      })
+    })
+    
     //获取帐户订单支付项
     action.getPayInfo(this.data.paymentNo).then(res => {
       //获取支持的支付类型
@@ -180,7 +182,10 @@ Page({
     switch (payType){
       case 'xj': this.xjPay(paymentToken); break;
       case 'yl': this.ylPay(); break;
-      case 'wx': this.wxPay({ paymentToken: paymentToken}); break;
+      case 'wx': 
+        // this.wxPay({ paymentToken: paymentToken});
+        this.psotWxpay(paymentToken);
+        break;
       case 'xx': this.xxPay(paymentToken); break;
       case 'merchant_account': this.merchantPay(paymentToken); break;
       default: console.log('payType参数有误')
@@ -193,8 +198,8 @@ Page({
       wx.showToast({
         title: '支付成功',
       })
+      this.goback();
     })
-    this.goback();
   },
 
   //银联支付
@@ -241,11 +246,11 @@ Page({
       wx.showToast({
         title: '支付成功',
       })
+      this.goback();
     })
-    this.goback();
   },
 
-  //获取支持的支付类型
+  //转换支持的支付类型为本地的字符串
   getPayType1(key){
     let o = {
       'merchant_account': 'merchant_account',
@@ -288,6 +293,7 @@ Page({
         case 1: url = '/pages/user/wallet/wallet'; break;
         case 2: url = '/pages/merchant/wallet/wallet'; break;
         case 3: url = '/pages/user/upgrade/upgrade'; break;
+        case 4: url = '/pages/user/consignment/consignment'; break;
         default:
           wx.switchTab({
             url: '/pages/tabBar/index/index',
@@ -298,5 +304,70 @@ Page({
       })
 
     }, 1000)
+  },
+
+  //调用微信支付API
+  psotWxpay(paymentToken){
+    wx.showLoading({
+      title: 'loading..',
+    })
+    let self = this
+    this.wxLogin(openid=>{
+      console.log(openid)
+      action.wxpayParms({
+        openId: openid,
+        paymentToken: paymentToken
+      }).then(res=>{
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package_str,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+
+          success: function(res){
+            // console.log(res)
+            wx.showToast({
+              title: '支付成功',
+            })
+            self.goback();
+          },
+
+          complete: function(res){
+            console.log(res)
+            wx.hideLoading();
+          }
+        })
+      })
+      
+    });
+
+  },
+
+  //获取openid用于微信支付
+  wxLogin(cb){
+    
+    wx.login({
+      success: function(res){
+        let code = res.code
+        wx.request({
+          url: `https://api.weixin.qq.com/sns/jscode2session?appid=${wx_conf.appid}&secret=${wx_conf.secret}&js_code=${code}&grant_type=authorization_code`,
+          data: {},
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            if (!res.data.errcode){
+              let openid = res.data.openid //返回openid
+              cb && cb(openid)
+            }else{
+              console.log(res.data.errmsg)
+            }
+          }
+        })
+      }
+    })
   }
+
+  
 })

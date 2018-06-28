@@ -41,7 +41,7 @@
       </view>  
     </view>
   
-    <view class='text-center load-text'>
+    <view class='load-text'>
       {{msg}}
     </view>
 

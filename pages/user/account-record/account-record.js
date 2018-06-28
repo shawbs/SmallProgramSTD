@@ -71,12 +71,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   //帐户余额
   initPage() {

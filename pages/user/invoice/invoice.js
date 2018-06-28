@@ -14,7 +14,7 @@ Page({
     content: {
       1: true,//艺术品
       2: false,//珠宝
-      3: false, //有疑问请联系客服400-000-0000
+      // 3: false, //有疑问请联系客服400-000-0000
     },
   },
 
@@ -69,12 +69,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   toggleExpress(e) {
     console.log(e)
@@ -109,8 +103,14 @@ Page({
     let o = {
       1: '艺术品',
       2: '珠宝',
-      3: '有疑问请联系客服400-000-0000'
+      // 3: '有疑问请联系客服400-000-0000'
     }
     return o[key]
+  },
+
+  callphone(){
+    wx.makePhoneCall({
+      phoneNumber: '0592-5220601'
+    })
   }
 })

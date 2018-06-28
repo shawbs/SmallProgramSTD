@@ -26,7 +26,7 @@
                 </view>
                 <view class="logistics-info-content">
                     <view class="address">
-                        <label>收货地址</label>
+                        <label>收货地址:</label>
                         {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
                     </view>
                     <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink">设置地址</navigator>

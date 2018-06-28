@@ -13,7 +13,13 @@ Page({
 
     //滑动删除
     startX: 0,
-    deleteWidth: 90
+    deleteWidth: 90,
+
+    //分页
+    page: 1,
+    loading: false,
+    loadover: false,
+    msg: ''
   },
 
   /**
@@ -68,14 +74,30 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
+    if(this.data.loadover || this.data.loading) return
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    this.setData({
+      page: ++this.data.page,
+      loading: true,
+      msg: app.globalData.msgLoading
+    })
+    action.getAddressList({
+      pageNumber: this.data.page,
+      pageSize: 10
+    }).then(res => {
+      if(res.data.list.length>0){
+        this.setData({
+          addressList: res.data.list
+        })
+      }else{
+        this.setData({
+          msg: app.globalData.msgLoadOver
+        })
+      }
+      this.setData({
+        loading: false,
+      })
+    })
   },
 
   initPage(){
@@ -83,9 +105,15 @@ Page({
       pageNumber: 1,
       pageSize: 10
     }).then(res=>{
-      this.setData({
-        addressList: res.data.list
-      })
+      if (res.data.list.length > 0) {
+        this.setData({
+          addressList: res.data.list
+        })
+      } else {
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+      }
     })
   },
 

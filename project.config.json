@@ -35,7 +35,7 @@
 				{
 					"id": 0,
 					"name": "tabBar",
-					"pathName": "pages/tabBar/new/new",
+					"pathName": "pages/tabBar/index/index",
 					"query": "",
 					"scene": "1001"
 				},
@@ -56,8 +56,8 @@
 				{
 					"id": 3,
 					"name": "t",
-					"pathName": "pages/other/new-detail/new-detail",
-					"query": "step=2&token=/nlz5FqX7z+jaHqLH5Dfuu4VjcbXQkU2yCe8BcWZbSremeXhCkEeN+1e7FnscKDWxTftd9WeSNhJFwyMLxoqcDwFSJqUHuE5uFYZeItTG0tQSsUzQTfoY+qKQCDbNvg7DWzo4+1SbFQCv4sxqdmEkEdRB96OuADmekxLE600KA1HAJfDZ3nlGo6CtucQ3XimZHQDDJBuyRQ=&orderNo=2018061116000391609",
+					"pathName": "pages/user/order/order",
+					"query": "",
 					"scene": "1001"
 				}
 			]

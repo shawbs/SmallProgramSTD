@@ -65,12 +65,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   initPage(){
     action.getJB().then(res=>{
@@ -80,6 +74,11 @@ Page({
         infoData: res.data,
         appraisalToken: res.data.appraisalToken
       })
+      if (res.data.paymentNo){
+        wx.navigateTo({
+          url: `/pages/other/yb-pay/yb-pay?payNo=${res.data.paymentNo}`,
+        })
+      }
     })
   },
 
@@ -87,66 +86,24 @@ Page({
   selectImg(){
     let that = this;
     let previewList = that.data.previewList;
-    // if (uploading){
-    //   wx.showToast({
-    //     title: '等待上传完成',
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
-    // uploading = true;
     wx.chooseImage({
-      count: 1,
+      count: 6,
       success: function(res) {
-        //选完后设置一个空图片对象占用位置
-        // previewList.push({
-        //   imgUrl: '',
-        //   id: ''
-        // });
-        // that.setData({
-        //   previewList: previewList
-        // })
         var tempFilePaths = res.tempFilePaths;
-        // let uploadTask = 
-        that.uploadImge(tempFilePaths[0], (file)=>{
-          //上传完后删除空图片对象并加上上传好的图片对象
-          previewList.pop();
-          file.imgUrl = file.url;
-          delete file.url;
-          previewList.push(file);
-          that.setData({
-            previewList: previewList
+        
+        for (let file of tempFilePaths){
+          that.uploadImge(file, (file) => {
+            //上传完后删除空图片对象并加上上传好的图片对象
+            file.imgUrl = file.url;
+            delete file.url;
+            previewList.push(file);
+            that.setData({
+              previewList: previewList
+            })
           })
-        });
-        //获取上传进度
-        // uploadTask.onProgressUpdate(res=>{
-        //   let num = res.progress;
-        //   //获取当前在上传的图片索引
-        //   let key = previewList.length - 1;
-        //   let progress = {};
-        //   progress['index'] = key;
-        //   progress['value'] = num
-        //   that.setData({
-        //     progress: progress
-        //   })
-
-        //   if (num == 100){
-        //     setTimeout(function(){
-        //       num = 101;
-        //       progress['value'] = num;
-        //       that.setData({
-        //         progress: progress
-        //       })
-        //       uploading = false;
-        //     },500)
-        //   }
-          
-          
-        // })
-      },
-      // fail(e){
-      //   uploading = false;
-      // }
+        }
+        
+      }
     })
   },
 
@@ -168,9 +125,9 @@ Page({
   },
 
   //上传鉴宝图片
-  uploadImge(filePath,cb){
+  uploadImge(file,cb){
     action.uploadJBpic({
-      files: filePath,
+      files: file,
       filename: 'file',
       formData: { appraisalToken: this.data.appraisalToken}
     }).then(res=>{
@@ -180,12 +137,12 @@ Page({
 
   //提交表单
   submitForm(e) {
+    console.log(this.data.previewList.length)
     let formData = e.detail.value;
-    console.log(formData);
     formData.appraisalToken = this.data.appraisalToken;
     action.addJB(formData).then(res=>{
-      wx.showToast({
-        title: '提交成功！',
+      wx.navigateTo({
+        url: `/pages/other/yb-pay/yb-pay?payNo=${res.data.paymentNo}`,
       })
     })
   },

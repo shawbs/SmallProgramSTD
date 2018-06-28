@@ -29,7 +29,7 @@
   </view>
 
   <scroll-view class='_list' scroll-y style='height:{{windowH-scrollH}}px'>
-    <navigator url='/pages/user/recommend-detail/recommend-detail?userId={{item.userId}}&partnerToken={{partnerToken}}' wx:for="{{list}}" wx:key="{{index}}"  class="inviter">
+    <navigator url='/pages/user/recommend-detail/recommend-detail?userId={{item.userId}}&partnerToken={{partnerToken}}&type={{tabIndex}}' wx:for="{{list}}" wx:key="{{index}}"  class="inviter">
       <view class='list-item'>
         <view class='item'>
           <view>[{{index+1}}] {{item.nickName}}</view>

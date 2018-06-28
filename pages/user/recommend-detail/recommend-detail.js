@@ -10,7 +10,8 @@ Page({
   data: {
     logs: [],
     orderlist: [],
-    detail:null
+    detail:null,
+    type: 1
   },
 
   /**
@@ -19,6 +20,9 @@ Page({
   onLoad: function (options) {
     let userId = options.userId;
     let partnerToken = options.partnerToken;
+    this.setData({
+      type: options.type
+    })
     this.initPage(partnerToken,userId)
   },
 
@@ -64,23 +68,34 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   initPage(partnerToken,userId){
-    action.getInviteDetails({
-      partnerToken: partnerToken,
-      userId: userId
-    }).then(res=>{
-      this.setData({
-        detail: res.data.detailsDto,
-        logs: res.data.logs,
-        orderlist: res.data.orderlist
+    console.log(this.data.type)
+    if(this.data.type == 1){
+      action.getInviteDetails({
+        partnerToken: partnerToken,
+        userId: userId
+      }).then(res => {
+        this.setData({
+          detail: res.data.detailsDto,
+          logs: res.data.logs,
+          orderlist: res.data.orderlist
+        })
       })
-    })
+    }
+    if (this.data.type == 2) {
+      action.getInviteDetails2({
+        partnerToken: partnerToken,
+        userId: userId
+      }).then(res => {
+        this.setData({
+          detail: res.data.detailsDto,
+          logs: res.data.logs,
+          orderlist: res.data.orderlist
+        })
+      })
+    }
+    
   }
 })

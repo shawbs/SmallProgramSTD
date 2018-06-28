@@ -136,13 +136,19 @@ image{
   color: #000;
 }
 .orange{
-  color: #E86433;
+  color: #E86433 !important;
 }
 .orange1{
-  color: #e76434;
+  color: #e76434 !important;
 }
 .orange2{
-  color: #d89f55;
+  color: #d89f55 !important;
+}
+.white{
+  color: #fff;
+}
+.red{
+  color: red;
 }
 .gray{
   color: #9F9F9F;
@@ -193,8 +199,9 @@ button::after{
 .btn-orange-link{
   display:inline-block;
   border: #E5B577 1px solid;
+  background: rgba(255,235,178,0.23);
   border-radius: 4px;
-  color: #E5B577;
+  color: #D89F55;
   font-size: 14px;
   padding: 5px 12px;
 }
@@ -258,6 +265,9 @@ button::after{
 .text-center{
   text-align: center
 }
+.text-left{
+  text-align: left;
+}
 .text-right{
   text-align: right;
 }
@@ -274,6 +284,20 @@ button::after{
 .help image{
   width: 26px;
   height: 26px;
+}
+.icon-phone{
+  width: 20px;
+  height: 20px;
+}
+.icon-circle{
+  width: 15px;
+  height: 15px;
+}
+.icon-line{
+  display: inline-block;
+  width: 2px;
+  background: #ddd;
+  height: 30px;
 }
 .icon-level{
   width: 15px;
@@ -296,8 +320,8 @@ button::after{
   height: 20px;
 }
 .icon-setting{
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
 }
 .icon-msg{
   width: 30px;
@@ -309,6 +333,7 @@ button::after{
   height: 80px;
   border-radius: 50%;
   border: 3px solid  #d89f55;
+  background: #333;
   overflow:hidden;
 }
 .store-logo{
@@ -318,10 +343,14 @@ button::after{
 }
 .load-text{
   font-size: 12px;
-  color: #333;
-  padding: 20px 0;
+  color: #444;
+  line-height: 40px;
+  text-align: center;
 }
 /**商品列表**/
+.good-list{
+  padding-top: 10px;
+}
 .good-item{
   position: relative;
   background: #ffffff;
@@ -465,7 +494,7 @@ button::after{
 .order-item .show-text{
     color: #888;
     font-size: 12px;
-    padding: 12px;
+    padding: 10px 12px;
     width: 55%;
     position: relative;
     box-sizing: border-box;
@@ -478,10 +507,10 @@ button::after{
 }
 .order-item .show-text .residue{
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     left: 12px;
     font-size: 20px;
-    color: #E86433;
+    color: #D89F55;
 }
 
 /**大的底部条**/
@@ -528,8 +557,12 @@ button::after{
   opacity: 0;
 }
 .checkbox checkbox{
-   position: absolute;
-   opacity: 0; 
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
 }
 .checkbox image{
   width: 30px;
@@ -720,8 +753,9 @@ topnav.dark{
   border-radius: 50%;
   background: #E86433;
   color: #fff;
-  width: 6px;
-  height: 6px;
+  width: 16px;
+  height: 16px;
+  transform: scale(.6);
 }
 .orader-card .card-bd .cell .img{
   width: 25px;
@@ -778,7 +812,7 @@ topnav.dark{
   right: 10px;
 }
 
-/* 地址1 */
+/* 收货地址列表 */
 .address-item{
     font-size: 14px;
     line-height: 22px;
@@ -786,79 +820,52 @@ topnav.dark{
     margin-bottom: 10px;
     position: relative;
 }
-.address-item .address-box{
+/* 地址 */
+.address-box{
   position: relative;
   background: #fff;
   z-index: 1;
   transition: all .2s linear;
 }
-.address-item .address-item-title{
+.address-box .address-item-title{
     line-height: 22px;
     border-bottom: 1px solid #f2f2f2;
     color: #c4c4c4;
     padding: 8px 10px;
 }
-.address-item .address-item-bd{
+.address-box .address-item-bd{
     position: relative;
-    padding-left: 40px;
+    padding-left: 10px; 
     color: #666666;
 }
-.address-item .address-row{
+.address-box .address-row{
     padding: 10px;
     color: #3A3838;
     border-bottom: 1px solid #f2f2f2;
 }
 .address{
-    padding: 10px 0;
+    padding: 10px;
     display: flex;
-    align-items: center;
-}
-.address image{
+    color: #3A3838;
+} 
+.address .icon-address{
+  margin-right: 10px;
   width: 30px;
+  position: relative;
+  top: -5px;
 }
 
-/* 地址2 */
-.address-icon{
-  width: 30px;
-}
-.address-item2{
-    font-size: 14px;
-    line-height: 22px;
-    margin-bottom: 10px;
-    position: relative;
-}
-.address-item2 .address-box{
-  position: relative;
-  background: #fff;
-  z-index: 1;
-  transition: all .2s linear;
-}
-.address-item2 .address-item-title{
-    line-height: 22px;
-    border-bottom: 1px solid #f2f2f2;
-    color: #c4c4c4;
-    padding: 8px 10px;
-}
-.address-item2 .address-item-bd{
-    padding: 0 10px;
-    color: #666666;
+/* 简易地址 */
+.address-simple{
+  padding: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.address-item2 .address-row{
     color: #3A3838;
 }
-.address-item2 .address-icon{
-  margin-right: 10px;
+.address-simple .label{
+  width: 66px;
+  color: #9B9B9B;
 }
-.address2{
-  flex: 1;
-  padding: 10px 0;
-}
-.address image{
-  width: 30px;
-}
+
 .btn-group{
   display: flex;
   padding: 0 5px;
@@ -873,10 +880,27 @@ topnav.dark{
   height: 30px;
 }
 .radio radio{
-   position: absolute;
-   opacity: 0; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0; 
+  width: 30px;
+  height: 30px;
 }
 .radio image{
   width: 30px;
   height: 30px;
+}
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -ms-transform: scale(.3);
+        transform: scale(.3);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
 }

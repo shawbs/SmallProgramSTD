@@ -50,7 +50,7 @@
       <navigator url='/pages/merchant/wallet/wallet' class="list-item">
         <image class='label-icon' src='/assets/image/money_icon.png' mode='aspectFit'></image>
         <label class='fullflex'>帐户余额</label>
-        <text class='orange2'>{{amount}}元</text>
+        <text class='orange2'>{{amount/100}}元</text>
         <image class='icon-arrow-r' src='/assets/image/xx_jiantou@2x.png' mode='aspectFit'></image>
       </navigator>
       <!-- <navigator url='/pages/merchant/message/message' class="list-item mb-2 noborder">

@@ -14,3 +14,4 @@
     </view>
   </navigator>  
 </view>
+<view class='load-text'>{{msg}}</view>

@@ -68,12 +68,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   //初始化页面
   initPage(payNo){

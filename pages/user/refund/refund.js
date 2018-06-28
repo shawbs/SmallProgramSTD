@@ -66,12 +66,7 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   init(){
     action.getRefundToken({
@@ -88,10 +83,13 @@ Page({
   uploadImg() {
     let that = this;
     wx.chooseImage({
-      count: 1,
+      count: 9,
       success: function (res) {
-        let tempFilePath = res.tempFilePaths[0]
-        that.uploadImge(tempFilePath, 0)
+        console.log(res)
+        let tempFilePaths = res.tempFilePaths
+        for (let file of tempFilePaths) {
+          that.uploadImge(file, 0)
+        }
       }
     })
   },

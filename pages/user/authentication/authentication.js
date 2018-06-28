@@ -61,12 +61,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
 
   initPage() {
     //如果正在申请商户,设checkInfo为1,反之则设为实名认证状态

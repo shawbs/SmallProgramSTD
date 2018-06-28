@@ -70,7 +70,7 @@ page{
 .chunk .preview-img{
   margin-right: -8px;
   margin-bottom: 20px;
-  min-height: 185px;
+  /* min-height: 185px; */
 }
 .chunk .preview-img .img{
   width: 77px;

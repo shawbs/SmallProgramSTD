@@ -28,10 +28,7 @@
                     </view>
                 </view>
                 <view class="mine_cell">
-                    <view class="weui-cell__bd">
                         <textarea class="weui-textarea" name="street" id="addressOther" placeholder="请输入详细地址" value='{{address.street}}'/>
-                        
-                    </view>
                 </view>
             </view>
             <view class="mine_cells">

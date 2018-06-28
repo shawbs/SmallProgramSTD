@@ -4,14 +4,19 @@ const app = getApp();
 const action = require('../../../api/action.js')
 const util = require('../../../utils/util.js')
 
-let PAGE = 1;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+
+    page: 1,
+    loadover: false,
+    loading: false,
+    msg:''
   },
 
   /**
@@ -60,40 +65,62 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
+    if(this.data.loading || this.data.loadover) return
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-  initPage(){
-    let that = this;
-    that.fetchData(0,function(data){
-      let list = data.returnlist;
-      for(let item of list){
-        item.statusText = util.getAfterStatusText(item.returnStatus);
-        item.imgUrl = JSON.parse(item.imgUrl)
+    this.setData({
+      loading: true,
+      page: ++this.data.page
+    })
+    action.getAftermarketList({
+      status: 0,
+      page: this.data.page,
+      limit: 10
+    }).then(res => {
+      let list = res.data.returnlist;
+      if (list.length > 0) {
+        for (let item of list) {
+          item.statusText = util.getAfterStatusText(item.returnStatus);
+          item.imgUrl = JSON.parse(item.imgUrl)
+        }
+        this.setData({
+          list: [...this.data.list, ...list]
+        })
+      } else {
+        this.setData({
+          loadover: true,
+          msg: app.globalData.msgLoadOver
+        })
       }
-      that.setData({
-        list: list
+      this.setData({
+        loading: false
       })
     })
   },
 
-  fetchData(status,cb){
-    action.getAftermarketList({
-      status: status,
-      page: PAGE,
-      limit: 10
-    }).then(res=>{
-      cb && cb(res.data)
-    })
-  },
 
-  
+
+  initPage(){
+    action.getAftermarketList({
+      status: 0,
+      page: this.data.page,
+      limit: 10
+    }).then(res => {
+      let list = res.data.returnlist;
+      if(list.length > 0){
+        for (let item of list) {
+          item.statusText = util.getAfterStatusText(item.returnStatus);
+          item.imgUrl = JSON.parse(item.imgUrl)
+        }
+        this.setData({
+          list: list
+        })
+      }else{
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+      }
+    })
+  }
+
 
 })

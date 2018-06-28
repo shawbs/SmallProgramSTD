@@ -5,7 +5,7 @@ const app = getApp();
 let PAGE = 1
 let CATEID = 0
 let LOADOVER = false
-
+let LOADING = false
 Page({
 
   /**
@@ -61,7 +61,7 @@ Page({
    */
   onPullDownRefresh: function () {
     
-    this.initListInfo(CATEID)
+    this.initListInfo()
     .then(function(){
       wx.stopPullDownRefresh()
     })
@@ -73,29 +73,27 @@ Page({
    */
   onReachBottom: function () {
 
-    if (LOADOVER){
-      return
-    }
-    let _this = this;
-    let _page = PAGE;
+    if (LOADOVER || LOADING) return
+
+    LOADING = true
     action.getStoreListInfo({
       cateId: CATEID,
       limit: 10,
-      page: ++_page
+      page: ++PAGE
     })
     .then(res => {
       let treasurelist = res.data.treasurelist;
       if(treasurelist.length > 0){
-        _this.setData({
-          listData: _this.data.listData.concat(treasurelist)
+        this.setData({
+          listData: this.data.listData.concat(treasurelist)
         })
-        PAGE = _page
       }else{
-        _this.setData({
-          msg: '全部数据已加载完成'
+        this.setData({
+          msg: app.globalData.msgLoadOver,
         })
         LOADOVER = true
       }
+      LOADING = false
       
     })
     .catch(msg => {
@@ -113,22 +111,21 @@ Page({
   },
 
   //初始化列表
-  initListInfo(cateId=0){
-    let _this = this;
+  initListInfo(){
     return action.getStoreListInfo({
-      cateId: cateId,
+      cateId: CATEID,
       limit: 10,
       page: 1
     })
     .then(res=>{
       let treasurelist = res.data.treasurelist
       if(treasurelist.length>0){
-        _this.setData({
+        this.setData({
           listData: treasurelist
         })
       }else{
-        _this.setData({
-          msg: '无数据'
+        this.setData({
+          msg: app.globalData.msgLoadNone,
         })
       }
       
@@ -140,11 +137,10 @@ Page({
 
   //初始商品类型
   initCateType(){
-    let _this = this;
     action.getStoreCateType({})
     .then(res => {
-      _this.setData({
-        navlist: _this.data.navlist.concat(res.data.cateList)
+      this.setData({
+        navlist: this.data.navlist.concat(res.data.cateList)
       })
     })
     .catch(msg => {
@@ -161,7 +157,7 @@ Page({
       msg: ''
     })
     
-    this.initListInfo(cateId)
+    this.initListInfo()
   }
 
 

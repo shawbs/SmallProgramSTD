@@ -17,6 +17,7 @@
     align-items: center;
     border-bottom: 1px solid #f2f2f2;
 }
+
 .address-form .mine_cell.weui-cell_switch{
     padding: 8px 15px;
 }
@@ -26,6 +27,7 @@
 }
 .weui-textarea{
   height: 100px;
+  flex: 1;
 }
 .picker{
   color: #666;

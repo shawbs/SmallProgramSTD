@@ -26,6 +26,8 @@
 }
 .table .th,.table .td{
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 .table .tr:last-of-type{
   border-bottom: none;

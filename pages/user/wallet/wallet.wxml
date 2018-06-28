@@ -23,7 +23,8 @@
         <view wx:for="{{moneyList}}" wx:key="{{index}}" url='/pages/user/account-record/account-record?id=123' class="list-item">
           <view class='left'>
             <view class='_title'>{{item.msg}}</view>
-            <text class='green'>+{{item.amount/100}}</text>
+            <text class='green' wx:if="{{item.type==0}}">+{{item.amount/100}}</text>
+            <text class='orange' wx:if="{{item.type==1}}">-{{item.amount/100}}</text>
           </view>
           <view class='right'>
             <view>
@@ -57,7 +58,8 @@
         <view class="list-item" wx:for="{{integralList}}" wx:key="{{index}}">
           <view class='left'>
             <view class='_title'>{{item.msg}}</view>
-            <text class='green'>+{{item.amount}}</text>
+            <text class='green' wx:if="{{item.type==0}}">+{{item.amount}}</text>
+            <text class='orange' wx:if="{{item.type==1}}">-{{item.amount}}</text>
           </view>
           <view class='right'>
             <view>

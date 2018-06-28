@@ -65,12 +65,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
   
   initPage(){
     action.getAftermarketInfo(this.data.orderNo).then(res=>{

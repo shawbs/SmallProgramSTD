@@ -14,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    status: 0,
     payway: null,
     info: null,
     address: null,
@@ -108,16 +109,11 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
+
 
   //改变当前的总价格
   changeTotal(){
-    let total = (this.data.info.bidPrice / 100) + (this.data.invoiceFee / 100) + (this.data.extraFee / 100);
+    let total = (this.data.info.actualPrice / 100) + (this.data.invoiceFee / 100) + (this.data.extraFee / 100);
     this.setData({
       total: total.toFixed(1)
     })
@@ -147,6 +143,24 @@ Page({
         invoiceToken: invoice.invoiceToken,
         invoiceFee: invoice.fee
       })
+      
+      //发票返回默认发票为选中
+      let _invoice = this.data.invoice;
+      _invoice.checked = true;
+      this.setData({
+        invoice: _invoice
+      })
+      //计算发票费用
+      if (!this.data.invoice.checked) {
+        this.setData({
+          invoiceFee: 0
+        })
+      } else {
+        this.setData({
+          invoiceFee: InvoiceFee
+        })
+      }
+      this.changeTotal();
     })
 
 
@@ -160,6 +174,7 @@ Page({
       let info = {...res.data};
       info.imgUrl = JSON.parse(info.imgUrl);
       this.setData({
+        status: info.orderStatus,
         info: info,
         address: info.address,
         shippmentSelfToken: info.shippmentSelfToken, //自取token
@@ -167,7 +182,13 @@ Page({
         extraFeeToken: info.extraFeeToken, //增值费用token
       })
 
-      if (info.orderStatus>12){
+      if (this.data.status == 10){
+        this.setData({
+          step: 1
+        })
+      }
+
+      if (this.data.status>12){
         wx.showToast({
           title: '订单已经配置',
           icon: 'none'
@@ -183,7 +204,7 @@ Page({
       orderNo: this.data.orderNo
     }).then(res=>{
       let payway = {...res.data};
-      let entrys =  {};
+      let entrys =  [];
       for (let i = 0; i < payway.entrys.length; i++) {
         entrys[i] = payway.entrys[i];
         if(i == 0){
@@ -219,30 +240,41 @@ Page({
   toggle(e){
     let value = e.detail.value;
     let entrys = this.data.entrys;
-    for (let item of entrys){
-      item.checked = false;
+    console.log(entrys)
+    for (let i=0; i<entrys.length;i++){
+      entrys[i].checked = false;
     }
     entrys[value].checked = true
     this.setData({
-      types: entrys
+      entrys: entrys
     })
+
   },
 
   //提交付款配置项,如果是全款则进入第二步配置,如果是分期,则跳转支付定金
   nextPost(e){
     let payType = e.detail.value.payType;
-    action.postOrderPayway({
-      paymentType: payType,
-      orderNo: this.data.orderNo
-    }).then(res=>{
-      if (payType == 1){
-        this.createPayNo()
-      }else{
-        this.setData({
-          step: 2
-        })
-      }
-    })
+    if (this.data.status == 10){
+      this.createPayNo({
+        orderToken: this.data.token
+      })
+    }else{  
+      action.postOrderPayway({
+        paymentType: payType,
+        orderNo: this.data.orderNo
+      }).then(res=>{
+        if (payType == 1){
+          this.createPayNo({
+            orderToken: this.data.token
+          })
+        }else{
+          this.setData({
+            step: 2
+          })
+        }
+      })
+    }
+
   },
 
   //修改增值费用
@@ -284,8 +316,7 @@ Page({
       this.linkInvoice();
       return
     }
-
-
+    
     let invoice = this.data.invoice;
     invoice.checked = !invoice.checked;
     this.setData({
@@ -394,6 +425,11 @@ Page({
   getShipmentToken(cb){
     console.log(this.data.address)
     let address = this.data.address;
+    if(!address){
+      wx.showToast({
+        title: '收货地址不能为空',
+      })
+    } 
     action.getDeliveryToken({
       orderToken: this.data.token,
       isInsure: 0,

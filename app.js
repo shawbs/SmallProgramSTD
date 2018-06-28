@@ -24,7 +24,7 @@ App({
     if (inviterToken){
       wx.setStorageSync('inviterToken', inviterToken)
     }
-       
+    
   },
 
   //当小程序从前台进入后台，会触发 onHide
@@ -40,6 +40,9 @@ App({
   },
 
   globalData: {
+    msgLoadNone: '暂无数据', //数据请求提示文本1
+    msgLoading: '正在加载中,请稍后', //数据请求提示文本1
+    msgLoadOver: '全部数据加载完成', //数据请求提示文本1
     wxUser: null,//微信用户
     user: null,//std用户
     conf: conf.conf,
@@ -51,7 +54,7 @@ App({
     isMerchant: 1,
 
     //支付类型 0默认(用户) 1用户提现 2商户提现
-    payType: 0, 
+    payType: 0, //支付类型 0用户订单支付，1用户提现，2商户提现，3用户升级,4寄存
 
     //刷新商户申请状态
     getMerchantApplyStatus(cb) { 

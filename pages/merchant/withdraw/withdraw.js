@@ -80,13 +80,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
   initPage(){
     if (app.globalData.payType == 1){
       this.getAccountMoney();

@@ -5,16 +5,16 @@
           <image class='img' src="{{logistics.imgUrl[0]}}"></image>
           <view class="show-text">
             <view class='mb-1'>物流状态：
-              <text class='white'>{{entry.deliveryStatus}}</text>
+              <text class='white'>{{entry.deliveryStatus || "未配送"}}</text>
             </view>
             <view class='mb-1'>乘运公司：
-              <text class='white'>{{entry.deliveryCompany}}</text>
+              <text class='white'>{{entry.deliveryCompany || "无"}}</text>
             </view>
             <view class='mb-1'>运单单号：
-              <text class='white'>{{entry.deliveryCompany}}</text>
+              <text class='white'>{{entry.deliveryNo || "无"}}</text>
             </view>
             <view class='mb-1'>官方电话：
-              <text class='white'>{{entry.deliveryCompanyPhone}}</text>
+              <text class='white'>{{entry.deliveryCompanyPhone || "无"}}</text>
             </view>
           </view>
       </view>
@@ -29,6 +29,7 @@
         <text class='small'>{{item.time}}</text>
       </view>
     </view>
+    <view class='load-text' wx:if="{{!entry.deliveryHistory}}">无配送信息</view>
   </view>
 
   <view class='logistics-bottom'>

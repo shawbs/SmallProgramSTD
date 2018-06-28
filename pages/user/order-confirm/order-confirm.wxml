@@ -15,21 +15,35 @@
         </view>
         <form wx:if="{{step == 1}}" bindsubmit="nextPost">
             <radio-group name="payType" class="play-list" bindchange="toggle">
-              <view class='list-item' wx:for="{{entrys}}" wx:key="{{index}}">
-                <view class='label' wx:if="{{item.type == 0}}">
-                  全款
-                  <text class='gray small'>全款金额: ￥{{payway.payAllCash/100}}</text>
+
+              <block wx:for="{{entrys}}" wx:key="{{index}}">
+                <view class='list-item' wx:if="{{item.type == 0 && status != 10}}">
+                  <view class='label'>
+                    全款
+                    <text class='gray small'>全款金额: ￥{{payway.payAllCash/100}}</text>
+                  </view>
+                  <view class='radio' >
+                    <radio value='{{item.type}}'  checked='{{item.checked}}' ></radio>
+                    <image hidden='{{item.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                    <image hidden='{{!item.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                  </view>
                 </view>
-                <view class='label' wx:if="{{item.type == 1}}">
-                  定金
-                  <text class='gray small'>首款金额: ￥{{payway.payFirstCash/100}} 尾款金额: ￥{{payway.payRestCash/100}}</text>
+                <view class='list-item' wx:if="{{item.type == 1}}">
+                  <view class='label'>
+                    定金
+                    <text class='gray small'>首款金额: ￥{{payway.payFirstCash/100}} 尾款金额: ￥{{payway.payRestCash/100}}</text>
+                  </view>
+                  <view class='radio' wx:if="{{status != 10}}">
+                    <radio value='{{item.type}}'  checked='{{item.checked}}' ></radio>
+                    <image hidden='{{item.checked}}' src='/assets/image/icon_gou@2x.png'></image>
+                    <image hidden='{{!item.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
+                  </view>
+                  <view class='radio' wx:if="{{status == 10}}">
+                    <radio value='{{item.type}}'  checked></radio>
+                    <image src='/assets/image/icon_gou2@2x.png'></image> 
+                  </view>
                 </view>
-                <view class='radio' >
-                  <radio value='{{item.type}}'  checked='{{item.checked}}' ></radio>
-                  <image hidden='{{item.checked}}' src='/assets/image/icon_gou@2x.png'></image>
-                  <image hidden='{{!item.checked}}' src='/assets/image/icon_gou2@2x.png'></image> 
-                </view>
-              </view>
+              </block>
             </radio-group>
             <view class="max-bottom-bar ">
               <button class='link' form-type="submit">下一步</button>
@@ -91,8 +105,8 @@
                     </view>
                 </view>
                 <view class="logistics-info-content">
-                    <view class="address">
-                        <label>收货地址</label>
+                    <view class="address-simple ">
+                        <text class='label'>收货地址</text>
                         {{address.province || ''}}{{address.city || ''}}{{address.area || ''}}{{address.street || ''}}
                     </view>
                     <navigator url='/pages/user/address/address?type=2' class="btn1 btn-orange1 setAddressLink">设置地址</navigator>
