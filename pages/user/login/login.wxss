@@ -31,8 +31,9 @@
 .top-pic .login-tip label{
     position: relative;
     padding-bottom: 3px;
+    margin: 0 15%;
 }
-.top-pic .login-tip label:after{
+.top-pic .login-tip label.active:after{
     position: absolute;
     bottom: -3px;
     left: 50%;
@@ -53,24 +54,24 @@
 .login-content .input-control{
     padding-top: 30px;
 }
-.login-content .input-control input{
-    width: 84%;
+.input-control input{
+    flex: 1;
     margin: 0 auto;
     border: none;
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid #888;
     padding: 10px 0;
     font-size: 15px;
     outline: none;
 }
-.login-content .input-control input:focus{
+.input-control input:focus{
     border-bottom: 1px solid #e76434;
 }
-.login-content .login-btn-wp{
+.login-btn-wp{
     text-align: center;
     margin-top: 30px;
 }
-.login-content .login-btn{
-    width: 84%;
+.login-btn{
+    
     background: #e5b577;
     color: #ffffff;
     border: 0;
@@ -78,27 +79,26 @@
     border-radius: 5px;
     font-size: 18px;
 }
-.login-content .login-btn:active{
+button:active,button:focus{
     border: 0;
     outline: none;
 }
-.login-content .login-btn:focus{
-    border: 0;
-    outline: none;
-}
-.login-content .login-noc{
-    width: 84%;
+.login-noc{
     margin: 10px auto;
     line-height: 26px;
     position: relative;
 }
-.login-content .login-noc a{
+.login-noc a{
     color: #e45520;
     font-size: 12px;
 }
 .login-bottom{
-    margin-bottom: 5px;
-    text-align: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  margin-bottom: 5px;
+  text-align: center;
 }
 .login-bottom .black{
     color: #888;
@@ -111,7 +111,7 @@
 }
 
 .content-val .desc-text{
-    width: 84%;
+    
     margin: 0 auto;
     margin-top: 40px;
     margin-bottom: 30px;
@@ -127,7 +127,7 @@
     color: #e45520;
 }
 .content-val .input-wp{
-    width: 84%;
+    
     margin: 30px auto;
 }
 .content-val .input-wp .flex-item{
@@ -142,26 +142,6 @@
 }
 .content-val .input-wp input:focus{
     border-bottom: 1px solid #e76434;
-}
-/* 特效 */
-.animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 100%, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-.fadeInUp {
-    animation-name: fadeInUp;
 }
 
 .checkbox{
@@ -191,4 +171,29 @@
     position: relative;
     z-index: 0;
     top: 4px;
+}
+.content-val,.content-tel{
+  padding-left: 8%;
+  padding-right: 8%;
+}
+.reg-content{
+  padding-top: 10px;
+}
+.input-control{
+  display: flex;
+  padding-top: 5px;
+  align-items: center;
+}
+.btn-code{
+  background: #e5b577;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 4px;
+  line-height: 2;
+  font-size: 12px;
+  width: 120px;
+}
+.btn-code[disabled]{
+  background: rgba(0,0,0,.3);
+  color: #666;
 }

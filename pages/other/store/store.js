@@ -17,7 +17,8 @@ Page({
       cateName:'全部',
       cateId: 0
     }],
-    listData: []
+    listData: [],
+    hiddenSideNav: true
   },
 
   /**
@@ -74,7 +75,6 @@ Page({
   onReachBottom: function () {
 
     if (LOADOVER || LOADING) return
-
     LOADING = true
     action.getStoreListInfo({
       cateId: CATEID,
@@ -140,7 +140,7 @@ Page({
     action.getStoreCateType({})
     .then(res => {
       this.setData({
-        navlist: this.data.navlist.concat(res.data.cateList)
+        navlist: [...res.data.cateList]
       })
     })
     .catch(msg => {
@@ -148,15 +148,26 @@ Page({
     })
   },
 
-  navtab(e){
-    let cateId = e.detail.id
-    CATEID = cateId
-    PAGE = 1
-    LOADOVER = false
-    this.setData({
-      msg: ''
-    })
+  resetCate(){
+    CATEID = 0;
+    LOADOVER = false;
+    this.initListInfo()
+  },
+
+  closeSideNav(){
     
+  },
+
+  showSideNav(){
+    this.setData({
+      hiddenSideNav: false
+    })
+  },
+
+  filtrateCate(e){
+    let id = e.detail.id;
+    CATEID = id;
+    LOADOVER = false;
     this.initListInfo()
   }
 

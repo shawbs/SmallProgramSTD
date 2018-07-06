@@ -4,6 +4,10 @@ module.exports = {
   getCode: '/service-sms/std/app/sms/vcode',
   //登录
   login: '/business-app-user/std/app/api/v1/app/minapps/login/mobile',
+  //注册
+  register: '/business-app-user/std/app/api/v1/app/regist/nopwd',
+  //校验邀请码
+  checkInviterCode: '/business-app-user/std/app/api/v1/app/check/invitercode',
   //刷新token
   refreshToken: '/business-app-user/std/app/api/v1/app/minapps/user/login/refreshToken',
   //签到
@@ -13,6 +17,8 @@ module.exports = {
     banner: '/business-banner/get/banner/list',
     previewLive: '/web-app-facade/std/app/api/v1/show/mainpage',
     live: '/web-app-facade/std/app/api/v1/mainpage',
+    //获取首页所有拍场和拍品列表
+    list: '/web-app-facade/std/app/api/v2/all/mainpage'
   },
   //商场换宝列表
   storeListInfo: '/business-treasure-shop/std/app/api/v1/treasure/list',
@@ -20,6 +26,12 @@ module.exports = {
   storeCateType: '/business-treasure-shop/std/app/api/v1/treasure/cate/list',
   //商场换宝详情
   storeDetail: '/business-treasure-shop/std/app/api/v1/treasure/detail',
+  //商场换宝订单列表
+  storeOrderList: '/business-treasure-shop/std/app/api/v1/treasure/orderlist',
+  //商场换宝订单详情
+  storeOrderDetail: '/business-treasure-shop/std/app/api/v1/treasure/order/detail',
+  //商场换宝确认收货
+  storeOrderReceive: '/business-treasure-shop/std/app/api/v1/treasure/confirm/receive',
   //商场换宝订单生成
   storePaySure: '/business-treasure-shop/std/app/api/v1/treasure/order',
   //限时拍品列表
@@ -286,5 +298,5 @@ module.exports = {
   merchantAuctionRepublic: '/business-merchantauction-live/std/app/api/v1/live/republic/auction/item',
   //获取微信支付参数
   wxpayParms: '/business-wepay/std/wxpay/smallpro/params',
-
+  
 }

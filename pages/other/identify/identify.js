@@ -157,7 +157,7 @@ Page({
 
   //拨打电话联系
   connectTel(){
-    let arr = ['15810013266', '15811477498']
+    let arr = ['0592-5220601']
     wx.showActionSheet({
       itemList: arr,
       success: function (res) {

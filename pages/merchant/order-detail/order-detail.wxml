@@ -1,5 +1,5 @@
 <!--pages/order-detail/order-detail.wxml-->
-<view class="order-detail-page animated fadeInUp" wx:if="order">
+<view class="order-detail-page  fadeInUp" wx:if="order">
     <view class="message shipments">
       <image wx:if="{{order.orderStatus==21 || order.orderStatus<20}}" class='status-icon' title="待收货/待付款" src='/assets/image/yonghuqueren@2x.png'></image>
       <image wx:if="{{order.orderStatus==20}}" class='status-icon' title="待发货" src='/assets/image/ddxq_icon_dsh@3x.png'></image>

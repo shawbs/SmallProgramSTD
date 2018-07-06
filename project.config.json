@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
@@ -56,7 +56,7 @@
 				{
 					"id": 3,
 					"name": "t",
-					"pathName": "pages/user/order/order",
+					"pathName": "pages/other/store/store",
 					"query": "",
 					"scene": "1001"
 				}

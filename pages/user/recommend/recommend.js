@@ -16,7 +16,12 @@ Page({
     partnerToken: '',
     orderPrice:0,
     diamond:0, //钻石人数
-    platinum: 0 //白金人数
+    platinum: 0, //白金人数
+
+    type: 1,
+    page: 1,
+    loadover: false,
+    loading: false
   },
 
   /**
@@ -27,7 +32,7 @@ Page({
     this.setData({
       windowH: wx.getSystemInfoSync().windowHeight
     })
-    this.initPage(1);
+    this.initPage();
   },
 
   /**
@@ -88,19 +93,23 @@ Page({
     let target = e.target;
     let id = target.dataset.id;
     this.setData({
-      tabIndex: id
+      tabIndex: id,
+      type: id,
+      loadover: false,
+      page: 1,
+      list: []
     })
 
-    this.initPage(id);
+    this.initPage();
   },
 
   //初始化数据
-  initPage(type){
+  initPage(){
     this.getPartnerToken(partnerToken=>{
-
-      if(type == 1){
+      //一级会员数据
+      if(this.data.type == 1){
         action.getInviteList({
-          page: 1,
+          page: this.data.page,
           limit: 10,
           partnerToken: partnerToken
         }).then(res => {
@@ -112,10 +121,10 @@ Page({
           })
         })
       }
-
-      if( type == 2){
+      //二级会员数据
+      if (this.data.type == 2){
         action.getInviteList2({
-          page: 1,
+          page: this.data.page,
           limit: 10,
           partnerToken: partnerToken
         }).then(res => {
@@ -140,5 +149,62 @@ Page({
       })
       cb(res.data.partnerToken)
     })
+  },
+
+  loadmore(){
+    if(this.data.loadover || this.data.loading) return
+    this.setData({
+      loading: false
+    })
+    let page = ++this.data.page;
+    if (this.data.type == 1) {
+      action.getInviteList({
+        page: page,
+        limit: 10,
+        partnerToken: this.data.partnerToken
+      }).then(res => {
+          if(page == res.page){
+            this.setData({
+              loadover: true
+            })
+          }else{
+            this.setData({
+              list: [...this.data.list, ...res.data.entry],
+              orderPrice: res.data.orderPrice,
+              diamond: res.data.diamond,
+              platinum: res.data.platinum,
+              page: page
+            })
+            this.setData({
+              loading: false
+            })
+          }
+      })
+    }
+    //二级会员数据
+    if (this.data.type == 2) {
+      action.getInviteList2({
+        page: page,
+        limit: 10,
+        partnerToken: this.data.partnerToken
+      }).then(res => {
+        if (page == res.page) {
+          this.setData({
+            loadover: true
+          })
+        } else {
+          this.setData({
+            list: [...this.data.list, ...res.data.entry],
+            orderPrice: res.data.orderPrice,
+            diamond: res.data.diamond,
+            platinum: res.data.platinum,
+            page: page
+          })
+          this.setData({
+            loading: false
+          })
+        }
+      })
+    }
   }
 })

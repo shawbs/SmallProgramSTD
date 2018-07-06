@@ -23,7 +23,9 @@
         "issue/issue",
         "bidlist/bidlist",
         "yb-confirm/yb-confirm",
-        "store-order-confirm/store-order-confirm"
+        "store-order-confirm/store-order-confirm",
+        "store-order/store-order",
+        "store-order-detail/store-order-detail"
       ]
     },
     {
@@ -64,7 +66,7 @@
         "agreement/agreement",
         "merchant-entry/merchant-entry",
         "invoice/invoice",
-		    "logistics/logistics"
+        "logistics/logistics"
       ]
     },
     {
@@ -105,7 +107,6 @@
         "iconPath": "assets/image/icon_sy@2x.png",
         "selectedIconPath": "assets/image/icon_sy2@2x.png"
       },
-
       {
         "pagePath": "pages/tabBar/mine/mine",
         "text": "我的",

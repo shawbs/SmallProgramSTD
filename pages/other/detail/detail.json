@@ -3,5 +3,6 @@
     "usingComponents": {
       "bottom-bar": "../../../component/bottombar/bottombar",
       "model-prompt": "../../../component/modelPrompt/modelPrompt"
-    }
+    },
+    "enablePullDownRefresh": true
 }

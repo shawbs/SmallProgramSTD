@@ -1,4 +1,4 @@
-<!--pages/order-detail/order-detail.wxml-->
+<!--pages/other/store-order-detail/store-order-detail.wxml-->
 <view class="order-detail-page  fadeInUp" wx:if="order">
     <view class="message shipments">
         <!-- 订单关闭 -->
@@ -23,10 +23,10 @@
         <view>
           <view> {{order.statusText}}</view>
           <text class='small' wx:if="{{order.orderStatus == 0}}">24小时内未确认订单将自动关闭</text>
-          <text class='small' wx:if="{{order.orderStatus >=10 && order.orderStatus <=12}}">48小时内未支付订单将自动关闭</text>
+          <text class='small' wx:if="{{order.orderStatus >=10 && order.orderStatus <=12}}">5分钟未支付订单将自动关闭</text>
         </view>
     </view>
-    <view class='address-box' wx:if="{{ order.orderStatus == 21 && order.deliveryWay=='delivery' }}">
+    <view class='address-box' wx:if="{{ order.orderStatus == 21}}">
       <view class="address-item-bd">
           <view class="address-row">收货人: {{order.consignee}} <span class="fr">{{order.telephone}}</span></view>
           <view class="address">
@@ -39,10 +39,9 @@
         <view class="order-item-bd">
             <image class='img' src="{{order.imgUrl[0]}}"></image>
             <view class="show-text">
-              <view class="create-date">{{order.auctionType || ''}}</view>
-              <view class="title ellipsis2">{{order.itemName || ''}}</view>
-              <view class="residue">￥{{order.bidPrice/100}}</view>
-              <view class="create-date">落锤时间: {{order.countdownTime || ''}}</view>
+                <text class="create-date">订单编号: {{order.treasureItemNo}}</text>
+                <view class="title ellipsis2">{{order.name || ''}}</view>
+                <view class="residue">{{order.integralNum}}积分</view>
             </view>
         </view>
 
@@ -51,33 +50,21 @@
 
     <view class="order-info">
         <view class="linelg">
-          <text>金额总计</text>
-          <text class="orange2 mr-2">￥{{order.bidPrice/100}}</text>
+          <text>使用积分</text>
+          <text class="orange2 mr-2">{{order.integralNum}}积分</text>
         </view>
-        <view class="linelg">
-          <text wx:if="{{order.orderStatus <20}}">未付款</text>
-          <text wx:if="{{order.orderStatus >=20}}">实付款</text>
-          <text class="orange2 mr-2">￥{{order.actualPrice/100}}</text>
-        </view>
-        <view class="linelg" wx:if="{{order.orderStatus == 10}}">
-          <text>待付定金</text>
-          <text class="orange2 mr-2">￥{{order.firstPrice/100}}</text>
-        </view>
-        <view class="linelg" wx:if="{{order.orderStatus == 11}}">
-          <text>待付尾款</text>
-          <text class="orange2 mr-2">￥{{order.actualPrice/100}}</text>
-        </view>
+
         <view class="line">
           <text class='gray'>订单编号:</text>
           <text> {{order.orderNo}}</text>
         </view>
-        <view class="line" wx:if="{{order.paymentCompleteTime}}">
+        <view class="line" wx:if="{{order.payTime}}">
           <text class='gray'>支付时间:</text>
-          <text> {{order.paymentCompleteTime }}</text>
+          <text> {{order.payTime }}</text>
         </view>
-        <view class="line">
+        <view class="line" wx:if="{{order.orderCompleteTime}}">
           <text class='gray'>确认时间:</text>
-          <text> {{order.orderCompleteTime || ''}}</text>
+          <text> {{order.orderCompleteTime}}</text>
         </view>
     </view>
 
@@ -85,30 +72,16 @@
     <view class="contact-tel"><a href="tel:0592-5220601">0592-5220601</a></view>
 
 
-    <bottom-bar wx:if="{{order.orderStatus <=12}}">
-      <text></text><text></text>
-      <text></text><text></text>
-
-
-      <navigator wx:if="{{order.orderStatus == 0}}" url="/pages/user/order-confirm/order-confirm?token={{order.orderToken}}&orderNo={{order.orderNo}}" class='btn2 btn-orange2'>确认订单</navigator>
-
-      <view wx:if="{{order.orderStatus == 10 || order.orderStatus == 11 || order.orderStatus == 12}}" data-paymentNo="{{order.paymentNo}}" data-token="{{order.orderToken}}" data-isofflinepay="{{order.isOfflinePay}}" data-orderNo="{{order.orderNo}}" bindtap='linkPay' class='btn2 btn-orange2'>前往支付</view>   
-
-    </bottom-bar>
-
     <bottom-bar wx:if="{{order.orderStatus==21}}">
         <text></text><text></text>
         <text></text><text></text>
 
         <view data-orderNo="{{order.orderNo}}" bindtap='postReceiving' class='btn2 btn-orange2'>确认收货</view>
-        <navigator url='/pages/user/logistics/logistics?orderNo={{order.orderNo}}' wx:if="{{order.deliveryWay=='delivery'}}"  class='btn2 btn-orange2'>查看物流</navigator>
+        <navigator url='/pages/user/logistics/logistics?orderNo={{order.orderNo}}' class='btn2 btn-orange2'>查看物流</navigator>
     </bottom-bar>
-
-    <bottom-bar wx:if="{{order.orderStatus==24}}">
-        <text></text><text></text>
-        <text></text><text></text>
-
-        <navigator url="/pages/user/refund/refund?orderNo={{order.orderNo}}" class='btn2 btn-orange2'>申请售后</navigator>
-        
+    <bottom-bar wx:if="{{order.orderStatus==10}}">
+      <text></text><text></text>
+      <text></text><text></text>
+      <navigator url='/pages/other/yb-pay/yb-pay?payNo={{order.paymentNo}}' class='btn2 btn-orange2'>前往支付</navigator> 
     </bottom-bar>
 </view>

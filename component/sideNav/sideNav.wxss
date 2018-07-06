@@ -1,0 +1,78 @@
+/* component/sideNav/sideNav.wxss */
+.m-mask{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 99;
+}
+.sideNav{
+  background: #fff;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+}
+.sideNav-bottom{
+  background: #fff;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  font-size: 16px;
+}
+._title{
+  line-height: 30px;
+  color: #333;
+  margin-bottom: 10px;
+}
+._list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.btn-reset{
+  flex: 1;
+  background: #333;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+}
+.btn-close{
+  flex: 1;
+  background: #d99f55;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+}
+.sidenav-item{
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  width: 38%;
+  color: #333;
+  text-align: center;
+  border-radius: 4px;
+}
+.sidenav-item.active{
+  border: 1px solid #e5b577;
+  color: #e5b577;
+  background-color: #fff9e9;
+}
+.sideInRight{
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: sideInRight;
+}
+@keyframes sideInRight {
+    0% {
+        right:-100%;
+    }
+    100% {
+        right: 0;
+    }
+}

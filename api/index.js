@@ -3,6 +3,7 @@ const base = require('../utils/base.js')
 const API = require('./api.js')
 
 
+
 const hintNetwork = function(){
   wx.getNetworkType({
     success: function (res) {

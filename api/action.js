@@ -11,8 +11,14 @@ const request = {
   getcjwt: () => $.getAsset('http://text.shuntd.cn/cjwt.txt'),
   //拍卖规则
   getPMGZ: () => $.getAsset('http://text.shuntd.cn/pmgz.txt'),
+  //注册
+  register: (parameter) => $.post(baseurl + API.register, parameter, true),
+  //校验邀请码
+  checkInviterCode: (parameter) => $.post(baseurl + API.checkInviterCode, parameter, false),
   //首页banner图
   getBanner: () => $.get(baseurl + API.index.banner, {}),
+  //获取首页所有拍场和拍品列表
+  indexList: (parameter, showloader) => $.post(baseurl + API.index.list, parameter, showloader),
   //展拍拍场
   // getZPLive: () => $.get(baseurl + API.index.getZPLive, {}),
   //即时拍场
@@ -23,6 +29,12 @@ const request = {
   getStoreListInfo: (paramrter) => $.post(baseurl + API.storeListInfo, paramrter, true),
   //获取商品类型
   getStoreCateType: (paramrter) => $.post(baseurl + API.storeCateType, paramrter, true),
+  //商场换宝订单列表
+  storeOrderList: (paramrter) => $.post(baseurl + API.storeOrderList, paramrter, true),
+  //商场换宝订单详情
+  storeOrderDetail: (paramrter) => $.post(baseurl + API.storeOrderDetail, paramrter, true),
+  //商场换宝确认收货
+  storeOrderReceive: (paramrter) => $.post(baseurl + API.storeOrderReceive, paramrter, true),
   //获取限时拍品列表
   getListInfo: (paramrter) => $.post(baseurl + API.list, paramrter, true),
   //获取限时拍品详情

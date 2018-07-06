@@ -1,7 +1,5 @@
 /* pages/store/store.wxss */
-.store-page{
-  padding-top: 50px;
-}
+
 .select-btn{
   position: fixed;
   top: 26%;

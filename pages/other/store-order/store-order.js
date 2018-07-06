@@ -1,0 +1,191 @@
+// pages/other/store-order/store-order.js
+const app = getApp();
+
+const action = require('../../../api/action.js')
+const util = require('../../../utils/util.js')
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    tabIndex: 0,
+    navlist: [
+      {
+        cateName: '全部',
+        cateId: '0'
+      },
+      {
+        cateName: '待发货',
+        cateId: '1'
+      },
+      {
+        cateName: '待收货',
+        cateId: '2'
+      },
+      {
+        cateName: '已完成',
+        cateId: '3'
+      }
+    ],
+    orderlist: [],
+    //分页
+    page: 1,
+    status: 0,
+    loadover: false,
+    loading: false,
+    msg: ''
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log(options)
+    this.setData({
+      tabIndex: options.tabIndex || 0,
+      status: options.id || 0,
+    })
+    this.initPage();
+    app.globalData.payType = 0;
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    this.initPage();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 1000)
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    this.scrollLoad()
+  },
+
+
+
+  //tab点击事件
+  navtab: function (e) {
+    let id = e.detail.id;
+    this.setData({
+      status: id
+    })
+    this.initPage();
+  },
+
+  // 获取订单列表
+  initPage() {
+    this.setData({
+      page: 1,
+      loadover: false,
+      msg: '',
+      orderlist: []
+    })
+    action.storeOrderList({
+      status: this.data.status,
+      page: 1,
+      limit: 10
+    }).then(res => {
+      let orderlist = [ ...res.data.orderlist]
+      if (orderlist.length == 0) {
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+        return
+      }
+      for (let item of orderlist) {
+        item.statusText = util.getStatusText(item.orderStatus)
+      }
+      this.setData({
+        orderlist: orderlist
+      })
+    })
+  },
+
+  //滚动加载
+  scrollLoad() {
+    if (this.data.loadover || this.data.loading) return
+
+    this.setData({
+      page: ++this.data.page,
+      msg: app.globalData.msgLoading,
+      loading: true
+    })
+    action.storeOrderList({
+      status: this.data.status,
+      page: this.data.page,
+      limit: 10
+    }).then(res => {
+      if (res.data.orderlist.length > 0) {
+        let orderlist = util.transformImgUrls(res.data.orderlist, 'imgUrl');
+        for (let i = orderlist.length - 1; i >= 0; i--) {
+          orderlist[i].statusText = util.getStatusText(orderlist[i].orderStatus)
+        }
+        let arr = [...this.data.orderlist, ...orderlist];
+        this.setData({
+          orderlist: arr
+        })
+      } else {
+        this.setData({
+          loadover: true,
+          msg: app.globalData.msgLoadOver
+        })
+      }
+      this.setData({
+        loading: false
+      })
+
+    })
+  },
+
+  
+  //收货
+  postReceiving(e) {
+    let orderno = e.currentTarget.dataset.orderno;
+    action.storeOrderReceive({
+      orderNo: orderno
+    }).then(res => {
+      wx.showToast({
+        title: '收货完成',
+      })
+      this.initPage()
+    })
+  },
+
+
+
+
+})

@@ -1,0 +1,13 @@
+<!--component/sideNav/sideNav.wxml-->
+<view class='m-mask' hidden="{{hidden}}">
+  <view class='sideNav {{hidden?"":"sideInRight"}}'>
+      <view class='_title'>产品类别</view>
+      <view class='_list'>
+        <view class='sidenav-item {{currentIndex==items[index].cateId?"active":""}}' wx:for="{{items}}" wx:key="{{index}}" data-id="{{item.cateId}}" bindtap='filtrateCate'>{{item.cateName}}</view>
+      </view>
+      <view class='sideNav-bottom'>
+        <view class='btn-reset' bindtap='reset'>重置</view>
+        <view class='btn-close' bindtap='close'>完成</view>
+      </view>
+  </view>
+</view>

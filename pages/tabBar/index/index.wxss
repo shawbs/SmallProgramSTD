@@ -4,10 +4,12 @@
 .swiper-container{
   position: relative;
   width: 100%;
-  height: 130px;
+  /* height: 130px; */
 }
 .swiper-container swiper-item image{
-  height: 130px;
+  width: 100%;
+  height: 100%;
+  /* height: 130px; */
 }
 .top-banner .link{
   height: 100%;
@@ -26,9 +28,9 @@
 
 .auction-item{
   position: relative;
-  height: 240px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
+
 .auction-item .auction-cover{
   width: 100%;
 }
@@ -81,4 +83,8 @@
 .title-logo image{
   width: 260px;
   height: 30px;
+}
+.good-list{
+  margin-top: -5px;
+  padding-top: 2%;
 }

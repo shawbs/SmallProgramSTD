@@ -891,6 +891,48 @@ topnav.dark{
   width: 30px;
   height: 30px;
 }
+
+
+/* 特效 */
+.fadeInUp {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: fadeInUp;
+}
+.bounceIn{
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: bounceIn;
+}
+.fadeInDown{
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeInDown;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -10%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
 @keyframes bounceIn {
     0% {
         opacity: 0;
@@ -904,3 +946,20 @@ topnav.dark{
         transform: scale(1);
     }
 }
+
+
+.sideBtn{
+  position: fixed;
+  top: 40%;
+  right: 0;
+  background: #8E6B52;
+  font-size: 14px;
+  padding: 15px 2px;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+  color: #fff;
+  width: 25px;
+  z-index: 10;
+}
+
+

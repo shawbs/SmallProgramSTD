@@ -77,7 +77,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.getBidList();
+    this.getDetail();
+    this.getPMGZ();
+    setTimeout(function(){
+      wx.stopPullDownRefresh()
+    },2000)
   },
 
   /**

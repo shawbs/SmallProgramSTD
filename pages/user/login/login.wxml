@@ -4,25 +4,26 @@
 
       <image src="/assets/image/yaobao_bg@3x.png" class='top-pic-bg'></image>
       <image src="/assets/image/zhuce_bg_logo@3x.png" class='top-pic-logo'></image>
-      <view class="login-tip"><label class="top-text">登录</label></view>
+      <view class="login-tip">
+        <label class="top-text {{type==1?'active':''}}" data-type="1" bindtap='toggleType'>登录</label>
+        <label class="top-text {{type==2?'active':''}}" data-type='2' bindtap='toggleType'>注册</label>
+      </view>
   </view>
-  <view class="content-tel {{step == 1 ? '':'hide'}}">
+  <view class="content-tel  {{type==1&&step == 1 ? 'fadeInUp':'hide'}}">
       <view class="login-content">
           <view class="input-phone-tip">请输入手机号码</view>
           <view class="input-control">
-              <input type="number" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus value='{{phone}}'/>
+              <input type="number" maxlength="11" placeholder="请输入手机号码" bindinput='getPhone' id="phone" confirm-type="next" focus="{{type==1&&step==1}}" value='{{phone}}'/>
           </view>
           <view class="login-btn-wp">
               <button type="button" class="login-btn" bindtap='sendPhone'>下一步</button>
           </view>
           <view class="login-noc">
-              <!-- <checkbox  id="checkbox-1-1" class="checkbox {{agreeChecked ? 'checked' : ''}}" checked="{{agreeChecked}}" bindtap='toggleAgreeCheck'/>
-              <label for="checkbox-1-1"></label> -->
               <navigator class='orange' url='/pages/user/agreement/agreement'>点击下一步表示为同意“厦门顺天达用户协议”</navigator>
           </view>
       </view>
   </view>
-  <view class="content-val animated  {{step >= 2 ? 'fadeInUp':'hide'}}">
+  <view class="content-val   {{type==1&&step == 2 ? 'fadeInUp':'hide'}}">
       <view class="desc-text">
           <label class="phone-text">{{phone}}</label>
           <label class="count-down" wx:if="{{timer>0}}">{{timer}}s</label>
@@ -32,10 +33,39 @@
 
           <view class="flex">
             <view class="flex-item">
-              <input type='number' maxlength='4' confirm-type="done" focus="{{step == 2}}" value="" placeholder='请输入验证码' placeholder-style="font-size:14px;" bindinput='postSend'></input>
+              <input type='number' maxlength='4' confirm-type="done" focus="{{type==1&&step==2}}" value="" placeholder='请输入验证码' placeholder-style="font-size:14px;" bindinput='postSend'></input>
             </view>
           </view>
       </view>
+  </view>
+
+  <view class="content-tel  {{type == 2 ? 'fadeInUp':'hide'}}">
+      <form bindsubmit="register">
+        <view class="reg-content">
+            <view class="input-control">
+                <input type="number" maxlength="11" placeholder="请输入手机号码" confirm-type="next" focus="{{type==2}}" name="name" bindinput='changeNewTel' value=""/>
+            </view>
+            <view class="input-control">
+                <input type="text" maxlength="11" placeholder="请输入邀请码" confirm-type="next"  name="inviterCode" bindinput='changeInviterCode' value=""/>
+            </view>
+            <view class="input-control">
+                <input type="number" maxlength="4" placeholder="请输入验证码"  confirm-type="next" name="smsCode"/>
+                <button type="button" class='btn-code' disabled="{{sendCodeDis}}" bindtap='sendPhone2'>
+                  {{timer == 60 ? '发送验证码' : ''}}
+                  {{timer == 0 ? '重新发送' : ''}}
+                  {{timer < 60 && timer > 0 ? timer + 's':''}}
+                </button>
+            </view>
+            <view class="login-btn-wp">
+                <button size="min" form-type='submit' class="login-btn">注册</button>
+            </view>
+            <view class="login-noc">
+                <!-- <navigator class='orange' url='/pages/user/agreement/agreement'>点击注册表示为同意“厦门顺天达用户协议”</navigator>
+                 -->
+                <view class='orange' bindtap='connectTel'>联系客服</view>
+            </view>
+        </view>
+      </form>
   </view>
   <view class="login-bottom">
       <view class="black">— 顺天达拍卖 —</view>

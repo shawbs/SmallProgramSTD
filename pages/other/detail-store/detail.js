@@ -19,18 +19,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       auctionItemId: options.id
     })
+    this.getDetail();
+    this.getPMGZ();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getDetail();
-    this.getPMGZ();
+    
   },
 
   /**
@@ -58,7 +58,11 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.getDetail();
+    this.getPMGZ();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 2000)
   },
 
   /**

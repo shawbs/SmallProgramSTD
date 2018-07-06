@@ -19,7 +19,7 @@
       </view>
       <view class='flex'>
         <view class='text-num flex-item'>{{platinum}}</view>
-        <view class='text-num flex-item'>{{orderPrice}}</view>
+        <view class='text-num flex-item'>{{orderPrice/100}}</view>
       </view>
     </view>
     <view class='top-title'>
@@ -28,12 +28,16 @@
     </view>
   </view>
 
-  <scroll-view class='_list' scroll-y style='height:{{windowH-scrollH}}px'>
+  <scroll-view class='_list' scroll-y style='height:{{windowH-scrollH}}px' bindscrolltolower="loadmore">
     <navigator url='/pages/user/recommend-detail/recommend-detail?userId={{item.userId}}&partnerToken={{partnerToken}}&type={{tabIndex}}' wx:for="{{list}}" wx:key="{{index}}"  class="inviter">
       <view class='list-item'>
-        <view class='item'>
+        <view class='item' wx:if="{{type==1}}">
           <view>[{{index+1}}] {{item.nickName}}</view>
           {{item.phone}}
+        </view>
+        <view class='item' wx:if="{{type==2}}">
+          <view>[{{index+1}}] {{item.nickName}}</view>
+          用户id{{item.userId}}
         </view>
         <view class='item'>
           {{item.inviterTime}}

@@ -1,4 +1,4 @@
-/* pages/order-detail/order-detail.wxss */
+/* pages/other/store-order-detail/store-order-detail.wxss */
 .order-detail-page{
     height: 100vh;
 }

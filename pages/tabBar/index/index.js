@@ -7,19 +7,33 @@ const util = require('../../../utils/util.js')
 const base = require('../../../utils/base.js')
 Page({
   data: {
+    bannerH: '150',
+    //
     banner: null,
     jsLive: null,
     jxLive: null,
     zpLive: null,
 
+    //下拉加载
     page: 1,
     loadover: false,
     loading: false,
-    merchantList: [],
+    msg: '',
 
+    //商户拍品
+    merchantList: [],
+    //限时拍品
+    goodlist: [],
+
+    //签到
     tip: '',
     tipstatus: '',
-    tipshow: false
+    tipshow: false,
+
+    //首页所有数据
+    auction: null,
+    directAuction: null,
+    list: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -30,15 +44,16 @@ Page({
   onLoad: function (options) {
     this.initPage();
     this.checkIn();
-    //获取商户入驻首页拍品
-    this.getMerchantAuctionList();
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      bannerH: Math.floor(wx.getSystemInfoSync().screenWidth * 0.4)
+    })
   },
 
   /**
@@ -53,39 +68,39 @@ Page({
    */
   onPullDownRefresh: function(){
     this.initPage();
-    this.getMerchantAuctionList();
+    
     setTimeout(function(){
       wx.stopPullDownRefresh()
-    },1000)
+    },2000)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(!this.data.loadover){
-      if (!this.data.loading) {
+    if(this.data.loading || this.data.loadover) return
+    let page = ++this.data.page;
+    this.setData({
+      loading: true,
+      msg: app.globalData.msgLoading
+    })
+    action.indexList({
+      page: page,
+      limit: 10
+    }, false).then(res => {
+      let data = { ...res.data }
+      this.setData({
+        page: page,
+        loading: false,
+        list: [...this.data.list, ...data.auction.timeAuctionItems.entries]
+      })
+      if (page == data.auction.timeAuctionItems.totalPage){
         this.setData({
-          loading: true,
-          page: ++this.data.page
-        })
-        action.getMerchantAuctionList({
-          page: this.data.page,
-          limit: 10
-        }).then(res => {
-          if (!res.data.list.length){
-            this.setData({
-              loadover: true
-            })
-          }else{
-            this.setData({
-              merchantList: res.data.list
-            })
-          }
+          loadover: true,
+          msg: app.globalData.msgLoadOver
         })
       }
-    }
-
+    })
   },
 
   //判断直播是否开始进行跳转
@@ -125,43 +140,38 @@ Page({
 
   //初始化页面
   initPage(){
-    let _this = this;
     //获取广告数据
     action.getBanner()
       .then(res => {
-        _this.setData({
+        this.setData({
           banner: res.data.dtolist
         })
       })
 
-    // action.getZPLive()
+    // //获取即时拍场
+    // action.getJSLive()
     //   .then(res => {
     //     let items = [...res.data.items]
-    //     console.log(items)
-    //     _this.setData({
-    //       zpLive: _this.transformImgUrls(items)
+    //     // console.log(items)
+    //     this.setData({
+    //       jsLive: this.transformImgUrls(items)
     //     })
     //   })
 
-    //获取即时拍场
-    action.getJSLive()
-      .then(res => {
-        let items = [...res.data.items]
-        // console.log(items)
-        _this.setData({
-          jsLive: _this.transformImgUrls(items)
-        })
-      })
+    // //获取直播拍场
+    // action.getJXLive()
+    // .then(res => {
+    //   let items = [...res.data.items]
+    //   // console.log(items)
+    //   this.setData({
+    //     jxLive: this.transformImgUrls(items)
+    //   })
+    // })
+    //获取商户入驻首页拍品
+    // this.getMerchantAuctionList();
 
-    //获取直播拍场
-    action.getJXLive()
-      .then(res => {
-        let items = [...res.data.items]
-        // console.log(items)
-        _this.setData({
-          jxLive: _this.transformImgUrls(items)
-        })
-      })
+    //获取首页数据
+    this.getIndexList();
   },
 
   //初始获取商户拍品
@@ -200,6 +210,50 @@ Page({
         })
       },3000)
     })
-  }
+  },
 
+  //获取限时拍品列表
+  getList(){
+    action.getListInfo({
+      cateId: 0,
+      pageSize: 10,
+      pageNumber: 1,
+      auctionId: this.data.auctionId
+    })
+    .then(res => {
+      let treasurelist = [...res.data.items]
+      if (treasurelist.length > 0) {
+        this.transformImgUrls(treasurelist)
+        this.setData({
+          listData: treasurelist
+        })
+      } else {
+        this.setData({
+          msg: app.globalData.msgLoadNone
+        })
+      }
+
+    })
+  },
+
+  //获取首页数据
+  getIndexList(){
+    this.setData({
+      page: 1,
+      loadover: false,
+      msg: ''
+    })
+    action.indexList({
+      page: this.data.page,
+      limit: 10
+    },true).then(res=>{
+      let data = {...res.data}
+      this.transformImgUrls(data.auction.directAuction.items)
+      this.setData({
+        auction: data.auction,
+        directAuction: data.auction.directAuction,
+        list: data.auction.timeAuctionItems.entries
+      })
+    })
+  }
 })

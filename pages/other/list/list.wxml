@@ -21,7 +21,7 @@
         </view>
 
     
-        <view class='good-list row' wx:if="{{listData.length}}">
+        <view class='good-list row ' wx:if="{{listData.length}}">
 
           <view class='good-item col' wx:for="{{listData}}"  wx:for-index="i"  wx:for-item="item" wx:key="{{i}}">
             <navigator url='../../other/detail/detail?id={{item.auctionItemId}}{{exType==1 ? "&exType=1": ""}}'>

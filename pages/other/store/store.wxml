@@ -1,10 +1,9 @@
 <!--pages/store/store.wxml-->
 <view class='store-page container'>
-  <!-- <view class='select-btn' bind:tap="openSide">筛选</view> -->
 
-  <!-- <navigator url='../../other/order/order?id=123' class='order-btn'>我的订单</navigator> -->
-  <topnav bind:navitemtap="navtab" navlist="{{navlist}}"/>
-
+  <side-nav bind:reset="resetCate" bind:close="closeSideNav" bind:item="filtrateCate" items="{{navlist}}" hidden="{{hiddenSideNav}}"></side-nav>
+  <navigator class='sideBtn' url='../../other/store-order/store-order'>订单</navigator>
+  <view class='sideBtn' style='top: 25%' bindtap='showSideNav'>筛选</view>
   <view>
     
         <view class='good-list row'>
